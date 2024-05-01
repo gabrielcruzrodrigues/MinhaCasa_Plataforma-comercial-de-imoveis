@@ -24,7 +24,7 @@ public class User extends Person {
     private List<String> favorites;
 
     public User(Long id, @NotBlank String name, @NotBlank String phone, String whatsapp, @NotBlank @Email String email,
-                @NotBlank String password, MultipartFile file, Date dateOfBirth, @NotBlank String nationality, GenderEnum gender,
+                @NotBlank String password, String file, Date dateOfBirth, @NotBlank String nationality, GenderEnum gender,
                 @NotBlank String city, @NotBlank Set<String> role, List<String> favorites) {
         super(id, name, phone, whatsapp, email, password, file, dateOfBirth, nationality, gender, city, role);
         this.favorites = favorites;
