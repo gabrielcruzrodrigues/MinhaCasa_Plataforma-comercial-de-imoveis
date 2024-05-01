@@ -44,7 +44,7 @@ public class Person {
     @NotBlank
     protected String password;
 
-    protected MultipartFile file;
+    protected String imageProfile;
 
     @Column(nullable = false)
     protected Date dateOfBirth;

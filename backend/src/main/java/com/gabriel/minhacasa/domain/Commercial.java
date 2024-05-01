@@ -1,9 +1,6 @@
 package com.gabriel.minhacasa.domain;
 
-import com.gabriel.minhacasa.domain.enums.CategoryEnum;
-import com.gabriel.minhacasa.domain.enums.CommercialTypeEnum;
-import com.gabriel.minhacasa.domain.enums.IntegrityEnum;
-import com.gabriel.minhacasa.domain.enums.SellerTypeEnum;
+import com.gabriel.minhacasa.domain.enums.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -74,7 +71,7 @@ public class Commercial extends Immobile {
 
     public Commercial(Long id, @NotBlank String name, @NotBlank String address, @NotBlank String neighborhood, @NotBlank String state,
                       boolean garage, int quantityBedrooms, int quantityRooms, float IPTU, float price, boolean suite, float usefulArea,
-                      float totalArea, int quantityBathrooms, IntegrityEnum integrity, SellerTypeEnum sellerType, int age,
+                      float totalArea, int quantityBathrooms, IntegrityEnum integrity, SellerTypeEnum sellerType, AgeEnum age,
                       CategoryEnum category, LocalDateTime createdAt, boolean garden, boolean virtualTour, boolean videos,
                       boolean beach, CommercialTypeEnum type, boolean disabledAccess, boolean playground, boolean energyGenerator,
                       boolean elevator, boolean pool, boolean frontDesk, boolean internet, boolean partyRoom, boolean airConditioning,

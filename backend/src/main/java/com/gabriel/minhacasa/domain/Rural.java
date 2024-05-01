@@ -1,9 +1,6 @@
 package com.gabriel.minhacasa.domain;
 
-import com.gabriel.minhacasa.domain.enums.CategoryEnum;
-import com.gabriel.minhacasa.domain.enums.IntegrityEnum;
-import com.gabriel.minhacasa.domain.enums.RuralTypeEnum;
-import com.gabriel.minhacasa.domain.enums.SellerTypeEnum;
+import com.gabriel.minhacasa.domain.enums.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -68,7 +65,7 @@ public class Rural extends Immobile {
 
     public Rural(Long id, @NotBlank String name, @NotBlank String address, @NotBlank String neighborhood, @NotBlank String state,
                  boolean garage, int quantityBedrooms, int quantityRooms, float IPTU, float price, boolean suite, float usefulArea,
-                 float totalArea, int quantityBathrooms, IntegrityEnum integrity, SellerTypeEnum sellerType, int age, CategoryEnum category,
+                 float totalArea, int quantityBathrooms, IntegrityEnum integrity, SellerTypeEnum sellerType, AgeEnum age, CategoryEnum category,
                  LocalDateTime createdAt, boolean garden, boolean virtualTour, boolean videos, boolean beach, RuralTypeEnum type,
                  boolean grill, boolean disabledAccess, boolean energyGenerator, boolean elevator, boolean pool, boolean internet,
                  boolean cableTV, boolean cabinetsInTheKitchen, boolean bathroomInTheRoom, boolean americanKitchen, boolean fireplace,

@@ -25,7 +25,7 @@ public class Owner extends Person {
     private String instagram;
 
     public Owner(Long id, @NotBlank String name, @NotBlank String phone, String whatsapp, @NotBlank @Email String email,
-                 @NotBlank String password, MultipartFile file, Date dateOfBirth, @NotBlank String nationality, GenderEnum gender,
+                 @NotBlank String password, String file, Date dateOfBirth, @NotBlank String nationality, GenderEnum gender,
                  @NotBlank String city, @NotBlank Set<String> role, List<String> properties, String facebook, String instagram) {
         super(id, name, phone, whatsapp, email, password, file, dateOfBirth, nationality, gender, city, role);
         this.properties = properties;
