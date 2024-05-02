@@ -1,6 +1,6 @@
 package com.gabriel.minhacasa.domain.enums;
 
-public enum ApartmentTypeEnum {
+public enum TypeEnum {
     ROOM,
     ROOF,
     FLAT,
@@ -10,5 +10,13 @@ public enum ApartmentTypeEnum {
     DUPLEX,
     TRIPLEX,
     CONDOMINIUM,
-    BUILDING
+    BUILDING,
+    SHEDS,
+    DEPOSITS,
+    OFFICES,
+    PARKING,
+    STORE,
+    SUBDIVISION,
+    GATED_COMMUNITY,
+    FARM
 }
