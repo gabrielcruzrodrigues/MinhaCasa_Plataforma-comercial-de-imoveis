@@ -1,4 +1,4 @@
-package com.gabriel.minhacasa.domain.controller;
+package com.gabriel.minhacasa.controller;
 
 
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;

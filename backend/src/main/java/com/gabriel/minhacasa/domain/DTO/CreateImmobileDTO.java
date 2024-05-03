@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record CreateImmobileDTO(
+        @NotNull
+        Long studentId,
         @NotBlank
         String name,
         @NotBlank

@@ -1,11 +1,13 @@
 package com.gabriel.minhacasa.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabriel.minhacasa.domain.enums.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -205,4 +207,13 @@ public class Immobile {
 
     @Column(nullable = false)
     private boolean gatedCommunity;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "favorites")
+    private List<User> favoriteUser;
 }

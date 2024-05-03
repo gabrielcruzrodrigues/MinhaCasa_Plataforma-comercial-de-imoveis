@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -67,9 +68,16 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    private List<String> favorites;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "user_favorites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "immobile_id")
+    )
+    private List<Immobile> favorites;
 
-    private List<String> properties;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Immobile> properties;
 
     @Column(unique = true)
     private String facebook;
