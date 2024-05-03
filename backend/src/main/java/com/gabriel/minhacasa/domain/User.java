@@ -49,8 +49,6 @@ public class User {
     @JsonIgnore
     private String password;
 
-    private String imageProfile;
-
     @Column(nullable = false)
     private Date dateOfBirth;
 
@@ -69,6 +67,10 @@ public class User {
     private Set<String> role;
 
     private LocalDateTime createdAt;
+
+    @OneToOne
+    @JoinColumn(name = "imageUser")
+    private ImageProfileFile imageProfile;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
