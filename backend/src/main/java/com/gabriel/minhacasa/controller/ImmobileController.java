@@ -36,7 +36,7 @@ public class ImmobileController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteImmobile(@PathVariable Long id) {
-        this.immobileService.deleteImmobile(id);
+        this.immobileService.disableImmobile(id);
         return ResponseEntity.noContent().build();
     }
 }

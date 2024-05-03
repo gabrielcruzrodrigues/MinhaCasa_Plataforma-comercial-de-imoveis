@@ -208,6 +208,9 @@ public class Immobile {
     @Column(nullable = false)
     private boolean gatedCommunity;
 
+    @Column(nullable = false)
+    private boolean active;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")

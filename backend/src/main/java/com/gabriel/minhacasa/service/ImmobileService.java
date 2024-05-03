@@ -46,6 +46,7 @@ public class ImmobileService {
                     .category(immobileData.category())
                     .createdAt(LocalDateTime.now())
                     .type(immobileData.type())
+                    .active(true)
                     .garden(immobileData.garden())
                     .virtualTour(false)
                     .videos(false)
@@ -168,12 +169,9 @@ public class ImmobileService {
     }
 
     @Transactional
-    public void deleteImmobile(Long id) {
+    public void disableImmobile(Long id) {
         Immobile immobile = this.findById(id);
-        try {
-            this.immobileRepository.delete(immobile);
-        } catch (Exception ex) {
-            throw new ErrorForDeleteImmobileException(ex.getMessage());
-        }
+        immobile.setActive(false);
+        this.immobileRepository.save(immobile);
     }
 }
