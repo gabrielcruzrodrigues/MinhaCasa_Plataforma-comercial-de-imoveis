@@ -38,4 +38,18 @@ public class UserController {
         this.userService.disabledUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    //favorite
+
+    @PutMapping("/favorite/add/{studentId}/{immobileId}")
+    public ResponseEntity<Object> addNewImmobileFavorite(@PathVariable Long studentId, @PathVariable Long immobileId) {
+        this.userService.addNewFavorite(studentId, immobileId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/favorite/remove/{studentId}/{immobileId}")
+    public ResponseEntity<Object> removeNewImmobileFavorite(@PathVariable Long studentId, @PathVariable Long immobileId) {
+        this.userService.removeFavorite(studentId, immobileId);
+        return ResponseEntity.noContent().build();
+    }
 }

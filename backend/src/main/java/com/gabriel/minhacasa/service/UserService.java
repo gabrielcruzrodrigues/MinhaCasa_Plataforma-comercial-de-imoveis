@@ -2,8 +2,11 @@ package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.DTO.CreateUserDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateUserDTO;
+import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
+import com.gabriel.minhacasa.exceptions.FavoriteAlreadyExistsException;
+import com.gabriel.minhacasa.exceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.UserNotFoundException;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -21,6 +24,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ImmobileService immobileService;
 
     @Transactional
     public void createUser(CreateUserDTO userData) {
@@ -71,5 +75,29 @@ public class UserService {
         User user = this.findById(id);
         user.setActive(false);
         userRepository.save(user);
+    }
+
+    public void addNewFavorite(Long studentId, Long immobileId) {
+        Immobile immobile = this.immobileService.findById(immobileId);
+        User user = this.findById(studentId);
+
+        if (!user.getFavorites().contains(immobile)) {
+            user.getFavorites().add(immobile);
+            userRepository.save(user);
+        } else {
+            throw new FavoriteAlreadyExistsException();
+        }
+    }
+
+    public void removeFavorite(Long studentId, Long immobileId) {
+        Immobile immobile = this.immobileService.findById(immobileId);
+        User user = this.findById(studentId);
+
+        if (user.getFavorites().contains(immobile)) {
+            user.getFavorites().remove(immobile);
+            userRepository.save(user);
+        } else {
+            throw new ImmobileNotFoundException();
+        }
     }
 }
