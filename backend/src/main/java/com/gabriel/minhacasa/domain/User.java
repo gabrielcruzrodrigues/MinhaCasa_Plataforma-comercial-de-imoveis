@@ -1,5 +1,6 @@
 package com.gabriel.minhacasa.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabriel.minhacasa.domain.enums.GenderEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -45,6 +46,7 @@ public class User {
 
     @Column(nullable = false)
     @NotBlank
+    @JsonIgnore
     private String password;
 
     private String imageProfile;
