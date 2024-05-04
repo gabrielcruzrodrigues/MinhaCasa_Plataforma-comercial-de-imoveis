@@ -12,7 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class ImmobileFiles {
+public class ImmobileFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

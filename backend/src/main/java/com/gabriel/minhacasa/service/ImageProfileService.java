@@ -95,7 +95,7 @@ public class ImageProfileService {
         try {
             Files.delete(path);
         } catch (IOException ex) {
-            throw new ErrorForDeleteImageException(ex.getMessage());
+            throw new ErrorForDeleteFileException(ex.getMessage());
         }
     }
 

@@ -13,4 +13,4 @@ spring:
       show-sql: true
 
 images-user-path: "C:/minhacasa/images-profile"
-images-immobile-path: "C:/minhacasa/images-immobile"
+images-immobile-path: "C:/minhacasa/files-immobile"

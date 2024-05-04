@@ -128,6 +128,6 @@ public record CreateImmobileDTO(
         @NotNull
         boolean gatedCommunity,
 //        @NotNull change when create frontend form
-        List<MultipartFile> images
+        List<MultipartFile> files
 ) {
 }

@@ -92,10 +92,10 @@ public class ImmobileService {
                     .user(user.get())
                     .build();
 
-            this.immobileRepository.save(immobile);
+            Immobile immobileSaved = this.immobileRepository.save(immobile);
 
-            if (immobileData.images() != null) {
-                this.filesImmobileService.saveFiles(immobileData.images(), immobile);
+            if (immobileData.files() != null) {
+                this.filesImmobileService.saveFiles(immobileData.files(), immobileSaved);
             }
         } else {
             throw new UserNotFoundException();

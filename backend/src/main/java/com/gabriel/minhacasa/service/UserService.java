@@ -47,10 +47,10 @@ public class UserService {
         user.setInstagram(null);
         user.setActive(true);
 
-        this.userRepository.save(user);
+        User userSaved = this.userRepository.save(user);
 
         if (userData.imageProfile() != null) {
-            this.imageProfileService.saveFile(userData.imageProfile(), user);
+            this.imageProfileService.saveFile(userData.imageProfile(), userSaved);
         }
     }
 

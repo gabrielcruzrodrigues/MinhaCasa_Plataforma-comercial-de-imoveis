@@ -1,22 +1,23 @@
 package com.gabriel.minhacasa.service;
 
-import com.gabriel.minhacasa.domain.ImmobileFiles;
+import com.gabriel.minhacasa.domain.ImmobileFile;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.enums.TypeFileEnum;
-import com.gabriel.minhacasa.exceptions.FileNullContentException;
-import com.gabriel.minhacasa.exceptions.ImmobileNotFoundException;
-import com.gabriel.minhacasa.exceptions.SaveFileErrorException;
+import com.gabriel.minhacasa.exceptions.*;
 import com.gabriel.minhacasa.repository.FilesImmobileRepository;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
 import com.gabriel.minhacasa.utils.CheckFileType;
 import com.gabriel.minhacasa.utils.GenerateNewName;
 import com.gabriel.minhacasa.utils.GenerateRegister;
 import com.gabriel.minhacasa.utils.GetFileExtension;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -76,7 +77,7 @@ public class FilesImmobileService {
         String register = generateRegister.newRegister();
         TypeFileEnum type = getFileExtension.getExtension(fileName);
 
-        ImmobileFiles fileImage = ImmobileFiles.builder()
+        ImmobileFile fileImage = ImmobileFile.builder()
                 .register(register)
                 .path(fileName)
                 .type(type)
@@ -93,5 +94,29 @@ public class FilesImmobileService {
         } else {
             return generateNewName.addCharactersToFileName(newFileName);
         }
+    }
+
+    @Transactional
+    public void deleteFile(Long immobileId, Long fileId) {
+        Immobile immobile = this.immobileRepository.findById(immobileId).orElseThrow(ImmobileNotFoundException::new);
+        ImmobileFile immobileFile = this.filesImmobileRepository.findById(fileId).orElseThrow(ImmobileNotFoundException::new);
+
+        if (immobile.getFiles().size() <= 1) {
+            throw new IntegrityErrorException("The immobile cannot be left without any file");
+        }
+
+        Path path = Paths.get(immobileFile.getPath());
+
+        try {
+            Files.delete(path);
+            this.deleteRegisterInDatabase(immobileFile);
+        } catch (IOException ex) {
+            throw new ErrorForDeleteFileException("Error for delete ImmobileFile");
+        }
+    }
+
+    @Transactional
+    private void deleteRegisterInDatabase(ImmobileFile file) {
+        this.filesImmobileRepository.deleteById(file.getId());
     }
 }

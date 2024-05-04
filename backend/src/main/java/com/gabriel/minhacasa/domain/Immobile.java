@@ -226,5 +226,5 @@ public class Immobile {
     private List<User> favoriteUser;
 
     @OneToMany(mappedBy = "immobile")
-    private List<ImmobileFiles> files;
+    private List<ImmobileFile> files;
 }
