@@ -3,8 +3,10 @@ package com.gabriel.minhacasa.domain.DTO;
 import com.gabriel.minhacasa.domain.enums.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record CreateImmobileDTO(
         @NotNull
@@ -124,6 +126,8 @@ public record CreateImmobileDTO(
         @NotNull
         boolean seaView,
         @NotNull
-        boolean gatedCommunity
+        boolean gatedCommunity,
+//        @NotNull change when create frontend form
+        List<MultipartFile> images
 ) {
 }

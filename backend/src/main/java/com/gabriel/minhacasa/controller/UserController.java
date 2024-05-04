@@ -17,14 +17,15 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<Object> createUser(@RequestBody CreateUserDTO request) {
+    public ResponseEntity<Object> createUser(@RequestBody CreateUserDTO request) { //change to @ModelAttribute
         this.userService.createUser(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(this.userService.findById(id));
+        User user = this.userService.findById(id);
+        return ResponseEntity.ok().body(user);
     }
 
     @PutMapping("/update")

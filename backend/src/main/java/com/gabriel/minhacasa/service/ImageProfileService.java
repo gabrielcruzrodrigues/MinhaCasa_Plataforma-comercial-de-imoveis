@@ -2,24 +2,27 @@ package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.ImageProfileFile;
 import com.gabriel.minhacasa.domain.User;
-import com.gabriel.minhacasa.exceptions.FileNullContentException;
-import com.gabriel.minhacasa.exceptions.SaveFileErrorException;
-import com.gabriel.minhacasa.exceptions.UserNullContentException;
+import com.gabriel.minhacasa.exceptions.*;
 import com.gabriel.minhacasa.repository.ImageProfileFileRepository;
 import com.gabriel.minhacasa.repository.UserRepository;
 import com.gabriel.minhacasa.utils.CheckFileType;
 import com.gabriel.minhacasa.utils.GenerateNewName;
 import com.gabriel.minhacasa.utils.GenerateRegister;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
+@Service
 @RequiredArgsConstructor
-public class ImageProfileService implements FileStorageServiceInterface<User> {
+public class ImageProfileService {
 
     @Value("${images-user-path}")
     private String imagesPath;
@@ -27,49 +30,77 @@ public class ImageProfileService implements FileStorageServiceInterface<User> {
     private final CheckFileType checkFileType;
     private final GenerateNewName generateNewName;
     private final ImageProfileFileRepository imageProfileFileRepository;
+    private final UserRepository userRepository;
     private final GenerateRegister generateRegister;
 
-    @Override
+    @Transactional
     public void saveFile(MultipartFile file, User user) {
-        if (checkFileType.verifyIfIsAImage(file)) {
-            if (user != null) {
+        if (user.getImageProfile() == null) {
+            if (checkFileType.verifyIfIsAImage(file)) {
                 try {
                     byte[] bytes = file.getBytes();
                     String newFileName = this.generateFileName(file, user);
                     Path path = Paths.get(imagesPath + "/" + newFileName);
                     Files.write(path, bytes);
-                    this.saveFileReferenceInDatabase(newFileName, user);
+                    this.saveFileReferenceInDatabase(path.toString(), user);
                 } catch (Exception ex) {
                     throw new SaveFileErrorException(ex.getMessage());
                 }
             } else {
-                throw new UserNullContentException();
+                throw new DataTypeNotAcceptedForThisOperationException();
             }
         } else {
-            throw new FileNullContentException();
+            throw new TheUserAlreadyHasAnImageProfileException();
         }
     }
 
-    @Override
-    public void saveFileReferenceInDatabase(String fileName, User user) {
+    @Transactional
+    private void saveFileReferenceInDatabase(String path, User user) {
         String register = generateRegister.newRegister();
 
         ImageProfileFile fileImage = ImageProfileFile.builder()
                 .register(register)
-                .path(fileName)
+                .path(path)
                 .user(user)
                 .build();
 
         imageProfileFileRepository.save(fileImage);
     }
 
-    @Override
-    public String generateFileName(MultipartFile file, User user) {
+    private String generateFileName(MultipartFile file, User user) {
         String newFileName = generateNewName.generateFileName(file, user.getName());
         if (imageProfileFileRepository.findByPath(newFileName).isEmpty()) {
             return newFileName;
         } else {
             return generateNewName.addCharactersToFileName(newFileName);
         }
+    }
+
+    @Transactional
+    public void updateImageProfile(MultipartFile file, Long id) {
+        Optional<User> userOPT = this.userRepository.findById(id);
+        if (userOPT.isPresent()) {
+            User user = userOPT.get();
+            this.deleteFile(user);
+            this.deleteRegisterInDatabase(user);
+            this.saveFile(file, user);
+        } else {
+            throw new UserNotFoundException();
+        }
+    }
+
+    @Transactional
+    private void deleteFile(User user) {
+        Path path = Paths.get(user.getImageProfile().getPath());
+        try {
+            Files.delete(path);
+        } catch (IOException ex) {
+            throw new ErrorForDeleteImageException(ex.getMessage());
+        }
+    }
+
+    @Transactional
+    private void deleteRegisterInDatabase(User user) {
+        this.imageProfileFileRepository.deleteById(user.getImageProfile().getId());
     }
 }

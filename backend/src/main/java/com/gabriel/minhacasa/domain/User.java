@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -68,8 +67,7 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    @OneToOne
-    @JoinColumn(name = "imageUser")
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private ImageProfileFile imageProfile;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

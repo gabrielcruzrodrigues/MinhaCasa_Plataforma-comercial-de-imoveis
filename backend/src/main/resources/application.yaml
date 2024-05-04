@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
   datasource:
     username: postgres
     url: jdbc:postgresql://localhost:5432/minhacasa
@@ -9,3 +13,4 @@ spring:
       show-sql: true
 
 images-user-path: "C:/minhacasa/images-profile"
+images-immobile-path: "C:/minhacasa/images-immobile"

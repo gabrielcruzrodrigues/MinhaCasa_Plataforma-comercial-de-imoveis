@@ -219,4 +219,7 @@ public class Immobile {
     @JsonIgnore
     @ManyToMany(mappedBy = "favorites")
     private List<User> favoriteUser;
+
+    @OneToMany(mappedBy = "immobile")
+    private List<ImageImmobileFile> images;
 }

@@ -1,7 +1,10 @@
 package com.gabriel.minhacasa.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.UUID;
 
+@Component
 public class GenerateRegister {
 
     public String newRegister() {

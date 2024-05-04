@@ -11,7 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class ImageProfileFile {
+public class ImageImmobileFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class ImageProfileFile {
     private String path;
 
     @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "immobile_id")
+    private Immobile immobile;
 }

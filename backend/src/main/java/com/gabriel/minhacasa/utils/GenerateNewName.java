@@ -1,9 +1,11 @@
 package com.gabriel.minhacasa.utils;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
+@Component
 public class GenerateNewName {
 
     public String generateFileName(MultipartFile file, String name) {

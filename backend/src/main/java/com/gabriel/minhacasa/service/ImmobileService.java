@@ -22,6 +22,7 @@ public class ImmobileService {
 
     private final ImmobileRepository immobileRepository;
     private final UserRepository userRepository;
+    private final ImageImmobileService imageImmobileService;
 
     public void createImmobile(CreateImmobileDTO immobileData) {
         Optional<User> user = userRepository.findById(immobileData.studentId());
@@ -93,6 +94,10 @@ public class ImmobileService {
                     .build();
 
             this.immobileRepository.save(immobile);
+
+            if (immobileData.images() != null) {
+                this.imageImmobileService.saveFile(immobileData.images(), immobile);
+            }
         } else {
             throw new UserNotFoundException();
         }

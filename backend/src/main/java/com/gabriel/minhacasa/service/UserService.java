@@ -25,6 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ImmobileService immobileService;
+    private final ImageProfileService imageProfileService;
 
     @Transactional
     public void createUser(CreateUserDTO userData) {
@@ -47,6 +48,10 @@ public class UserService {
         user.setActive(true);
 
         this.userRepository.save(user);
+
+        if (userData.imageProfile() != null) {
+            this.imageProfileService.saveFile(userData.imageProfile(), user);
+        }
     }
 
     public User findById(Long id) {
