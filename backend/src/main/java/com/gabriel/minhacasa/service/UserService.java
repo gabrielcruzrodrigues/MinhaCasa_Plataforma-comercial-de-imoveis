@@ -41,6 +41,7 @@ public class UserService {
         user.setCity(userData.city());
         user.setRole(Set.of(RoleEnum.USER.toString()));
         user.setCreatedAt(LocalDateTime.now());
+        user.setContractQuantities(0L);
         user.setFavorites(null);
         user.setProperties(null);
         user.setFacebook(null);

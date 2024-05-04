@@ -66,7 +66,11 @@ public class User {
     @Column(nullable = false)
     private Set<String> role;
 
+    @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private Long contractQuantities;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private ImageProfileFile imageProfile;

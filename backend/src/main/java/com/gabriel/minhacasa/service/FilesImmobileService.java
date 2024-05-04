@@ -2,6 +2,7 @@ package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.ImmobileFile;
+import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.TypeFileEnum;
 import com.gabriel.minhacasa.exceptions.*;
 import com.gabriel.minhacasa.repository.FilesImmobileRepository;
@@ -139,6 +140,14 @@ public class FilesImmobileService {
             for (int i = 1; i < files.size(); i++) {
                 this.deleteFile(immobile, files.get(i));
             }
+            this.addContractQuantityForUser(immobile);
         }
+    }
+
+    private void addContractQuantityForUser(Immobile immobile) {
+        User user = this.userRepository.findById(immobile.getUser().getId())
+                .orElseThrow(UserNotFoundException::new);
+        user.setContractQuantities(user.getContractQuantities() + 1);
+        this.userRepository.save(user);
     }
 }
