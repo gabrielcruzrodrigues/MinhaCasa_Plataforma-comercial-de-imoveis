@@ -20,7 +20,7 @@ public class CheckFileType {
             }
 
         } else {
-            throw new FileNullContentException();
+            throw new FileNullContentException("verifyIfIsAImage method");
         }
     }
 }

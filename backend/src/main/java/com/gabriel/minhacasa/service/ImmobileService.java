@@ -4,7 +4,6 @@ import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
-import com.gabriel.minhacasa.exceptions.ErrorForDeleteImmobileException;
 import com.gabriel.minhacasa.exceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.UserNotFoundException;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
@@ -96,7 +95,7 @@ public class ImmobileService {
             this.immobileRepository.save(immobile);
 
             if (immobileData.images() != null) {
-                this.imageImmobileService.saveFile(immobileData.images(), immobile);
+                this.imageImmobileService.saveFiles(immobileData.images(), immobile);
             }
         } else {
             throw new UserNotFoundException();
