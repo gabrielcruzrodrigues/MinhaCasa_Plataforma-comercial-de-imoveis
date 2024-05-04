@@ -1,6 +1,8 @@
 package com.gabriel.minhacasa.security.service;
 
 import com.gabriel.minhacasa.domain.User;
+import com.gabriel.minhacasa.exceptions.AuthenticationErrorException;
+import com.gabriel.minhacasa.exceptions.UserNotFoundException;
 import com.gabriel.minhacasa.repository.UserRepository;
 import com.gabriel.minhacasa.security.DTO.AuthenticatedResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +26,10 @@ public class AuthenticationService {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(email, password));
             String token = jwtTokenService.generateToken(auth);
-            Optional<User> user = userRepository.findByEmail(email);
-            return new AuthenticatedResponseDTO(user.get().getId(), token);
+            User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+            return new AuthenticatedResponseDTO(user.getId(), token, user.getRole().toString());
         } catch (Exception ex) {
-            return new AuthenticatedResponseDTO(null, ex.getMessage());
+            throw new AuthenticationErrorException(ex.getMessage());
         }
     }
 }

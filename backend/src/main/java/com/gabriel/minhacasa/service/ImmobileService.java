@@ -4,6 +4,7 @@ import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
+import com.gabriel.minhacasa.domain.enums.RoleEnum;
 import com.gabriel.minhacasa.exceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.UserNotFoundException;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -94,6 +96,7 @@ public class ImmobileService {
                     .build();
 
             Immobile immobileSaved = this.immobileRepository.save(immobile);
+            this.setRoleOWNERByUser(user.get());
 
             if (immobileData.files() != null) {
                 this.filesImmobileService.saveFiles(immobileData.files(), immobileSaved);
@@ -101,6 +104,11 @@ public class ImmobileService {
         } else {
             throw new UserNotFoundException();
         }
+    }
+
+    private void setRoleOWNERByUser(User user) {
+        user.setRole(Set.of(RoleEnum.OWNER.toString()));
+        this.userRepository.save(user);
     }
 
     public Immobile findById(Long id) {
