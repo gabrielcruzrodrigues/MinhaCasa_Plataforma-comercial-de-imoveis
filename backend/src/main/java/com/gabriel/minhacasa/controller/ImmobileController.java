@@ -4,6 +4,7 @@ package com.gabriel.minhacasa.controller;
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
+import com.gabriel.minhacasa.repository.UserRepository;
 import com.gabriel.minhacasa.service.ImmobileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,12 @@ public class ImmobileController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteImmobile(@PathVariable Long id) {
         this.immobileService.disableImmobile(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/sold/{id}")
+    public ResponseEntity<Object> soldImmobile(@PathVariable Long id) {
+        this.immobileService.soldImmobile(id);
         return ResponseEntity.noContent().build();
     }
 }

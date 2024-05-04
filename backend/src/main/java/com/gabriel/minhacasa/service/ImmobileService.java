@@ -178,4 +178,11 @@ public class ImmobileService {
         immobile.setActive(false);
         this.immobileRepository.save(immobile);
     }
+
+    @Transactional
+    public void soldImmobile(Long id) {
+        Immobile immobile = this.findById(id);
+        this.disableImmobile(id);
+        this.filesImmobileService.soldImmobile(immobile);
+    }
 }

@@ -1,11 +1,12 @@
 package com.gabriel.minhacasa.service;
 
-import com.gabriel.minhacasa.domain.ImmobileFile;
 import com.gabriel.minhacasa.domain.Immobile;
+import com.gabriel.minhacasa.domain.ImmobileFile;
 import com.gabriel.minhacasa.domain.enums.TypeFileEnum;
 import com.gabriel.minhacasa.exceptions.*;
 import com.gabriel.minhacasa.repository.FilesImmobileRepository;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
+import com.gabriel.minhacasa.repository.UserRepository;
 import com.gabriel.minhacasa.utils.CheckFileType;
 import com.gabriel.minhacasa.utils.GenerateNewName;
 import com.gabriel.minhacasa.utils.GenerateRegister;
@@ -16,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,6 +37,7 @@ public class FilesImmobileService {
     private final ImmobileRepository immobileRepository;
     private final GenerateRegister generateRegister;
     private final GetFileExtension getFileExtension;
+    private final UserRepository userRepository;
 
     public void saveFiles(List<MultipartFile> images, Long id) {
         if (images != null) {
@@ -116,7 +117,28 @@ public class FilesImmobileService {
     }
 
     @Transactional
+    public void deleteFile(Immobile immobile, ImmobileFile file) {
+        Path path = Paths.get(file.getPath());
+
+        try {
+            Files.delete(path);
+            this.deleteRegisterInDatabase(file);
+        } catch (IOException ex) {
+            throw new ErrorForDeleteFileException("Error for delete ImmobileFile");
+        }
+    }
+
+    @Transactional
     private void deleteRegisterInDatabase(ImmobileFile file) {
         this.filesImmobileRepository.deleteById(file.getId());
+    }
+
+    public void soldImmobile(Immobile immobile) {
+        List<ImmobileFile> files = immobile.getFiles();
+        if (files.size() > 1) {
+            for (int i = 1; i < files.size(); i++) {
+                this.deleteFile(immobile, files.get(i));
+            }
+        }
     }
 }
