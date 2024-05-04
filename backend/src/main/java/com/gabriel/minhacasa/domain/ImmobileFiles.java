@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gabriel.minhacasa.domain.enums.TypeFileEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class ImageImmobileFile {
+public class ImmobileFiles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,10 @@ public class ImageImmobileFile {
 
     @Column(nullable = false)
     private String path;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TypeFileEnum type;
 
     @JsonIgnore
     @ManyToOne

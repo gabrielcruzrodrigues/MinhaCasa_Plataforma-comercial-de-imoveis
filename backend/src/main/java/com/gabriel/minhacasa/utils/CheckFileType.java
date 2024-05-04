@@ -23,4 +23,21 @@ public class CheckFileType {
             throw new FileNullContentException("verifyIfIsAImage method");
         }
     }
+
+    public Boolean verifyFilesForImmobile(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        if (file != null) {
+            boolean verify = fileName.endsWith(".JPG") || fileName.endsWith(".jpg") || fileName.endsWith("jpeg") || fileName.endsWith(".png")
+                    || fileName.endsWith("mp4");
+
+            if (verify) {
+                return true;
+            } else {
+                throw new DataTypeNotAcceptedForThisOperationException();
+            }
+
+        } else {
+            throw new FileNullContentException("verifyIfIsAImage method");
+        }
+    }
 }

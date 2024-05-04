@@ -64,21 +64,26 @@ public class Immobile {
     @Column(nullable = false)
     protected int quantityBathrooms;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     protected IntegrityEnum integrity;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     protected SellerTypeEnum sellerType;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     protected AgeEnum age;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     protected CategoryEnum category;
 
     @Column(nullable = false)
     protected LocalDateTime createdAt;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     protected TypeEnum type;
 
@@ -221,5 +226,5 @@ public class Immobile {
     private List<User> favoriteUser;
 
     @OneToMany(mappedBy = "immobile")
-    private List<ImageImmobileFile> images;
+    private List<ImmobileFiles> files;
 }

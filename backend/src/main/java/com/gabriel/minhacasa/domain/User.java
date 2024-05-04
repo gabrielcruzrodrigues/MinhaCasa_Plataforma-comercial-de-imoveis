@@ -55,6 +55,7 @@ public class User {
     @NotBlank
     private String nationality;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private GenderEnum gender;
 

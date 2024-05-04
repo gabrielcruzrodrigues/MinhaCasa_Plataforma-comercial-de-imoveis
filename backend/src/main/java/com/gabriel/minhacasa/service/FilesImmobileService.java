@@ -1,15 +1,17 @@
 package com.gabriel.minhacasa.service;
 
-import com.gabriel.minhacasa.domain.ImageImmobileFile;
+import com.gabriel.minhacasa.domain.ImmobileFiles;
 import com.gabriel.minhacasa.domain.Immobile;
+import com.gabriel.minhacasa.domain.enums.TypeFileEnum;
 import com.gabriel.minhacasa.exceptions.FileNullContentException;
 import com.gabriel.minhacasa.exceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.SaveFileErrorException;
-import com.gabriel.minhacasa.repository.ImageImmobileFileRepository;
+import com.gabriel.minhacasa.repository.FilesImmobileRepository;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
 import com.gabriel.minhacasa.utils.CheckFileType;
 import com.gabriel.minhacasa.utils.GenerateNewName;
 import com.gabriel.minhacasa.utils.GenerateRegister;
+import com.gabriel.minhacasa.utils.GetFileExtension;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,16 +25,17 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ImageImmobileService {
+public class FilesImmobileService {
 
     @Value("${images-immobile-path}")
     private String imagesPath;
 
     private final CheckFileType checkFileType;
     private final GenerateNewName generateNewName;
-    private final ImageImmobileFileRepository imageImmobileFileRepository;
+    private final FilesImmobileRepository filesImmobileRepository;
     private final ImmobileRepository immobileRepository;
     private final GenerateRegister generateRegister;
+    private final GetFileExtension getFileExtension;
 
     public void saveFiles(List<MultipartFile> images, Long id) {
         if (images != null) {
@@ -51,12 +54,12 @@ public class ImageImmobileService {
         writeFilesInFolder(images, immobile);
     }
 
-    private void writeFilesInFolder(List<MultipartFile> images, Immobile immobile) {
-        for (MultipartFile image : images) {
-            if (immobile != null && checkFileType.verifyIfIsAImage(image)) {
+    private void writeFilesInFolder(List<MultipartFile> files, Immobile immobile) {
+        for (MultipartFile file : files) {
+            if (immobile != null && checkFileType.verifyFilesForImmobile(file)) {
                 try {
-                    byte[] bytes = image.getBytes();
-                    String newFileName = this.generateFileName(image, immobile);
+                    byte[] bytes = file.getBytes();
+                    String newFileName = this.generateFileName(file, immobile);
                     Path path = Paths.get(imagesPath + "/" + newFileName);
                     Files.write(path, bytes);
                     this.saveFileReferenceInDatabase(path.toString(), immobile);
@@ -71,19 +74,21 @@ public class ImageImmobileService {
 
     private void saveFileReferenceInDatabase(String fileName, Immobile immobile) {
         String register = generateRegister.newRegister();
+        TypeFileEnum type = getFileExtension.getExtension(fileName);
 
-        ImageImmobileFile fileImage = ImageImmobileFile.builder()
+        ImmobileFiles fileImage = ImmobileFiles.builder()
                 .register(register)
                 .path(fileName)
+                .type(type)
                 .immobile(immobile)
                 .build();
 
-        imageImmobileFileRepository.save(fileImage);
+        filesImmobileRepository.save(fileImage);
     }
 
     private String generateFileName(MultipartFile file, Immobile immobile) {
         String newFileName = generateNewName.generateFileName(file, immobile.getName());
-        if (imageImmobileFileRepository.findByPath(newFileName).isEmpty()) {
+        if (filesImmobileRepository.findByPath(newFileName).isEmpty()) {
             return newFileName;
         } else {
             return generateNewName.addCharactersToFileName(newFileName);
