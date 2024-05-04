@@ -19,85 +19,88 @@ public class Immobile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    private Long id;
 
     @Column(nullable = false, length = 50)
     @NotBlank
-    protected String name;
+    private String name;
+
+    @Column(length = 500)
+    private String description;
 
     @Column(nullable = false, length = 50)
     @NotBlank
-    protected String address;
+    private String address;
 
     @Column(nullable = false, length = 50)
     @NotBlank
-    protected String neighborhood;
+    private String neighborhood;
 
     @Column(nullable = false, length = 50)
     @NotBlank
-    protected String state;
+    private String state;
 
     @Column(nullable = false)
-    protected boolean garage;
+    private boolean garage;
 
     @Column(nullable = false)
-    protected int quantityBedrooms;
+    private int quantityBedrooms;
 
     @Column(nullable = false)
-    protected int quantityRooms;
+    private int quantityRooms;
 
     @Column(nullable = false)
-    protected float IPTU;
+    private float IPTU;
 
     @Column(nullable = false)
-    protected float price;
+    private float price;
 
     @Column(nullable = false)
-    protected boolean suite;
+    private boolean suite;
 
     @Column(nullable = false)
-    protected float usefulArea;
+    private float usefulArea;
 
     @Column(nullable = false)
-    protected float totalArea;
+    private float totalArea;
 
     @Column(nullable = false)
-    protected int quantityBathrooms;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected IntegrityEnum integrity;
+    private int quantityBathrooms;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    protected SellerTypeEnum sellerType;
+    private IntegrityEnum integrity;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    protected AgeEnum age;
+    private SellerTypeEnum sellerType;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    protected CategoryEnum category;
-
-    @Column(nullable = false)
-    protected LocalDateTime createdAt;
+    private AgeEnum age;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    protected TypeEnum type;
+    private CategoryEnum category;
 
     @Column(nullable = false)
-    protected boolean garden;
+    private LocalDateTime createdAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TypeEnum type;
 
     @Column(nullable = false)
-    protected boolean virtualTour;
+    private boolean garden;
 
     @Column(nullable = false)
-    protected boolean videos;
+    private boolean virtualTour;
 
     @Column(nullable = false)
-    protected boolean beach;
+    private boolean videos;
+
+    @Column(nullable = false)
+    private boolean beach;
 
     @Column(nullable = false)
     private boolean disabledAccess;

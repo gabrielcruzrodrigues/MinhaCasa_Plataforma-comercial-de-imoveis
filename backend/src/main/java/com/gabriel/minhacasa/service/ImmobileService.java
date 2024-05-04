@@ -28,6 +28,7 @@ public class ImmobileService {
         if (user.isPresent()) {
             Immobile immobile = Immobile.builder()
                     .name(immobileData.name())
+                    .description(immobileData.description())
                     .address(immobileData.address())
                     .neighborhood(immobileData.neighborhood())
                     .state(immobileData.state())
@@ -110,6 +111,7 @@ public class ImmobileService {
     public void updateImmobile(UpdateImmobileDTO immobileData) {
         Immobile immobile = Immobile.builder()
                 .name(immobileData.name())
+                .description(immobileData.description())
                 .address(immobileData.address())
                 .neighborhood(immobileData.neighborhood())
                 .state(immobileData.state())

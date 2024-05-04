@@ -13,6 +13,7 @@ public record CreateImmobileDTO(
         Long studentId,
         @NotBlank
         String name,
+        String description,
         @NotBlank
         String address,
         @NotBlank

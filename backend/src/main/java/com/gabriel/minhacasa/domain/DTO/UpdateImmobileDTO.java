@@ -10,6 +10,8 @@ public record UpdateImmobileDTO(
         @NotBlank
         String name,
         @NotBlank
+        String description,
+        @NotBlank
         String address,
         @NotBlank
         String neighborhood,
