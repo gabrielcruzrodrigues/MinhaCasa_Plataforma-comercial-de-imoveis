@@ -18,7 +18,7 @@ public class ImmobileController {
     private final ImmobileService immobileService;
 
     @PostMapping
-    public ResponseEntity<Object> create(@ModelAttribute CreateImmobileDTO request) {
+    public ResponseEntity<Object> create(@RequestBody CreateImmobileDTO request) { //change to modelAttribute
         this.immobileService.createImmobile(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -102,5 +102,7 @@ public class ImageProfileService {
     @Transactional
     private void deleteRegisterInDatabase(User user) {
         this.imageProfileFileRepository.deleteById(user.getImageProfile().getId());
+        user.setImageProfile(null);
+        this.userRepository.save(user);
     }
 }
