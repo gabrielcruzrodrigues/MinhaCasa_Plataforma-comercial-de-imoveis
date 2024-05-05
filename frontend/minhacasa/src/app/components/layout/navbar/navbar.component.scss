@@ -1,0 +1,69 @@
+@import '../../../scss/color-variables.scss';
+
+section {
+    background-color: $primary-color;
+    width: 100%;
+    height: 10%;
+}
+
+nav {
+    margin: auto;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+}
+
+ul {
+    margin: auto;
+    height: 100%;
+    width: 50%;
+    list-style: none; 
+    display: flex; 
+    align-items: center;
+    // justify-content: space-between;
+}
+
+.auth {
+    margin-left: 30%;
+    align-items: center;
+}
+
+.auth li {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.logo img {
+    width: 200px;
+    margin-left: 10px;
+}
+
+.menu img{
+    width: 25px;
+}
+
+.create-post {
+    padding: 12px;
+    background-color: white;
+    border-radius: 20px;
+    color: $text-primary-color;
+
+}
+
+.create-post a {
+    text-decoration: none;
+}
+
+.login a{
+    padding: 12px;
+    background-color: #2daccc;
+    border-radius: 20px;
+    color: white;
+}
+
+.login a {
+    color: white;
+    text-decoration: none;
+}
