@@ -262,18 +262,6 @@ public class MainExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<StandardError> UserNotFoundException(UserNotFoundException ex, HttpServletRequest request) {
-        StandardError error = StandardError.builder()
-                .timeStamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(ex.getMessage())
-                .path(request.getRequestURI())
-                .fieldError("UserNotFoundException")
-                .build();
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(UserNullContentException.class)
     public ResponseEntity<StandardError> UserNullContentException(UserNullContentException ex, HttpServletRequest request) {
         StandardError error = StandardError.builder()
