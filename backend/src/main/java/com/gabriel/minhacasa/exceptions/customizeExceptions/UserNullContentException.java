@@ -1,4 +1,4 @@
-package com.gabriel.minhacasa.exceptions;
+package com.gabriel.minhacasa.exceptions.customizeExceptions;
 
 public class UserNullContentException extends RuntimeException {
     public UserNullContentException() {

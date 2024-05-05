@@ -4,7 +4,7 @@ import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.ImmobileFile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.TypeFileEnum;
-import com.gabriel.minhacasa.exceptions.*;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.*;
 import com.gabriel.minhacasa.repository.FilesImmobileRepository;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
 import com.gabriel.minhacasa.repository.UserRepository;

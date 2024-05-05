@@ -2,7 +2,7 @@ package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.ImageProfileFile;
 import com.gabriel.minhacasa.domain.User;
-import com.gabriel.minhacasa.exceptions.*;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.*;
 import com.gabriel.minhacasa.repository.ImageProfileFileRepository;
 import com.gabriel.minhacasa.repository.UserRepository;
 import com.gabriel.minhacasa.utils.CheckFileType;

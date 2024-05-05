@@ -1,7 +1,7 @@
 package com.gabriel.minhacasa.utils;
 
-import com.gabriel.minhacasa.exceptions.DataTypeNotAcceptedForThisOperationException;
-import com.gabriel.minhacasa.exceptions.FileNullContentException;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.DataTypeNotAcceptedForThisOperationException;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.FileNullContentException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,8 +27,7 @@ public class CheckFileType {
     public Boolean verifyFilesForImmobile(MultipartFile file) {
         String fileName = file.getOriginalFilename();
         if (file != null) {
-            boolean verify = fileName.endsWith(".JPG") || fileName.endsWith(".jpg") || fileName.endsWith("jpeg") || fileName.endsWith(".png")
-                    || fileName.endsWith("mp4");
+            boolean verify = fileName.endsWith(".jpg") || fileName.endsWith("jpeg") || fileName.endsWith(".png") || fileName.endsWith("mp4");
 
             if (verify) {
                 return true;

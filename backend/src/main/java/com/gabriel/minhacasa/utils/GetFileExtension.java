@@ -1,7 +1,7 @@
 package com.gabriel.minhacasa.utils;
 
 import com.gabriel.minhacasa.domain.enums.TypeFileEnum;
-import com.gabriel.minhacasa.exceptions.ExtensionNotValidException;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.ExtensionNotValidException;
 import org.springframework.stereotype.Component;
 
 @Component

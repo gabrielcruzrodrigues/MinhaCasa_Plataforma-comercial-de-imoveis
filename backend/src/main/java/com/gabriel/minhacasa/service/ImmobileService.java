@@ -5,8 +5,8 @@ import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
-import com.gabriel.minhacasa.exceptions.ImmobileNotFoundException;
-import com.gabriel.minhacasa.exceptions.UserNotFoundException;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundException;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -107,7 +107,7 @@ public class ImmobileService {
     }
 
     private void setRoleOWNERByUser(User user) {
-        user.setRole(Set.of(RoleEnum.OWNER.toString()));
+        user.setRole(Set.of(RoleEnum.USER.toString(), RoleEnum.OWNER.toString()));
         this.userRepository.save(user);
     }
 

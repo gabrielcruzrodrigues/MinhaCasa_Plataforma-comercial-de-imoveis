@@ -1,6 +1,6 @@
 package com.gabriel.minhacasa.security.service;
 
-import com.gabriel.minhacasa.exceptions.UserNotFoundException;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
 import com.gabriel.minhacasa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
