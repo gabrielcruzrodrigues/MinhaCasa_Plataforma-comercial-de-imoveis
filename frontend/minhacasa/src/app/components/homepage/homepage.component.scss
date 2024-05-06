@@ -3,59 +3,63 @@
 .main-section {
     height: 100vh;
     width: 100%;
+    // background-color: $primary-color;
 }
 
 .main-search {
-    position: relative;
     width: 100%;
     height: 60%;
-    background-image: linear-gradient(to bottom, $primary-color, $third-color);
-}
-
-.main-search h1 {
-    position: absolute;
-    top: 20%;
-    left: 38%;
-    font-size: 60px;
-    color: white;
-}
-
-.main-search p {
-    position: absolute;
-    top: 35%;
-    left: 34%;
-    font-size: 20px;
-    color: white;
-}
-
-.main-search input {
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    width: 50%;
-    padding: 15px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: none;
+    // background-image: linear-gradient(to bottom, $primary-color, $third-color);
+    background-color: $primary-color;
     text-align: center;
 }
 
+.main-search h1 {
+    font-size: 50px;
+    color: white;
+    font-weight: 600;
+    padding-top: 70px;
+}
+
+.main-search p {
+    font-size: 20px;
+    color: white;
+    margin-top: 40px;
+}
+
+.main-search input {
+    margin: 30px auto;
+    width: 50%;
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    
+}
+
 .highlights {
-    // background-color: black;
-    height: 500px;
+    background-color: white;
+    height: 700px;
     display: block;
-    justify-content: center;
+    justify-content: space-between;
     padding: 50px;
 }
 
 .highlights h3 {
     background-color: white;
-    color: $text-primary-color;
+    color: $primary-color;
     height: 50px;
     width: 100%;
     text-align: center;
-    font-size: 50px;
-    margin-top: 0;
+    font-size: 45px;
+    margin-top: 80px;
+    margin-bottom: 5px;
+}
+
+.highlights p {
+    text-align: center;
+    font-size: 20px;
+    color: #858585;
     margin-bottom: 40px;
 }
 
