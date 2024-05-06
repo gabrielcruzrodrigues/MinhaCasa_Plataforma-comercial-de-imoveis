@@ -14,7 +14,7 @@
 
 .main-search h1 {
     position: absolute;
-    top: 0%;
+    top: 20%;
     left: 38%;
     font-size: 60px;
     color: white;
@@ -22,7 +22,7 @@
 
 .main-search p {
     position: absolute;
-    top: 30%;
+    top: 35%;
     left: 34%;
     font-size: 20px;
     color: white;
@@ -45,7 +45,7 @@
     height: 500px;
     display: block;
     justify-content: center;
-    padding: 30px;
+    padding: 50px;
 }
 
 .highlights h3 {
@@ -54,9 +54,9 @@
     height: 50px;
     width: 100%;
     text-align: center;
-    font-size: 40px;
+    font-size: 50px;
     margin-top: 0;
-    // margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .highlights-main {
@@ -97,7 +97,7 @@
     font-size: 60px;
     text-align: center;
     margin-top: 0;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     font-weight: 600;
 }
 
@@ -113,6 +113,6 @@
     border-radius: 20px;
     border: none;
     font-size: 30px;
-    margin-top: 10px;
+    margin-top: 50px;
     cursor: pointer;
 }

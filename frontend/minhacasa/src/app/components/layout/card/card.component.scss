@@ -1,7 +1,7 @@
 @import '../../../scss/color-variables.scss';
 
 .example-card {
-    max-width: 350px;
+    max-width: 300px;
     // padding: 10px;
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -17,4 +17,10 @@
     background-color: $primary-color;
     border-radius: 10px;
     align-self: flex-end;
+    width: 100%;
+}
+
+.title h4 {
+  font-size: 18px;
+  margin-top: 10px;
 }
