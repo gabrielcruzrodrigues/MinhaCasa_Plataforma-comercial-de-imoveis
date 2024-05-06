@@ -1,0 +1,106 @@
+@import '../../../scss/color-variables.scss';
+
+footer {
+     width: 100%;
+     height: 18.125rem;
+     background-color: $primary-color;
+}
+
+hr {
+     height: 0.063rem;
+     border: none;
+     background-color: white;
+     margin-top: 1.25rem;
+}
+
+.name {
+     text-align: center;
+     color: white;
+}
+
+.main-section {
+     display: flex;
+     justify-content: space-between;
+     padding: 5% 5% 0 5%;
+     color: white;
+     font-size: 1.875rem;
+}
+
+.main-section h5 {
+     font-size: 1.125rem;
+}
+
+.main-section img {
+     color: white;
+}
+ 
+.social-media {
+     display: block;
+     width: 30%;
+     height: 100%;
+}
+
+.icon {
+     margin-bottom: 0.625rem;
+}
+
+.icon img {
+     cursor: pointer;
+}
+
+.category {
+     display: block;
+     width: 30%;
+     height: 100%;
+}
+
+.category h5 {
+     margin: 0;
+}
+ 
+.category ul {
+     padding: 0;
+     margin-top: 0.313rem;
+}
+
+.category li {
+     list-style-type: none;
+}
+
+.category a {
+     text-decoration: none;
+     font-size: 0.75rem;
+     color: white;
+}
+
+.category a:hover {
+     color: rgb(238, 238, 238);
+}
+
+.contact {
+     width: 30%;
+     height: 100%;
+}
+
+.contact h5 {
+     margin: 0;
+}
+ 
+.contact ul {
+     padding: 0;
+     margin-top: 0.313rem;
+}
+
+.contact li {
+     list-style-type: none;
+}
+
+.contact a {
+     text-decoration: none;
+     font-size: 0.75rem;
+     color: white;
+}
+
+.contact a:hover {
+     color: rgb(238, 238, 238);
+}
