@@ -4,7 +4,7 @@
       <mat-card-title>Shiba Inu</mat-card-title>
       <mat-card-subtitle>Dog Breed</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="/assets/foto.jpg" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="/assets/foto.jpg" (load)="imageLoaded()" alt="Photo of a Shiba Inu">
     <mat-card-content class="title">
       <h4>Casa</h4>
     </mat-card-content>

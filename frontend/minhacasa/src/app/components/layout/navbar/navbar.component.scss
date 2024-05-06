@@ -1,15 +1,11 @@
 @import '../../../scss/color-variables.scss';
 
-section {
+nav {
     background-color: $primary-color;
     width: 100%;
     height: 10%;
-}
-
-nav {
     margin: auto;
     width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
     font-size: 19px;
@@ -82,13 +78,13 @@ ul {
     padding: 10px 15px;
     background-color: white;
     border-radius: 20px;
-    color: $text-primary-color;
-
+    
 }
 
 .create-post a {
     text-decoration: none;
     padding: 10px;
+    color: $text-primary-color;
 }
 
 .create-post:hover {
