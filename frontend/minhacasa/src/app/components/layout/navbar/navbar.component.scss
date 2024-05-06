@@ -8,12 +8,10 @@ nav {
     width: 100%;
     display: flex;
     align-items: center;
-    font-size: 19px;
+    font-size: 1.188rem;
 }
 
 ul {
-    // margin: auto;
-    // height: 100%;
     list-style: none; 
     display: flex; 
     align-items: center;
@@ -32,8 +30,8 @@ ul {
 }
 
 .logo img {
-    width: 200px;
-    margin-left: 10px;
+    width: 12.5rem;
+    margin-left: 0.625rem;
 }
 
 .menu {
@@ -41,7 +39,7 @@ ul {
 }
 
 .menu img{
-    width: 25px;
+    width: 1.563rem;
 }
 
 .options {
@@ -52,8 +50,8 @@ ul {
 .options li a {
     text-decoration: none;
     color: white;
-    padding: 10px 20px;
-    border-radius: 15px;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.938rem;
 }
 
 .option:hover a {
@@ -70,20 +68,20 @@ ul {
 }
 
 .auth li {
-    margin-left: 20px;
+    margin-left: 1.25rem;
     cursor: pointer;
 }
 
 .create-post {
-    padding: 10px 15px;
+    padding: 0.625rem 0.938rem;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     
 }
 
 .create-post a {
     text-decoration: none;
-    padding: 10px;
+    padding: 0.625rem;
     color: $text-primary-color;
 }
 
@@ -96,9 +94,9 @@ ul {
 }
 
 .login a {
-    padding: 10px 15px;
+    padding: 0.625rem 0.938rem;
     background-color: #2daccc;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     color: white;
     text-decoration: none;
 }

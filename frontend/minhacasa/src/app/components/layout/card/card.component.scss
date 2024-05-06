@@ -1,10 +1,10 @@
 @import '../../../scss/color-variables.scss';
 
 .example-card {
-    max-width: 320px;
+    max-width: 20rem;
     // padding: 10px;
-    border: 1px solid #e7e6e6;
-    border-radius: 10px;
+    border: 0.063rem solid #e7e6e6;
+    border-radius: 0.625rem;
 }
   
   .example-header-image {
@@ -13,19 +13,19 @@
   }
 
 .button {
-    padding: 10px;
+    padding: 0.625rem;
     background-color: $primary-color;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     align-self: flex-end;
     width: 100%;
     color: white;
     border: none;
-    font-size: 16px;
+    font-size: 1rem;
     cursor: pointer;
 }
 
 .title h4 {
-  font-size: 18px;
-  margin-top: 10px;
+  font-size: 1.125rem;
+  margin-top: 0.625rem;
 }
 

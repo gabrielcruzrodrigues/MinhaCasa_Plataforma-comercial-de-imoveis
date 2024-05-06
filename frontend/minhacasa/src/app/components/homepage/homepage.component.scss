@@ -8,59 +8,59 @@
 
 .main-search {
     width: 100%;
-    height: 550px;
+    height: 34.375rem;
     // background-image: linear-gradient(to bottom, $primary-color, $third-color);
     background-color: $primary-color;
     text-align: center;
 }
 
 .main-search h1 {
-    font-size: 50px;
+    font-size: 3.125rem;
     color: white;
     font-weight: 600;
-    padding-top: 120px;
+    padding-top: 7.5rem;
 }
 
 .main-search p {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: white;
-    margin-top: 40px;
+    margin-top: 2.5rem;
 }
 
 .main-search input {
-    margin: 30px auto;
+    margin: 1.875rem auto;
     width: 50%;
-    padding: 20px;
-    font-size: 18px;
-    border-radius: 5px;
+    padding: 1.25rem;
+    font-size: 1.125rem;
+    border-radius: 0.313rem;
     border: none;
     
 }
 
 .highlights {
     background-color: white;
-    height: 800px;
+    height: 50rem;
     display: block;
     justify-content: space-between;
-    padding: 50px;
+    padding: 3.125rem;
 }
 
 .highlights h3 {
     background-color: white;
     color: $primary-color;
-    height: 50px;
+    height: 3.125rem;
     width: 100%;
     text-align: center;
-    font-size: 45px;
-    margin-top: 80px;
-    margin-bottom: 5px;
+    font-size: 2.813rem;
+    margin-top: 5rem;
+    margin-bottom: 0.313rem;
 }
 
 .highlights p {
     text-align: center;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #858585;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 }
 
 .highlights-main {
@@ -75,7 +75,7 @@
     width: 100%;
     // height: 390px;
     height: 20%;
-    margin-bottom: 100px;
+    margin-bottom: 6.25rem;
     display: flex;
 }
 
@@ -90,32 +90,32 @@
 .content {
     width: 60%;
     color: white;
-    padding: 30px;
+    padding: 1.875rem;
     display: block;
     text-align: center;
     height: 100%;
 }
 
 .main-text {
-    font-size: 60px;
+    font-size: 3.75rem;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 80px;
+    margin-top: 1.25rem;
+    margin-bottom: 5rem;
     font-weight: 600;
 }
 
 .second-text {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .content button {
     background-color: $primary-color;
     color: white;
     width: 50%;
-    padding: 15px;
-    border-radius: 20px;
+    padding: 0.938rem;
+    border-radius: 1.25rem;
     border: none;
-    font-size: 30px;
-    margin-top: 50px;
+    font-size: 1.875rem;
+    margin-top: 3.125rem;
     cursor: pointer;
 }
