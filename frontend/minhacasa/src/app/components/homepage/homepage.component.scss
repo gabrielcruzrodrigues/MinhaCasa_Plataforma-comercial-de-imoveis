@@ -11,10 +11,20 @@
     height: 34.375rem;
     background-color: $primary-color;
     text-align: center;
-    background-image: url('/assets/background.jpg');
-    background-size: cover;
-    background-position: center;
     position: relative;
+    overflow: hidden;
+}
+
+.main-search img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // min-width: 25%;
+    // min-height: 25%;
+    width: 200%;
+    height: auto;
+    object-fit: cover;
 }
 
 .main-search-content {
