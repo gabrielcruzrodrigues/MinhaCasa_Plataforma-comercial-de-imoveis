@@ -16,6 +16,7 @@
 
 .register {
     width: 70%;
+    padding: 20px;
 }
 
 .register h1 {
@@ -65,10 +66,10 @@ input {
 
 .section2 {
     display: flex;
-    // justify-content: space-between;
     width: 92%;
     height: 70%;
-    padding: 0px 40px 40px 40px;
+    padding: 40px;
+    padding-top: 0;
 }
 
 .data2 {
@@ -85,7 +86,7 @@ input {
 }
 
 .data3 {
-    // background-color: red;
+
     width: 50%;
     height: 100%;
     display: flex;
