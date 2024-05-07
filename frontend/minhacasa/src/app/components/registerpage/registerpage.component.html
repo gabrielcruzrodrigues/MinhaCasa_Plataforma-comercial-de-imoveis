@@ -1,8 +1,52 @@
 <section class="main-section">
-    <section class="content">
-            
-    </section>
+    <section class="content"></section>
     <section class="register">
+        <h1>Cadastre-se para ter acesso a todas as funcionalidades!</h1>
+        <!-- <hr> -->
+        <form action="">
+            <section class="section1">
+                <div class="image-profile">
+                    <input class="image-profile-input" type="file" name="image-profile">
+                </div>
+                <div class="data1">
+                    <label>Nome:</label>
+                    <input type="text" name="name" placeholder="Digite aqui o seu nome!">
+                    <label>Email:</label>
+                    <input type="email" name="email" placeholder="Digite aqui o seu email!">
+                    <label>Nacionalidade:</label>
+                    <input type="text" name="nacionality" placeholder="Digite aqui sua nacionalidade! Ex: Brasileira">
+                </div>
+            </section>
 
+            <section class="section2">
+                <div class="data2">
+                    <label>Telefone:</label>
+                    <input type="tel" name="phone" placeholder="Ex: 55900000000">
+                    <label>Whatsapp:</label>
+                    <input type="tel" name="whatsapp" placeholder="Ex: 55900000000">
+                    <label>Data de nascimento:</label>
+                    <input type="date" name="dateOfBirth">
+                    <label>Cidade:</label>
+                    <input type="text" name="city" placeholder="Digite aqui o nome da sua cidade!">
+                </div>
+
+                <div class="data3">
+                    <label>Genero:</label>
+                    <input name="gender" list="gender" id="gender">
+                    <datalist id="gender">
+                        <option value="MALE">Masculino</option>
+                        <option value="FEMALE">Feminino</option>
+                    </datalist>
+
+                    <label>Senha:</label>
+                    <input type="password" name="password" placeholder="Digite uma senha de no mínimo 10 caracteres">
+
+                    <label>Verificar senha:</label>
+                    <input type="password" name="verify-password" placeholder="Digite a mesma senha do campo anterior!">
+
+                    <button>Finalizar cadastro</button>
+                </div>
+            </section>
+        </form>
     </section>
 </section>

@@ -17,3 +17,93 @@
 .register {
     width: 70%;
 }
+
+.register h1 {
+    text-align: center;
+    color: $text-primary-color;
+    font-size: 30px;
+    margin-top: 50px;
+}
+
+.section1 {
+    display: flex;
+    height: 30%;
+    padding: 20px;
+}
+
+.image-profile {
+    width: 30%;
+    padding: 20px;
+}
+
+.image-profile-input {
+    background-color: #ccc;
+    height: 90%;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+input {
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid #d6d6d6;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.data1 {
+    width: 70%;
+    padding: 25px 20px 5px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.data1 input {
+    width: 95%;
+}
+
+.section2 {
+    display: flex;
+    // justify-content: space-between;
+    width: 92%;
+    height: 70%;
+    padding: 0px 40px 40px 40px;
+}
+
+.data2 {
+    // background-color: blue;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0px 10px 10px;
+}
+
+.data2 input {
+    width: 90%;
+}
+
+.data3 {
+    // background-color: red;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0px 10px 15px;
+}
+
+.data3 input{
+    width: 95%;
+}
+
+button {
+    padding: 15px;
+    background-color: $primary-color;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
