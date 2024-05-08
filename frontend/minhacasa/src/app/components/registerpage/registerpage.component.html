@@ -37,12 +37,12 @@
                 </div>
 
                 <div class="data3">
-                    <label>Genero:</label>
-                    <input name="gender" list="gender" id="gender">
-                    <datalist id="gender">
+                    <label for="genderSelect">Gênero:</label>
+                    <select name="genderInput" id="genderSelect">
+                        <option value="" disabled selected>Selecione o gênero</option>
                         <option value="MALE">Masculino</option>
-                        <option value="FEMALE">Feminino</option>
-                    </datalist>
+                        <option value="FEMALE">Feminina</option>
+                    </select>
 
                     <label>Senha:</label>
                     <input type="password" name="password" placeholder="Digite uma senha de no mínimo 10 caracteres">
