@@ -89,6 +89,7 @@ form {
     font-size: 0.938rem;
     margin-top: 0.313rem;
     margin-bottom: 1.563rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .login button {
@@ -98,8 +99,9 @@ form {
     font-size: 1.25rem;
     cursor: pointer;
     background-color: $primary-color;
-    // color: white;
     margin-top: 0.938rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+
 }
 
 .login button:hover {

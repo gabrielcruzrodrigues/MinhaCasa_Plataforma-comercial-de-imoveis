@@ -42,6 +42,22 @@
     padding: 1.25rem;
 }
 
+.back {
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back span {
+    color: #757575;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.back img {
+    width: 20px;
+}
+
 .register h1 {
     text-align: center;
     color: $text-primary-color;
@@ -75,6 +91,7 @@ input {
     padding: 0.625rem;
     margin-bottom: 1.25rem;
     margin-top: 0.313rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .data1 {
@@ -130,5 +147,6 @@ button {
     font-size: 1.25rem;
     margin-top: 0.625rem;
     cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
