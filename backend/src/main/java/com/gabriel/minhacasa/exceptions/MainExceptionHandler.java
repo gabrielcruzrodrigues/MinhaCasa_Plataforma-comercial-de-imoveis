@@ -124,11 +124,11 @@ public class MainExceptionHandler {
     public ResponseEntity<StandardError> authenticationErrorException(AuthenticationErrorException ex, HttpServletRequest request) {
         StandardError error = new StandardError(
                 LocalDateTime.now(),
-                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.UNAUTHORIZED.value(),
                 ex.getMessage(),
                 request.getRequestURI(),
                 "AuthenticationErrorException");
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(DataTypeNotAcceptedForThisOperationException.class)
