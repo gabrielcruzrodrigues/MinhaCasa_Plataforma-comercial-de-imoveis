@@ -51,6 +51,22 @@ form {
     padding: 1.875rem;
 }
 
+.back {
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back span {
+    color: #757575;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.back img {
+    width: 20px;
+}
+
 .login-logo {
     max-width: 70%;
     margin-top: 15%;
