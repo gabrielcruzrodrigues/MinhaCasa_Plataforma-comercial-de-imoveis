@@ -8,6 +8,12 @@ export class AuthService {
   constructor() { }
 
   configureLocalStorage(body: any) {
-    alert("configurando local storage.")
+    if (body) {
+      localStorage.setItem('userId', body.id);
+      localStorage.setItem('role', body.role)
+      localStorage.setItem('token', body.token)
+    } else {
+      console.log("Erro ao configurar o localStorage.");
+    }
   }
 }
