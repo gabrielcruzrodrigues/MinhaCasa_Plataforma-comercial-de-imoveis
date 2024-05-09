@@ -3,6 +3,8 @@ package com.gabriel.minhacasa.controller;
 import com.gabriel.minhacasa.domain.DTO.CreateUserDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateUserDTO;
 import com.gabriel.minhacasa.domain.User;
+import com.gabriel.minhacasa.security.DTO.AuthenticatedResponseDTO;
+import com.gabriel.minhacasa.security.service.AuthenticationService;
 import com.gabriel.minhacasa.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,11 +17,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping
     public ResponseEntity<Object> createUser(@ModelAttribute CreateUserDTO request) {
         this.userService.createUser(request);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        AuthenticatedResponseDTO authenticatedResponseDTO = this.authenticationService.loginUser(request.email(), request.password());
+        return new ResponseEntity<>(authenticatedResponseDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

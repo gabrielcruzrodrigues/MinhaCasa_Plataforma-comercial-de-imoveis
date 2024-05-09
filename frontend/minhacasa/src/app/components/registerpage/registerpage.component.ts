@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class RegisterpageComponent {
   equalsPassword: boolean = false;
   form: FormGroup;
+  formData = new FormData();
 
   constructor(
     private fb: FormBuilder,
@@ -39,28 +40,24 @@ export class RegisterpageComponent {
 
   submit() {
     if (!this.equalsPassword) {
-      alert("As senhas não são iguais!" + this.equalsPassword);
+      alert("As senhas não são iguais! " + this.equalsPassword);
       return;
     }
 
     if (this.form.valid) {
-      const formData = new FormData();
-      formData.set('imageProfile', this.form.get('imageProfile')?.value);
-      formData.set('name', this.form.get('name')?.value);
-      formData.set('email', this.form.get('email')?.value);
-      formData.set('nationality', this.form.get('nationality')?.value);
-      formData.set('phone', this.form.get('phone')?.value);
-      formData.set('whatsapp', this.form.get('whatsapp')?.value);
-      formData.set('dateOfBirth', this.form.get('dateOfBirth')?.value);
-      formData.set('city', this.form.get('city')?.value);
-      formData.set('gender', this.form.get('gender')?.value);
-      formData.set('password', this.form.get('password')?.value);
+      // formData.set('imageProfile', this.form.get('imageProfile')?.value);
 
-      formData.forEach((value, key) => {
-        console.log(key, value);
-      });
+      this.formData.set('name', this.form.get('name')?.value);
+      this.formData.set('email', this.form.get('email')?.value);
+      this.formData.set('nationality', this.form.get('nationality')?.value);
+      this.formData.set('phone', this.form.get('phone')?.value);
+      this.formData.set('whatsapp', this.form.get('whatsapp')?.value);
+      this.formData.set('dateOfBirth', this.form.get('dateOfBirth')?.value);
+      this.formData.set('city', this.form.get('city')?.value);
+      this.formData.set('gender', this.form.get('gender')?.value);
+      this.formData.set('password', this.form.get('password')?.value);
 
-      this.userService.registerUser(formData).subscribe({
+      this.userService.registerUser(this.formData).subscribe({
         next: (response: HttpResponse<any>) => {
           this.authService.configureLocalStorage(response.body)
           alert("Cadastro realizado com sucesso!");
@@ -92,8 +89,7 @@ export class RegisterpageComponent {
     const element = event.currentTarget as HTMLInputElement;
     let file: File | null = element.files ? element.files[0] : null;
     if (file) {
-      this.form.patchValue({ imageProfile: file })
-      this.form.get('imageProfile')?.updateValueAndValidity();
+      this.formData.append('imageProfile', file);
     }
   }
 }
