@@ -45,18 +45,7 @@ export class RegisterpageComponent {
     }
 
     if (this.form.valid) {
-      // formData.set('imageProfile', this.form.get('imageProfile')?.value);
-
-      this.formData.set('name', this.form.get('name')?.value);
-      this.formData.set('email', this.form.get('email')?.value);
-      this.formData.set('nationality', this.form.get('nationality')?.value);
-      this.formData.set('phone', this.form.get('phone')?.value);
-      this.formData.set('whatsapp', this.form.get('whatsapp')?.value);
-      this.formData.set('dateOfBirth', this.form.get('dateOfBirth')?.value);
-      this.formData.set('city', this.form.get('city')?.value);
-      this.formData.set('gender', this.form.get('gender')?.value);
-      this.formData.set('password', this.form.get('password')?.value);
-
+      this.populateFormData();
       this.userService.registerUser(this.formData).subscribe({
         next: (response: HttpResponse<any>) => {
           this.authService.configureLocalStorage(response.body)
@@ -71,6 +60,18 @@ export class RegisterpageComponent {
     } else {
       alert("Preencha os campos corretamente!");
     }
+  }
+
+  populateFormData():void {
+    this.formData.set('name', this.form.get('name')?.value);
+    this.formData.set('email', this.form.get('email')?.value);
+    this.formData.set('nationality', this.form.get('nationality')?.value);
+    this.formData.set('phone', this.form.get('phone')?.value);
+    this.formData.set('whatsapp', this.form.get('whatsapp')?.value);
+    this.formData.set('dateOfBirth', this.form.get('dateOfBirth')?.value);
+    this.formData.set('city', this.form.get('city')?.value);
+    this.formData.set('gender', this.form.get('gender')?.value);
+    this.formData.set('password', this.form.get('password')?.value);
   }
 
   verifyPassword(event: Event): void {
