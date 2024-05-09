@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registerpage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, ModalAlertComponent],
+  imports: [ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule],
   templateUrl: './registerpage.component.html',
   styleUrl: './registerpage.component.scss'
 })
@@ -18,52 +19,79 @@ export class RegisterpageComponent {
   form: FormGroup;
   formData = new FormData();
 
-  showModal: boolean = true;
-  field: string = 'nome';
+  showModal: boolean = false;
+  field: string = '';
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
-      imageProfile: [null],
-      name: [''],
-      email: [''],
-      nationality: [''],
-      phone: [''],
-      whatsapp: [''],
-      dateOfBirth: [''],
-      city: [''],
-      gender: [''],
-      firstPassword: [''],
-      password: ['']
+      imageProfile: [null, Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      nationality: ['', Validators.required],
+      phone: ['', Validators.required],
+      whatsapp: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      city: ['', Validators.required],
+      gender: ['', Validators.required],
+      firstPassword: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   submit() {
-    if (!this.equalsPassword) {
-      alert("As senhas não são iguais! " + this.equalsPassword);
-      return;
-    }
+    alert('passou')
+    // if (!this.verifyFields()) {
+    //   return;
+    // }
 
-    if (this.form.valid) {
-      this.populateFormData();
-      this.userService.registerUser(this.formData).subscribe({
-        next: (response: HttpResponse<any>) => {
-          this.authService.configureLocalStorage(response.body)
-          alert("Cadastro realizado com sucesso!");
-          this.router.navigate(["/"]);
-        },
-        error: (error) => {
-          alert("Erro ao tentar realizar cadastro! Erro: " + error.message);
-          console.log(error);
-        }
-      })
+    // if (!this.equalsPassword) {
+    //   alert("As senhas não são iguais! " + this.equalsPassword);
+    //   return;
+    // }
+
+    this.populateFormData();
+    this.userService.registerUser(this.formData).subscribe({
+      next: (response: HttpResponse<any>) => {
+        this.authService.configureLocalStorage(response.body)
+        alert("Cadastro realizado com sucesso!");
+        this.router.navigate(["/"]);
+      },
+      error: (error) => {
+        alert("Erro ao tentar realizar cadastro! Erro: " + error.message);
+        console.log(error);
+      }
+    })
+  }
+
+  verifyFields() {
+    const invalidFields = this.getInvalidFields();
+    
+    if (invalidFields[0]) {
+      this.field = invalidFields[0];
+      this.showModal = true;
+      this.cdr.detectChanges();
     } else {
-      alert("Preencha os campos corretamente!");
+      this.submit();
     }
+  }
+
+  getInvalidFields(): string[] {
+    const invalidFields: string[] = [];
+
+    Object.keys(this.form.controls).forEach(key => {
+      const control = this.form.get(key);
+      if (control && control.invalid) {
+        invalidFields.push(key);
+      }
+    });
+
+    return invalidFields;
   }
 
   populateFormData():void {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-modal-alert',
@@ -13,11 +13,14 @@ export class ModalAlertComponent implements OnInit{
   @Input() field: string = '';
   message: string = '';
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     this.message = `Preencha o campo [ ${this.field} ] para continuar!`
   }
 
   closeModal() {
     this.showModal = false;
+    this.cdr.detectChanges();
   }
 }
