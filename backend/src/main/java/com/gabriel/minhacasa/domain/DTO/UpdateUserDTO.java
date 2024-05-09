@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public record UpdateUserDTO(
@@ -20,7 +21,7 @@ public record UpdateUserDTO(
         String email,
         MultipartFile imageProfile,
         @NotNull
-        Date dateOfBirth,
+        LocalDate dateOfBirth,
         @NotBlank
         String nationality,
         @NotNull

@@ -273,4 +273,16 @@ public class MainExceptionHandler {
                 .build();
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardError> IllegalArgumentException(IllegalArgumentException ex, HttpServletRequest request) {
+        StandardError error = StandardError.builder()
+                .timeStamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .error(ex.getMessage())
+                .path(request.getRequestURI())
+                .fieldError("IllegalArgumentException")
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }

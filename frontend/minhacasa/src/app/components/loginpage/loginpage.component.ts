@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 interface ResponseInterface {
   id: number,
@@ -41,6 +41,7 @@ export class LoginpageComponent {
           console.log(response);
           if (response.status == 200) {
             this.authService.configureLocalStorage(response.body);
+            alert("Login efetuado com sucesso!");
             this.router.navigate(["/"])
           }
         },
