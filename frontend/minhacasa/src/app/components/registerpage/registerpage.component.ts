@@ -4,11 +4,12 @@ import { UserService } from '../../services/user.service';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component';
 
 @Component({
   selector: 'app-registerpage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, ModalAlertComponent],
   templateUrl: './registerpage.component.html',
   styleUrl: './registerpage.component.scss'
 })
@@ -16,6 +17,9 @@ export class RegisterpageComponent {
   equalsPassword: boolean = false;
   form: FormGroup;
   formData = new FormData();
+
+  showModal: boolean = true;
+  field: string = 'nome';
 
   constructor(
     private fb: FormBuilder,
