@@ -1,0 +1,116 @@
+@mixin breakpoint($point) {
+     
+    @if $point == small-only {
+         @media (max-width: 63.938em) { //1023px
+              @content;
+         }
+    }
+
+    @else if $point == small-up {
+         @media (min-width: 64em) { //1024px
+              @content;    
+         }
+    }
+
+    @else if $point == hd-only {
+         @media (max-width: 79.938em) { //1279px
+              @content;
+         }
+    }
+
+    @else if $point == hd-up { 
+         @media (min-width: 80em) { //1280px
+              @content;
+         }
+    }
+
+    @else if $point == medium-only { 
+         @media (max-width: 85.313em) { //1365px
+              @content;
+         }
+    }
+
+    @else if $point == medium-up { 
+         @media (min-width: 85.375em) { //1366px
+              @content;
+         }
+    }
+
+    @else if $point == big-only { 
+         @media (max-width: 89.938em) { //1439px
+              @content;
+         }
+    }
+
+    @else if $point == big-up { 
+         @media (min-width: 90em) { //1440px
+              @content;
+         }
+    }
+
+    @else if $point == very-big-only { 
+         @media (max-width: 95.938em) { //1535px
+              @content;
+         }
+    }
+
+    @else if $point == very-big-up { 
+         @media (min-width: 96em) { //1536px
+              @content;
+         }
+    }
+
+    @else if $point == extra-big-only { 
+         @media (max-width: 97.438em) { //1559px
+              @content;
+         }
+    }
+
+    @else if $point == extra-big-up { 
+         @media (min-width: 100em) { //1600px
+              @content;
+         }
+    }
+
+    @else if $point == full-hd-only { 
+         @media (max-width: 119.938em) { //1919px
+              @content;
+         }
+    }
+
+    @else if $point == full-hd-up { 
+         @media (min-width: 120em) { //1920px
+              @content;
+         }
+    }
+
+    @else if $point == quad-hd-only { 
+         @media (max-width: 159.938em) { //2559px
+              @content;
+         }
+    }
+
+    @else if $point == quad-hd-up { 
+         @media (min-width: 160em) { //2560px
+              @content;
+         }
+    }
+
+    @else if $point == super-hd-only { 
+         @media (max-width: 239.938em) { //3839px
+              @content;
+         }
+    }
+
+    @else if $point == super-hd-up { 
+         @media (min-width: 240em) { //3840px
+              @content;
+         }
+    }
+
+    // @else {
+    //      @media(min-width: ($point / 16) + 'em') {
+              
+    //      }
+    // }
+}
