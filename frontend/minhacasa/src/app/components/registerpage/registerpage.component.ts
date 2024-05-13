@@ -124,8 +124,26 @@ export class RegisterpageComponent {
       this.activeModalText('Sua senha deve ter mais de 8 caracters!');
       return false;
     } 
+
+    if (this.validateString(password)) {
+      this.activeModalText('Sua senha deve conter letras, numeros e caracteres especiais (#, %, &, *, @, !...)!');
+      return false;
+    }
     
     return true;
+  }
+
+  validateString(password: string) {
+    const hasLetters = /a-zA-Z/.test(password);
+    const hasNumbers = /\d/.test(password);      
+    const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    return {
+      hasLetters,
+      hasNumbers,
+      hasSpecialChars,
+      isValid: hasLetters && hasNumbers && hasSpecialChars
+    };
   }
 
   activeModalText(text: string):void {
