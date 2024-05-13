@@ -15,7 +15,7 @@ export class ModalAlertComponent {
 
   @Input() set field(value: string) {
     this._field = value;
-    this.message = `Preencga o campo [ ${value} ] para continuar!`;
+    this.message = `Preencha o campo [ ${value} ] para continuar!`;
     this.cdr.detectChanges();
   }
 

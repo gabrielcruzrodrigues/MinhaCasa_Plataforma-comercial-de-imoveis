@@ -30,31 +30,21 @@ export class RegisterpageComponent {
     private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
-      imageProfile: [null, Validators.required],
-      name: ['', Validators.required],
+      imagem_de_perfil: [null, Validators.required],
+      nome: ['', Validators.required],
       email: ['', Validators.required],
-      nationality: ['', Validators.required],
-      phone: ['', Validators.required],
+      nacionalidade: ['', Validators.required],
+      telefone: ['', Validators.required],
       whatsapp: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      city: ['', Validators.required],
-      gender: ['', Validators.required],
-      firstPassword: ['', Validators.required],
-      password: ['', Validators.required]
+      data_de_nascimento: ['', Validators.required],
+      cidade: ['', Validators.required],
+      gênero: ['', Validators.required],
+      verificação_de_senha: ['', Validators.required],
+      senha: ['', Validators.required]
     });
   }
 
   submit() {
-    alert('passou')
-    // if (!this.verifyFields()) {
-    //   return;
-    // }
-
-    // if (!this.equalsPassword) {
-    //   alert("As senhas não são iguais! " + this.equalsPassword);
-    //   return;
-    // }
-
     this.populateFormData();
     this.userService.registerUser(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
@@ -98,15 +88,15 @@ export class RegisterpageComponent {
   }
 
   populateFormData():void {
-    this.formData.set('name', this.form.get('name')?.value);
+    this.formData.set('name', this.form.get('nome')?.value);
     this.formData.set('email', this.form.get('email')?.value);
-    this.formData.set('nationality', this.form.get('nationality')?.value);
-    this.formData.set('phone', this.form.get('phone')?.value);
+    this.formData.set('nationality', this.form.get('nacionalidade')?.value);
+    this.formData.set('phone', this.form.get('telefone')?.value);
     this.formData.set('whatsapp', this.form.get('whatsapp')?.value);
-    this.formData.set('dateOfBirth', this.form.get('dateOfBirth')?.value);
-    this.formData.set('city', this.form.get('city')?.value);
-    this.formData.set('gender', this.form.get('gender')?.value);
-    this.formData.set('password', this.form.get('password')?.value);
+    this.formData.set('dateOfBirth', this.form.get('data_de_nascimento')?.value);
+    this.formData.set('city', this.form.get('cidade')?.value);
+    this.formData.set('gender', this.form.get('gênero')?.value);
+    this.formData.set('password', this.form.get('senha')?.value);
   }
 
   verifyPassword(event: Event): void {
