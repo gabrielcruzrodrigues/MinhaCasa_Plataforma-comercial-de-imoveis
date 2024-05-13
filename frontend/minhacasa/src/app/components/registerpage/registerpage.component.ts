@@ -114,10 +114,12 @@ export class RegisterpageComponent {
   verifyPassword(): boolean {
     const firstPassword = this.form.get('verificação_de_senha')?.value;
     const password = this.form.get('senha')?.value;
-   
+
     if (firstPassword != password) {
-      // this.showModalText = false;
       this.activeModalText('As senhas não são iguais!');
+      return false;
+    } else if (password.length < 8) {
+      this.activeModalText('Sua senha deve ter mais de 8 caracters!');
       return false;
     } else {
       return true;
