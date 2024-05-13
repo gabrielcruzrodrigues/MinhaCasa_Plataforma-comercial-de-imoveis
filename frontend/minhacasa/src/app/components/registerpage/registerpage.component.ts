@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { HttpResponse } from '@angular/common/http';
@@ -26,6 +26,7 @@ export class RegisterpageComponent {
   //modal text
   showModalText: boolean = false;
   message: string = '';
+  @ViewChild(ModalTextComponent) modalComponent!: ModalTextComponent;
 
   constructor(
     private fb: FormBuilder,
@@ -54,12 +55,16 @@ export class RegisterpageComponent {
     this.userService.registerUser(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.authService.configureLocalStorage(response.body)
-        alert("Cadastro realizado com sucesso!");
-        this.router.navigate(["/"]);
+        this.activeModalText('Cadastro realizado com sucesso!');
+        this.waitForModalClose().then(() => {
+          this.router.navigate(["/"]);
+        })
       },
       error: (error) => {
-        alert("Erro ao tentar realizar cadastro! Erro: " + error.message);
-        console.log(error);
+        this.activeModalText('Ocorreu um erro interno, por favor tente mais tarde!');
+        this.waitForModalClose().then(() => {
+          this.router.navigate(["/"]);
+        })
       }
     })
   }
@@ -111,16 +116,21 @@ export class RegisterpageComponent {
     const password = this.form.get('senha')?.value;
    
     if (firstPassword != password) {
-      this.showModalText = false;
-      setTimeout(() => {
-        this.message = 'As senhas não são iguais!';
-        this.showModalText = true;
-        this.cdr.detectChanges();
-      });
+      // this.showModalText = false;
+      this.activeModalText('As senhas não são iguais!');
       return false;
     } else {
       return true;
     }
+  }
+
+  activeModalText(text: string):void {
+    this.showModalText = false; //reset
+    setTimeout(() => {
+      this.message = text;
+      this.showModalText = true;
+      this.cdr.detectChanges();
+    });
   }
 
   onFileSelect(event: Event): void {
@@ -129,5 +139,11 @@ export class RegisterpageComponent {
     if (file) {
       this.formData.append('imageProfile', file);
     }
+  }
+
+  waitForModalClose(): Promise<void> {
+    return new Promise(resolve => {
+      this.modalComponent.onClose.subscribe(() => resolve());
+    })
   }
 }

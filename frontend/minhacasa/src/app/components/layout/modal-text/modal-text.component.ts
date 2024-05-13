@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-modal-text',
@@ -10,6 +10,7 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 })
 export class ModalTextComponent {
   @Input() showModal: boolean = false;
+  @Output() onClose = new EventEmitter<void>();
   _message: string = '';
 
   @Input() set message(value: string) {
@@ -22,5 +23,6 @@ export class ModalTextComponent {
   closeModal() {
     this.showModal = false;
     this.cdr.detectChanges();
+    this.onClose.emit();
   }
 }
