@@ -118,12 +118,14 @@ export class RegisterpageComponent {
     if (firstPassword != password) {
       this.activeModalText('As senhas não são iguais!');
       return false;
-    } else if (password.length < 8) {
+    } 
+    
+    if (password.length < 8) {
       this.activeModalText('Sua senha deve ter mais de 8 caracters!');
       return false;
-    } else {
-      return true;
-    }
+    } 
+    
+    return true;
   }
 
   activeModalText(text: string):void {
