@@ -6,21 +6,26 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component';
 import { CommonModule } from '@angular/common';
+import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 
 @Component({
   selector: 'app-registerpage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule, ModalTextComponent],
   templateUrl: './registerpage.component.html',
   styleUrl: './registerpage.component.scss'
 })
 export class RegisterpageComponent {
-  equalsPassword: boolean = false;
   form: FormGroup;
   formData = new FormData();
 
+  //modal alert
   showModal: boolean = false;
   field: string = '';
+
+  //modal text
+  showModalText: boolean = false;
+  message: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -70,7 +75,9 @@ export class RegisterpageComponent {
         this.cdr.detectChanges();
       });
     } else {
-      this.submit();
+      if (this.verifyPassword()) {
+        this.submit();
+      }
     }
   }
 
@@ -99,15 +106,20 @@ export class RegisterpageComponent {
     this.formData.set('password', this.form.get('senha')?.value);
   }
 
-  verifyPassword(event: Event): void {
-    const firstPassword = this.form.get('firstPassword')?.value;
-    const password = this.form.get('password')?.value;
+  verifyPassword(): boolean {
+    const firstPassword = this.form.get('verificação_de_senha')?.value;
+    const password = this.form.get('senha')?.value;
    
-    if (firstPassword === password) {
-      this.equalsPassword = true;
+    if (firstPassword != password) {
+      this.showModalText = false;
+      setTimeout(() => {
+        this.message = 'As senhas não são iguais!';
+        this.showModalText = true;
+        this.cdr.detectChanges();
+      });
+      return false;
     } else {
-      this.equalsPassword = false;
-      console.log("As senhas digitadas não são iguais." + firstPassword + ', ' + password)
+      return true;
     }
   }
 
