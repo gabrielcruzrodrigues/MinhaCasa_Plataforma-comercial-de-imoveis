@@ -73,9 +73,12 @@ export class RegisterpageComponent {
     const invalidFields = this.getInvalidFields();
     
     if (invalidFields[0]) {
-      this.field = invalidFields[0];
-      this.showModal = true;
-      this.cdr.detectChanges();
+      this.showModal = false;
+      setTimeout(() => {
+        this.field = this.field = invalidFields[0];
+        this.showModal = true;
+        this.cdr.detectChanges();
+      });
     } else {
       this.submit();
     }

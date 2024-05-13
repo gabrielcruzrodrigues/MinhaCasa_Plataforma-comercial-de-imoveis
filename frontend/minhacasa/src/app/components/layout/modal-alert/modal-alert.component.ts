@@ -8,16 +8,18 @@ import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
   templateUrl: './modal-alert.component.html',
   styleUrl: './modal-alert.component.scss'
 })
-export class ModalAlertComponent implements OnInit{
+export class ModalAlertComponent {
   @Input() showModal: boolean = false;
-  @Input() field: string = '';
+  private _field: string = '';
   message: string = '';
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
-  ngOnInit(): void {
-    this.message = `Preencha o campo [ ${this.field} ] para continuar!`
+  @Input() set field(value: string) {
+    this._field = value;
+    this.message = `Preencga o campo [ ${value} ] para continuar!`;
+    this.cdr.detectChanges();
   }
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   closeModal() {
     this.showModal = false;
