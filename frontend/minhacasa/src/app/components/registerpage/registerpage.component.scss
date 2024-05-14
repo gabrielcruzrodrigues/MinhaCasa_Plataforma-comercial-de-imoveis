@@ -77,20 +77,22 @@
     // padding-left: 1.875rem;
 }
 
-// .image-profile {
-//     width: 20%;
-//     display: flex;
-//     align-items: center;
-// }
+.image-profile-div {
+    border-radius: 0.625rem;
+    background-color: #ccc;
+    box-shadow: none;
+    background-image: url('/assets/upload-icon.png');
+    background-position: center center;
+    background-size: 80% 60%;
+    background-repeat: no-repeat;
+}
 
 .image-profile-input {
     margin-bottom: 0;
-    background-color: #ccc;
     height: 80%;
-    width: 20%;
+    width: 90%;
     cursor: pointer;
-    border-radius: 0.625rem;
-    box-shadow: none;
+    opacity: 0;
 }
 
 input, select {
