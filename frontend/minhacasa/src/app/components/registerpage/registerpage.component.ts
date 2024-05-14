@@ -8,6 +8,11 @@ import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component
 import { CommonModule } from '@angular/common';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CepService } from '../../services/cep.service';
+
+interface cepInterface {
+  nome: string
+}
 
 @Component({
   selector: 'app-registerpage',
@@ -21,6 +26,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 export class RegisterpageComponent {
   form: FormGroup;
   formData = new FormData();
+  cities: string[] = [];
 
   //modal alert
   showModal: boolean = false;
@@ -36,7 +42,8 @@ export class RegisterpageComponent {
     private userService: UserService,
     private authService: AuthService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private cepService: CepService
   ) {
     this.form = this.fb.group({
       imagem_de_perfil: [null, Validators.required],
@@ -169,6 +176,27 @@ export class RegisterpageComponent {
     return new Promise(resolve => {
       this.modalComponent.onClose.subscribe(() => resolve());
     })
+  }
+
+  findCitiesByState(event: Event) {
+    const selectedState = this.form.get('estado')?.value;
+    this.cities = [];
+    
+    this.cepService.findCities(selectedState).subscribe({
+      next: (response: HttpResponse<any>) => {
+        if (response.body && Array.isArray(response.body)) {
+          this.cities = response.body.map((city: cepInterface) => city.nome)
+            .sort((a, b) => a.localeCompare(b));
+        }
+      },
+      error: (error) => {
+        this.activeModalText("Aconteceu um erro interno, Por favor tente mais tarde.");
+        this.waitForModalClose().then(() => {
+          this.router.navigate(["/"]);
+        })
+        console.log('Erro ao buscar cidades por UF: ', error);
+      }
+    });
   }
 
   searchCity(event: Event) {

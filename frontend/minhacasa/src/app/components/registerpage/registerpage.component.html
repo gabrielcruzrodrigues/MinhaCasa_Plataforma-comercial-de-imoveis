@@ -32,7 +32,8 @@
                     <input formControlName="whatsapp" type="tel" name="whatsapp" placeholder="Ex: 55900000000">
                     
                     <label>Estado:</label>
-                    <select id="estado-select" formControlName="estado">
+                    <select id="estado-select" formControlName="estado" (change)="findCitiesByState($event)">
+                        <option value="" disabled selected>Selecione um estado</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -63,7 +64,10 @@
                     </select>
 
                     <label>Cidade:</label>
-                    <input formControlName="cidade" type="text" name="city" placeholder="Digite aqui o nome da sua cidade!" (input)="searchCity($event)">
+                    <select formControlName="cidade">
+                        <option value="" disabled selected>Selecione uma cidade</option>
+                        <option *ngFor="let city of cities" [value]="city">{{ city }}</option> 
+                    </select>
                 </div>
 
                 <div class="data3">
