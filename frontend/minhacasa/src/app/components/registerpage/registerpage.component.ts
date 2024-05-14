@@ -39,7 +39,7 @@ export class RegisterpageComponent {
       imagem_de_perfil: [null, Validators.required],
       nome: ['', Validators.required],
       email: ['', Validators.required],
-      nacionalidade: ['', Validators.required],
+      estado: ['', Validators.required],
       telefone: ['', Validators.required],
       whatsapp: ['', Validators.required],
       data_de_nascimento: ['', Validators.required],
@@ -102,7 +102,7 @@ export class RegisterpageComponent {
   populateFormData():void {
     this.formData.set('name', this.form.get('nome')?.value);
     this.formData.set('email', this.form.get('email')?.value);
-    this.formData.set('nationality', this.form.get('nacionalidade')?.value);
+    this.formData.set('state', this.form.get('estado')?.value);
     this.formData.set('phone', this.form.get('telefone')?.value);
     this.formData.set('whatsapp', this.form.get('whatsapp')?.value);
     this.formData.set('dateOfBirth', this.form.get('data_de_nascimento')?.value);
@@ -167,4 +167,15 @@ export class RegisterpageComponent {
       this.modalComponent.onClose.subscribe(() => resolve());
     })
   }
+
+  searchCity(event: Event) {
+    if (!this.form.get('estado')?.valid) {
+      this.activeModalText("Selecione o seu estado para continuar!");
+      this.form.patchValue({
+        cidade: ''
+      })
+    }
+  }
 }
+
+

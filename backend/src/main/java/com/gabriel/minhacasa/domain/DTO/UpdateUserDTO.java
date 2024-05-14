@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public record UpdateUserDTO(
         @NotNull
@@ -23,7 +22,7 @@ public record UpdateUserDTO(
         @NotNull
         LocalDate dateOfBirth,
         @NotBlank
-        String nationality,
+        String state,
         @NotNull
         GenderEnum gender,
         @NotBlank

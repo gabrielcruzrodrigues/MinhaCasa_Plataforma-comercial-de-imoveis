@@ -13,14 +13,14 @@
             <section class="section1">
             
                     <input formControlName="imagem_de_perfil" class="image-profile-input" type="file" name="image-profile" (change)="onFileSelect($event)">
-                
+                 
                 <div class="data1">
                     <label>Nome:</label>
                     <input formControlName="nome" type="text" name="name" placeholder="Digite aqui o seu nome!">
                     <label>Email:</label>
                     <input formControlName="email" type="email" name="email" placeholder="Digite aqui o seu email!">
-                    <label>Nacionalidade:</label>
-                    <input formControlName="nacionalidade" type="text" name="nationality" placeholder="Digite aqui sua nacionalidade! Ex: Brasileira">
+                    <label>Data de nascimento:</label>
+                    <input formControlName="data_de_nascimento" type="date" name="dateOfBirth">
                 </div>
             </section>
 
@@ -30,10 +30,10 @@
                     <input formControlName="telefone" type="tel" name="phone" placeholder="Ex: 55900000000">
                     <label>Whatsapp:</label>
                     <input formControlName="whatsapp" type="tel" name="whatsapp" placeholder="Ex: 55900000000">
-                    <label>Data de nascimento:</label>
-                    <input formControlName="data_de_nascimento" type="date" name="dateOfBirth">
+                    <label>Nacionalidade:</label>
+                    <input formControlName="estado" type="text" name="state" placeholder="Digite aqui o seu estado!">
                     <label>Cidade:</label>
-                    <input formControlName="cidade" type="text" name="city" placeholder="Digite aqui o nome da sua cidade!">
+                    <input formControlName="cidade" type="text" name="city" placeholder="Digite aqui o nome da sua cidade!" (input)="searchCity($event)">
                 </div>
 
                 <div class="data3">

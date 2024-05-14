@@ -58,7 +58,7 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     @NotBlank
-    private String nationality;
+    private String state;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

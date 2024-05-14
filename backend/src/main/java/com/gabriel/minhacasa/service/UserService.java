@@ -36,7 +36,7 @@ public class UserService {
         user.setEmail(userData.email());
         user.setPassword(passwordEncoder.encode(userData.password()));
         user.setDateOfBirth(userData.dateOfBirth());
-        user.setNationality(userData.nationality());
+        user.setState(userData.state());
         user.setGender(userData.gender());
         user.setCity(userData.city());
         user.setRole(Set.of(RoleEnum.USER.toString()));
@@ -69,7 +69,7 @@ public class UserService {
         user.setWhatsapp(userDTO.whatsapp());
         user.setEmail(userDTO.email());
         user.setDateOfBirth(userDTO.dateOfBirth());
-        user.setNationality(userDTO.nationality());
+        user.setState(userDTO.state());
         user.setGender(userDTO.gender());
         user.setCity(userDTO.city());
 

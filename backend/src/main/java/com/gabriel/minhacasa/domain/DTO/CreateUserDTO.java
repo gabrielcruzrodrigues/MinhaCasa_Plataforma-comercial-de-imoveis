@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public record CreateUserDTO(
         @NotBlank
@@ -24,7 +23,7 @@ public record CreateUserDTO(
         @NotNull
         LocalDate dateOfBirth,
         @NotBlank
-        String nationality,
+        String state,
         @NotNull
         GenderEnum gender,
         @NotBlank
