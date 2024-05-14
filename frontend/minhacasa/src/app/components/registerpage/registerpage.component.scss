@@ -141,7 +141,7 @@ input, select {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 0.8rem 0 0.625rem 0rem;
+    padding: 0rem 0 0.625rem 0rem;
 }
 
 button {
@@ -150,7 +150,7 @@ button {
     border-radius: 0.625rem;
     border: none;
     font-size: 1.25rem;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     cursor: pointer;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -177,7 +177,7 @@ button {
     }
 
     .image-profile-input {
-        height: 200px;
+        height: 12.5rem;
     }
 
     .section2 {
@@ -187,7 +187,7 @@ button {
         margin: 0px;
     }
 
-    input {
-        margin-bottom: 15px;
+    input, select {
+        margin-bottom: 0.938rem;
     }
 }
