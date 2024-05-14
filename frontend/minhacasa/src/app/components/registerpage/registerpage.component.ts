@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { HttpResponse } from '@angular/common/http';
@@ -7,11 +7,14 @@ import { Router } from '@angular/router';
 import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component';
 import { CommonModule } from '@angular/common';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-registerpage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule, ModalTextComponent],
+  imports: [
+    ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule, ModalTextComponent, NgSelectModule
+  ],
   templateUrl: './registerpage.component.html',
   styleUrl: './registerpage.component.scss'
 })
@@ -177,5 +180,3 @@ export class RegisterpageComponent {
     }
   }
 }
-
-
