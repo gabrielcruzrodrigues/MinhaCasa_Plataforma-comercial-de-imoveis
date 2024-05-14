@@ -79,12 +79,18 @@
 
 .image-profile-div {
     border-radius: 0.625rem;
+    height: 230px;
     background-color: #ccc;
     box-shadow: none;
     background-image: url('/assets/upload-icon.png');
-    background-position: center center;
+    background-position: center 60%;
     background-size: 80% 60%;
     background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 2%;
 }
 
 .image-profile-input {
@@ -93,6 +99,12 @@
     width: 90%;
     cursor: pointer;
     opacity: 0;
+}
+
+.image-profile-div label {
+    background-color: white;
+    width: 100%;
+    padding: 5px;
 }
 
 input, select {
