@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component';
 import { CommonModule } from '@angular/common';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { CepService } from '../../services/cep.service';
 
 interface cepInterface {
@@ -18,7 +17,7 @@ interface cepInterface {
   selector: 'app-registerpage',
   standalone: true,
   imports: [
-    ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule, ModalTextComponent, NgSelectModule
+    ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule, ModalTextComponent
   ],
   templateUrl: './registerpage.component.html',
   styleUrl: './registerpage.component.scss'
