@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 
 interface ResponseInterface {
   id: number,
@@ -14,18 +15,23 @@ interface ResponseInterface {
 @Component({
   selector: 'app-loginpage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, ModalTextComponent],
   templateUrl: './loginpage.component.html',
   styleUrl: './loginpage.component.scss'
 })
 export class LoginpageComponent {
   form: FormGroup;
+  showModalText: boolean = false;
+  message: string = '';
+  @ViewChild(ModalTextComponent) modalComponent!: ModalTextComponent;
+
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private loginService: LoginService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef,
   ) {
       this.form = this.fb.group({
         email: [''],
@@ -41,15 +47,32 @@ export class LoginpageComponent {
           console.log(response);
           if (response.status == 200) {
             this.authService.configureLocalStorage(response.body);
-            alert("Login efetuado com sucesso!");
-            this.router.navigate(["/"])
+            this.activeModalText("Login efetuado com sucesso!");
+            this.waitForModalClose().then(() => {
+              this.router.navigate(["/"]);
+            })
           }
         },
         error: (error) => {
           if (error.status == 401) {
-            alert("login não foi efetuado com sucesso!");
+            this.activeModalText("Credenciais incorretas, tente novamente!");
           }
         }
+      })
+    }
+
+    activeModalText(text: string):void {
+      this.showModalText = false; //reset
+      setTimeout(() => {
+        this.message = text;
+        this.showModalText = true;
+        this.cdr.detectChanges();
+      });
+    }
+
+    waitForModalClose(): Promise<void> {
+      return new Promise(resolve => {
+        this.modalComponent.onClose.subscribe(() => resolve());
       })
     }
 }
