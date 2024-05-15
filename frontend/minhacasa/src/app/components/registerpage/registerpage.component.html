@@ -68,7 +68,7 @@
                     </select>
 
                     <label>Cidade:</label>
-                    <select formControlName="cidade">
+                    <select formControlName="cidade" (click)="searchCity($event)">
                         <option value="" disabled selected>Selecione uma cidade</option>
                         <option *ngFor="let city of cities" [value]="city">{{ city }}</option> 
                     </select>
