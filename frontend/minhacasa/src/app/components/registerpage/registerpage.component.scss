@@ -79,26 +79,32 @@
 
 .image-profile-div {
     border-radius: 0.625rem;
-    height: 230px;
+    padding-bottom: 0;
+    height: 210px; 
+    width: 30%;
     background-color: $primary-color;
     box-shadow: none;
     background-image: url('/assets/upload-icon.png');
-    background-position: center 60%;
-    background-size: 80% 60%;
+    background-position: center;
+    background-size: cover;
     background-repeat: no-repeat;
-
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    margin-bottom: 2%;
+    align-items: center;
+    margin-bottom: 0;
+    position: relative;
 }
 
 .image-profile-input {
-    margin-bottom: 0;
-    height: 80%;
-    width: 90%;
+    position: absolute;
+    padding-bottom: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0; /* Invisível, mas funcional */
     cursor: pointer;
-    opacity: 0;
+    z-index: 2;
 }
 
 .image-profile-div label {
@@ -107,14 +113,14 @@
     padding: 5px;
 }
 
-input, select {
+.data1 input, select, .data2 input, select, .data3 input, select {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     height: 100%;
     border-radius: 0.625rem;
     border: 1px solid #d6d6d6;
     padding: 0.625rem;
     margin-bottom: 1.25rem;
     margin-top: 0.313rem;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .data1 {
@@ -215,11 +221,6 @@ button {
 @include breakpoint(very-big-up) {
     .image-profile-div {
         height: 260px;
-    }
-
-    .image-profile-div label {
-        padding: 5px;
-        margin-bottom: 50px;
     }
 
     .register h1 {
@@ -374,10 +375,6 @@ button {
         margin-top: 20px;
     }
 
-    .image-profile-div label {
-        padding: 7px;
-    }
-
     .section1 {
         padding-top: 1rem;
     }
@@ -399,10 +396,6 @@ button {
     .register h1 {
         margin-bottom: 10px;
         margin-top: 20px;
-    }
-
-    .image-profile-div label {
-        padding: 7px;
     }
 
     .data2 select {

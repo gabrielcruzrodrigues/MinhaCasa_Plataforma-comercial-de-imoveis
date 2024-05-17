@@ -167,9 +167,23 @@ export class RegisterpageComponent {
     const element = event.currentTarget as HTMLInputElement;
     let file: File | null = element.files ? element.files[0] : null;
     if (file) {
-      this.formData.append('imageProfile', file);
+        this.formData.append('imageProfile', file);
+
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+            const imageUrl = e.target.result;
+            const imageProfileDiv = document.querySelector('.image-profile-div') as HTMLElement;
+            if (imageProfileDiv) {
+                imageProfileDiv.style.backgroundImage = `url(${imageUrl})`;
+                imageProfileDiv.style.backgroundSize = 'cover';
+                imageProfileDiv.style.backgroundPosition = 'center';
+                imageProfileDiv.style.backgroundRepeat = 'no-repeat';
+            }
+        };
+        reader.readAsDataURL(file);
     }
-  }
+
+}
 
   waitForModalClose(): Promise<void> {
     return new Promise(resolve => {
