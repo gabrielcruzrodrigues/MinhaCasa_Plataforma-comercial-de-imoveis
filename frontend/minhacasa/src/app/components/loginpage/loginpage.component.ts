@@ -56,6 +56,11 @@ export class LoginpageComponent {
         error: (error) => {
           if (error.status == 401) {
             this.activeModalText("Credenciais incorretas, tente novamente!");
+          } else {
+            this.activeModalText("Ocorreu um erro, tente novamente mais tarde!");
+            this.waitForModalClose().then(() => {
+              this.router.navigate(["/"]);
+            })
           }
         }
       })
