@@ -3,6 +3,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginpageComponent } from './components/loginpage/loginpage.component';
 import { RegisterpageComponent } from './components/registerpage/registerpage.component';
 import { LogoutComponent } from './components/layout/logout/logout.component';
+import { CreateImmobileComponent } from './components/create-immobile/create-immobile.component';
 
 export const routes: Routes = [
     {
@@ -16,5 +17,8 @@ export const routes: Routes = [
     },
     {
         path: 'logout', component: LogoutComponent
+    },
+    {
+        path: 'create-immobile', component: CreateImmobileComponent
     }
 ];
