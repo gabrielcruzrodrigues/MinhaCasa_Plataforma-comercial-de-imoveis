@@ -86,7 +86,7 @@
                     <input formControlName="senha" type="password" name="password" placeholder="Digite uma senha de no mínimo 10 caracteres">
 
                     <label>Verificar senha:</label>
-                    <input formControlName="verificação_de_senha" type="password" name="verify-password" placeholder="Digite a mesma senha do campo anterior!">
+                    <input formControlName="verificação_de_senha" type="password" name="verify-password" placeholder="Digite a mesma senha do campo anterior!" (input)="verifyIfPasswordNotNull()">
 
                     <button (click)="verifyFields()">Finalizar cadastro</button>
                 </div>

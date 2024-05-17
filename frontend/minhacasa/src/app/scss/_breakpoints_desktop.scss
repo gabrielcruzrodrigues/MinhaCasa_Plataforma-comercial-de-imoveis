@@ -13,100 +13,90 @@
     }
 
     @else if $point == hd-only {
-         @media (max-width: 79.938em) { //1279px
+         @media (max-width: 1279px) { //1279 x 720
               @content;
          }
     }
 
     @else if $point == hd-up { 
-         @media (min-width: 80em) { //1280px
+         @media (min-width: 1280px) { //1280 x 720
               @content;
          }
     }
 
     @else if $point == medium-only { 
-         @media (max-width: 85.313em) { //1365px
+         @media (max-width: 1365px) { //1365 x 768
               @content;
          }
     }
 
     @else if $point == medium-up { 
-         @media (min-width: 85.375em) { //1366px
+         @media (min-width: 1366px) { //1366 x 768
               @content;
          }
     }
 
     @else if $point == big-only { 
-         @media (max-width: 89.938em) { //1439px
+         @media (max-width: 1439px) { //1439 x 900
               @content;
          }
     }
 
     @else if $point == big-up { 
-         @media (min-width: 90em) { //1440px
+         @media (min-width: 1440px) { //1440 x 900
               @content;
          }
     }
 
     @else if $point == very-big-only { 
-         @media (max-width: 95.938em) { //1535px
+         @media (max-width: 1535px) { //1535 x 864
               @content;
          }
     }
 
     @else if $point == very-big-up { 
-         @media (min-width: 96em) { //1536px
+         @media (min-width: 1536px) { //1536 x 864
               @content;
          }
     }
 
     @else if $point == extra-big-only { 
-         @media (max-width: 97.438em) { //1559px
+         @media (max-width: 1559px) { //1559 x 900
               @content;
          }
     }
 
     @else if $point == extra-big-up { 
-         @media (min-width: 100em) { //1600px
+         @media (min-width: 1600px) { //1600 x 900
               @content;
          }
     }
 
     @else if $point == full-hd-only { 
-         @media (max-width: 119.938em) { //1919px
+         @media (max-width: 1919px) { //1919 x 1080
               @content;
          }
     }
 
     @else if $point == full-hd-up { 
-         @media (min-width: 120em) { //1920px
+         @media (min-width: 1920px) { //1920 x 1080
               @content;
          }
     }
 
-    @else if $point == quad-hd-only { 
-         @media (max-width: 159.938em) { //2559px
+    @else if $point == full-hd-zoom-only { 
+         @media (max-width: 1535px) { //1535 x 720
               @content;
          }
     }
 
-    @else if $point == quad-hd-up { 
-         @media (min-width: 160em) { //2560px
+    @else if $point == full-hd-zoom-up { 
+         @media (min-width: 1536px) { //1536 x 720
               @content;
          }
     }
 
-    @else if $point == super-hd-only { 
-         @media (max-width: 239.938em) { //3839px
-              @content;
-         }
-    }
 
-    @else if $point == super-hd-up { 
-         @media (min-width: 240em) { //3840px
-              @content;
-         }
-    }
 
     // @else {
     //      @media(min-width: ($point / 16) + 'em') {

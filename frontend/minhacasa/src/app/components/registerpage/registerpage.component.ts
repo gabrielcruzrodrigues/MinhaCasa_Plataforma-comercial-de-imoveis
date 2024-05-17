@@ -48,14 +48,14 @@ export class RegisterpageComponent {
       imagem_de_perfil: [null, Validators.required],
       nome: ['', Validators.required],
       email: ['', Validators.required],
+      data_de_nascimento: ['', Validators.required],
       estado: ['', Validators.required],
       telefone: ['', Validators.required],
       whatsapp: ['', Validators.required],
-      data_de_nascimento: ['', Validators.required],
       cidade: ['', Validators.required],
       gênero: ['', Validators.required],
-      verificação_de_senha: ['', Validators.required],
-      senha: ['', Validators.required]
+      senha: ['', Validators.required],
+      verificação_de_senha: ['', Validators.required]
     });
   }
 
@@ -203,6 +203,15 @@ export class RegisterpageComponent {
       this.activeModalText("Selecione o seu estado para continuar!");
       this.form.patchValue({
         cidade: ''
+      })
+    }
+  }
+
+  verifyIfPasswordNotNull(): void {
+    if (!this.form.get('senha')?.valid) {
+      this.activeModalText("Crie uma senha antes de verificar!");
+      this.form.patchValue({
+        verificação_de_senha: ''
       })
     }
   }

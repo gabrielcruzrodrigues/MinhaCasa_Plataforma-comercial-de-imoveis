@@ -169,20 +169,7 @@ button {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-@include breakpoint(very-big-up) {
-    .image-profile-div {
-        height: 260px;
-    }
 
-    .image-profile-div label {
-        padding: 5px;
-        margin-bottom: 50px;
-    }
-
-    .register h1 {
-        margin-top: 2rem;
-    }
-}
 
 @include breakpoint(big-up) {
     input, select {
@@ -224,6 +211,65 @@ button {
         padding-top: 0;
     }
 }
+
+@include breakpoint(very-big-up) {
+    .image-profile-div {
+        height: 260px;
+    }
+
+    .image-profile-div label {
+        padding: 5px;
+        margin-bottom: 50px;
+    }
+
+    .register h1 {
+        margin-top: 2rem;
+    }
+}
+
+@include breakpoint (full-hd-zoom-up) {
+    // .register {
+    //     background-color: red;
+    // }
+
+    .register h1 {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 30px;
+    }
+
+    input, select {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .section1 {
+        padding-top: 0;
+    }
+
+    .image-profile-div {
+        height: 240px;
+    }
+
+    .image-profile-div label {
+        padding: 10px;
+        margin-bottom: 50px;
+    }
+
+    .image-profile-div {
+        background-position: center 70%;
+    }
+
+    .section2 {
+        padding-top: 0;
+    }
+
+    .data3 {
+        padding-top: 10px;
+    }
+}
+
+// ===========================================
 
 @include breakpoint(big-only) {
 
