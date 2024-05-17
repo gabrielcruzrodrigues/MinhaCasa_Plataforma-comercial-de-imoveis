@@ -13,10 +13,19 @@ h1 {
      margin-bottom: 50px;
 }
 
+.information {
+     text-align: center;
+     color: $primary-color;
+     font-size: 25px;
+     margin-top: 25px;
+     margin-bottom: 25px;
+     font-weight: 400;
+}
+
 .upload-images {
      width: 90%;
      height: 400px;
-     margin: auto;
+     margin: 50px auto;
      display: flex;
      border-radius: 10px;
      border: 1px solid #ccc;
@@ -39,4 +48,59 @@ h1 {
 .view-upload {
      width: 80%;
 }
+
+.basic-informations {
+     width: 90%;
+     height: 290px;
+     margin: 0 auto 30px auto;
+     display: flex;
+     flex-direction: column;
+     border-radius: 10px;
+     // border: 1px solid #ccc;
+}
+
+.basic-informations label {
+     font-size: 15px;
+     padding-bottom: 5px;
+}
+
+input, select {
+     padding: 10px;
+     border: 1px solid #ccc;
+     border-radius: 10px;
+     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.title-input {
+     margin-bottom: 10px;
+}
+
+.type-price-sellertype, .state-city-neighborhood-address {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     width: 100%;
+     margin-top: 10px;
+}
+
+.price {
+     width: 31%;
+     display: flex;
+     flex-direction: column;
+}
+
+.type, .seller-type {
+     width: 31%;
+     display: flex;
+     flex-direction: column;
+     // margin-left: 5%;
+}
+
+
+.state, .city, .neighborhood {
+     width: 31%;
+     display: flex;
+     flex-direction: column;
+}
+
 

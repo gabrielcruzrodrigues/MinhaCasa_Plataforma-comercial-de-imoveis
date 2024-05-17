@@ -22,8 +22,8 @@ public class Immobile {
     private Long id;
 
     @Column(nullable = false, length = 50)
-    @NotBlank
-    private String name;
+    @NotBlank 
+    private String name; //
 
     @Column(length = 500)
     private String description;
@@ -73,7 +73,7 @@ public class Immobile {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private SellerTypeEnum sellerType;
+    private SellerTypeEnum sellerType; //
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
