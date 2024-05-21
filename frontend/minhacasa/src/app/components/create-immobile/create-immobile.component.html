@@ -11,223 +11,232 @@
      
                </div>
           </section>
+
+          <div class="container">
+               <h2 class="information">Informações básicas gerais</h2>
      
-          <h2 class="information">Informações básicas gerais</h2>
-     
-          <section class="basic-informations">
-               <label class="title-label">Título do imóvel:</label>
-               <input class="title-input" type="text" placeholder="Digite aqui o título do imóvel!">
-               
-               <label class="address-label">Endereço:</label>
-               <input type="text" name="address" placeholder="Endereço">
-     
-               <div class="state-city-neighborhood-address">
-                    <div class="state">
-                         <label>Estado:</label>
-                         <select id="estado-select">
+               <section class="basic-informations">
+                    <label class="title-label">Título do imóvel:</label>
+                    <input class="title-input" type="text" placeholder="Digite aqui o título do imóvel!">
+                    
+                    <label class="address-label">Endereço:</label>
+                    <input type="text" name="address" placeholder="Endereço">
+          
+                    <div class="state-city-neighborhood-address">
+                         <div class="state">
+                              <label>Estado:</label>
+                              <select id="estado-select">
+                                   <option value="" disabled selected>Selecione</option>
+                                   <option value="AC">Acre</option>
+                                   <option value="AL">Alagoas</option>
+                                   <option value="AP">Amapá</option>
+                                   <option value="AM">Amazonas</option>
+                                   <option value="BA">Bahia</option>
+                                   <option value="CE">Ceará</option>
+                                   <option value="DF">Distrito Federal</option>
+                                   <option value="ES">Espírito Santo</option>
+                                   <option value="GO">Goiás</option>
+                                   <option value="MA">Maranhão</option>
+                                   <option value="MT">Mato Grosso</option>
+                                   <option value="MS">Mato Grosso do Sul</option>
+                                   <option value="MG">Minas Gerais</option>
+                                   <option value="PA">Pará</option>
+                                   <option value="PB">Paraíba</option>
+                                   <option value="PR">Paraná</option>
+                                   <option value="PE">Pernambuco</option>
+                                   <option value="PI">Piauí</option>
+                                   <option value="RJ">Rio de Janeiro</option>
+                                   <option value="RN">Rio Grande do Norte</option>
+                                   <option value="RS">Rio Grande do Sul</option>
+                                   <option value="RO">Rondônia</option>
+                                   <option value="RR">Roraima</option>
+                                   <option value="SC">Santa Catarina</option>
+                                   <option value="SP">São Paulo</option>
+                                   <option value="SE">Sergipe</option>
+                                   <option value="TO">Tocantins</option>
+                              </select>
+                         </div>
+                         <div class="city">
+                              <label>Cidade:</label>
+                              <select formControlName="cidade">
                               <option value="" disabled selected>Selecione</option>
-                              <option value="AC">Acre</option>
-                              <option value="AL">Alagoas</option>
-                              <option value="AP">Amapá</option>
-                              <option value="AM">Amazonas</option>
-                              <option value="BA">Bahia</option>
-                              <option value="CE">Ceará</option>
-                              <option value="DF">Distrito Federal</option>
-                              <option value="ES">Espírito Santo</option>
-                              <option value="GO">Goiás</option>
-                              <option value="MA">Maranhão</option>
-                              <option value="MT">Mato Grosso</option>
-                              <option value="MS">Mato Grosso do Sul</option>
-                              <option value="MG">Minas Gerais</option>
-                              <option value="PA">Pará</option>
-                              <option value="PB">Paraíba</option>
-                              <option value="PR">Paraná</option>
-                              <option value="PE">Pernambuco</option>
-                              <option value="PI">Piauí</option>
-                              <option value="RJ">Rio de Janeiro</option>
-                              <option value="RN">Rio Grande do Norte</option>
-                              <option value="RS">Rio Grande do Sul</option>
-                              <option value="RO">Rondônia</option>
-                              <option value="RR">Roraima</option>
-                              <option value="SC">Santa Catarina</option>
-                              <option value="SP">São Paulo</option>
-                              <option value="SE">Sergipe</option>
-                              <option value="TO">Tocantins</option>
-                          </select>
+                              <!-- <option *ngFor="let city of cities" [value]="city">{{ city }}</option>  -->
+                              </select>
+                         </div>
+                         <div class="neighborhood">
+                              <label>Bairro:</label>
+                              <input type="text" name="neighborhood" placeholder="Nome do bairro...">
+                         </div>
                     </div>
-                    <div class="city">
-                         <label>Cidade:</label>
-                         <select formControlName="cidade">
-                             <option value="" disabled selected>Selecione</option>
-                             <!-- <option *ngFor="let city of cities" [value]="city">{{ city }}</option>  -->
-                         </select>
+                    <div class="type-price-sellertype">
+                         <div class="price">
+                              <label>Preço:</label>
+                              <input type="text" name="price" placeholder="Digite aqui o valor do imóvel!">
+                         </div>
+                         <div class="type">
+                              <label>O que você quer fazer?</label>
+                              <select>
+                                   <option value="AC">Vender</option>
+                                   <option value="AC">Alugar</option>
+                                   <option value="AC">Alugar por temporada</option>
+                                   <option value="AC">Financiar</option>
+                                   <!-- <option value="AC">Leiloar</option> -->
+                              </select>
+                         </div>
+                         <div class="seller-type">
+                              <label>Que tipo de vendedor você é?</label>
+                              <select>
+                                   <option value="AC">Vendedor próprio</option>
+                                   <option value="AC">Corretor</option>
+                                   <option value="AC">Imobiliária</option>
+                              </select>
+                         </div>
                     </div>
-                    <div class="neighborhood">
-                         <label>Bairro:</label>
-                         <input type="text" name="neighborhood" placeholder="Nome do bairro...">
-                    </div>
-               </div>
-               <div class="type-price-sellertype">
-                    <div class="price">
-                         <label>Preço:</label>
-                         <input type="text" name="price" placeholder="Digite aqui o valor do imóvel!">
-                    </div>
-                    <div class="type">
-                         <label>O que você quer fazer?</label>
-                         <select>
-                              <option value="AC">Vender</option>
-                              <option value="AC">Alugar</option>
-                              <option value="AC">Alugar por temporada</option>
-                              <option value="AC">Financiar</option>
-                              <!-- <option value="AC">Leiloar</option> -->
-                         </select>
-                    </div>
-                    <div class="seller-type">
-                         <label>Que tipo de vendedor você é?</label>
-                         <select>
-                              <option value="AC">Vendedor próprio</option>
-                              <option value="AC">Corretor</option>
-                              <option value="AC">Imobiliária</option>
-                         </select>
-                    </div>
-               </div>
+          
+                    <label class="description-label">Descrição:</label>
+                    <textarea class="description-textarea" placeholder=" Digite aqui a descrição do seu imóvel..."></textarea>
+               </section>
+          </div>
+
+          <div class="container">
+               <h3 class="information">Informações sobre a estrutura do imóvel</h3>
      
-               <label class="description-label">Descrição:</label>
-               <textarea class="description-textarea" placeholder=" Digite aqui a descrição do seu imóvel..."></textarea>
-          </section>
-     
-          <h3 class="information">Informações sobre a estrutura do imóvel</h3>
-     
-          <section class="estructure-informations">
-               <div class="garage-quantityRooms-quantityBathrooms">
-                    <div class="garage">
-                         <label>Seu imóvel possui garagem?</label>
-                         <select>
-                              <option value="" disabled selected>Selecione uma opção</option>
-                              <option value="true">Sim</option>
-                              <option value="false">Não</option>
-                         </select>
+               <section class="estructure-informations">
+                    <div class="garage-quantityRooms-quantityBathrooms">
+                         <div class="garage">
+                              <label>Seu imóvel possui garagem?</label>
+                              <select>
+                                   <option value="" disabled selected>Selecione uma opção</option>
+                                   <option value="true">Sim</option>
+                                   <option value="false">Não</option>
+                              </select>
+                         </div>
+                         <div class="quantityRooms">
+                              <label>Quantidade de comodos:</label>
+                              <select>
+                                   <option value="" disabled selected>Selecione uma opção</option>
+                                   <option value="1">1</option>
+                                   <option value="2">2</option>
+                                   <option value="3">3</option>
+                                   <option value="4">4</option>
+                                   <option value="5">5</option>
+                                   <option value="6">6</option>
+                                   <option value="7">7</option>
+                                   <option value="8">8</option>
+                                   <option value="9">9</option>
+                                   <option value="10">10</option>
+                              </select>
+                         </div>
+                         <div class="quantityBathrooms">
+                              <label>Quantidade de banheiros:</label>
+                              <select>
+                                   <option value="" disabled selected>Selecione uma opção</option>
+                                   <option value="1">1</option>
+                                   <option value="2">2</option>
+                                   <option value="3">3</option>
+                                   <option value="4">4</option>
+                                   <option value="5">5</option>
+                                   <option value="6">6</option>
+                              </select>
+                         </div>
+                         <div class="integrity">
+                              <label>Integridade do imóvel</label>
+                              <select>
+                                   <option value="used">Usado (Já ouveram moradores)</option>
+                                   <option value="new">Planta (Nunca ouveram moradores)</option>
+                              </select>
+                         </div>
                     </div>
-                    <div class="quantityRooms">
-                         <label>Quantidade de comodos:</label>
-                         <select>
-                              <option value="" disabled selected>Selecione uma opção</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                         </select>
+                    <div class="quantityBedrooms-iptu-suite-age">
+                         <div class="quantityBedrooms">
+                              <label>Quantidade de quartos do imóvel:</label>
+                              <select>
+                                   <option value="" disabled selected>Selecione uma opção</option>
+                                   <option value="1">1</option>
+                                   <option value="2">2</option>
+                                   <option value="3">3</option>
+                                   <option value="4">4</option>
+                                   <option value="5">5</option>
+                                   <option value="6">6</option>
+                                   <option value="7">7</option>
+                                   <option value="8">8</option>
+                                   <option value="9">9</option>
+                                   <option value="10">10</option>
+                              </select>
+                         </div>
+                         <div class="iptu">
+                              <label>Valor do IPTU</label>
+                              <input type="text" placeholder="Digite aqui o valor do IPTU">
+                         </div>
+                         <div class="suite">
+                              <label>Seu imóvel possui suite?</label>
+                              <select>
+                                   <option value="" dissabled selected>Selecione uma opção</option>
+                                   <option value="true">Sim</option>
+                                   <option value="false">Não</option>
+                              </select>
+                         </div>
+                         <div class="age">
+                              <label>Qual a idade do seu imóvel?</label>
+                              <select>
+                                   <option value="" disabled selected>Selecione uma opção</option>
+                                   <option value="IN_THE_PLANT">Ainda na planta</option>
+                                   <option value="BUILDING">Em construção</option>
+                                   <option value="UP_TO_1_YEARS">+-  1 anos</option>
+                                   <option value="UP_TO_2_YEARS">+-  2 anos</option>
+                                   <option value="UP_TO_5_YEARS">+-  5 anos</option>
+                                   <option value="UP_TO_10_YEARS">+-  10 anos</option>
+                                   <option value="UP_TO_20_YEARS">+-  20 anos</option>
+                                   <option value="UP_TO_30_YEARS">+-  30 anos</option>
+                                   <option value="UP_TO_40_YEARS">+-  40 anos</option>
+                                   <option value="UP_TO_50_YEARS">+-  50 anos</option>
+                              </select>
+                         </div>
                     </div>
-                    <div class="quantityBathrooms">
-                         <label>Quantidade de banheiros:</label>
-                         <select>
-                              <option value="" disabled selected>Selecione uma opção</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                         </select>
+                    <div class="type-totalarea-usefularea">
+                         <div class="type">
+                              <label>Tipo do imóvel:</label>
+                              <select name="property-type" id="property-type">
+                                   <option value="" disabled selected>Selecione uma opção</option>
+                                   <option value="ROOM">Quarto</option>
+                                   <option value="ROOF">Cobertura</option>
+                                   <option value="FLAT">Flat</option>
+                                   <option value="KITNET">Kitnet</option>
+                                   <option value="LOFT">Loft</option>
+                                   <option value="STUDIO">Estúdio</option>
+                                   <option value="DUPLEX">Duplex</option>
+                                   <option value="TRIPLEX">Triplex</option>
+                                   <option value="CONDOMINIUM">Condomínio</option>
+                                   <option value="GATED_COMMUNITY">Condomínio Fechado</option>
+                                   <option value="BUILDING">Prédio</option>
+                                   <option value="SHEDS">Galpão</option>
+                                   <option value="DEPOSITS">Depósito</option>
+                                   <option value="OFFICES">Escritório</option>
+                                   <option value="PARKING">Estacionamento</option>
+                                   <option value="STORE">Loja</option>
+                                   <option value="SUBDIVISION">Loteamento</option>
+                                   <option value="FARM">Fazenda</option>
+                              </select>
+                         </div>
+                         <div class="totalarea">
+                              <label>Qual a area total em m² (metros quadrados)?</label>
+                              <input type="text" placeholder="ex: 56">
+                         </div>
+                         <div class="garden">
+                              <label>Possui jardim?</label>
+                              <select>
+                                   <option value="" dissabled selected>Selecione uma opção</option>
+                                   <option value="true">Sim</option>
+                                   <option value="false">Não</option>
+                              </select>
+                         </div>
                     </div>
-                    <div class="integrity">
-                         <label>Integridade do imóvel</label>
-                         <select>
-                              <option value="used">Usado (Já ouveram moradores)</option>
-                              <option value="new">Planta (Nunca ouveram moradores)</option>
-                         </select>
-                    </div>
-               </div>
-               <div class="quantityBedrooms-iptu-suite-age">
-                    <div class="quantityBedrooms">
-                         <label>Quantidade de quartos do imóvel:</label>
-                         <select>
-                              <option value="" disabled selected>Selecione uma opção</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                         </select>
-                    </div>
-                    <div class="iptu">
-                         <label>Valor do IPTU</label>
-                         <input type="text" placeholder="Digite aqui o valor do IPTU">
-                    </div>
-                    <div class="suite">
-                         <label>Seu imóvel possui suite?</label>
-                         <select>
-                              <option value="" dissabled selected>Selecione uma opção</option>
-                              <option value="true">Sim</option>
-                              <option value="false">Não</option>
-                         </select>
-                    </div>
-                    <div class="age">
-                         <label>Qual a idade do seu imóvel?</label>
-                         <select>
-                              <option value="" disabled selected>Selecione uma opção</option>
-                              <option value="IN_THE_PLANT">Ainda na planta</option>
-                              <option value="BUILDING">Em construção</option>
-                              <option value="UP_TO_1_YEARS">+-  1 anos</option>
-                              <option value="UP_TO_2_YEARS">+-  2 anos</option>
-                              <option value="UP_TO_5_YEARS">+-  5 anos</option>
-                              <option value="UP_TO_10_YEARS">+-  10 anos</option>
-                              <option value="UP_TO_20_YEARS">+-  20 anos</option>
-                              <option value="UP_TO_30_YEARS">+-  30 anos</option>
-                              <option value="UP_TO_40_YEARS">+-  40 anos</option>
-                              <option value="UP_TO_50_YEARS">+-  50 anos</option>
-                         </select>
-                    </div>
-               </div>
-               <div class="type-totalarea-usefularea">
-                    <div class="type">
-                         <label>Tipo do imóvel:</label>
-                         <select name="property-type" id="property-type">
-                              <option value="" disabled selected>Selecione uma opção</option>
-                              <option value="ROOM">Quarto</option>
-                              <option value="ROOF">Cobertura</option>
-                              <option value="FLAT">Flat</option>
-                              <option value="KITNET">Kitnet</option>
-                              <option value="LOFT">Loft</option>
-                              <option value="STUDIO">Estúdio</option>
-                              <option value="DUPLEX">Duplex</option>
-                              <option value="TRIPLEX">Triplex</option>
-                              <option value="CONDOMINIUM">Condomínio</option>
-                              <option value="BUILDING">Prédio</option>
-                              <option value="SHEDS">Galpão</option>
-                              <option value="DEPOSITS">Depósito</option>
-                              <option value="OFFICES">Escritório</option>
-                              <option value="PARKING">Estacionamento</option>
-                              <option value="STORE">Loja</option>
-                              <option value="SUBDIVISION">Loteamento</option>
-                              <option value="GATED_COMMUNITY">Condomínio Fechado</option>
-                              <option value="FARM">Fazenda</option>
-                          </select>
-                    </div>
-                    <div class="totalarea">
-                         <label>Qual a area total em m²?</label>
-                         <input type="text" placeholder="ex: 56">
-                    </div>
-                    <div class="garden">
-                         <label>Possui jardim?</label>
-                         <select>
-                              <option value="" dissabled selected>Selecione uma opção</option>
-                              <option value="true">Sim</option>
-                              <option value="false">Não</option>
-                         </select>
-                    </div>
-               </div>
-          </section>
+               </section>
+          </div>
+          <div class="container">
+               <h3 class="information">Características do imóvel</h3>
+          </div>
      </form>
 </section>
+
+<!-- <app-footer></app-footer> -->
