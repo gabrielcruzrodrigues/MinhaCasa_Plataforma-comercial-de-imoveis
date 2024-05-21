@@ -14,6 +14,8 @@ public record UpdateImmobileDTO(
         @NotBlank
         String address,
         @NotBlank
+        String city,
+        @NotBlank
         String neighborhood,
         @NotBlank
         String state,
@@ -29,8 +31,6 @@ public record UpdateImmobileDTO(
         float price,
         @NotNull
         boolean suite,
-        @NotNull
-        float usefulArea,
         @NotNull
         float totalArea,
         @NotNull

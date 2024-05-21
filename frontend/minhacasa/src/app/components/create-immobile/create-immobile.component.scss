@@ -51,7 +51,7 @@ h1 {
 
 .basic-informations {
      width: 90%;
-     height: 290px;
+     height: 400px;
      margin: 0 auto 30px auto;
      display: flex;
      flex-direction: column;
@@ -59,7 +59,7 @@ h1 {
      // border: 1px solid #ccc;
 }
 
-.basic-informations label {
+label {
      font-size: 15px;
      padding-bottom: 5px;
 }
@@ -68,14 +68,15 @@ input, select {
      padding: 10px;
      border: 1px solid #ccc;
      border-radius: 10px;
-     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .title-input {
      margin-bottom: 10px;
 }
 
-.type-price-sellertype, .state-city-neighborhood-address {
+.type-price-sellertype, .state-city-neighborhood-address, .garage-quantityRooms-quantityBathrooms,
+.quantityBedrooms-iptu-suite-age, .type-totalarea-usefularea {
      display: flex;
      flex-direction: row;
      justify-content: space-between;
@@ -83,17 +84,11 @@ input, select {
      margin-top: 10px;
 }
 
-.price {
+.price, .type, .seller-type {
      width: 31%;
      display: flex;
      flex-direction: column;
-}
-
-.type, .seller-type {
-     width: 31%;
-     display: flex;
-     flex-direction: column;
-     // margin-left: 5%;
+     margin-bottom: 10px;
 }
 
 
@@ -103,4 +98,35 @@ input, select {
      flex-direction: column;
 }
 
+.description-textarea {
+     height: 100%;
+     width: 100%;
+     resize: none;
+     border: 1px solid #ccc;
+     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+     border-radius: 10px;
+}
 
+.estructure-informations {
+     width: 90%;
+     height: 250px;
+     margin: 0 auto 30px auto;
+     display: flex;
+     flex-direction: column;
+     border-radius: 10px;
+}
+
+.garage, .quantityRooms, .quantityBathrooms, .integrity,
+.quantityBedrooms, .iptu, .suite, .age {
+     width: 23%;
+     display: flex;
+     flex-direction: column;
+     margin-bottom: 10px;
+}
+
+.type, .totalarea, .garden {
+     width: 31%;
+     display: flex;
+     flex-direction: column;
+     margin-bottom: 10px;
+}

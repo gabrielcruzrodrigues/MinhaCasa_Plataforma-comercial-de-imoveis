@@ -3,7 +3,7 @@ package com.gabriel.minhacasa.domain.enums;
 public enum AgeEnum {
     IN_THE_PLANT,
     BUILDING,
-    SOON_RELEASE,
+    UP_TO_1_YEARS,
     UP_TO_2_YEARS,
     UP_TO_5_YEARS,
     UP_TO_10_YEARS,

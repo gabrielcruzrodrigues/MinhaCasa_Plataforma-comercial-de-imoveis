@@ -33,6 +33,9 @@ public class Immobile {
     private String address;
 
     @Column(nullable = false, length = 50)
+    private String city;
+
+    @Column(nullable = false, length = 50)
     @NotBlank
     private String neighborhood;
 
