@@ -50,6 +50,9 @@ public record CreateImmobileDTO(
         TypeEnum type, //
         @NotNull
         boolean garden, //
+
+        @NotNull
+        boolean videos,
         @NotNull
         boolean beach,
         @NotNull

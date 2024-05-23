@@ -3,10 +3,10 @@
 <section class="main-section">
      <h1>Vamos publicar o seu imóvel de forma simples</h1>
      <p class="subtitle">Use a sessão a baixo para enviar as imagens do seu imóvel!</p>
-     <form>
+     <form id="form" [formGroup]="form">
           <section class="upload-images">
                <div class="upload-button upload-button-bg">
-                    <input type="file" placeholder="Envie sua imagem">
+                    <input formControlName="imagens" type="file" placeholder="Envie sua imagem">
                </div>
                <div class="view-upload">
      
@@ -18,15 +18,15 @@
      
                <section class="basic-informations">
                     <label class="title-label">Título do imóvel:</label>
-                    <input class="title-input" type="text" placeholder="Ex: Kitnet para alugar no centro">
+                    <input formControlName="titulo_do_imóvel" class="title-input" type="text" placeholder="Ex: Kitnet para alugar no centro">
                     
                     <label class="address-label">Endereço:</label>
-                    <input type="text" name="address" placeholder="Endereço">
+                    <input formControlName="endereço" type="text" name="address" placeholder="Endereço">
           
                     <div class="state-city-neighborhood-address">
                          <div class="state">
                               <label>Estado:</label>
-                              <select id="estado-select">
+                              <select id="estado-select" formControlName="estado">
                                    <option value="" disabled selected>Selecione</option>
                                    <option value="AC">Acre</option>
                                    <option value="AL">Alagoas</option>
@@ -60,23 +60,23 @@
                          <div class="city">
                               <label>Cidade:</label>
                               <select formControlName="cidade">
-                              <option value="" disabled selected>Selecione</option>
-                              <!-- <option *ngFor="let city of cities" [value]="city">{{ city }}</option>  -->
+                                   <option value="" disabled selected>Selecione</option>
+                                   <!-- <option *ngFor="let city of cities" [value]="city">{{ city }}</option>  -->
                               </select>
                          </div>
                          <div class="neighborhood">
                               <label>Bairro:</label>
-                              <input type="text" name="neighborhood" placeholder="Nome do bairro...">
+                              <input formControlName="bairro" type="text" name="neighborhood" placeholder="Nome do bairro...">
                          </div>
                     </div>
                     <div class="type-price-sellertype">
                          <div class="price">
                               <label>Preço:</label>
-                              <input type="text" name="price" placeholder="Digite aqui o valor do imóvel!">
+                              <input formControlName="preço" type="text" name="price" placeholder="Digite aqui o valor do imóvel!">
                          </div>
                          <div class="type">
                               <label>O que você quer fazer?</label>
-                              <select>
+                              <select formControlName="o_que_você_quer_fazer">
                                    <option value="AC">Vender</option>
                                    <option value="AC">Alugar</option>
                                    <option value="AC">Alugar por temporada</option>
@@ -86,7 +86,7 @@
                          </div>
                          <div class="seller-type">
                               <label>Que tipo de vendedor você é?</label>
-                              <select>
+                              <select formControlName="que_tipo_de_vendedor_você_é">
                                    <option value="AC">Vendedor próprio</option>
                                    <option value="AC">Corretor</option>
                                    <option value="AC">Imobiliária</option>
@@ -95,7 +95,7 @@
                     </div>
           
                     <label class="description-label">Descrição:</label>
-                    <textarea class="description-textarea" placeholder=" Digite aqui a descrição do seu imóvel..."></textarea>
+                    <textarea formControlName="descrição" class="description-textarea" placeholder=" Digite aqui a descrição do seu imóvel..."></textarea>
                </section>
           </div>
 
@@ -106,7 +106,7 @@
                     <div class="garage-quantityRooms-quantityBathrooms">
                          <div class="garage">
                               <label>Seu imóvel possui garagem?</label>
-                              <select>
+                              <select formControlName="seu_imóvel_possui_garagem">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="true">Sim</option>
                                    <option value="false">Não</option>
@@ -114,7 +114,7 @@
                          </div>
                          <div class="quantityRooms">
                               <label>Quantidade de comodos:</label>
-                              <select>
+                              <select formControlName="quantidade_de_comodos">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="1">1</option>
                                    <option value="2">2</option>
@@ -130,7 +130,7 @@
                          </div>
                          <div class="quantityBathrooms">
                               <label>Quantidade de banheiros:</label>
-                              <select>
+                              <select formControlName="quantidade_de_banheiros">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="1">1</option>
                                    <option value="2">2</option>
@@ -142,7 +142,7 @@
                          </div>
                          <div class="integrity">
                               <label>Integridade do imóvel</label>
-                              <select>
+                              <select formControlName="integridade_do_imóvel">
                                    <option value="used">Usado (Já ouveram moradores)</option>
                                    <option value="new">Planta (Nunca ouveram moradores)</option>
                               </select>
@@ -151,7 +151,7 @@
                     <div class="quantityBedrooms-iptu-suite-age">
                          <div class="quantityBedrooms">
                               <label>Quantidade de quartos do imóvel:</label>
-                              <select>
+                              <select formControlName="quantidade_de_quartos_do_imóvel">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="1">1</option>
                                    <option value="2">2</option>
@@ -167,11 +167,11 @@
                          </div>
                          <div class="iptu">
                               <label>Valor do IPTU</label>
-                              <input type="text" placeholder="Digite aqui o valor do IPTU">
+                              <input formControlName="valor_do_IPTU" type="text" placeholder="Digite aqui o valor do IPTU">
                          </div>
                          <div class="suite">
                               <label>Seu imóvel possui suite?</label>
-                              <select>
+                              <select formControlName="seu_imóvel_possui_suite">
                                    <option value="" dissabled selected>Selecione uma opção</option>
                                    <option value="true">Sim</option>
                                    <option value="false">Não</option>
@@ -179,7 +179,7 @@
                          </div>
                          <div class="age">
                               <label>Qual a idade do seu imóvel?</label>
-                              <select>
+                              <select formControlName="qual_a_idade_do_seu_imóvel">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="IN_THE_PLANT">Ainda na planta</option>
                                    <option value="BUILDING">Em construção</option>
@@ -197,7 +197,7 @@
                     <div class="type-totalarea-usefularea">
                          <div class="type">
                               <label>Tipo do imóvel:</label>
-                              <select name="property-type" id="property-type">
+                              <select formControlName="tipo_do_imóvel" name="property-type" id="property-type">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="ROOM">Quarto</option>
                                    <option value="ROOF">Cobertura</option>
@@ -221,11 +221,11 @@
                          </div>
                          <div class="totalarea">
                               <label>Qual a area total em m² (metros quadrados)?</label>
-                              <input type="text" placeholder="ex: 56">
+                              <input formControlName="qual_a_area_total" type="text" placeholder="ex: 56">
                          </div>
                          <div class="garden">
                               <label>Possui jardim?</label>
-                              <select>
+                              <select formControlName="possui_jardim">
                                    <option value="" dissabled selected>Selecione uma opção</option>
                                    <option value="true">Sim</option>
                                    <option value="false">Não</option>
@@ -239,59 +239,59 @@
                <p class="p-checkbox">Selecione características que o seu imóvel tenha, isso ajuda os usuários a encontrarem você!</p>
                <div class="checkbox">
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1"> Condomínio fechado</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2"> Videos</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Casa na praia</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Acesso para deficientes</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> playground</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Churrasqueira</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Gerador de energia</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Próximo ao centro</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="gatedCommunity"> Condomínio fechado</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="videos"> Videos</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="beach"> Casa na praia</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="disabledAccess"> Acesso para deficientes</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="playground"> playground</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="grill"> Churrasqueira</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="energyGenerator"> Gerador de energia</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="closeToTheCenter"> Próximo ao centro</label>
                     </div>
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1"> Elevador</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2"> Piscina</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Recepção</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Quadra poli esportiva</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Academia</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Sauna</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> TV a cabo</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Aquecimento</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="elevator"> Elevador</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="pool"> Piscina</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="frontDesk"> Recepção</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="multiSportsCourt"> Quadra poli esportiva</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="gym"> Academia</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="steamRoom"> Sauna</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="steamRoom"> TV a cabo</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="heating"> Aquecimento</label>
                     </div>
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1"> Armários na cozinha</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2"> Banheiro no quarto</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Internet</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Salão de festas</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Ar condicionado</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Cozinha americana</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Hidromassagem</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Lareira</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="cabinetsInTheKitchen"> Armários na cozinha</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="bathroomInTheRoom"> Banheiro no quarto</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="internet"> Internet</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="partyRoom"> Salão de festas</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="airConditioning"> Ar condicionado</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="americanKitchen"> Cozinha americana</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="hydromassage"> Hidromassagem</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="fireplace"> Lareira</label>
                     </div>
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1"> Piscina privada</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2"> Portão eletrônico</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Área de serviço</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Bar</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Closet</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Escritório</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Quintal</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Sistema de alarmes</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="privatePool"> Piscina privada</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="electronicGate"> Portão eletrônico</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="serviceArea"> Área de serviço</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="pub"> Bar</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="closet"> Closet</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="office"> Escritório</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="yard"> Quintal</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="alarmSystem"> Sistema de alarmes</label>
                     </div>
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1"> Sacada</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2"> Portaria 24 horas</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Área murada</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Gatos permitidos</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Cachorros permitidos</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Camera de segurança</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Mobiliada</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3"> Vista do mar</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="balcony"> Sacada</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="concierge24Hour"> Portaria 24 horas</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="walledArea"> Área murada</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="dogAllowed"> Gatos permitidos</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="catAllowed"> Cachorros permitidos</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="cameras"> Camera de segurança</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="furnished"> Mobiliada</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="seaView"> Vista do mar</label>
                     </div>
                </div>
           </div>
           <div class="actions-div">
-               <button class="finish-button">Finalizar cadastro</button>
+               <button class="finish-button" (click)="submit()">Finalizar cadastro</button>
           </div>
      </form>
      <app-footer></app-footer>
