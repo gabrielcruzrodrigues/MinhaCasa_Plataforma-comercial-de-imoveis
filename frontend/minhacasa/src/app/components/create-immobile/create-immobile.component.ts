@@ -123,7 +123,6 @@ export class CreateImmobileComponent implements OnInit{
   }
 
   submit():void {
-    console.log(this.form.value);
     this.populateFormData();
     this.immobileService.create(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
