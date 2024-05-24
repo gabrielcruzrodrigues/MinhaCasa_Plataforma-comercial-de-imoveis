@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.domain.enums;
 
 public enum TypeEnum {
+    HOUSE,
     ROOM,
     ROOF,
     FLAT,

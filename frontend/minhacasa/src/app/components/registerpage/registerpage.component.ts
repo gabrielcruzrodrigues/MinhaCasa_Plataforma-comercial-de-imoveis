@@ -134,7 +134,7 @@ export class RegisterpageComponent {
       return false;
     } 
 
-    if (!this.validateString(password)) {
+    if (!this.validatePassword(password)) {
       this.activeModalText('Sua senha deve conter letras, numeros e caracteres especiais (#, %, &, *, @, !...)!');
       return false;
     }
@@ -142,7 +142,7 @@ export class RegisterpageComponent {
     return true;
   }
 
-  validateString(password: string) {
+  validatePassword(password: string) {
     const hasLetters = /[a-zA-Z]/.test(password);
     const hasNumbers = /\d/.test(password);      
     const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);

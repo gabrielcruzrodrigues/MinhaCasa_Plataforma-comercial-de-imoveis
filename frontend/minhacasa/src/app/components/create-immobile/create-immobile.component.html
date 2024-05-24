@@ -32,7 +32,7 @@
                     <div class="state-city-neighborhood-address">
                          <div class="state">
                               <label>Estado:</label>
-                              <select id="estado-select" formControlName="estado">
+                              <select id="estado-select" formControlName="estado" (change)="findCitiesByState($event)">
                                    <option value="" disabled selected>Selecione</option>
                                    <option value="AC">Acre</option>
                                    <option value="AL">Alagoas</option>
@@ -65,9 +65,9 @@
                          </div>
                          <div class="city">
                               <label>Cidade:</label>
-                              <select formControlName="cidade">
+                              <select formControlName="cidade" (click)="searchCity($event)">
                                    <option value="" disabled selected>Selecione</option>
-                                   <!-- <option *ngFor="let city of cities" [value]="city">{{ city }}</option>  -->
+                                   <option *ngFor="let city of cities" [value]="city">{{ city }}</option> 
                               </select>
                          </div>
                          <div class="neighborhood">
@@ -83,19 +83,21 @@
                          <div class="type">
                               <label>O que você quer fazer?</label>
                               <select formControlName="o_que_você_quer_fazer">
-                                   <option value="AC">Vender</option>
-                                   <option value="AC">Alugar</option>
-                                   <option value="AC">Alugar por temporada</option>
-                                   <option value="AC">Financiar</option>
+                                   <option value="" disabled selected>Selecione</option>
+                                   <option value="SELL">Vender</option>
+                                   <option value="RENT">Alugar</option>
+                                   <option value="TEMPORARY_RENTAL">Alugar por temporada</option>
+                                   <option value="FINANCING">Financiar</option>
                                    <!-- <option value="AC">Leiloar</option> -->
                               </select>
                          </div>
                          <div class="seller-type">
                               <label>Que tipo de vendedor você é?</label>
                               <select formControlName="que_tipo_de_vendedor_você_é">
-                                   <option value="AC">Vendedor próprio</option>
-                                   <option value="AC">Corretor</option>
-                                   <option value="AC">Imobiliária</option>
+                                   <option value="" disabled selected>Selecione</option>
+                                   <option value="OWNER">Vendedor próprio</option>
+                                   <option value="BROKER">Corretor</option>
+                                   <option value="REAL_ESTATE">Imobiliária</option>
                               </select>
                          </div>
                     </div>
@@ -148,9 +150,9 @@
                          </div>
                          <div class="integrity">
                               <label>Integridade do imóvel</label>
-                              <select formControlName="integridade_do_imóvel">
-                                   <option value="used">Usado (Já ouveram moradores)</option>
-                                   <option value="new">Planta (Nunca ouveram moradores)</option>
+                              <select formControlName="integridade_do_imóvel"><option value="" disabled selected>Selecione uma opção</option>
+                                   <option value="USED">Usado (Já ouveram moradores)</option>
+                                   <option value="NEW">Planta (Nunca ouveram moradores)</option>
                               </select>
                          </div>
                     </div>
@@ -205,6 +207,7 @@
                               <label>Tipo do imóvel:</label>
                               <select formControlName="tipo_do_imóvel" name="property-type" id="property-type">
                                    <option value="" disabled selected>Selecione uma opção</option>
+                                   <option value="HOUSE">Casa</option>
                                    <option value="ROOM">Quarto</option>
                                    <option value="ROOF">Cobertura</option>
                                    <option value="FLAT">Flat</option>
@@ -246,16 +249,16 @@
                <div class="checkbox">
                     <div class="section">
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="gatedCommunity"> Condomínio fechado</label>
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="videos"> Videos</label>
+                         <!-- <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="videos"> Videos</label> -->
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="beach"> Casa na praia</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="disabledAccess"> Acesso para deficientes</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="playground"> playground</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="grill"> Churrasqueira</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="energyGenerator"> Gerador de energia</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="closeToTheCenter"> Próximo ao centro</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="elevator"> Elevador</label>
                     </div>
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="elevator"> Elevador</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="pool"> Piscina</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="frontDesk"> Recepção</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="multiSportsCourt"> Quadra poli esportiva</label>
@@ -263,9 +266,9 @@
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="steamRoom"> Sauna</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="steamRoom"> TV a cabo</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="heating"> Aquecimento</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="cabinetsInTheKitchen"> Armários na cozinha</label>
                     </div>
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="cabinetsInTheKitchen"> Armários na cozinha</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="bathroomInTheRoom"> Banheiro no quarto</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="internet"> Internet</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="partyRoom"> Salão de festas</label>
@@ -273,9 +276,9 @@
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="americanKitchen"> Cozinha americana</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="hydromassage"> Hidromassagem</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="fireplace"> Lareira</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="privatePool"> Piscina privada</label>
                     </div>
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="privatePool"> Piscina privada</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="electronicGate"> Portão eletrônico</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="serviceArea"> Área de serviço</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="pub"> Bar</label>
@@ -283,9 +286,9 @@
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="office"> Escritório</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="yard"> Quintal</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="alarmSystem"> Sistema de alarmes</label>
+                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="balcony"> Sacada</label>
                     </div>
                     <div class="section">
-                         <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option1" formControlName="balcony"> Sacada</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option2" formControlName="concierge24Hour"> Portaria 24 horas</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="walledArea"> Área murada</label>
                          <label class="checkbox-label"><input class="checkbox-option" type="checkbox" name="section1-option3" formControlName="dogAllowed"> Gatos permitidos</label>
@@ -297,9 +300,11 @@
                </div>
           </div>
           <div class="actions-div">
-               <button class="finish-button" (click)="submit()">Finalizar cadastro</button>
+               <button class="finish-button" (click)="verifyFields()">Finalizar cadastro</button>
           </div>
      </form>
+     <app-modal-alert [showModal]="showModal" [field]="field"></app-modal-alert>
+     <app-modal-text [showModal]="showModalText" [message]="message"></app-modal-text>
      <app-footer></app-footer>
 </section>
 

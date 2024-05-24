@@ -4,7 +4,6 @@ package com.gabriel.minhacasa.controller;
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
-import com.gabriel.minhacasa.repository.UserRepository;
 import com.gabriel.minhacasa.service.ImmobileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ public class ImmobileController {
     private final ImmobileService immobileService;
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody CreateImmobileDTO request) { //change to modelAttribute
+    public ResponseEntity<Object> create(@ModelAttribute CreateImmobileDTO request) { //change to modelAttribute
         this.immobileService.createImmobile(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

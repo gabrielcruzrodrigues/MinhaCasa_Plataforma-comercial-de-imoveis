@@ -70,26 +70,21 @@ public class Immobile {
     @Column(nullable = false)
     private int quantityBathrooms;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private IntegrityEnum integrity;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SellerTypeEnum sellerType; //
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AgeEnum age;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private CategoryEnum category;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TypeEnum type;
 
