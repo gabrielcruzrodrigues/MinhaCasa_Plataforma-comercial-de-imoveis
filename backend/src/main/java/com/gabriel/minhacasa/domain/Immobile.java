@@ -74,7 +74,7 @@ public class Immobile {
     private IntegrityEnum integrity;
 
     @Column(nullable = false)
-    private SellerTypeEnum sellerType; //
+    private SellerTypeEnum sellerType;
 
     @Column(nullable = false)
     private AgeEnum age;

@@ -16,6 +16,10 @@ export class UserService {
   }
 
   getIdOfTheUserLogged() {
-    return localStorage.getItem('userId');
+    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+      return localStorage.getItem('userId');
+    } else {
+      return;
+    }
   }
 }
