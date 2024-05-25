@@ -22,4 +22,9 @@ export class UserService {
       return;
     }
   }
+
+  findById(id: any): Observable<any> {
+    const urlForRequest = this.url + `/${id}`; 
+    return this.http.get(urlForRequest, {observe: 'response'});
+  }
 }
