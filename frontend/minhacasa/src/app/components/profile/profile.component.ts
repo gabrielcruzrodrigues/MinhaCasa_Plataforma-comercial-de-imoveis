@@ -3,11 +3,12 @@ import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { UserService } from '../../services/user.service';
 import { response } from 'express';
 import { HttpResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -19,6 +20,7 @@ export class ProfileComponent implements OnInit{
   email: string = '';
   state: string = '';
   city: string = '';
+  imageProfileUrl: string = '';
 
   constructor(
     private userService:UserService
@@ -27,7 +29,7 @@ export class ProfileComponent implements OnInit{
   ngOnInit(): void {
       const id = this.userService.getIdOfTheUserLogged();
       if (id) {
-        this.userService.findById(id).subscribe({
+        this.userService.findByIdForProfile(id).subscribe({
           next: (response: HttpResponse<any>) => {
             if (response.status === 200) {
               this.populateFilds(response.body);
@@ -35,6 +37,7 @@ export class ProfileComponent implements OnInit{
           },
           error: (error) => {
             console.log('aconteceu um erro ao tentar buscar o usuário pelo id!');
+            console.log(error);
           }
         })
       }
@@ -48,5 +51,9 @@ export class ProfileComponent implements OnInit{
     this.email = body.email;
     this.state = body.state;
     this.city = body.city;
+
+    if (body.imageProfileBase64) {
+      this.imageProfileUrl = 'data:image/jpeg;base64,' + body.imageProfileBase64;
+    }
   }
 }

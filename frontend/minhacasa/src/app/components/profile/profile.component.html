@@ -2,7 +2,9 @@
 
 <section class="profile">
      <div class="image-profile">
-          <div class="image"></div>
+          <div class="image">
+               <img *ngIf="imageProfileUrl" [src]="imageProfileUrl" alt="Profile Image">
+          </div>
      </div>
      <div class="info">
           

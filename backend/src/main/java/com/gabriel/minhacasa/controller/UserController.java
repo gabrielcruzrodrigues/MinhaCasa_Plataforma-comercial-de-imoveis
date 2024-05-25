@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.controller;
 
 import com.gabriel.minhacasa.domain.DTO.CreateUserDTO;
+import com.gabriel.minhacasa.domain.DTO.ProfileUserResponseDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateUserDTO;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.security.DTO.AuthenticatedResponseDTO;
@@ -10,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("user")
@@ -30,6 +34,11 @@ public class UserController {
     public ResponseEntity<User> findById(@PathVariable Long id) {
         User user = this.userService.findById(id);
         return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<ProfileUserResponseDTO> findByIdForProfile(@PathVariable Long id) throws IOException {
+        return ResponseEntity.ok().body(this.userService.findByIdForProfile(id));
     }
 
     @PutMapping("/update")

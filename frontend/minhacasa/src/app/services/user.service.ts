@@ -27,4 +27,9 @@ export class UserService {
     const urlForRequest = this.url + `/${id}`; 
     return this.http.get(urlForRequest, {observe: 'response'});
   }
+
+  findByIdForProfile(id: any): Observable<any> {
+    const urlForRequest = this.url + `/profile/${id}`; 
+    return this.http.get(urlForRequest, {observe: 'response'});
+  }
 }
