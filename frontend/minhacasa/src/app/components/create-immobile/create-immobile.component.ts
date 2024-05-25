@@ -137,7 +137,7 @@ export class CreateImmobileComponent implements OnInit{
       error: (error) => {
         this.activeModalText('Ocorreu um erro interno, por favor tente mais tarde!');
         this.waitForModalClose().then(() => {
-          this.router.navigate(["/"]);
+          // this.router.navigate(["/"]);
         })
       }
     })
@@ -261,44 +261,9 @@ export class CreateImmobileComponent implements OnInit{
     this.formData.set('type', this.form.get('tipo_do_imóvel')?.value);
     this.formData.set('totalArea', this.form.get('qual_a_area_total')?.value);
     this.formData.set('garden', this.form.get('possui_jardim')?.value);
-    // this.formData.set('videos', this.form.get('videos')?.value);
-    // this.formData.set('beach', this.form.get('beach')?.value);
-    // this.formData.set('disabledAccess', this.form.get('disabledAccess')?.value);
-    // this.formData.set('playground', this.form.get('playground')?.value);
-    // this.formData.set('grill', this.form.get('grill')?.value);
-    // this.formData.set('energyGenerator', this.form.get('energyGenerator')?.value);
-    // this.formData.set('closeToTheCenter', this.form.get('closeToTheCenter')?.value);
-    // this.formData.set('elevator', this.form.get('elevator')?.value);
-    // this.formData.set('pool', this.form.get('pool')?.value);
-    // this.formData.set('frontDesk', this.form.get('frontDesk')?.value);
-    // this.formData.set('multiSportsCourt', this.form.get('multiSportsCourt')?.value);
-    // this.formData.set('gym', this.form.get('gym')?.value);
-    // this.formData.set('steamRoom', this.form.get('steamRoom')?.value);
-    // this.formData.set('cableTV', this.form.get('cableTV')?.value);
-    // this.formData.set('heating', this.form.get('heating')?.value);
-    // this.formData.set('cabinetsInTheKitchen', this.form.get('cabinetsInTheKitchen')?.value);
-    // this.formData.set('bathroomInTheRoom', this.form.get('bathroomInTheRoom')?.value);
-    // this.formData.set('internet', this.form.get('internet')?.value);
-    // this.formData.set('partyRoom', this.form.get('partyRoom')?.value);
-    // this.formData.set('airConditioning', this.form.get('airConditioning')?.value);
-    // this.formData.set('americanKitchen', this.form.get('americanKitchen')?.value);
-    // this.formData.set('hydromassage', this.form.get('hydromassage')?.value);
-    // this.formData.set('fireplace', this.form.get('fireplace')?.value);
-    // this.formData.set('privatePool', this.form.get('privatePool')?.value);
-    // this.formData.set('electronicGate', this.form.get('electronicGate')?.value);
-    // this.formData.set('serviceArea', this.form.get('serviceArea')?.value);
-    // this.formData.set('pub', this.form.get('pub')?.value);
-    // this.formData.set('closet', this.form.get('closet')?.value);
-    // this.formData.set('office', this.form.get('office')?.value);
-    // this.formData.set('yard', this.form.get('yard')?.value);
-    // this.formData.set('alarmSystem', this.form.get('alarmSystem')?.value);
-    // this.formData.set('balcony', this.form.get('balcony')?.value);
-    // this.formData.set('concierge24Hour', this.form.get('concierge24Hour')?.value);
-    // this.formData.set('walledArea', this.form.get('walledArea')?.value);
-    // this.formData.set('dogAllowed', this.form.get('dogAllowed')?.value);
-    // this.formData.set('catAllowed', this.form.get('catAllowed')?.value);
-    // this.formData.set('cameras', this.form.get('cameras')?.value);
-    // this.formData.set('furnished', this.form.get('furnished')?.value);
-    // this.formData.set('seaView', this.form.get('seaView')?.value);
+    
+    this.images.forEach((image, index) => {
+      this.formData.append(`files`, image);
+    });
   }
 }
