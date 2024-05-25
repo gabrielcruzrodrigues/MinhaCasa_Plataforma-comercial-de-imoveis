@@ -11,6 +11,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 export class CarroselComponent implements OnInit, OnChanges{
   @Input() images: File[] = [];
   imageUrls: string[] = [];
+  showDeleteButtons: boolean[] = [];
 
   ngOnInit(): void {
     this.loadImageUrls();
@@ -24,5 +25,20 @@ export class CarroselComponent implements OnInit, OnChanges{
 
   loadImageUrls(): void {
     this.imageUrls = this.images.map(image => URL.createObjectURL(image));
+    this.showDeleteButtons = new Array(this.images.length).fill(false);
+  }
+
+  showDeleteButton(index: number): void {
+    this.showDeleteButtons[index] = true;
+  }
+
+  hideDeleteButton(index: number): void {
+    this.showDeleteButtons[index] = false;
+  }
+
+  deleteImage(index: number): void {
+    this.images.splice(index, 1);
+    this.imageUrls.splice(index, 1);
+    this.showDeleteButtons.splice(index, 1);
   }
 }

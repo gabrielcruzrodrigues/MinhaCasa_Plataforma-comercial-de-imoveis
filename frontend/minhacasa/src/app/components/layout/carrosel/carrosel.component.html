@@ -1,7 +1,12 @@
 <div class="carousel">
      <div class="carousel-inner">
-       <div class="carousel-item" *ngFor="let imageUrl of imageUrls">
-         <img [src]="imageUrl" alt="Image">
-       </div>
+          <div class="carousel-item" *ngFor="let imageUrl of imageUrls; let i = index" (mouseover)="showDeleteButton(i)" (mouseleave)="hideDeleteButton(i)">
+               <div class="image-wrapper">
+                    <img [src]="imageUrl" alt="Image">
+                    <button class="delete-button" *ngIf="showDeleteButtons[i]" (click)="deleteImage(i)"></button>
+               </div>
+          </div>
      </div>
 </div>
+   
+   
