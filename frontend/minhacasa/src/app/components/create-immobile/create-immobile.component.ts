@@ -10,6 +10,7 @@ import { CepService } from '../../services/cep.service';
 import { HttpResponse } from '@angular/common/http';
 import { ImmobileService } from '../../services/immobile.service';
 import { UserService } from '../../services/user.service';
+import { CarroselComponent } from '../layout/carrosel/carrosel.component';
 
 interface cepInterface {
   nome: string
@@ -19,7 +20,8 @@ interface cepInterface {
   selector: 'app-create-immobile',
   standalone: true,
   imports: [
-    NavbarComponent, FooterComponent, ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule, ModalTextComponent,
+    NavbarComponent, FooterComponent, ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule,
+    ModalTextComponent, CarroselComponent
   ],
   templateUrl: './create-immobile.component.html',
   styleUrl: './create-immobile.component.scss'
@@ -31,6 +33,7 @@ export class CreateImmobileComponent implements OnInit{
   formData = new FormData();
   @ViewChild('imageContainer', { static: false }) imageContainer!: ElementRef<HTMLDivElement>;
   cities: string[] = [];
+  images: File[] = [];
 
   //modal alert
   showModal: boolean = false;
@@ -170,22 +173,9 @@ export class CreateImmobileComponent implements OnInit{
 
   onFileChange(event: any):void {
     const files = event.target.files as FileList;
-    const container = this.imageContainer.nativeElement;
-    container.innerHTML = ''; //limpa a div antes de adicionar novas imagens
-
-    Array.from(files).forEach((file: File) => {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.width = '80%'; // Define o tamanho das imagens
-        img.style.height = '80%'; // Define o tamanho das imagens
-        img.style.margin = '0px'; // Adiciona margem entre as imagens
-        img.style.objectFit = 'contain'
-        container.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    });
+    if (files) {
+      this.images = Array.from(files);
+    }
   }
 
   findCitiesByState(event: Event) {

@@ -9,13 +9,7 @@
                     <input formControlName="imagens" type="file" placeholder="Envie sua imagem" (change)="onFileChange($event)" multiple>
                </div>
                <div class="view-upload" #imageContainer>
-                    <!-- <swiper [slidesPerView]="3" [spaceBetween]="10" class="mySwiper">
-                         <ng-container *ngFor="let image of images">
-                           <ng-template swiperSlide>
-                             <img [src]="image" alt="Imagem carregada" style="width: 100%; height: auto;">
-                           </ng-template>
-                         </ng-container>
-                       </swiper> -->
+                    <app-carrosel [images]="images"></app-carrosel>
                </div>
           </section>
 
