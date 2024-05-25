@@ -63,7 +63,7 @@ public class FilesImmobileService {
                 try {
                     byte[] bytes = file.getBytes();
                     String newFileName = this.generateFileName(file, immobile);
-                    Path path = Paths.get(imagesPath + "/" + newFileName);
+                    Path path = Paths.get(imagesPath + "/" + immobile.getUser().getName() + "_" + newFileName);
                     Files.write(path, bytes);
                     this.saveFileReferenceInDatabase(path.toString(), immobile);
                 } catch (Exception ex) {
