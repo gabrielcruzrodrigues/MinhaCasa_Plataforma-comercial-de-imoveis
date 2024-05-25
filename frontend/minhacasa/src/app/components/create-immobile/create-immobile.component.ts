@@ -174,7 +174,7 @@ export class CreateImmobileComponent implements OnInit{
   onFileChange(event: any):void {
     const files = event.target.files as FileList;
     if (files) {
-      this.images = Array.from(files);
+      this.images = this.images.concat(Array.from(files));
     }
   }
 

@@ -1,21 +1,22 @@
 .carousel {
      display: flex;
      overflow-x: scroll;
-   }
+}
    
-   .carousel-inner {
+.carousel-inner {
      display: flex;
-   }
-   
-   .carousel-item {
+     padding: 10px;
+}
+
+.carousel-item {
      flex: 0 0 auto;
      width: auto;
      margin-left: 10px;
-   }
-   
-   .carousel-item img {
+}
+
+.carousel-item img {
      display: block;
      max-height: 380px;
      border-radius: 10px;
-   }
+}
    
