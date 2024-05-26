@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 
@@ -12,6 +12,12 @@ import {MatCardModule} from '@angular/material/card';
 })
 export class CardComponent {
   isLoading: boolean = true;
+  @Input() quantityRooms: string = '';
+  @Input() quantityBedrooms: string = '';
+  @Input() quantityBathrooms: string = '';
+  @Input() imageProfileBase64: string = '';
+  @Input() price: string = '';
+  @Input() name: string = '';
 
   constructor() {}
 

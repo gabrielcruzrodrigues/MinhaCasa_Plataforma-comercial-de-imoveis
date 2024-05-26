@@ -96,6 +96,14 @@
      padding-top: 3%;
 }
 
+.cards {
+     display: flex;
+}
+
+.card {
+     margin-right: 20px;
+}
+
 .immobiles h1 {
      text-align: center;
      color: $primary-color;

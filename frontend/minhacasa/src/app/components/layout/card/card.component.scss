@@ -1,8 +1,7 @@
 @import '../../../scss/color-variables.scss';
 
 .example-card {
-    max-width: 20rem;
-    // padding: 10px;
+    width: 20rem;
     border: 0.063rem solid #e7e6e6;
     border-radius: 0.625rem;
 }
@@ -11,6 +10,11 @@
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
+
+.image {
+  height: 180px;
+  width: 100%;
+}
 
 .button {
     padding: 0.625rem;
@@ -24,8 +28,38 @@
     cursor: pointer;
 }
 
-.title h4 {
+.title h3 {
   font-size: 1.125rem;
+  text-align: center;
   margin-top: 0.625rem;
+  margin-bottom: 0px;
 }
 
+.title h4{
+  font-size: 1.125rem;
+  text-align: center;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+}
+
+.info {
+  padding: 10px 20px 5px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-icon {
+  width: 30px;
+}
+
+.quantityRooms, .quantityBedrooms, .quantityBathrooms {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  font-size: 20px;
+  align-items: center;
+}
+
+.quantityRooms p, .quantityBedrooms p, .quantityBathrooms p {
+  margin: 0;
+}

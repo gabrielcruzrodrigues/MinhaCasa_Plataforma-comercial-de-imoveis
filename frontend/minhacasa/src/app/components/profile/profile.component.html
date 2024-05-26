@@ -35,6 +35,20 @@
           </div>
      </div>
 </section>
+
+
 <section class="immobiles">
      <h1>Meus imóveis</h1>
+     <div class="cards">
+          <ng-container *ngFor="let immobile of immobiles">
+               <app-card class="card"
+                 [quantityRooms]="immobile.quantityRooms"
+                 [quantityBedrooms]="immobile.quantityBedrooms"
+                 [quantityBathrooms]="immobile.quantityBathrooms"
+                 [imageProfileBase64]="immobile.imageProfileBase64"
+                 [price]="immobile.price"
+                 [name]="immobile.name">
+               </app-card>
+          </ng-container>
+     </div>
 </section>

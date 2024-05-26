@@ -1,8 +1,23 @@
 <mat-card class="example-card">
-    <img mat-card-image src="/assets/foto.jpg" (load)="imageLoaded()" alt="Photo of a Shiba Inu">
+    <img mat-card-image class="image" *ngIf="imageProfileBase64" [src]="imageProfileBase64" alt="Profile Image" (load)="imageLoaded()">
     <mat-card-content class="title">
-      <h4>Casa</h4>
+      <h3>R$ {{price}}</h3>
+      <h4>{{name}}</h4>
     </mat-card-content>
+    <div class="info">
+      <div class="quantityRooms">
+        <img class="info-icon" src="/assets/room-icon.png">
+        <p>{{quantityRooms}}</p>
+      </div>
+      <div class="quantityBedrooms">
+        <img class="info-icon" src="/assets/bedroom-icon.png">
+        <p>{{quantityBedrooms}}</p>
+      </div>
+      <div class="quantityBathrooms">
+        <img class="info-icon" src="/assets/bathroom-icon.png">
+        <p>{{quantityBathrooms}}</p>
+      </div>
+    </div>
     <mat-card-actions>
       <button class="button">Ver mais detalhes</button>
     </mat-card-actions>

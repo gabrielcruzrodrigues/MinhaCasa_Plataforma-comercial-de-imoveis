@@ -4,11 +4,21 @@ import { UserService } from '../../services/user.service';
 import { response } from 'express';
 import { HttpResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { CardComponent } from '../layout/card/card.component';
+
+interface propertiesInterface {
+  quantityRooms: string,
+  quantityBedrooms: string,
+  quantityBathrooms: string,
+  imageProfileBase64: string,
+  price: string,
+  name: string
+}
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule, CardComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -22,6 +32,8 @@ export class ProfileComponent implements OnInit{
   city: string = '';
   imageProfileUrl: string = '';
 
+  immobiles: propertiesInterface[] = [];
+
   constructor(
     private userService:UserService
   ) {}
@@ -33,6 +45,8 @@ export class ProfileComponent implements OnInit{
           next: (response: HttpResponse<any>) => {
             if (response.status === 200) {
               this.populateFilds(response.body);
+              this.immobiles = response.body.immobiles;
+              console.log(this.immobiles);
             }
           },
           error: (error) => {

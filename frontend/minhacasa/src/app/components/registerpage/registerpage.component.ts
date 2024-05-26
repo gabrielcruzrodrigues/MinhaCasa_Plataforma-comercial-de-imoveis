@@ -166,9 +166,10 @@ export class RegisterpageComponent {
 
   onFileSelect(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
-    let file: File | null = element.files ? element.files[0] : null;
-    if (file) {
-        this.formData.set('imageProfile', file);
+    const file: File | null = element.files ? element.files[0] : null;
+    
+    if (file && this.isImageFile(file)) {
+        this.formData.append('imageProfile', file);
 
         const reader = new FileReader();
         reader.onload = (e: any) => {
@@ -188,7 +189,14 @@ export class RegisterpageComponent {
         reader.readAsDataURL(file);
 
         element.value = '';
+    } else {
+      this.activeModalText("Apenas imagens são permitidas, tente novamente!");
     }
+  }
+
+  isImageFile(file: File): boolean {
+    const imageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp'];
+    return imageTypes.includes(file.type);
   }
 
   waitForModalClose(): Promise<void> {

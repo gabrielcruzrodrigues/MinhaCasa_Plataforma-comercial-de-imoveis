@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.DTO.CreateUserDTO;
+import com.gabriel.minhacasa.domain.DTO.ImmobileByProfileDTO;
 import com.gabriel.minhacasa.domain.DTO.ProfileUserResponseDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateUserDTO;
 import com.gabriel.minhacasa.domain.Immobile;
@@ -21,9 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Base64;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -75,12 +74,28 @@ public class UserService {
             throw new FileNotFoundException();
         }
 
+        List<ImmobileByProfileDTO> immobiles = new ArrayList<>();
+        List<Immobile> properties = user.getProperties();
+
+        for (Immobile immobile : properties) {
+            Path pathFirstImmobileImage = Paths.get(immobile.getFiles().get(0).getPath());
+            byte[] imageBytes = Files.readAllBytes(pathFirstImmobileImage);
+            String imageProfileBase64 = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageBytes);
+
+            ImmobileByProfileDTO profileDTO = new ImmobileByProfileDTO(
+                    immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
+                    imageProfileBase64, Float.parseFloat(String.valueOf(immobile.getPrice())), immobile.getName()
+            );
+
+            immobiles.add(profileDTO);
+        }
+
         byte[] imageBytes = Files.readAllBytes(path);
         String imageProfileBase64 = Base64.getEncoder().encodeToString(imageBytes);
 
         return new ProfileUserResponseDTO(
                 user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
-                user.getEmail(), user.getState(), user.getCity(), user.getProperties(), imageProfileBase64
+                user.getEmail(), user.getState(), user.getCity(), immobiles, imageProfileBase64
         );
     }
 

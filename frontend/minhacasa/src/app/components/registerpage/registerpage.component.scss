@@ -94,6 +94,7 @@
     align-items: center;
     margin-bottom: 0;
     position: relative;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .image-profile-input {
@@ -103,7 +104,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    opacity: 0; /* Invisível, mas funcional */
+    opacity: 0;
     cursor: pointer;
     z-index: 2;
 }
