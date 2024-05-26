@@ -101,11 +101,16 @@
 }
 
 .card {
-     margin-right: 20px;
+     margin-right: 3%;
+}
+
+.card:last-child {
+     margin-right: 0;
 }
 
 .immobiles h1 {
      text-align: center;
      color: $primary-color;
      font-size: 30px;
+     margin-bottom: 40px;
 }
