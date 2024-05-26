@@ -26,6 +26,7 @@ export class RegisterpageComponent {
   form: FormGroup;
   formData = new FormData();
   cities: string[] = [];
+  currentImageUrl: string | null = null;
 
   //modal alert
   showModal: boolean = false;
@@ -167,23 +168,28 @@ export class RegisterpageComponent {
     const element = event.currentTarget as HTMLInputElement;
     let file: File | null = element.files ? element.files[0] : null;
     if (file) {
-        this.formData.append('imageProfile', file);
+        this.formData.set('imageProfile', file);
 
         const reader = new FileReader();
         reader.onload = (e: any) => {
             const imageUrl = e.target.result;
             const imageProfileDiv = document.querySelector('.image-profile-div') as HTMLElement;
             if (imageProfileDiv) {
+                if (this.currentImageUrl) {
+                    URL.revokeObjectURL(this.currentImageUrl);
+                }
                 imageProfileDiv.style.backgroundImage = `url(${imageUrl})`;
                 imageProfileDiv.style.backgroundSize = 'cover';
                 imageProfileDiv.style.backgroundPosition = 'center';
                 imageProfileDiv.style.backgroundRepeat = 'no-repeat';
+                this.currentImageUrl = imageUrl;
             }
         };
         reader.readAsDataURL(file);
-    }
 
-}
+        element.value = '';
+    }
+  }
 
   waitForModalClose(): Promise<void> {
     return new Promise(resolve => {

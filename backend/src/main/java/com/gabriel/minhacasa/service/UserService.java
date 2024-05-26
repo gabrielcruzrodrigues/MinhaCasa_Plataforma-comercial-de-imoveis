@@ -70,9 +70,6 @@ public class UserService {
     public ProfileUserResponseDTO findByIdForProfile(Long id) throws IOException {
         User user = this.findById(id);
 
-        String imagePath = user.getImageProfile().getPath();
-        System.out.println("Image Path: " + imagePath);
-
         Path path = Paths.get(user.getImageProfile().getPath());
         if (!Files.exists(path)) {
             throw new FileNotFoundException();
@@ -80,7 +77,6 @@ public class UserService {
 
         byte[] imageBytes = Files.readAllBytes(path);
         String imageProfileBase64 = Base64.getEncoder().encodeToString(imageBytes);
-        System.out.println("Image Base64: " + imageProfileBase64);
 
         return new ProfileUserResponseDTO(
                 user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
