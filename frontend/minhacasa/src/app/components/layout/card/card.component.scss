@@ -1,31 +1,28 @@
 @import '../../../scss/color-variables.scss';
 
 .example-card {
-    width: 20rem;
-    border: 0.063rem solid #e7e6e6;
-    border-radius: 0.625rem;
+  width: 20rem;
+  border: 0.063rem solid #e7e6e6;
+  border-radius: 0.625rem;
+  position: relative;
 }
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
 
 .image {
   height: 180px;
   width: 100%;
+  border-radius: 10px 10px 0 0;
 }
 
 .button {
-    padding: 0.625rem;
-    background-color: $primary-color;
-    border-radius: 0.625rem;
-    align-self: flex-end;
-    width: 100%;
-    color: white;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
+  padding: 0.625rem;
+  background-color: $primary-color;
+  border-radius: 0.625rem;
+  align-self: flex-end;
+  width: 100%;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .title h3 {
@@ -35,7 +32,7 @@
   margin-bottom: 0px;
 }
 
-.title h4{
+.title h4 {
   font-size: 1.125rem;
   text-align: center;
   margin-top: 0.625rem;
@@ -69,4 +66,25 @@
 
 .quantityRooms p, .quantityBedrooms p, .quantityBathrooms p {
   margin: 0;
+}
+
+.favorite-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.favorite-button img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: white;
 }

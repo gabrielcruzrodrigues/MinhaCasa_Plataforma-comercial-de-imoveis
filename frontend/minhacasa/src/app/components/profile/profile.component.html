@@ -43,6 +43,7 @@
      <div class="cards">
           <ng-container *ngFor="let immobile of immobiles">
                <app-card class="card"
+               [id]="immobile.id"
                [quantityRooms]="immobile.quantityRooms"
                [quantityBedrooms]="immobile.quantityBedrooms"
                [quantityBathrooms]="immobile.quantityBathrooms"

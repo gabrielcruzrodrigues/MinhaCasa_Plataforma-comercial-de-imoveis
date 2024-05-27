@@ -8,6 +8,7 @@ import { FooterComponent } from '../layout/footer/footer.component';
 import { LoadingComponent } from '../layout/loading/loading.component';
 
 interface propertiesInterface {
+  id: string,
   quantityRooms: string,
   quantityBedrooms: string,
   quantityBathrooms: string,
@@ -24,6 +25,7 @@ interface propertiesInterface {
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit{
+  id: string = '';
   name: string = '';
   age: string = '';
   phone: string  = '';
@@ -70,6 +72,7 @@ export class ProfileComponent implements OnInit{
     this.email = body.email;
     this.state = body.state;
     this.city = body.city;
+    this.id = body.id;
 
     this.age = this.getYear(body.dateOfBirth);
 
@@ -89,7 +92,6 @@ export class ProfileComponent implements OnInit{
         age--;
     }
     
-    console.log(`${age.toString()}  anos`);
     return `${age.toString()}  anos`;
   }
 }

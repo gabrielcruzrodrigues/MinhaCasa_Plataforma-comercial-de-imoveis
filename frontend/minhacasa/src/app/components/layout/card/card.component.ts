@@ -12,6 +12,7 @@ import {MatCardModule} from '@angular/material/card';
 })
 export class CardComponent {
   isLoading: boolean = true;
+  @Input() id: string = '';
   @Input() quantityRooms: string = '';
   @Input() quantityBedrooms: string = '';
   @Input() quantityBathrooms: string = '';
@@ -21,8 +22,10 @@ export class CardComponent {
 
   constructor(private currencyPipe: CurrencyPipe) {}
 
-  imageLoaded() {
-    this.isLoading = true;
+  isFavorited: boolean = false;
+
+  toggleFavorite() {
+    this.isFavorited = !this.isFavorited;
   }
 
   formatPrice(price: string): string {
