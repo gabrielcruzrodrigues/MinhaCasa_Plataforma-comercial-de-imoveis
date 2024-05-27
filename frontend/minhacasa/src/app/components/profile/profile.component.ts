@@ -65,15 +65,31 @@ export class ProfileComponent implements OnInit{
 
   populateFilds(body: any):void {
     this.name = body.name;
-    this.age = body.dateOfBirth;
     this.phone = body.phone;
     this.whatsapp = body.whatsapp;
     this.email = body.email;
     this.state = body.state;
     this.city = body.city;
 
+    this.age = this.getYear(body.dateOfBirth);
+
     if (body.imageProfileBase64) {
       this.imageProfileUrl = 'data:image/jpeg;base64,' + body.imageProfileBase64;
     }
+  }
+
+  getYear(birthdayString: Date): string {
+    const birthDate = new Date(birthdayString);
+
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    
+    console.log(`${age.toString()}  anos`);
+    return `${age.toString()}  anos`;
   }
 }
