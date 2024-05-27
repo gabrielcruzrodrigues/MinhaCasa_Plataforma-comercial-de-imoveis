@@ -5,6 +5,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
+import { LoadingComponent } from '../layout/loading/loading.component';
 
 interface ResponseInterface {
   id: number,
@@ -15,7 +16,7 @@ interface ResponseInterface {
 @Component({
   selector: 'app-loginpage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, ModalTextComponent],
+  imports: [ReactiveFormsModule, FormsModule, ModalTextComponent, LoadingComponent],
   templateUrl: './loginpage.component.html',
   styleUrl: './loginpage.component.scss'
 })
@@ -24,7 +25,7 @@ export class LoginpageComponent {
   showModalText: boolean = false;
   message: string = '';
   @ViewChild(ModalTextComponent) modalComponent!: ModalTextComponent;
-
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +41,7 @@ export class LoginpageComponent {
     }
 
     submit() {
+      this.isLoading = true;
       const formData = this.form.value;
       console.log(formData);
       this.loginService.login(formData).subscribe({
@@ -47,6 +49,7 @@ export class LoginpageComponent {
           console.log(response);
           if (response.status == 200) {
             this.authService.configureLocalStorage(response.body);
+            this.isLoading = false;
             this.activeModalText("Login efetuado com sucesso!");
             this.waitForModalClose().then(() => {
               this.router.navigate(["/"]);
@@ -54,6 +57,7 @@ export class LoginpageComponent {
           }
         },
         error: (error) => {
+          this.isLoading = false;
           if (error.status == 401) {
             this.activeModalText("Credenciais incorretas, tente novamente!");
           } else {

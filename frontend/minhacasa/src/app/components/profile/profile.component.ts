@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit{
   imageProfileUrl: string = '';
 
   isLoading: boolean = true;
+  haveImmobiles: boolean = false;
 
   immobiles: propertiesInterface[] = [];
 
@@ -49,6 +50,9 @@ export class ProfileComponent implements OnInit{
             if (response.status === 200) {
               this.populateFilds(response.body);
               this.immobiles = response.body.immobiles;
+              if (response.body.immobiles == 0) {
+                this.haveImmobiles = true;
+              }
               this.isLoading = false;
             }
           },

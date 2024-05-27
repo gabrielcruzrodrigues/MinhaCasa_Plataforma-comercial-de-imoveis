@@ -11,6 +11,7 @@ import { HttpResponse } from '@angular/common/http';
 import { ImmobileService } from '../../services/immobile.service';
 import { UserService } from '../../services/user.service';
 import { CarroselComponent } from '../layout/carrosel/carrosel.component';
+import { LoadingComponent } from '../layout/loading/loading.component';
 
 interface cepInterface {
   nome: string
@@ -21,7 +22,7 @@ interface cepInterface {
   standalone: true,
   imports: [
     NavbarComponent, FooterComponent, ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule,
-    ModalTextComponent, CarroselComponent
+    ModalTextComponent, CarroselComponent, LoadingComponent
   ],
   templateUrl: './create-immobile.component.html',
   styleUrl: './create-immobile.component.scss'
@@ -34,6 +35,7 @@ export class CreateImmobileComponent implements OnInit{
   @ViewChild('imageContainer', { static: false }) imageContainer!: ElementRef<HTMLDivElement>;
   cities: string[] = [];
   images: File[] = [];
+  isLoading: boolean = false;
 
   //modal alert
   showModal: boolean = false;
@@ -126,15 +128,18 @@ export class CreateImmobileComponent implements OnInit{
   }
 
   submit():void {
+    this.isLoading = true;
     this.populateFormData();
     this.immobileService.create(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
+        this.isLoading = false;
         this.activeModalText('Imóvel cadastrado com sucesso!');
         this.waitForModalClose().then(() => {
           this.router.navigate(["/"]);
         })
       },
       error: (error) => {
+        this.isLoading = false;
         this.activeModalText('Ocorreu um erro interno, por favor tente mais tarde!');
         this.waitForModalClose().then(() => {
           // this.router.navigate(["/"]);

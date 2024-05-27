@@ -8,6 +8,7 @@ import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component
 import { CommonModule } from '@angular/common';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { CepService } from '../../services/cep.service';
+import { LoadingComponent } from '../layout/loading/loading.component';
 
 interface cepInterface {
   nome: string
@@ -17,7 +18,7 @@ interface cepInterface {
   selector: 'app-registerpage',
   standalone: true,
   imports: [
-    ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule, ModalTextComponent
+    ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule, ModalTextComponent, LoadingComponent
   ],
   templateUrl: './registerpage.component.html',
   styleUrl: './registerpage.component.scss'
@@ -36,6 +37,7 @@ export class RegisterpageComponent {
   showModalText: boolean = false;
   message: string = '';
   @ViewChild(ModalTextComponent) modalComponent!: ModalTextComponent;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -61,16 +63,19 @@ export class RegisterpageComponent {
   }
 
   submit() {
+    this.isLoading = true;
     this.populateFormData();
     this.userService.registerUser(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
-        this.authService.configureLocalStorage(response.body)
+        this.authService.configureLocalStorage(response.body);
+        this.isLoading = false;
         this.activeModalText('Cadastro realizado com sucesso!');
         this.waitForModalClose().then(() => {
           this.router.navigate(["/"]);
         })
       },
       error: (error) => {
+        this.isLoading = false;
         this.activeModalText('Ocorreu um erro interno, por favor tente mais tarde!');
         this.waitForModalClose().then(() => {
           this.router.navigate(["/"]);
