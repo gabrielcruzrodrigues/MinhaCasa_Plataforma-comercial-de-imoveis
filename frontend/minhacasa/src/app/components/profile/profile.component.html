@@ -15,20 +15,20 @@
                <div class="data1">
                     <label>Idade:</label>
                     <p>{{age}}</p>
-
+                    
                     <label>Telefone:</label>
                     <p>{{phone}}</p>
-
+                    
                     <label>Estado:</label>
                     <p>{{state}}</p>
                </div>
                <div class="data2">
                     <label>Whatsapp:</label>
                     <p>{{whatsapp}}</p>
-          
+                    
                     <label>Email:</label>
                     <p>{{email}}</p>
-
+                    
                     <label>Cidade:</label>
                     <p>{{city}}</p>
                </div>
@@ -42,15 +42,16 @@
      <div class="cards">
           <ng-container *ngFor="let immobile of immobiles">
                <app-card class="card"
-                 [quantityRooms]="immobile.quantityRooms"
-                 [quantityBedrooms]="immobile.quantityBedrooms"
-                 [quantityBathrooms]="immobile.quantityBathrooms"
-                 [imageProfileBase64]="immobile.imageProfileBase64"
-                 [price]="immobile.price"
-                 [name]="immobile.name">
-               </app-card>
-          </ng-container>
-     </div>
+               [quantityRooms]="immobile.quantityRooms"
+               [quantityBedrooms]="immobile.quantityBedrooms"
+               [quantityBathrooms]="immobile.quantityBathrooms"
+               [imageProfileBase64]="immobile.imageProfileBase64"
+               [price]="immobile.price"
+               [name]="immobile.name">
+          </app-card>
+     </ng-container>
+</div>
 </section>
 
+<app-loading [isLoading]="isLoading"></app-loading>
 <app-footer></app-footer>

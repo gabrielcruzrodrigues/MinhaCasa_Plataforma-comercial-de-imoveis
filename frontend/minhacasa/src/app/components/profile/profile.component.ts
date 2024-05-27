@@ -5,6 +5,7 @@ import { HttpResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../layout/card/card.component';
 import { FooterComponent } from '../layout/footer/footer.component';
+import { LoadingComponent } from '../layout/loading/loading.component';
 
 interface propertiesInterface {
   quantityRooms: string,
@@ -18,7 +19,7 @@ interface propertiesInterface {
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, CardComponent, FooterComponent],
+  imports: [NavbarComponent, CommonModule, CardComponent, FooterComponent, LoadingComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -31,6 +32,8 @@ export class ProfileComponent implements OnInit{
   state: string = '';
   city: string = '';
   imageProfileUrl: string = '';
+
+  isLoading: boolean = true;
 
   immobiles: propertiesInterface[] = [];
 
@@ -46,6 +49,7 @@ export class ProfileComponent implements OnInit{
             if (response.status === 200) {
               this.populateFilds(response.body);
               this.immobiles = response.body.immobiles;
+              this.isLoading = false;
             }
           },
           error: (error) => {
