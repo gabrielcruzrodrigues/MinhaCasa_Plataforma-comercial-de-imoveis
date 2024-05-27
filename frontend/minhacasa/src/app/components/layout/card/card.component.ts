@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe  } from '@angular/common';
 import {Component, Input} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -19,9 +19,14 @@ export class CardComponent {
   @Input() price: string = '';
   @Input() name: string = '';
 
-  constructor() {}
+  constructor(private currencyPipe: CurrencyPipe) {}
 
   imageLoaded() {
     this.isLoading = true;
+  }
+
+  formatPrice(price: string): string {
+    const numericPrice = parseFloat(price);
+    return this.currencyPipe.transform(numericPrice, 'BRL', 'symbol', '1.0-0') ?? '';
   }
 }

@@ -1,8 +1,10 @@
 <mat-card class="example-card">
     <img mat-card-image class="image" *ngIf="imageProfileBase64" [src]="imageProfileBase64" alt="Profile Image" (load)="imageLoaded()">
     <mat-card-content class="title">
-      <h3>R$ {{price}}</h3>
-      <h4>{{name}}</h4>
+      <h3>{{ formatPrice(price) }}</h3>
+      <div class="name">
+        <h4>{{name}}</h4>
+      </div>
     </mat-card-content>
     <div class="info">
       <div class="quantityRooms">

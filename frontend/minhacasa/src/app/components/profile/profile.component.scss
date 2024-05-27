@@ -98,14 +98,18 @@
 
 .cards {
      display: flex;
+     width: 100%;
+     flex-wrap: wrap;
+     align-content: flex-start;
+     gap: 1.5%
 }
 
 .card {
-     margin-right: 3%;
+     margin-bottom: 2%;
 }
 
 .card:last-child {
-     margin-right: 0;
+     margin-right: 0px;
 }
 
 .immobiles h1 {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { UserService } from '../../services/user.service';
-import { response } from 'express';
 import { HttpResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../layout/card/card.component';
+import { FooterComponent } from '../layout/footer/footer.component';
 
 interface propertiesInterface {
   quantityRooms: string,
@@ -18,7 +18,7 @@ interface propertiesInterface {
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, CardComponent],
+  imports: [NavbarComponent, CommonModule, CardComponent, FooterComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -46,12 +46,10 @@ export class ProfileComponent implements OnInit{
             if (response.status === 200) {
               this.populateFilds(response.body);
               this.immobiles = response.body.immobiles;
-              console.log(this.immobiles);
             }
           },
           error: (error) => {
             console.log('aconteceu um erro ao tentar buscar o usuário pelo id!');
-            console.log(error);
           }
         })
       }
