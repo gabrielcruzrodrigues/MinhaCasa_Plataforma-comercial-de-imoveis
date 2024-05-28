@@ -12,7 +12,7 @@ interface propertiesInterface {
   quantityRooms: string,
   quantityBedrooms: string,
   quantityBathrooms: string,
-  imageProfileBase64: string,
+  imageUrl: string,
   price: string,
   name: string
 }
@@ -75,8 +75,8 @@ export class ProfileComponent implements OnInit{
 
     this.age = this.getYear(body.dateOfBirth);
 
-    if (body.imageProfileBase64) {
-      this.imageProfileUrl = 'data:image/jpeg;base64,' + body.imageProfileBase64;
+    if (body.imageProfileUrl) {
+      this.imageProfileUrl = body.imageProfileUrl;
     }
   }
 

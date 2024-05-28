@@ -17,9 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -28,6 +26,11 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
+
+    private String baseUrl = "http://localhost:8080";
+    private String baseUrlProfileFilesApi = "/api/files/download/profile/";
+    private String baseUrlImmobileFilesApi = "/api/files/download/immobile/";
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -71,33 +74,27 @@ public class UserService {
     public ProfileUserResponseDTO findByIdForProfile(Long id) throws IOException {
         User user = this.findById(id);
 
-        Path path = Paths.get(user.getImageProfile());
-        if (!Files.exists(path)) {
-            throw new FileNotFoundException();
-        }
-
         List<ImmobileByProfileDTO> immobiles = new ArrayList<>();
         List<Immobile> properties = user.getProperties();
 
         for (Immobile immobile : properties) {
-            Path pathFirstImmobileImage = Paths.get(immobile.getFiles().get(0).getPath());
-            byte[] imageBytes = Files.readAllBytes(pathFirstImmobileImage);
-            String imageProfileBase64 = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageBytes);
+            Path pathFirstImmobileImage = Paths.get(immobile.getFiles().get(0));
+
+            String imageImmobile = baseUrl + baseUrlImmobileFilesApi + pathFirstImmobileImage;
 
             ImmobileByProfileDTO profileDTO = new ImmobileByProfileDTO(
                     immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
-                    imageProfileBase64, Float.parseFloat(String.valueOf(immobile.getPrice())), immobile.getName()
+                    imageImmobile, Float.parseFloat(String.valueOf(immobile.getPrice())), immobile.getName()
             );
 
             immobiles.add(profileDTO);
         }
 
-        byte[] imageBytes = Files.readAllBytes(path);
-        String imageProfileBase64 = Base64.getEncoder().encodeToString(imageBytes);
+        String imageProfile = baseUrl + baseUrlProfileFilesApi + user.getImageProfile();
 
         return new ProfileUserResponseDTO(
                 user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
-                user.getEmail(), user.getState(), user.getCity(), immobiles, imageProfileBase64
+                user.getEmail(), user.getState(), user.getCity(), immobiles, imageProfile
         );
     }
 

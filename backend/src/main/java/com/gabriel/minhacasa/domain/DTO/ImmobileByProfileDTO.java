@@ -5,7 +5,7 @@ public record ImmobileByProfileDTO(
         int quantityRooms,
         int quantityBedrooms,
         int quantityBathrooms,
-        String imageProfileBase64,
+        String imageUrl,
         float price,
         String name
 ) {

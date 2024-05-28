@@ -12,9 +12,6 @@ spring:
       ddl-auto: update
       show-sql: true
 
-#images-user-path: "C:/minhacasa/images-profile"
-#images-immobile-path: "C:/minhacasa/files-immobile"
-
 file.upload-image-profile-dir: "C:/minhacasa/images-profile"
 file.upload-image-immobile-dir: "C:/minhacasa/files-immobile"
-app.base-url: "http://localhost:8080/"
+base-url: "http://localhost:8080"

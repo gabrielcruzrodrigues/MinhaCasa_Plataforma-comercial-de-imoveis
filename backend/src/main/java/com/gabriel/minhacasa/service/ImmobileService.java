@@ -24,7 +24,6 @@ public class ImmobileService {
 
     private final ImmobileRepository immobileRepository;
     private final UserRepository userRepository;
-//    private final FilesImmobileService filesImmobileService;
     private final FilesService filesService;
 
     public void createImmobile(CreateImmobileDTO immobileData) {
@@ -97,13 +96,12 @@ public class ImmobileService {
                     .user(user.get())
                     .build();
 
-            Immobile immobileSaved = this.immobileRepository.save(immobile);
-            this.setRoleOWNERByUser(user.get());
-
             if (immobileData.files() != null) {
-//                this.filesImmobileService.saveFiles(immobileData.files(), immobileSaved);
-//                this.filesService.uploadImmobileFile(immobileData.files(), immobileSaved);
+                immobile.setFiles(this.filesService.uploadImmobileFile(immobileData.files(), immobile));
             }
+
+            this.immobileRepository.save(immobile);
+            this.setRoleOWNERByUser(user.get());
         } else {
             throw new UserNotFoundException();
         }

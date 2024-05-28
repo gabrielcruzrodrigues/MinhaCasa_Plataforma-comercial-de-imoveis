@@ -4,7 +4,7 @@
       <img [src]="isFavorited ? '/assets/like-active-icon.png' : '/assets/like-noactive-icon.png'" loading="lazy" alt="Like Icon">
     </button>
   </div>
-  <img mat-card-image class="image" *ngIf="imageProfileBase64" [src]="imageProfileBase64" alt="Profile Image">
+  <img mat-card-image class="image" *ngIf="imageUrl" [src]="imageUrl" alt="Profile Image">
   <mat-card-content class="title">
     <h3>{{ formatPrice(price) }}</h3>
     <div class="name">

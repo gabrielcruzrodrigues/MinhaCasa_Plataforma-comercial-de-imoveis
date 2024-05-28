@@ -16,7 +16,7 @@ export class CardComponent {
   @Input() quantityRooms: string = '';
   @Input() quantityBedrooms: string = '';
   @Input() quantityBathrooms: string = '';
-  @Input() imageProfileBase64: string = '';
+  @Input() imageUrl: string = '';
   @Input() price: string = '';
   @Input() name: string = '';
 
