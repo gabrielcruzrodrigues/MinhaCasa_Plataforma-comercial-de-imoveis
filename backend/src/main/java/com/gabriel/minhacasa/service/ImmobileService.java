@@ -7,6 +7,7 @@ import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
+import com.gabriel.minhacasa.files.FilesService;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -23,7 +24,8 @@ public class ImmobileService {
 
     private final ImmobileRepository immobileRepository;
     private final UserRepository userRepository;
-    private final FilesImmobileService filesImmobileService;
+//    private final FilesImmobileService filesImmobileService;
+    private final FilesService filesService;
 
     public void createImmobile(CreateImmobileDTO immobileData) {
         Optional<User> user = userRepository.findById(immobileData.studentId());
@@ -99,7 +101,8 @@ public class ImmobileService {
             this.setRoleOWNERByUser(user.get());
 
             if (immobileData.files() != null) {
-                this.filesImmobileService.saveFiles(immobileData.files(), immobileSaved);
+//                this.filesImmobileService.saveFiles(immobileData.files(), immobileSaved);
+//                this.filesService.uploadImmobileFile(immobileData.files(), immobileSaved);
             }
         } else {
             throw new UserNotFoundException();
@@ -193,6 +196,6 @@ public class ImmobileService {
     public void soldImmobile(Long id) {
         Immobile immobile = this.findById(id);
         this.disableImmobile(id);
-        this.filesImmobileService.soldImmobile(immobile);
+//        this.filesImmobileService.soldImmobile(immobile);
     }
 }

@@ -10,6 +10,7 @@ import com.gabriel.minhacasa.domain.enums.RoleEnum;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.FavoriteAlreadyExistsException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
+import com.gabriel.minhacasa.files.FilesService;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ImmobileService immobileService;
-    private final ImageProfileService imageProfileService;
+//    private final ImageProfileService imageProfileService;
+    private final FilesService filesService;
 
     @Transactional
     public void createUser(CreateUserDTO userData) {
@@ -54,11 +56,11 @@ public class UserService {
         user.setInstagram(null);
         user.setActive(true);
 
-        User userSaved = this.userRepository.save(user);
-
         if (userData.imageProfile() != null) {
-            this.imageProfileService.saveFile(userData.imageProfile(), userSaved);
+            user.setImageProfile(this.filesService.uploadProfileFile(userData.imageProfile(), user));
         }
+
+        this.userRepository.save(user);
     }
 
     public User findById(Long id) {
@@ -69,7 +71,7 @@ public class UserService {
     public ProfileUserResponseDTO findByIdForProfile(Long id) throws IOException {
         User user = this.findById(id);
 
-        Path path = Paths.get(user.getImageProfile().getPath());
+        Path path = Paths.get(user.getImageProfile());
         if (!Files.exists(path)) {
             throw new FileNotFoundException();
         }

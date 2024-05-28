@@ -77,8 +77,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Long contractQuantities;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
-    private ImageProfileFile imageProfile;
+    @Column(nullable = false)
+    private String imageProfile;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
