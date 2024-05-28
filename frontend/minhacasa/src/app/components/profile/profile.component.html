@@ -37,7 +37,7 @@
 </section>
 
 
-<section class="immobiles">
+<section class="immobiles" *ngIf="!isLoading">
      <h1>Meus imóveis</h1>
      <p *ngIf="haveImmobiles">Nenhum imóvel cadastrado!</p>
      <div class="cards">

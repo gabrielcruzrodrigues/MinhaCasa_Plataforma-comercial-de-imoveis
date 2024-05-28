@@ -1,7 +1,7 @@
 <mat-card class="example-card">
   <div class="favorite-container">
     <button class="favorite-button" [class.favorited]="isFavorited" (click)="toggleFavorite()">
-      <img [src]="isFavorited ? '/assets/like-active-icon.png' : '/assets/like-noactive-icon.png'" alt="Like Icon">
+      <img [src]="isFavorited ? '/assets/like-active-icon.png' : '/assets/like-noactive-icon.png'" loading="lazy" alt="Like Icon">
     </button>
   </div>
   <img mat-card-image class="image" *ngIf="imageProfileBase64" [src]="imageProfileBase64" alt="Profile Image">

@@ -52,14 +52,13 @@ export class ProfileComponent implements OnInit{
             if (response.status === 200) {
               this.populateFilds(response.body);
               this.immobiles = response.body.immobiles;
-              if (response.body.immobiles == 0) {
-                this.haveImmobiles = true;
-              }
+              this.haveImmobiles = this.immobiles.length === 0;
               this.isLoading = false;
             }
           },
           error: (error) => {
             console.log('aconteceu um erro ao tentar buscar o usuário pelo id!');
+            this.isLoading = false;
           }
         })
       }
