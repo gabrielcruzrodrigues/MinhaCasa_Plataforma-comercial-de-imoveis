@@ -9,7 +9,7 @@
 }
 
 .image {
-  height: 180px;
+  height: 200px;
   width: 100%;
   border-radius: 10px 10px 0 0;
 }
@@ -19,11 +19,12 @@
   background-color: $primary-color;
   border-radius: 0.625rem;
   align-self: flex-end;
-  width: 100%;
+  width: 90%;
   color: white;
   border: none;
   font-size: 1rem;
   cursor: pointer;
+  margin: 10px auto;
 }
 
 .title h3 {
@@ -60,7 +61,7 @@
 .quantityRooms, .quantityBedrooms, .quantityBathrooms {
   display: flex;
   justify-content: space-between;
-  width: 15%;
+  width: 17%;
   font-size: 18px;
   align-items: center;
 }
