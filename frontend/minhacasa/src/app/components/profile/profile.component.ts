@@ -35,6 +35,9 @@ export class ProfileComponent implements OnInit{
   city: string = '';
   imageProfileUrl: string = '';
 
+  completedEmail: string = '';
+  showCompletedEmail: boolean = false;
+
   isLoading: boolean = true;
   haveImmobiles: boolean = false;
 
@@ -64,17 +67,30 @@ export class ProfileComponent implements OnInit{
       }
   }
 
+  showCompleteEmail():void {
+    this.showCompletedEmail = true;
+  }
+
+  closeCompleteEmail():void {
+    this.showCompletedEmail = false;
+  }
+
   populateFilds(body: any):void {
     this.name = body.name;
     this.phone = body.phone;
     this.whatsapp = body.whatsapp;
-    this.email = body.email;
     this.state = body.state;
     this.city = body.city;
     this.id = body.id;
-
     this.age = this.getYear(body.dateOfBirth);
 
+    if (body.email.length > 28) {
+      this.email = body.email.substring(0, 25) + '...';
+      this.completedEmail = body.email;
+    } else {
+      this.email = body.email;
+    }
+  
     if (body.imageProfileUrl) {
       this.imageProfileUrl = body.imageProfileUrl;
     }

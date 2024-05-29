@@ -27,7 +27,10 @@
                     <p>{{whatsapp}}</p>
                     
                     <label>Email:</label>
+                    <div class="email-container" (mouseenter)="showCompleteEmail()" (mouseleave)="closeCompleteEmail()">
                     <p>{{email}}</p>
+                    <p *ngIf="showCompletedEmail" class="completed-email">{{completedEmail}}</p>
+                    </div>
                     
                     <label>Cidade:</label>
                     <p>{{city}}</p>

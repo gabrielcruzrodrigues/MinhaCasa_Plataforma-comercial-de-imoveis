@@ -21,7 +21,7 @@
           </div>
     </ul>
     <ng-template #defaultDiv>
-        <ul class="auth">
+        <ul *ngIf="!isLogged" class="auth">
             <li class="login"><a href="/login">Entrar</a></li>
             <li class="create-post"><a href="/login">Publicar um imóvel</a></li>
         </ul>
