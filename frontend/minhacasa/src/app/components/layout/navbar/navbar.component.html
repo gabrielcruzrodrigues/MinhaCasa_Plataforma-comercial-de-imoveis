@@ -9,7 +9,11 @@
         <li class="option"><a href="#">Planos e serviços</a></li>
         <li class="option"><a href="#">Entre em contato</a></li>
     </ul>
-    <ul *ngIf="isLogged; else defaultDiv" class="auth" (mouseleave)="closeDropdown()">
+    <ul *ngIf="noLogged" class="auth">
+        <li class="login"><a href="/login">Entrar</a></li>
+        <li class="create-post"><a href="/login">Publicar um imóvel</a></li>
+    </ul>
+    <ul *ngIf="isLogged" class="auth" (mouseleave)="closeDropdown()">
         <div class="dropdown">
             <button class="dropdown-button" (mouseenter)="openDropdown()">Minha conta <img src="/assets/arrow-icon-down.png"></button>
             <div class="dropdown-content" *ngIf="isOpen">
@@ -20,11 +24,5 @@
             </div>
           </div>
     </ul>
-    <ng-template #defaultDiv>
-        <ul *ngIf="!isLogged" class="auth">
-            <li class="login"><a href="/login">Entrar</a></li>
-            <li class="create-post"><a href="/login">Publicar um imóvel</a></li>
-        </ul>
-    </ng-template>
 </nav>
 
