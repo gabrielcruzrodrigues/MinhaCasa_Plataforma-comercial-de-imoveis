@@ -55,7 +55,7 @@ ul {
 }
 
 .option:hover a {
-    background-color: #2daccc;
+    background-color: $active-button;
     cursor: pointer;
 }
 
@@ -90,7 +90,7 @@ ul {
 }
 
 .login a:hover {
-    background-color: #229ebd;
+    background-color: $active-button;
 }
 
 .login a {
@@ -141,5 +141,5 @@ ul {
   }
   
   .dropdown:hover .dropdown-button {
-    background-color: #2daccc;
+    background-color: $active-button;
   }
