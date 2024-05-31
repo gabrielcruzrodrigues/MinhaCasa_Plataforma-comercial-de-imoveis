@@ -28,18 +28,16 @@ export class ArrowCarroselComponent {
 
   nextImage() {
     if (this.currentIndex < this.imageUrls.length - 1) {
-      this.currentIndex = this.currentIndex + 2;
+      this.currentIndex++;
     } else {
-      this.currentIndex = 0;
+      this.currentIndex = 0; // Loop para o início
     }
     this.updateCarousel();
   }
 
   updateCarousel() {
     const carouselImages = document.querySelector('.carousel-images') as HTMLElement;
-    const totalWidth = carouselImages.scrollWidth;
-    const visibleWidth = carouselImages.clientWidth;
-    const offset = Math.min(this.currentIndex * 210, totalWidth - visibleWidth);
+    const offset = this.currentIndex * 210;
     carouselImages.style.transform = `translateX(-${offset}px)`;
   }
 
