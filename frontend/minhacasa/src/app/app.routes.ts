@@ -5,6 +5,7 @@ import { RegisterpageComponent } from './components/registerpage/registerpage.co
 import { LogoutComponent } from './components/layout/logout/logout.component';
 import { CreateImmobileComponent } from './components/create-immobile/create-immobile.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ImmobileDetailsComponent } from './components/immobile-details/immobile-details.component';
 
 export const routes: Routes = [
     {
@@ -24,5 +25,8 @@ export const routes: Routes = [
     },
     {
         path: 'profile', component: ProfileComponent
+    },
+    {
+        path: 'immobile/:id/:name', component: ImmobileDetailsComponent
     }
-];
+]

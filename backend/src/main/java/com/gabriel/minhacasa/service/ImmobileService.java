@@ -12,9 +12,12 @@ import com.gabriel.minhacasa.repository.ImmobileRepository;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,9 +25,23 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ImmobileService {
 
+    @Value("${base-url}")
+    private String baseUrl;
+    private String baseUrlImmobileFilesApi = "/api/files/download/immobile/";
+
     private final ImmobileRepository immobileRepository;
     private final UserRepository userRepository;
     private final FilesService filesService;
+
+    List<String> booleanFields = List.of(
+            "gatedCommunity", "videos", "beach", "disabledAccess", "playground", "grill",
+            "energyGenerator", "closeToTheCenter", "elevator", "pool", "frontDesk",
+            "multiSportsCourt", "gym", "steamRoom", "cableTV", "heating", "cabinetsInTheKitchen",
+            "bathroomInTheRoom", "internet", "partyRoom", "airConditioning", "americanKitchen",
+            "hydromassage", "fireplace", "privatePool", "electronicGate", "serviceArea", "pub",
+            "closet", "office", "yard", "alarmSystem", "balcony", "concierge24Hour", "walledArea",
+            "dogAllowed", "catAllowed", "cameras", "furnished", "seaView"
+    );
 
     public void createImmobile(CreateImmobileDTO immobileData) {
         Optional<User> user = userRepository.findById(immobileData.studentId());
@@ -105,6 +122,18 @@ public class ImmobileService {
         } else {
             throw new UserNotFoundException();
         }
+    }
+
+    public Immobile getImmobileWithCompleteImagesPath(Long id) {
+        Immobile immobile = this.findById(id);
+        List<String> fullImagePaths = new ArrayList<>();
+
+        for (String path : immobile.getFiles()) {
+            fullImagePaths.add(this.baseUrl + this.baseUrlImmobileFilesApi + path);
+        }
+
+        immobile.setFiles(fullImagePaths);
+        return immobile;
     }
 
     private void setRoleOWNERByUser(User user) {

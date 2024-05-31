@@ -28,6 +28,11 @@ public class ImmobileController {
         return ResponseEntity.ok().body(this.immobileService.findById(id));
     }
 
+    @GetMapping("/details/{id}")
+    public ResponseEntity<Immobile> getImmobileWithFullImagePaths(@PathVariable Long id) {
+        return ResponseEntity.ok().body(this.immobileService.getImmobileWithCompleteImagesPath(id));
+    }
+
     @PutMapping("/update")
     public ResponseEntity<Object> updateImmobile(@RequestBody UpdateImmobileDTO request) {
         this.immobileService.updateImmobile(request);

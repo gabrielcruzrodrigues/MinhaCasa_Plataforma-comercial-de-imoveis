@@ -14,6 +14,7 @@ import com.gabriel.minhacasa.files.FilesService;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,9 @@ import java.util.*;
 @RequiredArgsConstructor
 public class UserService {
 
+    @Value("${base-url}")
+    private String baseUrl;
 
-    private String baseUrl = "http://localhost:8080";
     private String baseUrlProfileFilesApi = "/api/files/download/profile/";
     private String baseUrlImmobileFilesApi = "/api/files/download/immobile/";
 
