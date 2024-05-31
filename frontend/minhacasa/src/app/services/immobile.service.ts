@@ -14,4 +14,9 @@ export class ImmobileService {
   create(data: any): Observable<any> {
     return this.http.post(this.url, data, {observe: 'response'});
   }
+
+  getImmobileWithCompleteImagesPath(id: any): Observable<any> {
+    let urlForRequest = this.url + "/details/" + id;
+    return this.http.get(urlForRequest, {observe: 'response'});
+  }
 }

@@ -1,0 +1,9 @@
+<div class="carousel-container">
+     <button class="carousel-button left" (click)="prevImage()">&#9664;</button>
+     <div class="carousel-wrapper">
+          <div class="carousel-images" [style.transform]="getTransform()">
+               <img *ngFor="let image of imageUrls" [src]="image" alt="Carousel image">
+          </div>
+     </div>
+     <button class="carousel-button right" (click)="nextImage()">&#9654;</button>
+</div>

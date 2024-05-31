@@ -33,16 +33,6 @@ public class ImmobileService {
     private final UserRepository userRepository;
     private final FilesService filesService;
 
-    List<String> booleanFields = List.of(
-            "gatedCommunity", "videos", "beach", "disabledAccess", "playground", "grill",
-            "energyGenerator", "closeToTheCenter", "elevator", "pool", "frontDesk",
-            "multiSportsCourt", "gym", "steamRoom", "cableTV", "heating", "cabinetsInTheKitchen",
-            "bathroomInTheRoom", "internet", "partyRoom", "airConditioning", "americanKitchen",
-            "hydromassage", "fireplace", "privatePool", "electronicGate", "serviceArea", "pub",
-            "closet", "office", "yard", "alarmSystem", "balcony", "concierge24Hour", "walledArea",
-            "dogAllowed", "catAllowed", "cameras", "furnished", "seaView"
-    );
-
     public void createImmobile(CreateImmobileDTO immobileData) {
         Optional<User> user = userRepository.findById(immobileData.studentId());
         if (user.isPresent()) {
