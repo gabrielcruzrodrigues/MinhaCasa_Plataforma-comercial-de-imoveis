@@ -95,7 +95,7 @@ public class UserService {
         String imageProfile = baseUrl + baseUrlProfileFilesApi + user.getImageProfile();
 
         return new ProfileUserResponseDTO(
-                user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
+                user.getId(), user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
                 user.getEmail(), user.getState(), user.getCity(), immobiles, imageProfile
         );
     }

@@ -28,12 +28,16 @@
      // margin-bottom: 10px;
 }
 
+.infos {
+     display: flex;
+}
+
 .price-section {
      display: flex;
      margin-top: 30px;
      align-items: baseline;
      border-bottom: 4px solid $primary-color;
-     width: 27%;
+     width: 35%;
 }
 
 .price {
@@ -45,7 +49,100 @@
 }
 
 .seller-info {
-     width: 30%;
-     background-color: blue;
+     width: 26%;
+     border:2px solid #ccc;
+     border-radius: 10px;
+     padding: 20px;
 }
 
+.seller-info h3 {
+     color: $primary-color;
+     text-align: center;
+     font-size: 22px;
+}
+
+.seller-info h4 {
+     text-align: center;
+     font-size: 20px;
+     margin: 10px auto;
+}
+
+.icons {
+     width: 65%;
+     display: flex;
+     justify-content: flex-end;
+     align-items: center;
+     margin-right: 3%;
+;
+}
+
+.icons p {
+     font-size: 20px;
+     margin-bottom: 0;
+}
+
+.quantityRooms, .quantityBedrooms, .quantityBathrooms {
+     display: flex;
+     width: 12%;
+     justify-content: space-between;
+     align-items: center;
+     margin-left: 5%;
+}
+
+.info-icon {
+     width: 30px;
+     height: 30px;
+}
+
+.user-image {
+     display: flex;
+}
+
+.user-image img{
+     width: 90%;
+     border-radius: 15px;
+     margin: auto;
+}
+
+.seller-info button {
+     // padding: 5px;
+     width: 95%;
+     border: 1px solid #ccc;
+     border-radius: 10px;
+     margin: 10px auto 15px auto;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.buttons {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+}
+
+.buttons button {
+     cursor: pointer;
+}
+
+.button-icon {
+     width: 15%;
+     margin-right: 10px;
+}
+
+.button-icon-email {
+     width: 13%;
+     margin-right: 10px;
+}
+
+.email {
+     font-size: 16px;
+     padding: 1px;
+     background-color: $primary-color;
+}
+
+.whatsapp {
+     font-size: 16px;
+     background-color: #40c351;
+}

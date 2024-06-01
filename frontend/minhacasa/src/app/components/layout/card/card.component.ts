@@ -20,6 +20,7 @@ export class CardComponent {
   @Input() imageUrl: string = '';
   @Input() price: string = '';
   @Input() name: string = '';
+  @Input() sellerId: string = '';
 
   constructor(private currencyPipe: CurrencyPipe, private router: Router) {}
 
@@ -35,6 +36,6 @@ export class CardComponent {
   }
 
   redirectForImmobileDetails():void {
-    this.router.navigate(["/immobile/" + this.id + "/" + this.name]);
+    this.router.navigate(["/immobile/" + this.id + "/" + this.name + "/" + this.sellerId]);
   }
 }

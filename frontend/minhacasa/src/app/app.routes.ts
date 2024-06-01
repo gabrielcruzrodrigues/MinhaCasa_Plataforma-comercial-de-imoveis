@@ -27,6 +27,6 @@ export const routes: Routes = [
         path: 'profile', component: ProfileComponent
     },
     {
-        path: 'immobile/:id/:name', component: ImmobileDetailsComponent
+        path: 'immobile/:id/:name/:seller-id', component: ImmobileDetailsComponent
     }
 ]
