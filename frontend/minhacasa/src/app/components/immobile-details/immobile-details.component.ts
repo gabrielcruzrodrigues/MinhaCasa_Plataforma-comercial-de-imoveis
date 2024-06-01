@@ -32,6 +32,8 @@ export class ImmobileDetailsComponent implements OnInit{
   //seller
   sellerImage: string = '';
   sellerName: string = '';
+  sellerWhatsapp: string = '';
+  sellerWhatsappLink: string = `https://wa.me/55${this.sellerWhatsapp}?text=Olá! vim pelo minhacasa.com`
 
   constructor(
     private immobileService: ImmobileService, 
@@ -54,6 +56,7 @@ export class ImmobileDetailsComponent implements OnInit{
             console.log(response)
             this.sellerImage = response.body.imageProfileUrl;
             this.sellerName = response.body.name;
+            this.sellerWhatsapp = response.body.whatsapp;
           }
         })
       },

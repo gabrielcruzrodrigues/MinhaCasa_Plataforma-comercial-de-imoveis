@@ -102,17 +102,21 @@
      width: 90%;
      border-radius: 15px;
      margin: auto;
+     // box-shadow: 2px 2px 5px rgba(0,0,0,0.2);     
 }
 
-.seller-info button {
+.seller-info a {
      // padding: 5px;
      width: 95%;
-     border: 1px solid #ccc;
+     border: 2px solid #ccc;
      border-radius: 10px;
      margin: 10px auto 15px auto;
      display: flex;
      align-items: center;
      justify-content: center;
+     box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+     text-decoration: none;
+     color: white;
 }
 
 .buttons {
@@ -122,7 +126,7 @@
      justify-content: center;
 }
 
-.buttons button {
+.buttons a {
      cursor: pointer;
 }
 
