@@ -16,6 +16,13 @@ export class ImmobileDetailsComponent implements OnInit{
   imagesUrl: string[] = [];
   immobileId: string | null = null;
 
+  name: string = '';
+  address: string = '';
+  state: string = '';
+  city: string = '';
+  price: string = '';
+  category: string = '';
+
   constructor(private immobileService: ImmobileService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
@@ -23,8 +30,34 @@ export class ImmobileDetailsComponent implements OnInit{
 
     this.immobileService.getImmobileWithCompleteImagesPath(this.immobileId).subscribe({
       next: (response: HttpResponse<any>) => {
-        this.imagesUrl = response.body.files;
+        this.populateFields(response.body);
       }
     })
+  }
+  
+  populateFields(body: any): void {
+    this.imagesUrl = body.files;
+    this.name = body.name;
+    this.address = body.address;
+    this.state = body.state;
+    this.city = body.city;
+    this.price = body.price;
+
+    let category = body.category;
+
+    switch (category) {
+      case 'SELL':
+        this.category = 'vender';
+        break;
+      case "RENT":
+        this.category = 'alugar';
+        break;
+      case "TEMPORARY_RENTAL":
+        this.category = "alugar por temporada";
+        break;
+      case "FINANCING":
+        this.category = "financiamento";
+        break;
+    }
   }
 }

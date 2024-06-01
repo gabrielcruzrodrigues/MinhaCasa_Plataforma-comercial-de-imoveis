@@ -3,6 +3,16 @@
 <section class="main-section">
      <app-arrow-carrosel [imageUrls]="imagesUrl"></app-arrow-carrosel>
      <section class="description">
-
+          <div class="immobile-info">
+               <h1>{{name}}</h1>
+               <h2>{{address}} - {{state}} - {{city}}</h2>
+               <div class="price-section">
+                    <p class="price">R$ {{price}} </p>
+                    <p class="category">/{{ category}}</p>
+               </div>
+          </div>
+          <div class="seller-info">
+               dados do usuário
+          </div>
      </section>
 </section>

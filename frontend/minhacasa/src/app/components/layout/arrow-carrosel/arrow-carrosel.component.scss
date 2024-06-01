@@ -6,15 +6,16 @@
      // border: 2px solid #ccc;
      background-color: #fff;
      margin: auto;
+     border-bottom: 1px solid #ccc;
    }
    
    .carousel-wrapper {
      display: flex;
      overflow: hidden;
      // width: 100%;
-   }
-   
-   .carousel-images {
+    }
+    
+    .carousel-images {
      display: flex;
      transition: transform 0.5s ease-in-out;
      height: 400px;

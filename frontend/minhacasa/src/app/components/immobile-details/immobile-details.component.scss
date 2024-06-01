@@ -1,5 +1,51 @@
+@import '../../scss/color-variables.scss';
+
 .main-section {
      width: 100%;
      height: 400px;
      background-color: white;
 }
+
+.description {
+     display: flex;
+     padding: 2% 10%;
+}
+
+.immobile-info {
+     width: 70%;
+     padding: 3%;
+     // background-color: red;
+}
+
+.immobile-info h1 {
+     font-size: 35px;
+     margin-bottom: 10px;
+}
+
+.immobile-info h2 {
+     font-size: 15px;
+     font-weight: 400;
+     // margin-bottom: 10px;
+}
+
+.price-section {
+     display: flex;
+     margin-top: 30px;
+     align-items: baseline;
+     border-bottom: 4px solid $primary-color;
+     width: 27%;
+}
+
+.price {
+     font-size: 30px;
+}
+
+.category {
+     font-size: 20px;
+}
+
+.seller-info {
+     width: 30%;
+     background-color: blue;
+}
+
