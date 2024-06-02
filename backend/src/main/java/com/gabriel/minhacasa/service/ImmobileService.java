@@ -221,6 +221,18 @@ public class ImmobileService {
     }
 
     public List<Immobile> searchParams(SearchParamsDTO params) {
-        return this.immobileRepositorySearch.searchByParams(params);
+        List<Immobile> immobiles = this.immobileRepositorySearch.searchByParams(params);
+        List<Immobile> immobilesWithCompletePath = new ArrayList<>();
+        for (Immobile immobile : immobiles) {
+            List<String> fullImagesPaths = new ArrayList<>();
+
+            for (String path : immobile.getFiles()) {
+                fullImagesPaths.add(this.baseUrl + this.baseUrlImmobileFilesApi + path);
+            }
+
+            immobile.setFiles(fullImagesPaths);
+            immobilesWithCompletePath.add(immobile);
+        }
+        return immobilesWithCompletePath;
     }
 }
