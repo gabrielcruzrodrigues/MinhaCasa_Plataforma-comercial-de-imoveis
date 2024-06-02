@@ -8,6 +8,7 @@ public record ImmobileByProfileDTO(
         String imageUrl,
         float price,
         String name,
-        String description
+        String description,
+        Long sellerId
 ) {
 }

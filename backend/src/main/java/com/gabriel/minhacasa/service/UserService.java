@@ -86,7 +86,7 @@ public class UserService {
 
             ImmobileByProfileDTO profileDTO = new ImmobileByProfileDTO(
                     immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
-                    imageImmobile, Float.parseFloat(String.valueOf(immobile.getPrice())), immobile.getName(), immobile.getDescription()
+                    imageImmobile, Float.parseFloat(String.valueOf(immobile.getPrice())), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
             );
 
             immobiles.add(profileDTO);

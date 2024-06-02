@@ -233,7 +233,7 @@ public class ImmobileService {
 
             ImmobileByProfileDTO immobileByProfileDTO = new ImmobileByProfileDTO(
                     immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
-                    fullImagePath, immobile.getPrice(), immobile.getName(), immobile.getDescription()
+                    fullImagePath, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
             );
 
             immobilesWithCompletePath.add(immobileByProfileDTO);

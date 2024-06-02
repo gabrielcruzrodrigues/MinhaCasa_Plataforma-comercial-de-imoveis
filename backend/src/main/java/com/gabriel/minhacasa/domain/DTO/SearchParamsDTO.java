@@ -9,6 +9,8 @@ import java.util.Optional;
 @Getter
 @Setter
 public class SearchParamsDTO {
+    Optional<Integer> pageNumber;
+    Optional<Integer> pageSize;
     Optional<String> name;
     Optional<String> city;
     Optional<String> neighborhood;

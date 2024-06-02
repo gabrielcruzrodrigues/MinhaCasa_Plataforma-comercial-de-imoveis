@@ -3,6 +3,7 @@ package com.gabriel.minhacasa.repository;
 import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
 import com.gabriel.minhacasa.domain.Immobile;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -264,7 +265,17 @@ public class ImmobileRepositoryImpl implements ImmobileRepositoryCustomInterface
             predicates.add(criteriaBuilder.equal(root.get("gatedCommunity"), params.getGatedCommunity().get()));
         }
 
+        int offset = (params.getPageNumber().get() - 1) * params.getPageSize().get();
+
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
-        return entityManager.createQuery(criteriaQuery).getResultList();
+
+        // Create the query from criteriaQuery
+        TypedQuery<Immobile> query = entityManager.createQuery(criteriaQuery);
+
+        // Set pagination parameters
+        query.setFirstResult(offset);
+        query.setMaxResults(params.getPageSize().get());
+
+        return query.getResultList();
     }
 }
