@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { UserService } from '../../services/user.service';
+import { LoadingComponent } from '../layout/loading/loading.component';
+import { FooterComponent } from '../layout/footer/footer.component';
 
 interface Body {
   gatedCommunity: boolean;
@@ -53,14 +55,17 @@ interface Body {
 @Component({
   selector: 'app-immobile-details',
   standalone: true,
-  imports: [NavbarComponent, ArrowCarroselComponent, CommonModule],
+  imports: [NavbarComponent, ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent],
   templateUrl: './immobile-details.component.html',
   styleUrl: './immobile-details.component.scss'
 })
 export class ImmobileDetailsComponent implements OnInit{
+  // body = 
+
   imagesUrl: string[] = [];
   immobileId: string | null = null;
   sellerId: string | null = null;
+  isLoading: boolean = false;
 
   name: string = '';
   address: string = '';
@@ -195,6 +200,7 @@ export class ImmobileDetailsComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.immobileId = this.route.snapshot.paramMap.get('id');
     this.sellerId = this.route.snapshot.paramMap.get('seller-id');
 
@@ -210,6 +216,7 @@ export class ImmobileDetailsComponent implements OnInit{
             this.sellerName = response.body.name;
             this.sellerWhatsapp = response.body.whatsapp;
             this.sellerWhatsappLink = `https://wa.me/55${this.sellerWhatsapp}?text=Olá! Estou interessado(a) pela publicação "${this.name}", vim pelo minhacasa.com`;
+            this.isLoading = false;
           }
         })
       },
