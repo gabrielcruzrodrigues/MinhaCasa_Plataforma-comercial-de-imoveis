@@ -28,14 +28,25 @@ export class ImmobileDetailsComponent implements OnInit{
   quantityRooms: string = '';
   quantityBedrooms: string = '';
   quantityBathrooms: string = '';
+  description: string = '';
+  neighborhood: string = '';
+  garage: string = '';
+  suite: string = '';
+  age: string = '';
+  type: string = '';
+  sellerType: string = '';
+  totalArea: string = '';
+  usefulArea: string = '';
+  IPTU: string = '';
+  garden: string = '';
 
   //seller
   sellerImage: string = '';
   sellerName: string = '';
   sellerWhatsapp: string = '';
-  sellerWhatsappLink: string = `https://wa.me/55${this.sellerWhatsapp}?text=Olá! vim pelo minhacasa.com`
+  sellerWhatsappLink: string = '';
 
-  constructor(
+  constructor(  
     private immobileService: ImmobileService, 
     private route: ActivatedRoute,
     private currencyPipe: CurrencyPipe,
@@ -57,6 +68,7 @@ export class ImmobileDetailsComponent implements OnInit{
             this.sellerImage = response.body.imageProfileUrl;
             this.sellerName = response.body.name;
             this.sellerWhatsapp = response.body.whatsapp;
+            this.sellerWhatsappLink = `https://wa.me/55${this.sellerWhatsapp}?text=Olá! Estou interessado(a) pela publicação "${this.name}", vim pelo minhacasa.com`;
           }
         })
       },
@@ -76,6 +88,15 @@ export class ImmobileDetailsComponent implements OnInit{
     this.quantityRooms = body.quantityRooms;
     this.quantityBedrooms = body.quantityBedrooms;
     this.quantityBathrooms = body.quantityBathrooms;
+    this.description = body.description;
+    this.neighborhood = body.neighborhood;
+    this.garage = this.verifyBoolean(body.garage);
+    this.suite = this.verifyBoolean(body.suite);
+    this.type = body.type;
+    this.totalArea = body.totalArea;
+    this.usefulArea = body.usefulArea;
+    this.IPTU = body.iptu;
+    this.garden = this.verifyBoolean(body.garden);
 
     let category = body.category;
 
@@ -93,6 +114,123 @@ export class ImmobileDetailsComponent implements OnInit{
         this.category = "financiamento";
         break;
     }
+
+    let age = body.age;
+
+    switch(age) {
+      case 'IN_THE_PLANT':
+        this.age = 'na planta';
+        break;
+      case 'BUILDING':
+        this.age = 'construindo';
+        break;
+      case 'UP_TO_1_YEARS':
+        this.age = 'mais ou menos 1 ano';
+        break;
+      case 'UP_TO_2_YEARS':
+        this.age = 'mais de 2 anos';
+        break;
+      case 'UP_TO_5_YEARS':
+        this.age = 'mais de 5 anos';
+        break;
+      case 'UP_TO_10_YEARS':
+        this.age = 'mais de 10 anos';
+        break;
+      case 'UP_TO_20_YEARS':
+        this.age = 'mais de 20 anos';
+        break;
+      case 'UP_TO_30_YEARS':
+        this.age = 'mais de 30 anos';
+        break;
+      case 'UP_TO_40_YEARS':
+        this.age = 'mais de 40 anos';
+        break;
+      case 'OVER_50_YEARS':
+        this.age = 'mais de 50 anos';
+        break;
+      default:
+        this.age = 'idade não definida';
+    }
+
+    switch (body.type) {
+      case "HOUSE":
+        this.type = "Casa";
+        break;
+      case "ROOM":
+          this.type = "Quarto";
+          break;
+      case "ROOF":
+          this.type = "Cobertura";
+          break;
+      case "FLAT":
+          this.type = "Apartamento";
+          break;
+      case "KITNET":
+          this.type = "Kitnet";
+          break;
+      case "LOFT":
+          this.type = "Loft";
+          break;
+      case "STUDIO":
+          this.type = "Estúdio";
+          break;
+      case "DUPLEX":
+          this.type = "Duplex";
+          break;
+      case "TRIPLEX":
+          this.type = "Triplex";
+          break;
+      case "CONDOMINIUM":
+          this.type = "Condomínio";
+          break;
+      case "BUILDING":
+          this.type = "Prédio";
+          break;
+      case "SHEDS":
+          this.type = "Galpões";
+          break;
+      case "DEPOSITS":
+          this.type = "Depósitos";
+          break;
+      case "OFFICES":
+          this.type = "Escritórios";
+          break;
+      case "PARKING":
+          this.type = "Estacionamento";
+          break;
+      case "STORE":
+          this.type = "Loja";
+          break;
+      case "SUBDIVISION":
+          this.type = "Loteamento";
+          break;
+      case "GATED_COMMUNITY":
+          this.type = "Condomínio Fechado";
+          break;
+      case "FARM":
+          this.type = "Fazenda";
+          break;
+      default:
+          this.type = "Tipo não especificado";
+    }
+
+    switch (body.sellerType) {
+      case 'OWNER':
+        this.sellerType = 'proprietário';
+        break;
+      case 'BROKER':
+        this.sellerType = 'corretora';
+        break;
+      case 'REAL_ESTATE':
+        this.sellerType = 'imobiliária';
+        break;
+      default:
+        this.sellerType = 'vendedor não definido';
+    }
+  }
+
+  verifyBoolean(variable : any): string {
+    return (variable) ? 'sim' : 'não';
   }
 
   formatPrice(price: string): string {

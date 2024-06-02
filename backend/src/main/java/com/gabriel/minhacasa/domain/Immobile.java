@@ -19,74 +19,74 @@ public class Immobile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //
 
     @Column(nullable = false, length = 50)
     @NotBlank 
     private String name; //
 
     @Column(length = 500)
-    private String description;
+    private String description; //
 
     @Column(nullable = false, length = 50)
     @NotBlank
-    private String address;
+    private String address; //
 
     @Column(nullable = false, length = 50)
-    private String city;
-
-    @Column(nullable = false, length = 50)
-    @NotBlank
-    private String neighborhood;
+    private String city; //
 
     @Column(nullable = false, length = 50)
     @NotBlank
-    private String state;
+    private String neighborhood; //
+
+    @Column(nullable = false, length = 50)
+    @NotBlank
+    private String state; //
 
     @Column(nullable = false)
-    private boolean garage;
+    private boolean garage; //
 
     @Column(nullable = false)
-    private int quantityBedrooms;
+    private int quantityBedrooms; //
 
     @Column(nullable = false)
-    private int quantityRooms;
+    private int quantityRooms; //
 
     @Column(nullable = false)
-    private float IPTU;
+    private float IPTU; //
 
     @Column(nullable = false)
-    private float price;
+    private float price; //
 
     @Column(nullable = false)
-    private boolean suite;
+    private boolean suite; //
 
     @Column(nullable = false)
-    private float usefulArea;
+    private float usefulArea; //
 
     @Column(nullable = false)
-    private float totalArea;
+    private float totalArea; //
 
     @Column(nullable = false)
-    private int quantityBathrooms;
+    private int quantityBathrooms; //
 
     @Column(nullable = false)
-    private IntegrityEnum integrity;
+    private IntegrityEnum integrity; //
 
     @Column(nullable = false)
-    private SellerTypeEnum sellerType;
+    private SellerTypeEnum sellerType; //
 
     @Column(nullable = false)
-    private AgeEnum age;
+    private AgeEnum age; //
 
     @Column(nullable = false)
-    private CategoryEnum category;
+    private CategoryEnum category; //
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt; //
 
     @Column(nullable = false)
-    private TypeEnum type;
+    private TypeEnum type; //
 
     @Column(nullable = false)
     private boolean garden;

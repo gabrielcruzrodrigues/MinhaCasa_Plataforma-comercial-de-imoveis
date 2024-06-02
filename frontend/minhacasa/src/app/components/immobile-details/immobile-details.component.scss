@@ -28,8 +28,47 @@
      // margin-bottom: 10px;
 }
 
+.immobile-info h4 {
+     font-size: 20px;
+     text-align: center;
+     margin: 20px auto;
+}
+
+.description-space {
+     background-color: #cccccccc;  
+     padding: 10px;
+     border-radius: 10px;
+}
+
+.additional-infomations h5 {
+     font-size: 22px;
+     text-align: center;
+     margin: 30px auto 50px auto;
+}
+
+.informations {
+     display: flex;
+     justify-content: space-between;
+     flex-wrap: wrap;
+}
+
+.data {
+     width: 30%;
+}
+
+.data label {
+     font-size: 18px;
+}
+
+.data p {
+     font-size: 16px;
+     margin-top: 10px;
+     margin-bottom: 40px;
+}
+
 .infos {
      display: flex;
+     margin-bottom: 30px;
 }
 
 .price-section {

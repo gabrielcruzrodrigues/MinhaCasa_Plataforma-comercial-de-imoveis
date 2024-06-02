@@ -5,7 +5,7 @@
      <section class="description">
           <div class="immobile-info">
                <h1>{{name}}</h1>
-               <h2>{{address}} - {{city}} - {{state}}</h2>
+               <h2>{{address}} - {{neighborhood}} - {{city}} - {{state}}</h2>
                <section class="infos">
                     <div class="price-section">
                          <p class="price">{{price}} </p>
@@ -26,9 +26,54 @@
                             </div>
                     </div>
                </section>
+               <div class="description-space">
+                    <h4>Descrição do imóvel</h4>
+                    <p>{{description}}</p>
+               </div>
+               <div class="additional-infomations">
+                    <h5>Informações adicionais</h5>
+                    <div class="informations">
+                         <div class="data">
+                              <label>O imóvel possui gararem?</label>
+                              <p>{{garage}}</p>
+                         </div>
+                         <div class="data">
+                              <label>O immóvel possui suite?</label>
+                              <p>{{suite}}</p>
+                         </div>
+                         <div class="data">
+                              <label>Qual a idade do imóvel?</label>
+                              <p>{{age}}</p>
+                         </div>
+                         <div class="data">
+                              <label>Qual o tipo do imóvel?</label>
+                              <p>{{type}}</p>
+                         </div>
+                         <div class="data">
+                              <label>Qual o tipo do vendedor?</label>
+                              <p>{{sellerType}}</p>
+                         </div>
+                         <div class="data">
+                              <label>Area total em m²</label>
+                              <p>{{totalArea}}m²</p>
+                         </div>
+                         <div class="data">
+                              <label>Area livre para ser utilizada</label>
+                              <p>{{usefulArea}}m²</p>
+                         </div>
+                         <div class="data">
+                              <label>Valor do IPTU</label>
+                              <p>R${{IPTU}}</p>
+                         </div>
+                         <div class="data">
+                              <label>Tem jardim?</label>
+                              <p>{{garden}}</p>
+                         </div>
+                    </div>
+               </div>
           </div>
           <div class="seller-info">
-               <h3>Dados do proprietário</h3>
+               <h3>Proprietário</h3>
                <div class="user-image">
                     <img [src]="sellerImage" alt="Image profile">
                </div>

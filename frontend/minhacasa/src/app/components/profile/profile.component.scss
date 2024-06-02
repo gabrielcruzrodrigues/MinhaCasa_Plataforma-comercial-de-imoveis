@@ -15,7 +15,6 @@
      width: 30%;
      height: 100%;
      padding: 50px;
-     // padding-top: 20px;
      display: flex;
      align-items: center;
 }
@@ -33,12 +32,11 @@
 .image img {
      width: 100%;
      height: 100%;
-     object-fit: cover; /* Adiciona esta linha */
+     object-fit: cover;
      border-radius: 15px;
 }
 
 .info {
-     // background-color: blue;
      width: 60%;
      height: 100%;
      padding: 50px;

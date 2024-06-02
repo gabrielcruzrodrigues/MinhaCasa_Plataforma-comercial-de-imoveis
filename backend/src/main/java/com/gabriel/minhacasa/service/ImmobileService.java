@@ -5,6 +5,7 @@ import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
+import com.gabriel.minhacasa.domain.enums.TypeEnum;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
 import com.gabriel.minhacasa.files.FilesService;
