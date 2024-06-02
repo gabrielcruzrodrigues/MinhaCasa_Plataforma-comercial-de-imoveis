@@ -1,0 +1,24 @@
+.main-section {
+     display: flex;
+     width: 94%;
+     padding: 3%;
+}
+
+.search {
+     width: 25%;
+     height: 600px;
+     border: 2px solid #ccc;
+     border-radius: 10px;
+     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cards {
+     width: 75%;
+     height: 600px;
+     padding-left: 3%;
+     // background-color: red;
+     display: flex;
+     justify-content: flex-start;
+     gap: 3.5%;
+     flex-wrap: wrap;
+}

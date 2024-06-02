@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
+import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
@@ -10,6 +11,7 @@ import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundExce
 import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
 import com.gabriel.minhacasa.files.FilesService;
 import com.gabriel.minhacasa.repository.ImmobileRepository;
+import com.gabriel.minhacasa.repository.ImmobileRepositoryImpl;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class ImmobileService {
     private final ImmobileRepository immobileRepository;
     private final UserRepository userRepository;
     private final FilesService filesService;
+    private final ImmobileRepositoryImpl immobileRepositorySearch;
 
     public void createImmobile(CreateImmobileDTO immobileData) {
         Optional<User> user = userRepository.findById(immobileData.studentId());
@@ -215,5 +218,9 @@ public class ImmobileService {
         Immobile immobile = this.findById(id);
         this.disableImmobile(id);
 //        this.filesImmobileService.soldImmobile(immobile);
+    }
+
+    public List<Immobile> searchParams(SearchParamsDTO params) {
+        return this.immobileRepositorySearch.searchByParams(params);
     }
 }
