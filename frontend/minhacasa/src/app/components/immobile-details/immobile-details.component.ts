@@ -4,13 +4,56 @@ import { ArrowCarroselComponent } from '../layout/arrow-carrosel/arrow-carrosel.
 import { ImmobileService } from '../../services/immobile.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
-import { CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { UserService } from '../../services/user.service';
+
+interface Body {
+  gatedCommunity: boolean;
+  videos: boolean;
+  beach: boolean;
+  disabledAccess: boolean;
+  playground: boolean;
+  grill: boolean;
+  energyGenerator: boolean;
+  closeToTheCenter: boolean;
+  elevator: boolean;
+  pool: boolean;
+  frontDesk: boolean;
+  multiSportsCourt: boolean;
+  gym: boolean;
+  steamRoom: boolean;
+  cableTV: boolean;
+  heating: boolean;
+  cabinetsInTheKitchen: boolean;
+  bathroomInTheRoom: boolean;
+  internet: boolean;
+  partyRoom: boolean;
+  airConditioning: boolean;
+  americanKitchen: boolean;
+  hydromassage: boolean;
+  fireplace: boolean;
+  privatePool: boolean;
+  electronicGate: boolean;
+  serviceArea: boolean;
+  pub: boolean;
+  closet: boolean;
+  office: boolean;
+  yard: boolean;
+  alarmSystem: boolean;
+  balcony: boolean;
+  concierge24Hour: boolean;
+  walledArea: boolean;
+  dogAllowed: boolean;
+  catAllowed: boolean;
+  cameras: boolean;
+  furnished: boolean;
+  seaView: boolean;
+}
 
 @Component({
   selector: 'app-immobile-details',
   standalone: true,
-  imports: [NavbarComponent, ArrowCarroselComponent],
+  imports: [NavbarComponent, ArrowCarroselComponent, CommonModule],
   templateUrl: './immobile-details.component.html',
   styleUrl: './immobile-details.component.scss'
 })
@@ -45,6 +88,104 @@ export class ImmobileDetailsComponent implements OnInit{
   sellerName: string = '';
   sellerWhatsapp: string = '';
   sellerWhatsappLink: string = '';
+
+  trueBooleanFields: string[] = [];
+
+  booleanFields: (keyof Body)[] = [
+    'gatedCommunity', 'videos', 'beach', 'disabledAccess', 'playground', 'grill',
+    'energyGenerator', 'closeToTheCenter', 'elevator', 'pool', 'frontDesk',
+    'multiSportsCourt', 'gym', 'steamRoom', 'cableTV', 'heating', 'cabinetsInTheKitchen',
+    'bathroomInTheRoom', 'internet', 'partyRoom', 'airConditioning', 'americanKitchen',
+    'hydromassage', 'fireplace', 'privatePool', 'electronicGate', 'serviceArea', 'pub',
+    'closet', 'office', 'yard', 'alarmSystem', 'balcony', 'concierge24Hour', 'walledArea',
+    'dogAllowed', 'catAllowed', 'cameras', 'furnished', 'seaView'
+  ];
+
+  translations: { [key in keyof Body]: string } = {
+    gatedCommunity: 'Condomínio Fechado',
+    videos: 'Vídeos',
+    beach: 'Praia',
+    disabledAccess: 'Acesso para Deficientes',
+    playground: 'Playground',
+    grill: 'Churrasqueira',
+    energyGenerator: 'Gerador de Energia',
+    closeToTheCenter: 'Perto do Centro',
+    elevator: 'Elevador',
+    pool: 'Piscina',
+    frontDesk: 'Recepção',
+    multiSportsCourt: 'Quadra Poliesportiva',
+    gym: 'Academia',
+    steamRoom: 'Sauna',
+    cableTV: 'TV a Cabo',
+    heating: 'Aquecimento',
+    cabinetsInTheKitchen: 'Armários na Cozinha',
+    bathroomInTheRoom: 'Banheiro na Suíte',
+    internet: 'Internet',
+    partyRoom: 'Salão de Festas',
+    airConditioning: 'Ar-Condicionado',
+    americanKitchen: 'Cozinha Americana',
+    hydromassage: 'Hidromassagem',
+    fireplace: 'Lareira',
+    privatePool: 'Piscina Privada',
+    electronicGate: 'Portão Eletrônico',
+    serviceArea: 'Área de Serviço',
+    pub: 'Pub',
+    closet: 'Closet',
+    office: 'Escritório',
+    yard: 'Quintal',
+    alarmSystem: 'Sistema de Alarme',
+    balcony: 'Varanda',
+    concierge24Hour: 'Portaria 24h',
+    walledArea: 'Área Murada',
+    dogAllowed: 'Permite Cachorro',
+    catAllowed: 'Permite Gato',
+    cameras: 'Câmeras de Segurança',
+    furnished: 'Mobiliado',
+    seaView: 'Vista para o Mar'
+  };
+
+  body: Body = {
+    gatedCommunity: true,
+    videos: false,
+    beach: true,
+    disabledAccess: false,
+    playground: true,
+    grill: false,
+    energyGenerator: true,
+    closeToTheCenter: false,
+    elevator: true,
+    pool: true,
+    frontDesk: false,
+    multiSportsCourt: true,
+    gym: false,
+    steamRoom: true,
+    cableTV: true,
+    heating: false,
+    cabinetsInTheKitchen: true,
+    bathroomInTheRoom: false,
+    internet: true,
+    partyRoom: false,
+    airConditioning: true,
+    americanKitchen: false,
+    hydromassage: true,
+    fireplace: false,
+    privatePool: true,
+    electronicGate: false,
+    serviceArea: true,
+    pub: false,
+    closet: true,
+    office: false,
+    yard: true,
+    alarmSystem: false,
+    balcony: true,
+    concierge24Hour: false,
+    walledArea: true,
+    dogAllowed: true,
+    catAllowed: false,
+    cameras: true,
+    furnished: false,
+    seaView: true
+  };
 
   constructor(  
     private immobileService: ImmobileService, 
@@ -227,6 +368,8 @@ export class ImmobileDetailsComponent implements OnInit{
       default:
         this.sellerType = 'vendedor não definido';
     }
+
+    this.trueBooleanFields = this.getTrueBooleanFields(body);
   }
 
   verifyBoolean(variable : any): string {
@@ -236,5 +379,10 @@ export class ImmobileDetailsComponent implements OnInit{
   formatPrice(price: string): string {
     const numericPrice = parseFloat(price);
     return this.currencyPipe.transform(numericPrice, 'BRL', 'symbol', '1.0-0') ?? '';
+  }
+
+  getTrueBooleanFields(body: any): string[] {
+    const trueFields = this.booleanFields.filter(field => body[field] === true);
+    return trueFields.map(field => this.translations[field]);
   }
 }
