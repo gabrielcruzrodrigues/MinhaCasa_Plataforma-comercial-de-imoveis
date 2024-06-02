@@ -2,6 +2,7 @@ package com.gabriel.minhacasa.controller;
 
 
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
+import com.gabriel.minhacasa.domain.DTO.ImmobileByProfileDTO;
 import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
@@ -55,7 +56,7 @@ public class ImmobileController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<List<Immobile>> search(@RequestBody SearchParamsDTO params) {
+    public ResponseEntity<List<ImmobileByProfileDTO>> search(@RequestBody SearchParamsDTO params) {
         return ResponseEntity.ok().body(this.immobileService.searchParams(params));
     }
 }

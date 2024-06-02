@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
+import com.gabriel.minhacasa.domain.DTO.ImmobileByProfileDTO;
 import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
 import com.gabriel.minhacasa.domain.Immobile;
@@ -220,19 +221,24 @@ public class ImmobileService {
 //        this.filesImmobileService.soldImmobile(immobile);
     }
 
-    public List<Immobile> searchParams(SearchParamsDTO params) {
+    public List<ImmobileByProfileDTO> searchParams(SearchParamsDTO params) {
         List<Immobile> immobiles = this.immobileRepositorySearch.searchByParams(params);
-        List<Immobile> immobilesWithCompletePath = new ArrayList<>();
+        List<ImmobileByProfileDTO> immobilesWithCompletePath = new ArrayList<>();
+
         for (Immobile immobile : immobiles) {
-            List<String> fullImagesPaths = new ArrayList<>();
+            String fullImagePath;
 
-            for (String path : immobile.getFiles()) {
-                fullImagesPaths.add(this.baseUrl + this.baseUrlImmobileFilesApi + path);
-            }
+            String path = immobile.getFiles().get(0);
+            fullImagePath = this.baseUrl + this.baseUrlImmobileFilesApi + path;
 
-            immobile.setFiles(fullImagesPaths);
-            immobilesWithCompletePath.add(immobile);
+            ImmobileByProfileDTO immobileByProfileDTO = new ImmobileByProfileDTO(
+                    immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
+                    fullImagePath, immobile.getPrice(), immobile.getName(), immobile.getDescription()
+            );
+
+            immobilesWithCompletePath.add(immobileByProfileDTO);
         }
+
         return immobilesWithCompletePath;
     }
 }
