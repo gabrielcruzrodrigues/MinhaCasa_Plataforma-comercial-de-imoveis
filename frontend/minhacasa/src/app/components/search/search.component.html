@@ -214,19 +214,23 @@
           </form>
      </div>
      <div class="cards">
-          <ng-container class="ngcontainer" *ngFor="let immobile of cards">
-               <app-card class="card"
-                    [id]="immobile.id"
-                    [quantityRooms]="immobile.quantityRooms"
-                    [quantityBedrooms]="immobile.quantityBedrooms"
-                    [quantityBathrooms]="immobile.quantityBathrooms"
-                    [imageUrl]="immobile.imageUrl"
-                    [price]="immobile.price"
-                    [name]="immobile.name"
-                    [sellerId]="immobile.sellerId">
-               </app-card>
-          </ng-container>
-          <app-paginator></app-paginator>
+          <div class="card-div">
+               <ng-container class="ngcontainer" *ngFor="let immobile of cards">
+                    <app-card class="card"
+                         [id]="immobile.id"
+                         [quantityRooms]="immobile.quantityRooms"
+                         [quantityBedrooms]="immobile.quantityBedrooms"
+                         [quantityBathrooms]="immobile.quantityBathrooms"
+                         [imageUrl]="immobile.imageUrl"
+                         [price]="immobile.price"
+                         [name]="immobile.name"
+                         [sellerId]="immobile.sellerId">
+                    </app-card>
+               </ng-container>
+          </div>
+          <div class="paginator">
+               <app-paginator></app-paginator>
+          </div>
      </div>
 
      <app-loading [isLoading]="isLoading"></app-loading>

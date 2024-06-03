@@ -17,11 +17,23 @@
      width: 75%;
      height: 600px;
      padding-left: 3%;
-     // background-color: red;
+}
+
+.card-div {
+     width: 100%;
      display: flex;
      justify-content: flex-start;
      gap: 3.5%;
      flex-wrap: wrap;
+}
+
+.card {
+     margin-bottom: 3.5%;
+}
+
+.paginator {
+     display: flex;
+     justify-content: center;
 }
 
 select, input {

@@ -1,23 +1,26 @@
-// .demo-toggles {
-//      display: flex;
-//      flex-direction: column;
-// }
-   
-// .demo-toggles * {
-//      margin-bottom: 16px;
-// }
-   
-.demo-options {
+@import '../../../scss/color-variables.scss';
+
+.paginator-container {
      display: flex;
-     flex-direction: column;
-     width: 100%;
-}
-   
-.demo-data * {
-     margin: 16px 0;
-}
-   
-.demo-paginator {
-     width: 600px;
-}
-   
+     justify-content: center;
+     align-items: center;
+     margin-top: 20px;
+ }
+ 
+ .page-info {
+     margin: 0 16px;
+     font-size: 16px;
+ }
+ 
+ .paginator-button {
+     background: none;
+     border: none;
+     cursor: pointer;
+     font-size: 25px;
+     color: $primary-color;
+ }
+ 
+ .paginator-button:disabled {
+     cursor: not-allowed;
+     opacity: 0.5;
+ }

@@ -1,48 +1,44 @@
-import { Component } from '@angular/core';
-import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
-import {JsonPipe} from '@angular/common';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-paginator',
   standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatSlideToggleModule,
-    MatPaginatorModule,
-    JsonPipe,
-  ],
+  imports: [],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss'
 })
 export class PaginatorComponent {
-  length = 50;
-  pageSize = 10;
-  pageIndex = 0;
-  pageSizeOptions = [5, 10, 25];
+  @Input() length: number = 0;
+  @Input() pageSize: number = 10;
+  @Input() pageIndex: number = 0;
 
-  hidePageSize = false;
-  showPageSizeOptions = true;
-  showFirstLastButtons = true;
-  disabled = false;
+  @Output() page: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private pageEvent: PageEvent) {}
-
-  handlePageEvent(e: PageEvent) {
-    this.pageEvent = e;
-    this.length = e.length;
-    this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
+  get totalPages(): number {
+    return Math.ceil(this.length / this.pageSize);
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  goToFirstPage() {
+    this.pageIndex = 0;
+    this.page.emit(this.pageIndex);
+  }
+
+  goToPreviousPage() {
+    if (this.pageIndex > 0) {
+      this.pageIndex--;
+      this.page.emit(this.pageIndex);
     }
+  }
+
+  goToNextPage() {
+    if (this.pageIndex < this.totalPages - 1) {
+      this.pageIndex++;
+      this.page.emit(this.pageIndex);
+    }
+  }
+
+  goToLastPage() {
+    this.pageIndex = this.totalPages - 1;
+    this.page.emit(this.pageIndex);
   }
 }
