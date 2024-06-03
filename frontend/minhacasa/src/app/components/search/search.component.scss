@@ -5,8 +5,9 @@
 }
 
 .search {
-     width: 25%;
-     height: 600px;
+     width: 20%;
+     padding: 2%;
+     height: 1760px;
      border: 2px solid #ccc;
      border-radius: 10px;
      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -21,4 +22,63 @@
      justify-content: flex-start;
      gap: 3.5%;
      flex-wrap: wrap;
+}
+
+select, input {
+     padding: 10px;
+     border-radius: 10px;
+     border: 1px solid #ccc;
+}
+
+.state-city, .price, .iptu-totalArea, .type-quantityRooms,
+.quantityBedrooms-quantityBathrooms, .sellerType-age {
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+}
+
+.state-city select {
+     width: 100%;
+}
+
+.state, .city {
+     display: flex;
+     flex-direction: column;
+     width: 46%;
+}
+
+.neighborhood {
+     margin-top: 20px;
+     display: flex;
+     flex-direction: column; 
+}
+
+.min-price, .max-price,
+.iptu, .totalArea,
+.type, .quantityRooms,
+.quantityBedrooms, .quantityBathrooms,
+.sellerType, .age {
+     display: flex;
+     flex-direction: column;
+     width: 46%;
+     margin-top: 20px;
+}
+
+.type select, .quantityRooms select {
+     width: 100%;   
+}
+
+.characteristics {
+     display: flex;
+     flex-direction: column;
+     padding: 30px 10px 10px 0;
+}
+
+.characteristics input {
+     margin-bottom: 15px;
+     cursor: pointer;
+}
+
+.characteristics label {
+     cursor: pointer;
 }

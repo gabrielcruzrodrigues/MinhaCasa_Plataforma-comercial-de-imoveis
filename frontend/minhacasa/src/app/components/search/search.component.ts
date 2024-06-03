@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { CardComponent } from '../layout/card/card.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImmobileService } from '../../services/immobile.service';
 import { HttpResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { LoadingComponent } from '../layout/loading/loading.component';
+import { CepService } from '../../services/cep.service';
+import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
+import { PaginatorComponent } from '../layout/paginator/paginator.component';
 
 interface cardInterface {
   id: string,
@@ -17,45 +22,60 @@ interface cardInterface {
   sellerId: string
 }
 
+interface city {
+  nome: string;
+}
+
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [NavbarComponent, CardComponent, FormsModule, ReactiveFormsModule],
+  imports: [
+    NavbarComponent, CardComponent, FormsModule, ReactiveFormsModule, CommonModule, LoadingComponent,
+    ModalTextComponent, PaginatorComponent
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent implements OnInit{
+export class SearchComponent implements OnInit {
   form: FormGroup;
   formData = new FormData();
   pageNumber: number = 1;
   pageSize: number = 10;
   cards: cardInterface[] =[];
+  isLoading: boolean = true;
+
+  cities: string[] = [];
+  showModalText: boolean = false;
+  message: string = '';
+  @ViewChild(ModalTextComponent) modalComponent!: ModalTextComponent;
 
   constructor(
     private fb: FormBuilder,
     router: Router,
-    private immobileService: ImmobileService
+    private immobileService: ImmobileService,
+    private cepService: CepService,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
-      pageNumber: [1],
-      pageSize: [10],
-      name: [''],
-      city: [''],
-      neighborhood: [''],
-      state: [''],
+      pageNumber: [1], //
+      pageSize: [12], //
+      name: [''], //
+      city: [''], //
+      neighborhood: [''], //
+      state: [''], //
       garage: [false],
-      quantityBedrooms: [''],
-      quantityRooms: [''],
-      iptu: [''],
-      price: [''],
+      quantityBedrooms: [''], //
+      quantityRooms: [''], //
+      iptu: [''], //
+      price: [''], //
       suite: [false],
-      totalArea: [''],
-      quantityBathrooms: [''],
+      totalArea: [''], //
+      quantityBathrooms: [''], //
       integrity: [''],
-      sellerType: [''],
-      age: [''],
+      sellerType: [''], //
+      age: [''],  //
       category: [''],
-      type: [''],
+      type: [''], //
       garden: [false],
       virtualTour: [false],
       videos: [false],
@@ -108,6 +128,7 @@ export class SearchComponent implements OnInit{
       next: (response: HttpResponse<any>) => {
         this.cards = response.body;
         console.log(this.cards);
+        this.isLoading = false;
       },
       error: (error) => {
         console.log(error);
@@ -177,5 +198,39 @@ export class SearchComponent implements OnInit{
     this.formData.set('furnished', this.form.get('furnished')?.value);
     this.formData.set('seaView', this.form.get('seaView')?.value);
     this.formData.set('gatedCommunity', this.form.get('gatedCommunity')?.value);
+  }
+
+  findCitiesByState(event: Event) {
+    const selectedState = this.form.get('state')?.value;
+    this.cities = [];
+    
+    this.cepService.findCities(selectedState).subscribe({
+      next: (response: HttpResponse<any>) => {
+        console.log(response);
+        if (response.body && Array.isArray(response.body)) {
+          this.cities = response.body.map((city: city) => city.nome)
+            .sort((a, b) => a.localeCompare(b));
+        }
+      },
+      error: (error) => {
+        this.activeModalText("Aconteceu um erro interno, Por favor tente mais tarde.");
+        console.log('Erro ao buscar cidades por UF: ', error);
+      }
+    });
+  }
+
+  activeModalText(text: string):void {
+    this.showModalText = false; //reset
+    setTimeout(() => {
+      this.message = text;
+      this.showModalText = true;
+      this.cdr.detectChanges();
+    });
+  }
+
+  waitForModalClose(): Promise<void> {
+    return new Promise(resolve => {
+      this.modalComponent.onClose.subscribe(() => resolve());
+    })
   }
 }
