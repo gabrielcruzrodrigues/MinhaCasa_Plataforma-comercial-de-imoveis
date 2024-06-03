@@ -28,13 +28,13 @@ public record CreateImmobileDTO(
         @NotNull
         int quantityRooms, //
         @NotNull
-        float IPTU, //
+        Double IPTU, //
         @NotNull
-        float price, //
+        Double price, //
         @NotNull
         boolean suite, //
         @NotNull
-        float totalArea, //
+        Double totalArea, //
         @NotNull
         int quantityBathrooms, //
         @NotNull

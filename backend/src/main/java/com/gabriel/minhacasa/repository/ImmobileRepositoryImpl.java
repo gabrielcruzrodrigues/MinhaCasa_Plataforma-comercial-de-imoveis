@@ -29,252 +29,250 @@ public class ImmobileRepositoryImpl implements ImmobileRepositoryCustomInterface
         Root<Immobile> root = criteriaQuery.from(Immobile.class);
         List<Predicate> predicates = new ArrayList<>();
 
-        if (params.getName().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("name"), params.getName().get()));
+        if (!params.getName().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("name"), params.getName()));
         }
 
-        if (params.getCity().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("city"), params.getCity().get()));
+        if (!params.getCity().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("city"), params.getCity()));
         }
 
-        if (params.getNeighborhood().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("neighborhood"), params.getNeighborhood().get()));
+        if (!params.getNeighborhood().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("neighborhood"), params.getNeighborhood()));
         }
 
-        if (params.getState().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("state"), params.getState().get()));
+        if (!params.getState().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("state"), params.getState()));
         }
 
-        if (params.getGarage().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("garage"), params.getGarage().get()));
+        if (params.getGarage()) {
+            predicates.add(criteriaBuilder.equal(root.get("garage"), params.getGarage()));
         }
 
-        if (params.getQuantityBedrooms().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("quantityBedrooms"), params.getQuantityBedrooms().get()));
+        if (!params.getQuantityBedrooms().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("quantityBedrooms"), params.getQuantityBedrooms()));
         }
 
-        if (params.getQuantityRooms().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("quantityRooms"), params.getQuantityRooms().get()));
+        if (!params.getQuantityRooms().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("quantityRooms"), params.getQuantityRooms()));
         }
 
-        if (params.getIptu().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("iptu"), params.getIptu().get()));
+        if (!params.getIptu().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("IPTU"), params.getIptu()));
         }
 
-        if (params.getPrice().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("price"), params.getPrice().get()));
+        if (!params.getPrice().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("price"), params.getPrice()));
         }
 
-        if (params.getSuite().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("suite"), params.getSuite().get()));
+        if (params.getSuite()) {
+            predicates.add(criteriaBuilder.equal(root.get("suite"), params.getSuite()));
         }
 
-        if (params.getTotalArea().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("totalArea"), params.getTotalArea().get()));
+        if (!params.getTotalArea().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("totalArea"), params.getTotalArea()));
         }
 
-        if (params.getQuantityBathrooms().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("quantityBathrooms"), params.getQuantityBathrooms().get()));
+        if (!params.getQuantityBathrooms().isEmpty()) {
+            predicates.add(criteriaBuilder.equal(root.get("quantityBathrooms"), params.getQuantityBathrooms()));
         }
 
-        if (params.getIntegrity().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("integrity"), params.getIntegrity().get()));
+        if (params.getIntegrity() != null) {
+            predicates.add(criteriaBuilder.equal(root.get("integrity"), params.getIntegrity()));
         }
 
-        if (params.getSellerType().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("sellerType"), params.getSellerType().get()));
+        if (params.getSellerType() != null) {
+            predicates.add(criteriaBuilder.equal(root.get("sellerType"), params.getSellerType()));
         }
 
-        if (params.getAge().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("age"), params.getAge().get()));
+        if (params.getAge() != null) {
+            predicates.add(criteriaBuilder.equal(root.get("age"), params.getAge()));
         }
 
-        if (params.getCategory().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("category"), params.getCategory().get()));
+        if (params.getCategory() != null) {
+            predicates.add(criteriaBuilder.equal(root.get("category"), params.getCategory()));
         }
 
-        if (params.getType().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("type"), params.getType().get()));
+        if (params.getType() != null) {
+            predicates.add(criteriaBuilder.equal(root.get("type"), params.getType()));
         }
 
-        if (params.getGarden().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("garden"), params.getGarden().get()));
+        if (params.getGarden()) {
+            predicates.add(criteriaBuilder.equal(root.get("garden"), params.getGarden()));
         }
 
-        if (params.getVirtualTour().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("virtualTour"), params.getVirtualTour().get()));
+        if (params.getVirtualTour()) {
+            predicates.add(criteriaBuilder.equal(root.get("virtualTour"), params.getVirtualTour()));
         }
 
-        if (params.getVideos().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("videos"), params.getVideos().get()));
+        if (params.getVideos()) {
+            predicates.add(criteriaBuilder.equal(root.get("videos"), params.getVideos()));
         }
 
-        if (params.getBeach().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("beach"), params.getBeach().get()));
+        if (params.getBeach()) {
+            predicates.add(criteriaBuilder.equal(root.get("beach"), params.getBeach()));
         }
 
-        if (params.getDisabledAccess().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("disabledAccess"), params.getDisabledAccess().get()));
+        if (params.getDisabledAccess()) {
+            predicates.add(criteriaBuilder.equal(root.get("disabledAccess"), params.getDisabledAccess()));
         }
 
-        if (params.getPlayground().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("playground"), params.getPlayground().get()));
+        if (params.getPlayground()) {
+            predicates.add(criteriaBuilder.equal(root.get("playground"), params.getPlayground()));
         }
 
-        if (params.getGrill().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("grill"), params.getGrill().get()));
+        if (params.getGrill()) {
+            predicates.add(criteriaBuilder.equal(root.get("grill"), params.getGrill()));
         }
 
-        if (params.getEnergyGenerator().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("energyGenerator"), params.getEnergyGenerator().get()));
+        if (params.getEnergyGenerator()) {
+        predicates.add(criteriaBuilder.equal(root.get("energyGenerator"), params.getEnergyGenerator()));
         }
 
-        if (params.getCloseToTheCenter().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("closeToTheCenter"), params.getCloseToTheCenter().get()));
+        if (params.getCloseToTheCenter()) {
+            predicates.add(criteriaBuilder.equal(root.get("closeToTheCenter"), params.getCloseToTheCenter()));
         }
 
-        if (params.getElevator().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("elevator"), params.getElevator().get()));
+        if (params.getElevator()) {
+            predicates.add(criteriaBuilder.equal(root.get("elevator"), params.getElevator()));
         }
 
-        if (params.getPool().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("pool"), params.getPool().get()));
+        if (params.getPool()) {
+            predicates.add(criteriaBuilder.equal(root.get("pool"), params.getPool()));
         }
 
-        if (params.getFrontDesk().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("frontDesk"), params.getFrontDesk().get()));
+        if (params.getFrontDesk()) {
+            predicates.add(criteriaBuilder.equal(root.get("frontDesk"), params.getFrontDesk()));
         }
 
-        if (params.getMultiSportsCourt().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("multiSportsCourt"), params.getMultiSportsCourt().get()));
+        if (params.getMultiSportsCourt()) {
+            predicates.add(criteriaBuilder.equal(root.get("multiSportsCourt"), params.getMultiSportsCourt()));
         }
 
-        if (params.getGym().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("gym"), params.getGym().get()));
+        if (params.getGym()) {
+            predicates.add(criteriaBuilder.equal(root.get("gym"), params.getGym()));
         }
 
-        if (params.getSteamRoom().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("steamRoom"), params.getSteamRoom().get()));
+        if (params.getSteamRoom()) {
+            predicates.add(criteriaBuilder.equal(root.get("steamRoom"), params.getSteamRoom()));
         }
 
-        if (params.getCableTV().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("cableTV"), params.getCableTV().get()));
+        if (params.getCableTV()) {
+            predicates.add(criteriaBuilder.equal(root.get("cableTV"), params.getCableTV()));
         }
 
-        if (params.getHeating().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("heating"), params.getCableTV().get()));
+        if (params.getHeating()) {
+            predicates.add(criteriaBuilder.equal(root.get("heating"), params.getCableTV()));
         }
 
-        if (params.getCabinetsInTheKitchen().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("cabinetsInTheKitchen"), params.getCabinetsInTheKitchen().get()));
+        if (params.getCabinetsInTheKitchen()) {
+            predicates.add(criteriaBuilder.equal(root.get("cabinetsInTheKitchen"), params.getCabinetsInTheKitchen()));
         }
 
-        if (params.getBathroomInTheRoom().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("bathroomInTheRoom"), params.getBathroomInTheRoom().get()));
+        if (params.getBathroomInTheRoom()) {
+            predicates.add(criteriaBuilder.equal(root.get("bathroomInTheRoom"), params.getBathroomInTheRoom()));
         }
 
-        if (params.getInternet().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("internet"), params.getInternet().get()));
+        if (params.getInternet()) {
+            predicates.add(criteriaBuilder.equal(root.get("internet"), params.getInternet()));
         }
 
-        if (params.getPartyRoom().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("partyRoom"), params.getPartyRoom().get()));
+        if (params.getPartyRoom()) {
+            predicates.add(criteriaBuilder.equal(root.get("partyRoom"), params.getPartyRoom()));
         }
 
-        if (params.getAirConditioning().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("airConditioning"), params.getAirConditioning().get()));
+        if (params.getAirConditioning()) {
+            predicates.add(criteriaBuilder.equal(root.get("airConditioning"), params.getAirConditioning()));
         }
 
-        if (params.getAmericanKitchen().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("americanKitchen"), params.getAmericanKitchen().get()));
+        if (params.getAmericanKitchen()) {
+            predicates.add(criteriaBuilder.equal(root.get("americanKitchen"), params.getAmericanKitchen()));
         }
 
-        if (params.getHydromassage().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("hydromassage"), params.getHydromassage().get()));
+        if (params.getHydromassage()) {
+            predicates.add(criteriaBuilder.equal(root.get("hydromassage"), params.getHydromassage()));
         }
 
-        if (params.getFireplace().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("fireplace"), params.getFireplace().get()));
+        if (params.getFireplace()) {
+            predicates.add(criteriaBuilder.equal(root.get("fireplace"), params.getFireplace()));
         }
 
-        if (params.getPrivatePool().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("privatePool"), params.getPrivatePool().get()));
+        if (params.getPrivatePool()) {
+            predicates.add(criteriaBuilder.equal(root.get("privatePool"), params.getPrivatePool()));
         }
 
-        if (params.getElectronicGate().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("electronicGate"), params.getElectronicGate().get()));
+        if (params.getElectronicGate()) {
+            predicates.add(criteriaBuilder.equal(root.get("electronicGate"), params.getElectronicGate()));
         }
 
-        if (params.getServiceArea().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("serviceArea"), params.getServiceArea().get()));
+        if (params.getServiceArea()) {
+            predicates.add(criteriaBuilder.equal(root.get("serviceArea"), params.getServiceArea()));
         }
 
-        if (params.getPub().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("pub"), params.getPub().get()));
+        if (params.getPub()) {
+            predicates.add(criteriaBuilder.equal(root.get("pub"), params.getPub()));
         }
 
-        if (params.getCloset().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("closet"), params.getCloset().get()));
+        if (params.getCloset()) {
+            predicates.add(criteriaBuilder.equal(root.get("closet"), params.getCloset()));
         }
 
-        if (params.getOffice().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("office"), params.getOffice().get()));
+        if (params.getOffice()) {
+            predicates.add(criteriaBuilder.equal(root.get("office"), params.getOffice()));
         }
 
-        if (params.getYard().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("yard"), params.getYard().get()));
+        if (params.getYard()) {
+            predicates.add(criteriaBuilder.equal(root.get("yard"), params.getYard()));
         }
 
-        if (params.getAlarmSystem().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("alarmSystem"), params.getAlarmSystem().get()));
+        if (params.getAlarmSystem()) {
+            predicates.add(criteriaBuilder.equal(root.get("alarmSystem"), params.getAlarmSystem()));
         }
 
-        if (params.getBalcony().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("balcony"), params.getBalcony().get()));
+        if (params.getBalcony()) {
+            predicates.add(criteriaBuilder.equal(root.get("balcony"), params.getBalcony()));
         }
 
-        if (params.getConcierge24Hour().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("concierge24Hour"), params.getConcierge24Hour().get()));
+        if (params.getConcierge24Hour()) {
+            predicates.add(criteriaBuilder.equal(root.get("concierge24Hour"), params.getConcierge24Hour()));
         }
 
-        if (params.getWalledArea().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("walledArea"), params.getWalledArea().get()));
+        if (params.getWalledArea()) {
+            predicates.add(criteriaBuilder.equal(root.get("walledArea"), params.getWalledArea()));
         }
 
-        if (params.getDogAllowed().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("dogAllowed"), params.getDogAllowed().get()));
+        if (params.getDogAllowed()) {
+            predicates.add(criteriaBuilder.equal(root.get("dogAllowed"), params.getDogAllowed()));
         }
 
-        if (params.getCatAllowed().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("catAllowed"), params.getCatAllowed().get()));
+        if (params.getCatAllowed()) {
+            predicates.add(criteriaBuilder.equal(root.get("catAllowed"), params.getCatAllowed()));
         }
 
-        if (params.getCameras().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("cameras"), params.getCameras().get()));
+        if (params.getCameras()) {
+            predicates.add(criteriaBuilder.equal(root.get("cameras"), params.getCameras()));
         }
 
-        if (params.getFurnished().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("furnished"), params.getFurnished().get()));
+        if (params.getFurnished()) {
+            predicates.add(criteriaBuilder.equal(root.get("furnished"), params.getFurnished()));
         }
 
-        if (params.getSeaView().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("seaView"), params.getSeaView().get()));
+        if (params.getSeaView()) {
+            predicates.add(criteriaBuilder.equal(root.get("seaView"), params.getSeaView()));
         }
 
-        if (params.getGatedCommunity().isPresent()) {
-            predicates.add(criteriaBuilder.equal(root.get("gatedCommunity"), params.getGatedCommunity().get()));
+        if (params.getGatedCommunity()) {
+            predicates.add(criteriaBuilder.equal(root.get("gatedCommunity"), params.getGatedCommunity()));
         }
 
-        int offset = (params.getPageNumber().get() - 1) * params.getPageSize().get();
+        int offset = (params.getPageNumber() - 1) * params.getPageSize();
 
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
 
-        // Create the query from criteriaQuery
         TypedQuery<Immobile> query = entityManager.createQuery(criteriaQuery);
 
-        // Set pagination parameters
         query.setFirstResult(offset);
-        query.setMaxResults(params.getPageSize().get());
+        query.setMaxResults(params.getPageSize());
 
         return query.getResultList();
     }

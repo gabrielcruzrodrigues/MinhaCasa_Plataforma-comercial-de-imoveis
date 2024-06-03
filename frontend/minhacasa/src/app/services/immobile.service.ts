@@ -19,4 +19,9 @@ export class ImmobileService {
     let urlForRequest = this.url + "/details/" + id;
     return this.http.get(urlForRequest, {observe: 'response'});
   }
+
+  search(params: any): Observable<any> {
+    let urlForRequest = this.url + "/search";
+    return this.http.post(urlForRequest, params, {observe: 'response'});
+  }
 }

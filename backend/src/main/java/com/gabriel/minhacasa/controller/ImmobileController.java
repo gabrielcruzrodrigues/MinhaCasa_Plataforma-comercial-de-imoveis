@@ -56,7 +56,7 @@ public class ImmobileController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<List<ImmobileByProfileDTO>> search(@RequestBody SearchParamsDTO params) {
+    public ResponseEntity<List<ImmobileByProfileDTO>> search(@ModelAttribute SearchParamsDTO params) {
         return ResponseEntity.ok().body(this.immobileService.searchParams(params));
     }
 }

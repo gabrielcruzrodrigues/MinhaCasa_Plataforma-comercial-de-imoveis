@@ -6,7 +6,7 @@ public record ImmobileByProfileDTO(
         int quantityBedrooms,
         int quantityBathrooms,
         String imageUrl,
-        float price,
+        Double price,
         String name,
         String description,
         Long sellerId

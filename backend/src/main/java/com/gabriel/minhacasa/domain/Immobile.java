@@ -53,19 +53,19 @@ public class Immobile {
     private int quantityRooms; //
 
     @Column(nullable = false)
-    private float IPTU; //
+    private Double IPTU; //
 
     @Column(nullable = false)
-    private float price; //
+    private Double price; //
 
     @Column(nullable = false)
     private boolean suite; //
 
     @Column(nullable = false)
-    private float usefulArea; //
+    private Double usefulArea; //
 
     @Column(nullable = false)
-    private float totalArea; //
+    private Double totalArea; //
 
     @Column(nullable = false)
     private int quantityBathrooms; //
