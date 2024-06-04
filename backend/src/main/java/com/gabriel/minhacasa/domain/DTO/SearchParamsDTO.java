@@ -19,7 +19,8 @@ public class SearchParamsDTO {
     String quantityBedrooms;
     String quantityRooms;
     String iptu;
-    String price;
+    String minPrice;
+    String maxPrice;
     Boolean suite;
     String totalArea;
     String quantityBathrooms;

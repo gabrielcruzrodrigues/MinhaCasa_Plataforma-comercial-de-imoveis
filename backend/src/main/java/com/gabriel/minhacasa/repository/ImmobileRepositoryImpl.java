@@ -61,8 +61,12 @@ public class ImmobileRepositoryImpl implements ImmobileRepositoryCustomInterface
             predicates.add(criteriaBuilder.equal(root.get("IPTU"), params.getIptu()));
         }
 
-        if (!params.getPrice().isEmpty()) {
-            predicates.add(criteriaBuilder.equal(root.get("price"), params.getPrice()));
+        if (!params.getMinPrice().isEmpty()) {
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), params.getMinPrice()));
+        }
+
+        if (!params.getMaxPrice().isEmpty()) {
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("price"), params.getMaxPrice()));
         }
 
         if (params.getSuite()) {

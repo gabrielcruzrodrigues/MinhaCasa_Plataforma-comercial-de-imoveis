@@ -67,7 +67,8 @@ export class SearchComponent implements OnInit {
       quantityBedrooms: [''], //
       quantityRooms: [''], //
       iptu: [''], //
-      price: [''], //
+      minPrice: [''], //
+      maxPrice: [''], //
       suite: [false],
       totalArea: [''], //
       quantityBathrooms: [''], //
@@ -221,7 +222,8 @@ export class SearchComponent implements OnInit {
       quantityBedrooms: '',
       quantityRooms: '',
       iptu: '',
-      price: '',
+      minPrice: '',
+      maxPrice: '',
       suite: false,
       totalArea: '',
       quantityBathrooms: '',
