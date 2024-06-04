@@ -38,7 +38,7 @@
                               <option value="TO">Tocantins</option>
                          </select>
                     </div>
-                    <div class="city">
+                    <div class="city" (click)="verifyIfExistsState()">
                          <label>Cidade:</label>
                          <select formControlName="city">
                               <option value="" disabled selected>Cidade</option>

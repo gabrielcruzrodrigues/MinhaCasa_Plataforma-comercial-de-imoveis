@@ -197,6 +197,13 @@ export class SearchComponent implements OnInit {
     })
   }
 
+  verifyIfExistsState():void {
+    // alert('oi')
+    if (this.form.get('state')?.value === '') {
+      this.activeModalText("Selecione um estado para escolher uma cidade!");
+    }
+  }
+
   clearForm():void {
     this.setInitialFormValues();
     this.submitSearch();
