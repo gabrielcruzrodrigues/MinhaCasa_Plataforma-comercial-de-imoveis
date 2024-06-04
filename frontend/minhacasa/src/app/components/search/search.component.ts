@@ -136,6 +136,22 @@ export class SearchComponent implements OnInit {
     })
   }
 
+  submitSearch(): void {
+    this.isLoading = true;
+    this.cards = [];
+    this.populateFormData();
+    this.immobileService.search(this.formData).subscribe({
+      next: (response: HttpResponse<any>) => {
+        this.cards = response.body;
+        console.log(this.cards);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
   populateFormData(): void {
     this.formData.set('pageNumber', this.form.get('pageNumber')?.value);
     this.formData.set('pageSize', this.form.get('pageSize')?.value);

@@ -2,7 +2,7 @@
 
 <section class="main-section">
      <div class="search">
-          <form [formGroup]="form">
+          <form [formGroup]="form" (change)="submitSearch()">
                <div class="state-city">
                     <div class="state">
                          <label>Estado:</label>
