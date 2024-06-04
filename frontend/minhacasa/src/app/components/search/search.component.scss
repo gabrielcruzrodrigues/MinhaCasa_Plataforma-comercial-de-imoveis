@@ -1,3 +1,5 @@
+@import '../../scss/color-variables.scss';
+
 .main-section {
      display: flex;
      width: 94%;
@@ -7,7 +9,7 @@
 .search {
      width: 20%;
      padding: 2%;
-     height: 1760px;
+     height: 1800px;
      border: 2px solid #ccc;
      border-radius: 10px;
      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -93,4 +95,24 @@ select, input {
 
 .characteristics label {
      cursor: pointer;
+}
+
+.clear-form {
+     width: 100%;
+     padding: 10px;
+     background-color: $primary-color;
+     color: white;
+     cursor: pointer;
+     margin-bottom: 20px;
+     border-radius: 10px;
+     border: 1px solid #ccc;
+     font-size: 16px;
+}
+
+.clear-form:hover {
+     background-color: $secundary-color;
+}
+
+.clear-form:active {
+     background-color: $third-color;
 }
