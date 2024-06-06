@@ -7,10 +7,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 import { CurrencyPipe } from '@angular/common';
 import { PageEvent } from '@angular/material/paginator';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), provideClientHydration(), provideAnimationsAsync(), provideHttpClient(),
-    CurrencyPipe, PageEvent
+    CurrencyPipe, PageEvent, provideEnvironmentNgxMask()
   ]
 };

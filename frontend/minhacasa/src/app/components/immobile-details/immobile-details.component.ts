@@ -207,11 +207,9 @@ export class ImmobileDetailsComponent implements OnInit{
     this.immobileService.getImmobileWithCompleteImagesPath(this.immobileId).subscribe({
       next: (response: HttpResponse<any>) => {
         this.populateFields(response.body);
-        console.log(this.sellerId)
 
         this.userService.findByIdForProfile(this.sellerId).subscribe({
           next: (response: HttpResponse<any>) => {
-            console.log(response)
             this.sellerImage = response.body.imageProfileUrl;
             this.sellerName = response.body.name;
             this.sellerWhatsapp = response.body.whatsapp;
@@ -241,10 +239,26 @@ export class ImmobileDetailsComponent implements OnInit{
     this.garage = this.verifyBoolean(body.garage);
     this.suite = this.verifyBoolean(body.suite);
     this.type = body.type;
-    this.totalArea = body.totalArea;
-    this.usefulArea = body.usefulArea;
-    this.IPTU = body.iptu;
     this.garden = this.verifyBoolean(body.garden);
+
+    if (body.totalArea == null) {
+      this.totalArea = 'não especificado'
+    } else {
+      this.totalArea = `${body.totalArea}m²`;
+    }
+
+    if (body.usefulArea == null) {
+      this.usefulArea = 'não especificado'
+    } else {
+      this.usefulArea = `${body.usefulArea}m²`;
+    }
+
+    if (body.iptu == null) {
+      this.IPTU = 'não especificado'
+    } else {
+      this.IPTU = `R$ ${body.iptu}`;
+    }
+    
 
     let category = body.category;
 

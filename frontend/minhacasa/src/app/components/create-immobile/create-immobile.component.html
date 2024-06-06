@@ -72,7 +72,7 @@
                     <div class="type-price-sellertype">
                          <div class="price">
                               <label>Preço:</label>
-                              <input formControlName="preço" type="number" name="price" placeholder="Digite aqui o valor do imóvel!">
+                              <input formControlName="preço" type="text" name="price" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="R$ 150.000">
                          </div>
                          <div class="type">
                               <label>O que você quer fazer?</label>
@@ -169,7 +169,7 @@
                          </div>
                          <div class="iptu">
                               <label>Valor do IPTU</label>
-                              <input formControlName="valor_do_IPTU" type="number" placeholder="Digite aqui o valor do IPTU">
+                              <input formControlName="valor_do_IPTU" type="text" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="Digite aqui o valor do IPTU">
                          </div>
                          <div class="suite">
                               <label>Seu imóvel possui suite?</label>

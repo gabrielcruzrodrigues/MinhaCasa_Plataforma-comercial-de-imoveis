@@ -96,11 +96,11 @@
                <div class="price">
                     <div class="min-price">
                          <label>preço minimo</label>
-                         <input type="number" formControlName="minPrice" placeholder="R$ 100,00" >
+                         <input type="text" formControlName="minPrice" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="R$ 100,00">
                          </div>
                     <div class="max-price">
                          <label>preço máximo</label>
-                         <input type="number" formControlName="maxPrice" placeholder="R$ 800,00" >
+                         <input type="text" formControlName="maxPrice" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="R$ 800,00">
                     </div>
                </div>
                <div class="iptu-totalArea">

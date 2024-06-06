@@ -4,6 +4,7 @@ import com.gabriel.minhacasa.domain.enums.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Getter
@@ -19,8 +20,8 @@ public class SearchParamsDTO {
     String quantityBedrooms;
     String quantityRooms;
     String iptu;
-    String minPrice;
-    String maxPrice;
+    BigDecimal minPrice;
+    BigDecimal maxPrice;
     Boolean suite;
     String totalArea;
     String quantityBathrooms;

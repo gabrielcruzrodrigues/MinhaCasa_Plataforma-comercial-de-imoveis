@@ -12,6 +12,7 @@ import { ImmobileService } from '../../services/immobile.service';
 import { UserService } from '../../services/user.service';
 import { CarroselComponent } from '../layout/carrosel/carrosel.component';
 import { LoadingComponent } from '../layout/loading/loading.component';
+import { NgxMaskDirective } from 'ngx-mask';
 
 interface cepInterface {
   nome: string
@@ -22,7 +23,7 @@ interface cepInterface {
   standalone: true,
   imports: [
     NavbarComponent, FooterComponent, ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule,
-    ModalTextComponent, CarroselComponent, LoadingComponent
+    ModalTextComponent, CarroselComponent, LoadingComponent, NgxMaskDirective
   ],
   templateUrl: './create-immobile.component.html',
   styleUrl: './create-immobile.component.scss'
@@ -71,11 +72,11 @@ export class CreateImmobileComponent implements OnInit{
       quantidade_de_banheiros: ['', Validators.required],
       integridade_do_imóvel: ['', Validators.required],
       quantidade_de_quartos_do_imóvel: ['', Validators.required],
-      valor_do_IPTU: [0],
+      valor_do_IPTU: [''],
       seu_imóvel_possui_suite: ['', Validators.required],
       qual_a_idade_do_seu_imóvel: ['', Validators.required],
       tipo_do_imóvel: ['', Validators.required],
-      qual_a_area_total: [0],
+      qual_a_area_total: [''],
       possui_jardim: ['', Validators.required],
       gatedCommunity: [false],
       videos: [false],
@@ -250,7 +251,6 @@ export class CreateImmobileComponent implements OnInit{
     this.formData.set('state', this.form.get('estado')?.value);
     this.formData.set('city', this.form.get('cidade')?.value);
     this.formData.set('neighborhood', this.form.get('bairro')?.value);
-    this.formData.set('price', this.form.get('preço')?.value);
     this.formData.set('gender', this.form.get('gênero')?.value);
     this.formData.set('category', this.form.get('o_que_você_quer_fazer')?.value);
     this.formData.set('sellerType', this.form.get('que_tipo_de_vendedor_você_é')?.value);
@@ -260,15 +260,17 @@ export class CreateImmobileComponent implements OnInit{
     this.formData.set('quantityBathrooms', this.form.get('quantidade_de_banheiros')?.value);
     this.formData.set('integrity', this.form.get('integridade_do_imóvel')?.value);
     this.formData.set('quantityBedrooms', this.form.get('quantidade_de_quartos_do_imóvel')?.value);
-    this.formData.set('IPTU', this.form.get('valor_do_IPTU')?.value);
     this.formData.set('suite', this.form.get('seu_imóvel_possui_suite')?.value);
     this.formData.set('age', this.form.get('qual_a_idade_do_seu_imóvel')?.value);
     this.formData.set('type', this.form.get('tipo_do_imóvel')?.value);
     this.formData.set('totalArea', this.form.get('qual_a_area_total')?.value);
     this.formData.set('garden', this.form.get('possui_jardim')?.value);
+    this.formData.set('IPTU', this.form.get('valor_do_IPTU')?.value);
+    this.formData.set('price', this.form.get('preço')?.value);
     
     this.images.forEach((image, index) => {
       this.formData.append(`files`, image);
     });
+    
   }
 }

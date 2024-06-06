@@ -4,6 +4,7 @@ import com.gabriel.minhacasa.domain.enums.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record UpdateImmobileDTO(
@@ -26,9 +27,9 @@ public record UpdateImmobileDTO(
         @NotNull
         int quantityRooms,
         @NotNull
-        Double IPTU,
+        BigDecimal IPTU,
         @NotNull
-        Double price,
+        BigDecimal price,
         @NotNull
         boolean suite,
         @NotNull

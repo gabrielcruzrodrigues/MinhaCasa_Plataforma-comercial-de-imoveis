@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -52,19 +53,19 @@ public class Immobile {
     @Column(nullable = false)
     private int quantityRooms; //
 
-    @Column(nullable = false)
-    private Double IPTU; //
+    @Column
+    private BigDecimal IPTU; //
 
     @Column(nullable = false)
-    private Double price; //
+    private BigDecimal price; //
 
     @Column(nullable = false)
     private boolean suite; //
 
-    @Column(nullable = false)
+    @Column
     private Double usefulArea; //
 
-    @Column(nullable = false)
+    @Column
     private Double totalArea; //
 
     @Column(nullable = false)

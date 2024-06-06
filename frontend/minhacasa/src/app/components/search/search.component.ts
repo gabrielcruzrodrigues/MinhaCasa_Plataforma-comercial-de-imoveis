@@ -10,6 +10,7 @@ import { LoadingComponent } from '../layout/loading/loading.component';
 import { CepService } from '../../services/cep.service';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { PaginatorComponent } from '../layout/paginator/paginator.component';
+import { NgxMaskDirective } from 'ngx-mask';
 
 interface cardInterface {
   id: string,
@@ -31,7 +32,7 @@ interface city {
   standalone: true,
   imports: [
     NavbarComponent, CardComponent, FormsModule, ReactiveFormsModule, CommonModule, LoadingComponent,
-    ModalTextComponent, PaginatorComponent
+    ModalTextComponent, PaginatorComponent, NgxMaskDirective
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
@@ -157,11 +158,12 @@ export class SearchComponent implements OnInit {
   populateFormData(): void {
     const formValues = this.form.value;
 
-  Object.keys(formValues).forEach(key => {
+    Object.keys(formValues).forEach(key => {
       if (formValues[key] !== null && formValues[key] !== undefined) {
         this.formData.set(key, formValues[key]);
       }
     });
+
   }
 
   findCitiesByState(event: Event) {

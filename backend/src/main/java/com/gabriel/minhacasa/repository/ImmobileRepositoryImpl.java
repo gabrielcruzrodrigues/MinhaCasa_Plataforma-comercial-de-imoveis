@@ -10,6 +10,8 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,12 +63,14 @@ public class ImmobileRepositoryImpl implements ImmobileRepositoryCustomInterface
             predicates.add(criteriaBuilder.equal(root.get("IPTU"), params.getIptu()));
         }
 
-        if (!params.getMinPrice().isEmpty()) {
-            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), params.getMinPrice()));
+        if (params.getMinPrice() != null) {
+            BigDecimal minPrice = params.getMinPrice().setScale(2, RoundingMode.HALF_UP);
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), minPrice));
         }
 
-        if (!params.getMaxPrice().isEmpty()) {
-            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("price"), params.getMaxPrice()));
+        if (params.getMaxPrice() != null) {
+            BigDecimal maxPrice = params.getMaxPrice().setScale(2, RoundingMode.HALF_UP);
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("price"), maxPrice));
         }
 
         if (params.getSuite()) {

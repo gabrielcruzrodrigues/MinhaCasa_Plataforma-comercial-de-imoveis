@@ -55,6 +55,7 @@ public class ImmobileService {
                     .price(immobileData.price())
                     .suite(immobileData.suite())
                     .totalArea(immobileData.totalArea())
+                    .usefulArea(immobileData.totalArea())
                     .quantityBathrooms(immobileData.quantityBathrooms())
                     .integrity(immobileData.integrity())
                     .sellerType(immobileData.sellerType())

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public record CreateImmobileDTO(
@@ -27,13 +28,12 @@ public record CreateImmobileDTO(
         int quantityBedrooms, //
         @NotNull
         int quantityRooms, //
+
+        BigDecimal IPTU, //
         @NotNull
-        Double IPTU, //
-        @NotNull
-        Double price, //
+        BigDecimal price, //
         @NotNull
         boolean suite, //
-        @NotNull
         Double totalArea, //
         @NotNull
         int quantityBathrooms, //
