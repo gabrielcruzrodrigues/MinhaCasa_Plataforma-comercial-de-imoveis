@@ -18,7 +18,7 @@
      
                <section class="basic-informations">
                     <label class="title-label">Título do imóvel:</label>
-                    <input formControlName="titulo_do_imóvel" class="title-input" type="text" placeholder="Ex: Kitnet para alugar no centro">
+                    <input formControlName="titulo_do_imóvel" class="title-input" type="text" placeholder="Ex: Kitnet para alugar no centro" maxlength="100" (change)="verifyLength($event, 'nome', 100)">
                     
                     <label class="address-label">Endereço:</label>
                     <input formControlName="endereço" type="text" name="address" placeholder="Endereço">

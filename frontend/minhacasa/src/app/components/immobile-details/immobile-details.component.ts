@@ -352,10 +352,10 @@ export class ImmobileDetailsComponent implements OnInit{
           this.type = "Galpões";
           break;
       case "DEPOSITS":
-          this.type = "Depósitos";
+          this.type = "Depósito";
           break;
       case "OFFICES":
-          this.type = "Escritórios";
+          this.type = "Escritório";
           break;
       case "PARKING":
           this.type = "Estacionamento";

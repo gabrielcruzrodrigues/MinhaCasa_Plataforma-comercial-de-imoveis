@@ -58,15 +58,15 @@ export class CreateImmobileComponent implements OnInit{
   {
     this.form = this.fb.group({
       imagens: [null, Validators.required],
-      titulo_do_imóvel: ['', Validators.required],
-      endereço: ['', Validators.required],
-      estado: ['', Validators.required],
-      cidade: ['', Validators.required],
-      bairro: ['', Validators.required],
+      titulo_do_imóvel: ['', Validators.required, Validators.maxLength(100)],
+      endereço: ['', Validators.required, Validators.maxLength(50)],
+      estado: ['', Validators.required, Validators.maxLength(50)],
+      cidade: ['', Validators.required, Validators.maxLength(50)],
+      bairro: ['', Validators.required, Validators.maxLength(50)],
       preço: ['', Validators.required],
       o_que_você_quer_fazer: ['', Validators.required],
       que_tipo_de_vendedor_você_é: ['', Validators.required],
-      descrição: ['', Validators.required],
+      descrição: ['', Validators.required, Validators.maxLength(500)],
       seu_imóvel_possui_garagem: ['', Validators.required],
       quantidade_de_comodos: ['', Validators.required],
       quantidade_de_banheiros: ['', Validators.required],
@@ -126,6 +126,10 @@ export class CreateImmobileComponent implements OnInit{
     if (id) {
       this.userId = id;
     }
+
+    this.form.get('titulo_do_imóvel')?.valueChanges.subscribe(value => {
+      this.verifyLength(value.length, 'nome do imóvel', 100);
+    })
   }
 
   submit():void {
@@ -251,7 +255,6 @@ export class CreateImmobileComponent implements OnInit{
     this.formData.set('state', this.form.get('estado')?.value);
     this.formData.set('city', this.form.get('cidade')?.value);
     this.formData.set('neighborhood', this.form.get('bairro')?.value);
-    this.formData.set('gender', this.form.get('gênero')?.value);
     this.formData.set('category', this.form.get('o_que_você_quer_fazer')?.value);
     this.formData.set('sellerType', this.form.get('que_tipo_de_vendedor_você_é')?.value);
     this.formData.set('description', this.form.get('descrição')?.value);
@@ -271,6 +274,24 @@ export class CreateImmobileComponent implements OnInit{
     this.images.forEach((image, index) => {
       this.formData.append(`files`, image);
     });
-    
+  }
+
+  verifyLength(lengthField: number, field: string, quantityVerify: number): void {
+
+    if (quantityVerify === 50) {
+      if (lengthField >= 50) {
+        this.activeModalText(`O campo ${field} não pode ter mais de 50 caracteres!`);
+      }
+    }
+    if (quantityVerify === 100) {
+      if (lengthField >= 100) {
+        this.activeModalText(`O campo ${field} não pode ter mais de 100 caracteres!`);
+      }
+    }
+    if (quantityVerify === 500) {
+      if (lengthField >= 500) {
+        this.activeModalText(`O campo ${field} não pode ter mais de 500 caracteres!`);
+      }
+    }
   }
 }
