@@ -34,6 +34,7 @@ public record CreateImmobileDTO(
         BigDecimal price, //
         @NotNull
         boolean suite, //
+
         Double totalArea, //
         @NotNull
         int quantityBathrooms, //

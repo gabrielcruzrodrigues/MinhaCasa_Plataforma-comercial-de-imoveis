@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { CepService } from '../../services/cep.service';
 import { LoadingComponent } from '../layout/loading/loading.component';
+import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
 
 interface cepInterface {
   nome: string
@@ -48,17 +49,17 @@ export class RegisterpageComponent {
     private cepService: CepService
   ) {
     this.form = this.fb.group({
-      imagem_de_perfil: [null, Validators.required],
-      nome: ['', Validators.required],
+      image: [null, Validators.required],
+      name: ['', Validators.required],
       email: ['', Validators.required],
-      data_de_nascimento: ['', Validators.required],
-      estado: ['', Validators.required],
-      telefone: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      state: ['', Validators.required],
+      phone: ['', Validators.required],
       whatsapp: ['', Validators.required],
-      cidade: ['', Validators.required],
-      gênero: ['', Validators.required],
-      senha: ['', Validators.required],
-      verificação_de_senha: ['', Validators.required]
+      city: ['', Validators.required],
+      gender: ['', Validators.required],
+      password: ['', Validators.required],
+      passwordVerify: ['', Validators.required]
     });
   }
 
@@ -90,7 +91,7 @@ export class RegisterpageComponent {
     if (invalidFields[0]) {
       this.showModal = false;
       setTimeout(() => {
-        this.field = this.field = invalidFields[0];
+        this.field = ConverterFieldName.verify(invalidFields[0]);
         this.showModal = true;
         this.cdr.detectChanges();
       });
@@ -115,20 +116,20 @@ export class RegisterpageComponent {
   }
 
   populateFormData():void {
-    this.formData.set('name', this.form.get('nome')?.value);
+    this.formData.set('name', this.form.get('name')?.value);
     this.formData.set('email', this.form.get('email')?.value);
-    this.formData.set('state', this.form.get('estado')?.value);
-    this.formData.set('phone', this.form.get('telefone')?.value);
+    this.formData.set('state', this.form.get('state')?.value);
+    this.formData.set('phone', this.form.get('phone')?.value);
     this.formData.set('whatsapp', this.form.get('whatsapp')?.value);
-    this.formData.set('dateOfBirth', this.form.get('data_de_nascimento')?.value);
-    this.formData.set('city', this.form.get('cidade')?.value);
-    this.formData.set('gender', this.form.get('gênero')?.value);
-    this.formData.set('password', this.form.get('senha')?.value);
+    this.formData.set('dateOfBirth', this.form.get('dateOfBirth')?.value);
+    this.formData.set('city', this.form.get('city')?.value);
+    this.formData.set('gender', this.form.get('gender')?.value);
+    this.formData.set('password', this.form.get('password')?.value);
   }
 
   verifyPassword(): boolean {
-    const firstPassword = this.form.get('verificação_de_senha')?.value;
-    const password = this.form.get('senha')?.value;
+    const firstPassword = this.form.get('passwordVerify')?.value;
+    const password = this.form.get('password')?.value;
 
     if (firstPassword != password) {
       this.activeModalText('As senhas não são iguais!');
@@ -211,7 +212,7 @@ export class RegisterpageComponent {
   }
 
   findCitiesByState(event: Event) {
-    const selectedState = this.form.get('estado')?.value;
+    const selectedState = this.form.get('state')?.value;
     this.cities = [];
     
     this.cepService.findCities(selectedState).subscribe({
@@ -232,7 +233,7 @@ export class RegisterpageComponent {
   }
 
   searchCity(event: Event) {
-    if (!this.form.get('estado')?.valid) {
+    if (!this.form.get('state')?.valid) {
       this.activeModalText("Selecione o seu estado para continuar!");
       this.form.patchValue({
         cidade: ''
@@ -241,7 +242,7 @@ export class RegisterpageComponent {
   }
 
   verifyIfPasswordNotNull(): void {
-    if (!this.form.get('senha')?.valid) {
+    if (!this.form.get('password')?.valid) {
       this.activeModalText("Crie uma senha antes de verificar!");
       this.form.patchValue({
         verificação_de_senha: ''

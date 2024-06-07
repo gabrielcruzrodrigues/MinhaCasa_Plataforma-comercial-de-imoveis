@@ -1,16 +1,24 @@
-class ConverterFieldName {
+export class ConverterFieldName {
      static fields: string[] = [
-          'immobileTitle', 'address', 'state', 'city', 'neighborhood', 'price', 
+          'image', 'name', 'dateOfBirth', 'phone','city', 'gender', 'password', 'passwordVerify', 'files','immobileTitle', 'address', 'state', 'city', 'neighborhood', 'price', 
           'category', 'sellerType', 'description', 'garage', 'numberOfRooms', 
           'numberOfBathrooms', 'propertyCondition', 'numberOfBedrooms', 'iptuValue', 
           'hasSuite', 'propertyAge', 'propertyType', 'totalArea', 'hasGarden'
      ];
 
      static fieldMap: { [key: string]: string } = {
+          'image': 'imagem de perfil',
+          'name': 'nome',
+          'dateOfBirth': 'Data de aniversário',
+          'phone': 'telefone',
+          'city': 'cidade',
+          'gender': 'gênero',
+          'password': 'senha',
+          'passwordVerify': 'verificação de senha',
+          'files': 'images',
           'immobileTitle': 'titulo do imóvel',
           'address': 'endereço',
           'state': 'estado',
-          'city': 'cidade',
           'neighborhood': 'bairro',
           'price': 'preço',
           'category': 'o que você quer fazer',
@@ -29,7 +37,8 @@ class ConverterFieldName {
           'hasGarden': 'possui jardim'
      }
 
-     static veirify(fieldName: string): string {
+     static verify(fieldName: string): string {
+          console.log(fieldName)
           if (this.fields.includes(fieldName)) {
                return this.converter(fieldName);
           }

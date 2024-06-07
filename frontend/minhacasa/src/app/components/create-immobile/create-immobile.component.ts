@@ -13,6 +13,7 @@ import { UserService } from '../../services/user.service';
 import { CarroselComponent } from '../layout/carrosel/carrosel.component';
 import { LoadingComponent } from '../layout/loading/loading.component';
 import { NgxMaskDirective } from 'ngx-mask';
+import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
 
 interface cepInterface {
   nome: string
@@ -57,27 +58,27 @@ export class CreateImmobileComponent implements OnInit{
   ) 
   {
     this.form = this.fb.group({
-      imagens: [null, Validators.required],
-      titulo_do_imóvel: ['', Validators.required, Validators.maxLength(100)],
-      endereço: ['', Validators.required, Validators.maxLength(50)],
-      estado: ['', Validators.required, Validators.maxLength(50)],
-      cidade: ['', Validators.required, Validators.maxLength(50)],
-      bairro: ['', Validators.required, Validators.maxLength(50)],
-      preço: ['', Validators.required],
-      o_que_você_quer_fazer: ['', Validators.required],
-      que_tipo_de_vendedor_você_é: ['', Validators.required],
-      descrição: ['', Validators.required, Validators.maxLength(500)],
-      seu_imóvel_possui_garagem: ['', Validators.required],
-      quantidade_de_comodos: ['', Validators.required],
-      quantidade_de_banheiros: ['', Validators.required],
-      integridade_do_imóvel: ['', Validators.required],
-      quantidade_de_quartos_do_imóvel: ['', Validators.required],
-      valor_do_IPTU: [''],
-      seu_imóvel_possui_suite: ['', Validators.required],
-      qual_a_idade_do_seu_imóvel: ['', Validators.required],
-      tipo_do_imóvel: ['', Validators.required],
-      qual_a_area_total: [''],
-      possui_jardim: ['', Validators.required],
+      files: [null, Validators.required],
+      immobileTitle: ['', Validators.required],
+      address: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      neighborhood: ['', Validators.required],
+      price: ['', Validators.required],
+      category: ['', Validators.required],
+      sellerType: ['', Validators.required],
+      description: ['', Validators.required],
+      garage: ['', Validators.required],
+      quantityRooms: ['', Validators.required],
+      quantityBathrooms: ['', Validators.required],
+      integrity: ['', Validators.required],
+      quantityBedrooms: ['', Validators.required],
+      IPTU: [''],
+      suite: ['', Validators.required],
+      age: ['', Validators.required],
+      type: ['', Validators.required],
+      totalArea: [''],
+      garden: ['', Validators.required],
       gatedCommunity: [false],
       videos: [false],
       beach: [false],
@@ -159,7 +160,7 @@ export class CreateImmobileComponent implements OnInit{
     if (invalidFields[0]) {
       this.showModal = false;
       setTimeout(() => {
-        this.field = this.field = invalidFields[0];
+        this.field = ConverterFieldName.verify(invalidFields[0]);
         this.showModal = true;
         this.cdr.detectChanges();
       });
@@ -189,7 +190,7 @@ export class CreateImmobileComponent implements OnInit{
   }
 
   findCitiesByState(event: Event) {
-    const selectedState = this.form.get('estado')?.value;
+    const selectedState = this.form.get('state')?.value;
     this.cities = [];
     
     this.cepService.findCities(selectedState).subscribe({
@@ -210,7 +211,7 @@ export class CreateImmobileComponent implements OnInit{
   }
 
   searchCity(event: Event) {
-    if (!this.form.get('estado')?.valid) {
+    if (!this.form.get('state')?.valid) {
       this.activeModalText("Selecione o seu estado para continuar!");
       this.form.patchValue({
         cidade: ''
@@ -250,26 +251,26 @@ export class CreateImmobileComponent implements OnInit{
    });
 
     this.formData.set('studentId', this.userId);
-    this.formData.set('name', this.form.get('titulo_do_imóvel')?.value);
-    this.formData.set('address', this.form.get('endereço')?.value);
-    this.formData.set('state', this.form.get('estado')?.value);
-    this.formData.set('city', this.form.get('cidade')?.value);
-    this.formData.set('neighborhood', this.form.get('bairro')?.value);
-    this.formData.set('category', this.form.get('o_que_você_quer_fazer')?.value);
-    this.formData.set('sellerType', this.form.get('que_tipo_de_vendedor_você_é')?.value);
-    this.formData.set('description', this.form.get('descrição')?.value);
-    this.formData.set('garage', this.form.get('seu_imóvel_possui_garagem')?.value);
-    this.formData.set('quantityRooms', this.form.get('quantidade_de_comodos')?.value);
-    this.formData.set('quantityBathrooms', this.form.get('quantidade_de_banheiros')?.value);
-    this.formData.set('integrity', this.form.get('integridade_do_imóvel')?.value);
-    this.formData.set('quantityBedrooms', this.form.get('quantidade_de_quartos_do_imóvel')?.value);
-    this.formData.set('suite', this.form.get('seu_imóvel_possui_suite')?.value);
-    this.formData.set('age', this.form.get('qual_a_idade_do_seu_imóvel')?.value);
-    this.formData.set('type', this.form.get('tipo_do_imóvel')?.value);
-    this.formData.set('totalArea', this.form.get('qual_a_area_total')?.value);
-    this.formData.set('garden', this.form.get('possui_jardim')?.value);
-    this.formData.set('IPTU', this.form.get('valor_do_IPTU')?.value);
-    this.formData.set('price', this.form.get('preço')?.value);
+    this.formData.set('name', this.form.get('name')?.value);
+    this.formData.set('address', this.form.get('address')?.value);
+    this.formData.set('state', this.form.get('state')?.value);
+    this.formData.set('city', this.form.get('city')?.value);
+    this.formData.set('neighborhood', this.form.get('neighborhood')?.value);
+    this.formData.set('category', this.form.get('category')?.value);
+    this.formData.set('sellerType', this.form.get('sellerType')?.value);
+    this.formData.set('description', this.form.get('description')?.value);
+    this.formData.set('garage', this.form.get('garage')?.value);
+    this.formData.set('quantityRooms', this.form.get('quantityRooms')?.value);
+    this.formData.set('quantityBathrooms', this.form.get('quantityBathrooms')?.value);
+    this.formData.set('integrity', this.form.get('integrity')?.value);
+    this.formData.set('quantityBedrooms', this.form.get('quantityBedrooms')?.value);
+    this.formData.set('suite', this.form.get('suite')?.value);
+    this.formData.set('age', this.form.get('age')?.value);
+    this.formData.set('type', this.form.get('type')?.value);
+    this.formData.set('totalArea', this.form.get('totalArea')?.value);
+    this.formData.set('garden', this.form.get('garden')?.value);
+    this.formData.set('IPTU', this.form.get('IPTU')?.value);
+    this.formData.set('price', this.form.get('price')?.value);
     
     this.images.forEach((image, index) => {
       this.formData.append(`files`, image);
