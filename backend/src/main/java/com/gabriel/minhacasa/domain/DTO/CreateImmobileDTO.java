@@ -12,45 +12,42 @@ public record CreateImmobileDTO(
         @NotNull
         Long studentId,
         @NotBlank
-        String name, //
-        String description, //
+        String name,
+        String description,
         @NotBlank
-        String address, //
+        String address,
         @NotBlank
-        String city, //
+        String city,
         @NotBlank
-        String neighborhood, //
+        String neighborhood,
         @NotBlank
-        String state, //
+        String state,
         @NotNull
-        boolean garage, //
+        boolean garage,
         @NotNull
-        int quantityBedrooms, //
+        int quantityBedrooms,
         @NotNull
-        int quantityRooms, //
-
-        BigDecimal IPTU, //
+        int quantityRooms,
+        BigDecimal IPTU,
         @NotNull
-        BigDecimal price, //
+        BigDecimal price,
         @NotNull
-        boolean suite, //
-
-        Double totalArea, //
+        boolean suite,
+        Double totalArea,
         @NotNull
-        int quantityBathrooms, //
+        int quantityBathrooms,
         @NotNull
-        IntegrityEnum integrity, //
+        IntegrityEnum integrity,
         @NotNull
-        SellerTypeEnum sellerType, //
+        SellerTypeEnum sellerType,
         @NotNull
-        AgeEnum age, //
+        AgeEnum age,
         @NotNull
-        CategoryEnum category, //
+        CategoryEnum category,
         @NotNull
-        TypeEnum type, //
+        TypeEnum type,
         @NotNull
-        boolean garden, //
-
+        boolean garden,
         @NotNull
         boolean videos,
         @NotNull
