@@ -128,9 +128,9 @@ export class CreateImmobileComponent implements OnInit{
       this.userId = id;
     }
 
-    this.form.get('titulo_do_imóvel')?.valueChanges.subscribe(value => {
-      this.verifyLength(value.length, 'nome do imóvel', 100);
-    })
+    // this.form.get('titulo_do_imóvel')?.valueChanges.subscribe(value => {
+    //   this.verifyLength(value.length, 'nome do imóvel', 100);
+    // })
   }
 
   submit():void {
@@ -184,8 +184,20 @@ export class CreateImmobileComponent implements OnInit{
 
   onFileChange(event: any):void {
     const files = event.target.files as FileList;
+    const maxSize = 10 * 1024 * 1024;
+    const validFiles: File[] = [];
+
     if (files) {
-      this.images = this.images.concat(Array.from(files));
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.size <= maxSize) {
+          validFiles.push(file);
+        } else {
+          this.activeModalText(`O arquivo ${file.name} é maior que 10MB e não será adicionado.`);
+        }
+      }
+
+      this.images = this.images.concat(validFiles);
     }
   }
 
@@ -277,22 +289,22 @@ export class CreateImmobileComponent implements OnInit{
     });
   }
 
-  verifyLength(lengthField: number, field: string, quantityVerify: number): void {
+  // verifyLength(lengthField: number, field: string, quantityVerify: number): void {
 
-    if (quantityVerify === 50) {
-      if (lengthField >= 50) {
-        this.activeModalText(`O campo ${field} não pode ter mais de 50 caracteres!`);
-      }
-    }
-    if (quantityVerify === 100) {
-      if (lengthField >= 100) {
-        this.activeModalText(`O campo ${field} não pode ter mais de 100 caracteres!`);
-      }
-    }
-    if (quantityVerify === 500) {
-      if (lengthField >= 500) {
-        this.activeModalText(`O campo ${field} não pode ter mais de 500 caracteres!`);
-      }
-    }
-  }
+  //   if (quantityVerify === 50) {
+  //     if (lengthField >= 50) {
+  //       this.activeModalText(`O campo ${field} não pode ter mais de 50 caracteres!`);
+  //     }
+  //   }
+  //   if (quantityVerify === 100) {
+  //     if (lengthField >= 100) {
+  //       this.activeModalText(`O campo ${field} não pode ter mais de 100 caracteres!`);
+  //     }
+  //   }
+  //   if (quantityVerify === 500) {
+  //     if (lengthField >= 500) {
+  //       this.activeModalText(`O campo ${field} não pode ter mais de 500 caracteres!`);
+  //     }
+  //   }
+  // }
 }

@@ -2,11 +2,12 @@
 
 <section class="main-section">
      <h1>Vamos publicar o seu imóvel de forma simples</h1>
-     <p class="subtitle">Use a sessão a baixo para enviar as imagens do seu imóvel!</p>
+     <p class="subtitle-1">Use a sessão a baixo para enviar as imagens do seu imóvel!</p>
+     <p class="subtitle">As imagens devem conter até 10MB</p>
      <form id="form" [formGroup]="form">
           <section class="upload-images">
                <div class="upload-button upload-button-bg">
-                    <input formControlName="files" type="file" placeholder="Envie sua imagem" (change)="onFileChange($event)" multiple>
+                    <input formControlName="files" type="file" placeholder="Envie sua imagem" (change)="onFileChange($event)" multiple accept="image/*">
                </div>
                <div class="view-upload" #imageContainer>
                     <app-carrosel [images]="images"></app-carrosel>
@@ -21,7 +22,7 @@
                     <input formControlName="immobileTitle" class="title-input" type="text" placeholder="Ex: Kitnet para alugar no centro" maxlength="100">
                     
                     <label class="address-label">Endereço:</label>
-                    <input formControlName="address" type="text" name="address" placeholder="Endereço">
+                    <input formControlName="address" type="text" name="address" placeholder="Endereço" maxlength="50">
           
                     <div class="state-city-neighborhood-address">
                          <div class="state">
@@ -66,7 +67,7 @@
                          </div>
                          <div class="neighborhood">
                               <label>Bairro:</label>
-                              <input formControlName="neighborhood" type="text" name="neighborhood" placeholder="Nome do bairro...">
+                              <input formControlName="neighborhood" type="text" name="neighborhood" placeholder="Nome do bairro..." maxlength="50">
                          </div>
                     </div>
                     <div class="type-price-sellertype">
@@ -97,7 +98,7 @@
                     </div>
           
                     <label class="description-label">Descrição:</label>
-                    <textarea formControlName="description" class="description-textarea" placeholder=" Digite aqui a descrição do seu imóvel..."></textarea>
+                    <textarea formControlName="description" class="description-textarea" placeholder=" Digite aqui a descrição do seu imóvel..." maxlength="500"></textarea>
                </section>
           </div>
 
