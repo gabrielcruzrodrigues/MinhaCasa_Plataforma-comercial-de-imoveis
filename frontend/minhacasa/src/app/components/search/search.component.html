@@ -230,7 +230,10 @@
                </ng-container>
           </div>
           <div class="paginator">
-               <app-paginator></app-paginator>
+               <app-paginator
+               (previousPage)="onPreviousPage($event)"
+               (nextPage)="onNextPage($event)"
+               ></app-paginator>
           </div>
      </div>
 
