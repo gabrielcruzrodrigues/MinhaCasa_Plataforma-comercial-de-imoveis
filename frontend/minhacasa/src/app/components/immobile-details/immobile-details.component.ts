@@ -12,49 +12,7 @@ import { ConverterAgeToPortuguese } from '../../utils/ConverterAgeToPortuguese';
 import { ConverterCategoryToPortuguese } from '../../utils/ConverterCategoryToPortuguese';
 import { ConverterTypeForPortuguese } from '../../utils/ConverterTypeToPortuguese';
 import { ConverterSellerTypeToPortuguese } from '../../utils/ConverterSellerTypeToPortuguese';
-
-interface Body {
-  gatedCommunity: boolean;
-  videos: boolean;
-  beach: boolean;
-  disabledAccess: boolean;
-  playground: boolean;
-  grill: boolean;
-  energyGenerator: boolean;
-  closeToTheCenter: boolean;
-  elevator: boolean;
-  pool: boolean;
-  frontDesk: boolean;
-  multiSportsCourt: boolean;
-  gym: boolean;
-  steamRoom: boolean;
-  cableTV: boolean;
-  heating: boolean;
-  cabinetsInTheKitchen: boolean;
-  bathroomInTheRoom: boolean;
-  internet: boolean;
-  partyRoom: boolean;
-  airConditioning: boolean;
-  americanKitchen: boolean;
-  hydromassage: boolean;
-  fireplace: boolean;
-  privatePool: boolean;
-  electronicGate: boolean;
-  serviceArea: boolean;
-  pub: boolean;
-  closet: boolean;
-  office: boolean;
-  yard: boolean;
-  alarmSystem: boolean;
-  balcony: boolean;
-  concierge24Hour: boolean;
-  walledArea: boolean;
-  dogAllowed: boolean;
-  catAllowed: boolean;
-  cameras: boolean;
-  furnished: boolean;
-  seaView: boolean;
-}
+import { GetTrueBooleanFields } from '../../utils/GetTrueBooleanFields';
 
 @Component({
   selector: 'app-immobile-details',
@@ -97,102 +55,6 @@ export class ImmobileDetailsComponent implements OnInit{
   sellerWhatsappLink: string = '';
 
   trueBooleanFields: string[] = [];
-
-  booleanFields: (keyof Body)[] = [
-    'gatedCommunity', 'videos', 'beach', 'disabledAccess', 'playground', 'grill',
-    'energyGenerator', 'closeToTheCenter', 'elevator', 'pool', 'frontDesk',
-    'multiSportsCourt', 'gym', 'steamRoom', 'cableTV', 'heating', 'cabinetsInTheKitchen',
-    'bathroomInTheRoom', 'internet', 'partyRoom', 'airConditioning', 'americanKitchen',
-    'hydromassage', 'fireplace', 'privatePool', 'electronicGate', 'serviceArea', 'pub',
-    'closet', 'office', 'yard', 'alarmSystem', 'balcony', 'concierge24Hour', 'walledArea',
-    'dogAllowed', 'catAllowed', 'cameras', 'furnished', 'seaView'
-  ];
-
-  translations: { [key in keyof Body]: string } = {
-    gatedCommunity: 'Condomínio Fechado',
-    videos: 'Vídeos',
-    beach: 'Praia',
-    disabledAccess: 'Acesso para Deficientes',
-    playground: 'Playground',
-    grill: 'Churrasqueira',
-    energyGenerator: 'Gerador de Energia',
-    closeToTheCenter: 'Perto do Centro',
-    elevator: 'Elevador',
-    pool: 'Piscina',
-    frontDesk: 'Recepção',
-    multiSportsCourt: 'Quadra Poliesportiva',
-    gym: 'Academia',
-    steamRoom: 'Sauna',
-    cableTV: 'TV a Cabo',
-    heating: 'Aquecimento',
-    cabinetsInTheKitchen: 'Armários na Cozinha',
-    bathroomInTheRoom: 'Banheiro na Suíte',
-    internet: 'Internet',
-    partyRoom: 'Salão de Festas',
-    airConditioning: 'Ar-Condicionado',
-    americanKitchen: 'Cozinha Americana',
-    hydromassage: 'Hidromassagem',
-    fireplace: 'Lareira',
-    privatePool: 'Piscina Privada',
-    electronicGate: 'Portão Eletrônico',
-    serviceArea: 'Área de Serviço',
-    pub: 'Pub',
-    closet: 'Closet',
-    office: 'Escritório',
-    yard: 'Quintal',
-    alarmSystem: 'Sistema de Alarme',
-    balcony: 'Varanda',
-    concierge24Hour: 'Portaria 24h',
-    walledArea: 'Área Murada',
-    dogAllowed: 'Permite Cachorro',
-    catAllowed: 'Permite Gato',
-    cameras: 'Câmeras de Segurança',
-    furnished: 'Mobiliado',
-    seaView: 'Vista para o Mar'
-  };
-
-  body: Body = {
-    gatedCommunity: true,
-    videos: false,
-    beach: true,
-    disabledAccess: false,
-    playground: true,
-    grill: false,
-    energyGenerator: true,
-    closeToTheCenter: false,
-    elevator: true,
-    pool: true,
-    frontDesk: false,
-    multiSportsCourt: true,
-    gym: false,
-    steamRoom: true,
-    cableTV: true,
-    heating: false,
-    cabinetsInTheKitchen: true,
-    bathroomInTheRoom: false,
-    internet: true,
-    partyRoom: false,
-    airConditioning: true,
-    americanKitchen: false,
-    hydromassage: true,
-    fireplace: false,
-    privatePool: true,
-    electronicGate: false,
-    serviceArea: true,
-    pub: false,
-    closet: true,
-    office: false,
-    yard: true,
-    alarmSystem: false,
-    balcony: true,
-    concierge24Hour: false,
-    walledArea: true,
-    dogAllowed: true,
-    catAllowed: false,
-    cameras: true,
-    furnished: false,
-    seaView: true
-  };
 
   constructor(  
     private immobileService: ImmobileService, 
@@ -265,8 +127,7 @@ export class ImmobileDetailsComponent implements OnInit{
     this.age = ConverterAgeToPortuguese.converter(body.age);
     this.type = ConverterTypeForPortuguese.converter(body.type);
     this.sellerType = ConverterSellerTypeToPortuguese.converter(body.sellerType);
-
-    this.trueBooleanFields = this.getTrueBooleanFields(body);
+    this.trueBooleanFields = GetTrueBooleanFields.get(body);
   }
 
   verifyBoolean(variable : any): string {
@@ -276,10 +137,5 @@ export class ImmobileDetailsComponent implements OnInit{
   formatPrice(price: string): string {
     const numericPrice = parseFloat(price);
     return this.currencyPipe.transform(numericPrice, 'BRL', 'symbol', '1.0-0') ?? '';
-  }
-
-  getTrueBooleanFields(body: any): string[] {
-    const trueFields = this.booleanFields.filter(field => body[field] === true);
-    return trueFields.map(field => this.translations[field]);
   }
 }
