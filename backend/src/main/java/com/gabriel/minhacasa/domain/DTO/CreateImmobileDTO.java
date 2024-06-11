@@ -12,7 +12,7 @@ public record CreateImmobileDTO(
         @NotNull
         Long studentId,
         @NotBlank
-        String name,
+        String immobileTitle,
         String description,
         @NotBlank
         String address,

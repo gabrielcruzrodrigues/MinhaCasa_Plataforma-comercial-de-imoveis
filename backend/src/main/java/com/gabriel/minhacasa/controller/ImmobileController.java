@@ -1,10 +1,7 @@
 package com.gabriel.minhacasa.controller;
 
 
-import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
-import com.gabriel.minhacasa.domain.DTO.ImmobileByProfileDTO;
-import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
-import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
+import com.gabriel.minhacasa.domain.DTO.*;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.service.ImmobileService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +30,7 @@ public class ImmobileController {
     }
 
     @GetMapping("/details/{id}")
-    public ResponseEntity<Immobile> getImmobileWithFullImagePaths(@PathVariable Long id) {
+    public ResponseEntity<ImmobileWithSellerIdDTO> getImmobileWithFullImagePaths(@PathVariable Long id) {
         return ResponseEntity.ok().body(this.immobileService.getImmobileWithCompleteImagesPath(id));
     }
 
@@ -52,7 +49,7 @@ public class ImmobileController {
     @PutMapping("/sold/{id}")
     public ResponseEntity<Object> soldImmobile(@PathVariable Long id) {
         this.immobileService.soldImmobile(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body("Immobile sold successfully");
     }
 
     @PostMapping("/search")

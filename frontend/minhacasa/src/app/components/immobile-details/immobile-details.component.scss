@@ -173,7 +173,7 @@
      // box-shadow: 2px 2px 5px rgba(0,0,0,0.2);     
 }
 
-.seller-info a {
+.seller-info a, .seller-info button {
      // padding: 5px;
      width: 95%;
      border: 2px solid #ccc;
@@ -185,6 +185,7 @@
      box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
      text-decoration: none;
      color: white;
+     cursor: pointer;
 }
 
 .buttons {

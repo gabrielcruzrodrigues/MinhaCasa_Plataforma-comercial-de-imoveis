@@ -24,4 +24,9 @@ export class ImmobileService {
     let urlForRequest = this.url + "/search";
     return this.http.post(urlForRequest, params, {observe: 'response'});
   }
+
+  soldImmobile(id: string): Observable<any> {
+    let urlForRequest = this.url + `/sold/${id}`;
+    return this.http.put(urlForRequest, {}, {observe: 'response', responseType: 'text'});
+  }
 }

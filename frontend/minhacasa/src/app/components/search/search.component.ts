@@ -129,7 +129,6 @@ export class SearchComponent implements OnInit {
     this.immobileService.search(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.cards = response.body;
-        console.log(this.cards);
         this.isLoading = false;
       },
       error: (error) => {

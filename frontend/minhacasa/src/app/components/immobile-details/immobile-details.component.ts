@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { ArrowCarroselComponent } from '../layout/arrow-carrosel/arrow-carrosel.component';
 import { ImmobileService } from '../../services/immobile.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { UserService } from '../../services/user.service';
@@ -13,11 +13,12 @@ import { ConverterCategoryToPortuguese } from '../../utils/ConverterCategoryToPo
 import { ConverterTypeForPortuguese } from '../../utils/ConverterTypeToPortuguese';
 import { ConverterSellerTypeToPortuguese } from '../../utils/ConverterSellerTypeToPortuguese';
 import { GetTrueBooleanFields } from '../../utils/GetTrueBooleanFields';
+import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 
 @Component({
   selector: 'app-immobile-details',
   standalone: true,
-  imports: [NavbarComponent, ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent],
+  imports: [NavbarComponent, ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent, ModalTextComponent],
   templateUrl: './immobile-details.component.html',
   styleUrl: './immobile-details.component.scss'
 })
@@ -25,8 +26,14 @@ export class ImmobileDetailsComponent implements OnInit{
   imagesUrl: string[] = [];
   immobileId: string | null = null;
   sellerId: string | null = null;
+  userId: string | null | undefined = null;
   isLoading: boolean = false;
+  showModalText: boolean = false;
+  message: string = '';
+  @ViewChild(ModalTextComponent) modalComponent!: ModalTextComponent;
+  isSeller: boolean = false;
 
+  id: string = '';
   name: string = '';
   address: string = '';
   state: string = '';
@@ -47,6 +54,7 @@ export class ImmobileDetailsComponent implements OnInit{
   usefulArea: string = '';
   IPTU: string = '';
   garden: string = '';
+  immobileSellerId: string = '';
 
   //seller
   sellerImage: string = '';
@@ -60,7 +68,9 @@ export class ImmobileDetailsComponent implements OnInit{
     private immobileService: ImmobileService, 
     private route: ActivatedRoute,
     private currencyPipe: CurrencyPipe,
-    private userService: UserService
+    private userService: UserService,
+    private cdr: ChangeDetectorRef,
+    private router: Router,
   ){}
 
   ngOnInit(): void {
@@ -68,9 +78,12 @@ export class ImmobileDetailsComponent implements OnInit{
     this.immobileId = this.route.snapshot.paramMap.get('id');
     this.sellerId = this.route.snapshot.paramMap.get('seller-id');
 
+    this.userId = this.userService.getIdOfTheUserLogged();
+
     this.immobileService.getImmobileWithCompleteImagesPath(this.immobileId).subscribe({
       next: (response: HttpResponse<any>) => {
-        this.populateFields(response.body);
+        this.immobileSellerId = response.body.sellerId;
+        this.populateFields(response.body.immobile);
 
         this.userService.findByIdForProfile(this.sellerId).subscribe({
           next: (response: HttpResponse<any>) => {
@@ -79,6 +92,10 @@ export class ImmobileDetailsComponent implements OnInit{
             this.sellerWhatsapp = response.body.whatsapp;
             this.sellerWhatsappLink = `https://wa.me/55${this.sellerWhatsapp}?text=Olá! Estou interessado(a) pela publicação "${this.name}", vim pelo minhacasa.com`;
             this.isLoading = false;
+
+            if (this.immobileSellerId == this.userId) {
+              this.isSeller = true;
+            }
           }
         })
       },
@@ -89,6 +106,7 @@ export class ImmobileDetailsComponent implements OnInit{
   }
   
   populateFields(body: any): void {
+    this.id = body.id;
     this.imagesUrl = body.files;
     this.name = body.name;
     this.address = body.address;
@@ -137,5 +155,39 @@ export class ImmobileDetailsComponent implements OnInit{
   formatPrice(price: string): string {
     const numericPrice = parseFloat(price);
     return this.currencyPipe.transform(numericPrice, 'BRL', 'symbol', '1.0-0') ?? '';
+  }
+
+  activeModalText(text: string):void {
+    this.showModalText = false; //reset
+    setTimeout(() => {
+      this.message = text;
+      this.showModalText = true;
+      this.cdr.detectChanges();
+    });
+  }
+
+  waitForModalClose(): Promise<void> {
+    return new Promise(resolve => {
+      this.modalComponent.onClose.subscribe(() => resolve());
+    })
+  }
+
+  soldImmobile(): void {
+    this.immobileService.soldImmobile(this.id).subscribe({
+      next: (response: HttpResponse<any>) => {
+        console.log('oi');
+        if (response.status === 200) {
+          this.activeModalText('Imóvel marcado como vendido!');
+          this.waitForModalClose().then(() => {
+            this.router.navigate(["/profile"]);
+          });
+        } else {
+          this.activeModalText("Aconteceu um pequeno imprevisto, por favor tente mais tarde!");
+        }
+      },
+      error: (error) => {
+        console.log(`Erro ao tentar marcar o imóvel como vendido: ${error.message}`);
+      }
+    })
   }
 }

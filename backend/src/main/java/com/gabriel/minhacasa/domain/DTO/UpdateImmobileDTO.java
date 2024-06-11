@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public record UpdateImmobileDTO(
         @NotBlank
-        String name,
+        String immobileTitle,
         @NotBlank
         String description,
         @NotBlank

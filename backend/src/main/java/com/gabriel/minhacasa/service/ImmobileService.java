@@ -1,9 +1,6 @@
 package com.gabriel.minhacasa.service;
 
-import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
-import com.gabriel.minhacasa.domain.DTO.ImmobileByProfileDTO;
-import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
-import com.gabriel.minhacasa.domain.DTO.UpdateImmobileDTO;
+import com.gabriel.minhacasa.domain.DTO.*;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
@@ -42,7 +39,7 @@ public class ImmobileService {
         Optional<User> user = userRepository.findById(immobileData.studentId());
         if (user.isPresent()) {
             Immobile immobile = Immobile.builder()
-                    .name(immobileData.name())
+                    .name(immobileData.immobileTitle())
                     .description(immobileData.description())
                     .address(immobileData.address())
                     .city(immobileData.city())
@@ -120,7 +117,7 @@ public class ImmobileService {
         }
     }
 
-    public Immobile getImmobileWithCompleteImagesPath(Long id) {
+    public ImmobileWithSellerIdDTO getImmobileWithCompleteImagesPath(Long id) {
         Immobile immobile = this.findById(id);
         List<String> fullImagePaths = new ArrayList<>();
 
@@ -129,7 +126,7 @@ public class ImmobileService {
         }
 
         immobile.setFiles(fullImagePaths);
-        return immobile;
+        return new ImmobileWithSellerIdDTO(immobile, immobile.getUser().getId());
     }
 
     private void setRoleOWNERByUser(User user) {
@@ -144,7 +141,7 @@ public class ImmobileService {
 
     public void updateImmobile(UpdateImmobileDTO immobileData) {
         Immobile immobile = Immobile.builder()
-                .name(immobileData.name())
+                .name(immobileData.immobileTitle())
                 .description(immobileData.description())
                 .address(immobileData.address())
                 .city(immobileData.city())
@@ -215,11 +212,25 @@ public class ImmobileService {
         this.immobileRepository.save(immobile);
     }
 
-    @Transactional
     public void soldImmobile(Long id) {
         Immobile immobile = this.findById(id);
+        String firstImage = immobile.getFiles().get(0);
+
+        List<String> imagesForDelete = new ArrayList<>();
+        if (immobile.getFiles().size() > 1) {
+            for (int i = 1; i < immobile.getFiles().size(); i++) {
+                imagesForDelete.add(immobile.getFiles().get(i));
+            }
+        }
+//        this.deleteImages(imagesForDelete);
+
+        immobile.getFiles().clear();
+        immobile.getFiles().add(firstImage);
         this.disableImmobile(id);
-//        this.filesImmobileService.soldImmobile(immobile);
+    }
+
+    private void deleteImages(List<String> images) {
+
     }
 
     public List<ImmobileByProfileDTO> searchParams(SearchParamsDTO params) {
