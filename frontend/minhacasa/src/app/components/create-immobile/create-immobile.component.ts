@@ -263,7 +263,7 @@ export class CreateImmobileComponent implements OnInit{
    });
 
     this.formData.set('studentId', this.userId);
-    this.formData.set('name', this.form.get('name')?.value);
+    this.formData.set('immobileTitle', this.form.get('immobileTitle')?.value);
     this.formData.set('address', this.form.get('address')?.value);
     this.formData.set('state', this.form.get('state')?.value);
     this.formData.set('city', this.form.get('city')?.value);

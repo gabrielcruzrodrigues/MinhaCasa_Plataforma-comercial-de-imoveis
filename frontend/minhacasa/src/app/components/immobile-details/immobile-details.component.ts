@@ -106,6 +106,7 @@ export class ImmobileDetailsComponent implements OnInit{
   }
   
   populateFields(body: any): void {
+    console.log(body);
     this.id = body.id;
     this.imagesUrl = body.files;
     this.name = body.name;
@@ -186,6 +187,7 @@ export class ImmobileDetailsComponent implements OnInit{
         }
       },
       error: (error) => {
+        this.activeModalText("Aconteceu um pequeno imprevisto, por favor tente mais tarde!");
         console.log(`Erro ao tentar marcar o imóvel como vendido: ${error.message}`);
       }
     })

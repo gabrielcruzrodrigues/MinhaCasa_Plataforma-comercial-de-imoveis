@@ -30,7 +30,6 @@ public class UserService {
 
     @Value("${base-url}")
     private String baseUrl;
-
     private String baseUrlProfileFilesApi = "/api/files/download/profile/";
     private String baseUrlImmobileFilesApi = "/api/files/download/immobile/";
 
@@ -80,16 +79,20 @@ public class UserService {
         List<Immobile> properties = user.getProperties();
 
         for (Immobile immobile : properties) {
-            Path pathFirstImmobileImage = Paths.get(immobile.getFiles().get(0));
+            if (immobile.isActive()) {
 
-            String imageImmobile = baseUrl + baseUrlImmobileFilesApi + pathFirstImmobileImage;
 
-            ImmobileByProfileDTO profileDTO = new ImmobileByProfileDTO(
-                    immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
-                    imageImmobile, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
-            );
+                Path pathFirstImmobileImage = Paths.get(immobile.getFiles().get(0));
 
-            immobiles.add(profileDTO);
+                String imageImmobile = baseUrl + baseUrlImmobileFilesApi + pathFirstImmobileImage;
+
+                ImmobileByProfileDTO profileDTO = new ImmobileByProfileDTO(
+                        immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
+                        imageImmobile, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
+                );
+
+                immobiles.add(profileDTO);
+            }
         }
 
         String imageProfile = baseUrl + baseUrlProfileFilesApi + user.getImageProfile();

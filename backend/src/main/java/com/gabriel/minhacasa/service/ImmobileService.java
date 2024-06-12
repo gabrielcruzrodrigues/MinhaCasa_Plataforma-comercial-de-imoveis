@@ -5,6 +5,7 @@ import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
 import com.gabriel.minhacasa.domain.enums.TypeEnum;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.ErrorForDeleteFileException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
 import com.gabriel.minhacasa.files.FilesService;
@@ -16,6 +17,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +31,12 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ImmobileService {
 
-    @Value("${base-url}")
-    private String baseUrl;
-    private String baseUrlImmobileFilesApi = "/api/files/download/immobile/";
+    //change for ambient variables
+//    @Value("${base-url}")
+    private final String baseUrl = "http://localhost:8080";
+    private final String baseUrlImmobileFilesApi = "/api/files/download/immobile/";
+    private final String url = baseUrl + baseUrlImmobileFilesApi;
+    private final String rootPath = "C:/minhacasa/files-immobile/";
 
     private final ImmobileRepository immobileRepository;
     private final UserRepository userRepository;
@@ -122,7 +130,7 @@ public class ImmobileService {
         List<String> fullImagePaths = new ArrayList<>();
 
         for (String path : immobile.getFiles()) {
-            fullImagePaths.add(this.baseUrl + this.baseUrlImmobileFilesApi + path);
+            fullImagePaths.add(this.url + path);
         }
 
         immobile.setFiles(fullImagePaths);
@@ -222,7 +230,7 @@ public class ImmobileService {
                 imagesForDelete.add(immobile.getFiles().get(i));
             }
         }
-//        this.deleteImages(imagesForDelete);
+        this.deleteImages(imagesForDelete);
 
         immobile.getFiles().clear();
         immobile.getFiles().add(firstImage);
@@ -230,7 +238,15 @@ public class ImmobileService {
     }
 
     private void deleteImages(List<String> images) {
+        for (String image : images) {
+            Path path = Paths.get(this.rootPath + image);
 
+            try {
+                Files.delete(path);
+            } catch (IOException ex) {
+                throw new ErrorForDeleteFileException("Error for delete ImmobileFile");
+            }
+        }
     }
 
     public List<ImmobileByProfileDTO> searchParams(SearchParamsDTO params) {
@@ -241,7 +257,7 @@ public class ImmobileService {
             String fullImagePath;
 
             String path = immobile.getFiles().get(0);
-            fullImagePath = this.baseUrl + this.baseUrlImmobileFilesApi + path;
+            fullImagePath = this.url + path;
 
             ImmobileByProfileDTO immobileByProfileDTO = new ImmobileByProfileDTO(
                     immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
