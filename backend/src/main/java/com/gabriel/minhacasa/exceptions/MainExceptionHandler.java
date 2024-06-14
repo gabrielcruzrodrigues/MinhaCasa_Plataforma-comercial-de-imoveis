@@ -285,4 +285,16 @@ public class MainExceptionHandler {
 //                .build();
 //        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 //    }
+
+    @ExceptionHandler(ImageProfileNotFoundException.class)
+    public ResponseEntity<StandardError> ImageProfileNotFoundException(ImageProfileNotFoundException ex, HttpServletRequest request) {
+        StandardError error = StandardError.builder()
+                .timeStamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .error(ex.getMessage())
+                .path(request.getRequestURI())
+                .fieldError("ImageProfileNotFoundException")
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
