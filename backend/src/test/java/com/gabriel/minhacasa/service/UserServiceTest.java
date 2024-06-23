@@ -42,8 +42,6 @@ class UserServiceTest {
     private UserService userService;
     @Value("${base-url}")
     private String baseUrl;
-    @Value("${base-url-user-files-api}")
-    private String baseUrlProfileFilesApi;
     @Value("${base-url-immobile-files-api}")
     private String baseUrlImmobileFilesApi;
 

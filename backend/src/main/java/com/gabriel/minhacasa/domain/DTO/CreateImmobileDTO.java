@@ -128,7 +128,6 @@ public record CreateImmobileDTO(
         boolean seaView,
         @NotNull
         boolean gatedCommunity,
-//        @NotNull change when create frontend form
         List<MultipartFile> files
 ) {
 }

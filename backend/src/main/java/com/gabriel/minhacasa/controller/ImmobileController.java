@@ -54,6 +54,6 @@ public class ImmobileController {
 
     @PostMapping("/search")
     public ResponseEntity<List<ImmobileByProfileDTO>> search(@ModelAttribute SearchParamsDTO params) {
-        return ResponseEntity.ok().body(this.immobileService.searchParams(params));
+        return ResponseEntity.ok().body(this.immobileService.findImmobileByParamsWithCompleteImagePath(params));
     }
 }

@@ -4,7 +4,6 @@ import com.gabriel.minhacasa.domain.DTO.*;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
-import com.gabriel.minhacasa.domain.enums.TypeEnum;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.ErrorForDeleteFileException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
@@ -32,11 +31,12 @@ import java.util.Set;
 public class ImmobileService {
 
     //change for ambient variables
-//    @Value("${base-url}")
-    private final String baseUrl = "http://localhost:8080";
-    private final String baseUrlImmobileFilesApi = "/api/files/download/immobile/";
-    private final String url = baseUrl + baseUrlImmobileFilesApi;
-    private final String rootPath = "C:/minhacasa/files-immobile/";
+    @Value("${base-url}")
+    private String baseUrl;
+    @Value("${base-url-immobile-files-api}")
+    private String baseUrlImmobileFilesApi;
+    @Value("{file.upload-image-profile-dir}")
+    private String rootPath;
 
     private final ImmobileRepository immobileRepository;
     private final UserRepository userRepository;
@@ -130,7 +130,7 @@ public class ImmobileService {
         List<String> fullImagePaths = new ArrayList<>();
 
         for (String path : immobile.getFiles()) {
-            fullImagePaths.add(this.url + path);
+            fullImagePaths.add(this.baseUrl + this.baseUrlImmobileFilesApi + path);
         }
 
         immobile.setFiles(fullImagePaths);
@@ -232,8 +232,10 @@ public class ImmobileService {
         }
         this.deleteImages(imagesForDelete);
 
-        immobile.getFiles().clear();
-        immobile.getFiles().add(firstImage);
+        List<String> newFiles = new ArrayList<>();
+        newFiles.add(firstImage);
+        immobile.setFiles(newFiles);
+
         this.disableImmobile(id);
     }
 
@@ -249,7 +251,7 @@ public class ImmobileService {
         }
     }
 
-    public List<ImmobileByProfileDTO> searchParams(SearchParamsDTO params) {
+    public List<ImmobileByProfileDTO> findImmobileByParamsWithCompleteImagePath(SearchParamsDTO params) {
         List<Immobile> immobiles = this.immobileRepositorySearch.searchByParams(params);
         List<ImmobileByProfileDTO> immobilesWithCompletePath = new ArrayList<>();
 
@@ -257,7 +259,7 @@ public class ImmobileService {
             String fullImagePath;
 
             String path = immobile.getFiles().get(0);
-            fullImagePath = this.url + path;
+            fullImagePath = this.baseUrl + this.baseUrlImmobileFilesApi + path;
 
             ImmobileByProfileDTO immobileByProfileDTO = new ImmobileByProfileDTO(
                     immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
