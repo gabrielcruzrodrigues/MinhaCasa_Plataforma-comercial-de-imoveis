@@ -69,6 +69,7 @@ export class RegisterpageComponent {
     this.userService.registerUser(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.authService.configureLocalStorage(response.body);
+        console.log(response);
         this.isLoading = false;
         this.activeModalText('Cadastro realizado com sucesso!');
         this.waitForModalClose().then(() => {
