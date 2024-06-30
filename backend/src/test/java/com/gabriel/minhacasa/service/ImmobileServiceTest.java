@@ -35,10 +35,74 @@ import static org.mockito.Mockito.*;
 @Slf4j
 class ImmobileServiceTest {
 
+    public static final BigDecimal PRICE = new BigDecimal("850000.00");
+    public static final IntegrityEnum INTEGRITY_ENUM1 = IntegrityEnum.NEW;
     @Value("${base-url}")
     private String baseUrl;
     @Value("${base-url-immobile-files-api}")
     private String baseUrlImmobileFilesApi;
+
+    public static final Long IMMOBILE_ID = 1L;
+    public static final String IMMOBILE_NAME = "Casa para alugar";
+    public static final String IMMOBILE_DESCRIPTION = "description";
+    public static final String IMMOBILE_ADDRESS = "Rua 7";
+    public static final String IMMOBILE_CITY = "Salvador";
+    public static final String IMMOBILE_NEIGHBORHOOD = "algum bairro";
+    public static final String IMMOBILE_STATE = "BA";
+    public static final boolean GARAGE = true;
+    public static final int QUANTITY_BEDROOMS = 3;
+    public static final int QUANTITY_ROOMS = 3;
+    public static final BigDecimal IPTU = BigDecimal.valueOf(1500);
+    public static final boolean SUITE = true;
+    public static final double TOTAL_AREA = 86.00;
+    public static final int QUANTITY_BATHROOMS = 3;
+    public static final IntegrityEnum INTEGRITY_ENUM = IntegrityEnum.NEW;
+    public static final SellerTypeEnum SELLER_TYPE_ENUM = SellerTypeEnum.OWNER;
+    public static final AgeEnum AGE_ENUM = AgeEnum.UP_TO_1_YEARS;
+    public static final CategoryEnum CATEGORY_ENUM = CategoryEnum.SELL;
+    public static final TypeEnum TYPE_ENUM = TypeEnum.HOUSE;
+    public static final boolean GARDEN = true;
+    public static final boolean VIDEOS = false;
+    public static final boolean BEACH = false;
+    public static final boolean DISABLED_ACCESS = false;
+    public static final boolean PLAYGROUND = false;
+    public static final boolean GRILL = false;
+    public static final boolean ENERGY_GENERATOR = false;
+    public static final boolean CLOSE_TO_THE_CENTER = false;
+    public static final boolean ELEVATOR = false;
+    public static final boolean POOL = false;
+    public static final boolean FRONT_DESK = false;
+    public static final boolean MULTI_SPORTS_COURT = false;
+    public static final boolean GYM = false;
+    public static final boolean STEAM_ROOM = false;
+    public static final boolean CABLE_TV = false;
+    public static final boolean HEATING = false;
+    public static final boolean CABINETS_IN_THE_KITCHEN = false;
+    public static final boolean BATHROOM_IN_THE_ROOM = false;
+    public static final boolean INTERNET = false;
+    public static final boolean PARTY_ROOM = false;
+    public static final boolean AIR_CONDITIONING = false;
+    public static final boolean AMERICAN_KITCHEN = false;
+    public static final boolean HYDROMASSAGE = false;
+    public static final boolean FIREPLACE = false;
+    public static final boolean PRIVATE_POOL = false;
+    public static final boolean ELECTRONIC_GATE = false;
+    public static final boolean SERVICE_AREA = false;
+    public static final boolean PUB = false;
+    public static final boolean CLOSET = false;
+    public static final boolean OFFICE = false;
+    public static final boolean YARD = false;
+    public static final boolean ALARM_SYSTEM = false;
+    public static final boolean BALCONY = false;
+    public static final boolean CONCIERGE_24_HOUR = false;
+    public static final boolean WALLED_AREA = false;
+    public static final boolean DOG_ALLOWED = false;
+    public static final boolean CAT_ALLOWED = false;
+    public static final boolean CAMERAS = false;
+    public static final boolean FURNISHED = false;
+    public static final boolean SEA_VIEW = false;
+    public static final boolean GATED_COMMUNITY = false;
+    public static final List<MultipartFile> FILES = List.of();
 
     @Mock
     private ImmobileRepository immobileRepository;
@@ -241,71 +305,69 @@ class ImmobileServiceTest {
                 .files(List.of("teste.jpg"))
                 .build();
 
-        List<MultipartFile> files = List.of();
-
         this.createImmobileDTO = new CreateImmobileDTO(
-                1L,
-                "Casa de Praia",
-                "Uma bela casa de praia com vista para o mar.",
-                "Rua das Flores, 123",
-                "Florianópolis",
-                "Jurerê Internacional",
-                "Santa Catarina",
-                true,
-                4,
-                6,
-                new BigDecimal("1200.00"),
-                new BigDecimal("850000.00"),
-                true,
-                300.0,
-                3,
-                IntegrityEnum.NEW,
-                SellerTypeEnum.OWNER,
-                AgeEnum.UP_TO_1_YEARS,
-                CategoryEnum.SELL,
-                TypeEnum.HOUSE,
-                true,
-                false,
-                true,
-                true,
-                true,
-                true,
-                false,
-                true,
-                false,
-                true,
-                true,
-                false,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                files
+                IMMOBILE_ID,
+                IMMOBILE_NAME,
+                IMMOBILE_DESCRIPTION,
+                IMMOBILE_ADDRESS,
+                IMMOBILE_CITY,
+                IMMOBILE_NEIGHBORHOOD,
+                IMMOBILE_STATE,
+                GARAGE,
+                QUANTITY_BEDROOMS,
+                QUANTITY_ROOMS,
+                IPTU,
+                PRICE,
+                SUITE,
+                TOTAL_AREA,
+                QUANTITY_BATHROOMS,
+                INTEGRITY_ENUM,
+                SELLER_TYPE_ENUM,
+                AGE_ENUM,
+                CATEGORY_ENUM,
+                TYPE_ENUM,
+                GARDEN,
+                VIDEOS,
+                BEACH,
+                DISABLED_ACCESS,
+                PLAYGROUND,
+                GRILL,
+                ENERGY_GENERATOR,
+                CLOSE_TO_THE_CENTER,
+                ELEVATOR,
+                POOL,
+                FRONT_DESK,
+                MULTI_SPORTS_COURT,
+                GYM,
+                STEAM_ROOM,
+                CABLE_TV,
+                HEATING,
+                CABINETS_IN_THE_KITCHEN,
+                BATHROOM_IN_THE_ROOM,
+                INTERNET,
+                PARTY_ROOM,
+                AIR_CONDITIONING,
+                AMERICAN_KITCHEN,
+                HYDROMASSAGE,
+                FIREPLACE,
+                PRIVATE_POOL,
+                ELECTRONIC_GATE,
+                SERVICE_AREA,
+                PUB,
+                CLOSET,
+                OFFICE,
+                YARD,
+                ALARM_SYSTEM,
+                BALCONY,
+                CONCIERGE_24_HOUR,
+                WALLED_AREA,
+                DOG_ALLOWED,
+                CAT_ALLOWED,
+                CAMERAS,
+                FURNISHED,
+                SEA_VIEW,
+                GATED_COMMUNITY,
+                FILES
         );
     }
 }
