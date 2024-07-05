@@ -2,9 +2,11 @@ package com.gabriel.minhacasa.controller;
 
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
 import com.gabriel.minhacasa.domain.DTO.ImmobileWithSellerIdDTO;
+import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.*;
+import com.gabriel.minhacasa.repository.ImmobileRepository;
 import com.gabriel.minhacasa.service.ImmobileService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,9 +29,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ImmobileControllerTest {
     public static final Long ID = 1L;
@@ -118,6 +122,8 @@ class ImmobileControllerTest {
     private MockMvc mockMvc;
     @Mock
     private ImmobileService immobileService;
+    @Mock
+    private ImmobileRepository immobileRepository;
     @InjectMocks
     private ImmobileController immobileController;
 
@@ -265,11 +271,27 @@ class ImmobileControllerTest {
     }
 
     @Test
-    void soldImmobile() {
+    @DisplayName("must disabled the immobile and return status 200")
+    void soldImmobile_mustSoldTheImmobile_withSuccess() throws Exception {
+        Immobile immobile = this.immobile;
+        when(this.immobileRepository.findById(anyLong())).thenReturn(Optional.of(immobile));
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/immobile/sold/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
-    void search() {
+    @DisplayName("must return a list with ImmobileByProfileDTO with success")
+    void search_whenToCall_mustReturnAListWithImmobileByProfileDTO() throws Exception {
+        SearchParamsDTO params = new SearchParamsDTO();
+        when(this.immobileService.findImmobileByParamsWithCompleteImagePath(params)).thenReturn(List.of());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/immobile/search")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("params", String.valueOf(params)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[]"));
     }
 
     void startElements() {
