@@ -2,6 +2,7 @@ package com.gabriel.minhacasa.files;
 
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.FileNullContentException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.SaveFileErrorException;
 import com.gabriel.minhacasa.utils.GenerateNewName;
 import lombok.extern.slf4j.Slf4j;
@@ -13,10 +14,13 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @Slf4j
 class FilesServiceTest {
@@ -68,17 +72,18 @@ class FilesServiceTest {
 
     @Test
     @DisplayName("must return SaveFileErrorException when an error happens")
-    void uploadProfileFile_returnSaveFileErrorException_whenAnErrorHappens() {
-        MultipartFile file = new MockMultipartFile(
-                "imageProfile",
-                "imageProfile.png",
-                "image/jpeg",
-                "dummy image content".getBytes());
+    void uploadProfileFile_returnSaveFileErrorException_whenAnErrorHappens() throws IOException {
+        //settings for test
+        MultipartFile file = mock(MultipartFile.class);
 
         User user = new User();
         user.setName("Gabriel");
 
         when(this.generateNewName.generateFileName(file, user.getName())).thenThrow(SaveFileErrorException.class);
+
+        //Generation error
+        Path targetLocation = Paths.get("some/directory/testFileName");
+        doThrow(new IOException("Simulated IOException")).when(file).transferTo(targetLocation);
 
         SaveFileErrorException response = assertThrows(SaveFileErrorException.class, () -> {
             this.filesService.uploadProfileFile(file, user);
@@ -112,5 +117,18 @@ class FilesServiceTest {
         assertEquals(1, response.size());
     }
 
+    @Test
+    @DisplayName("when list is empty must return a FileNullContentException with the message 'The file list is nullabe'")
+    void uploadImmobileFile_whenListIsEmpty_mustReturnAFileNullContentException() {
+        List<MultipartFile> files = List.of();
+        Immobile immobile = new Immobile();
 
+        FileNullContentException response = assertThrows(FileNullContentException.class, () -> {
+            this.filesService.uploadImmobileFile(files, immobile);
+        });
+
+        assertNotNull(response);
+        assertEquals(response.getClass(), FileNullContentException.class);
+        assertEquals("File is null in uploadImmobileFile: FilesService", response.getMessage());
+    }
 }

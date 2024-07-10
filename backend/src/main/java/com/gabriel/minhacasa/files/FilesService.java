@@ -56,7 +56,7 @@ public class FilesService {
             }
             return referencesOfImmobileFiles;
         } else {
-            throw new FileNullContentException("The file list is nullable.");
+            throw new FileNullContentException("uploadImmobileFile: FilesService");
         }
     }
 }
