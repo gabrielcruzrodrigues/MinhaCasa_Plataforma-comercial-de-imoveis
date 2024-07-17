@@ -9,5 +9,26 @@ services:
       - POSTGRES_DB=minhacasa
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=1234
+  
+  spring-app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+     - "8080:8080"
+    depends_on:
+      - postgres-db
+  
+  angular-app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "9090"
+    depends_on:
+      - spring-app
+
+
+
 
 
