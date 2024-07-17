@@ -60,8 +60,6 @@ interface Body {
   styleUrl: './immobile-details.component.scss'
 })
 export class ImmobileDetailsComponent implements OnInit{
-  // body = 
-
   imagesUrl: string[] = [];
   immobileId: string | null = null;
   sellerId: string | null = null;
