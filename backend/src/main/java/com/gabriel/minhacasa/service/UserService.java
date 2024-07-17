@@ -8,6 +8,7 @@ import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.FavoriteAlreadyExistsException;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.ImageProfileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
 import com.gabriel.minhacasa.files.FilesService;
@@ -30,14 +31,14 @@ public class UserService {
 
     @Value("${base-url}")
     private String baseUrl;
-
-    private String baseUrlProfileFilesApi = "/api/files/download/profile/";
-    private String baseUrlImmobileFilesApi = "/api/files/download/immobile/";
+    @Value("${base-url-user-files-api}")
+    private String baseUrlProfileFilesApi;
+    @Value("${base-url-immobile-files-api}")
+    private String baseUrlImmobileFilesApi;
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ImmobileService immobileService;
-//    private final ImageProfileService imageProfileService;
     private final FilesService filesService;
 
     @Transactional
@@ -61,9 +62,10 @@ public class UserService {
         user.setInstagram(null);
         user.setActive(true);
 
-        if (userData.imageProfile() != null) {
-            user.setImageProfile(this.filesService.uploadProfileFile(userData.imageProfile(), user));
+        if (userData.imageProfile() == null) {
+            throw new ImageProfileNotFoundException();
         }
+        user.setImageProfile(this.filesService.uploadProfileFile(userData.imageProfile(), user));
 
         this.userRepository.save(user);
     }
@@ -75,21 +77,21 @@ public class UserService {
 
     public ProfileUserResponseDTO findByIdForProfile(Long id) throws IOException {
         User user = this.findById(id);
-
         List<ImmobileByProfileDTO> immobiles = new ArrayList<>();
         List<Immobile> properties = user.getProperties();
 
         for (Immobile immobile : properties) {
-            Path pathFirstImmobileImage = Paths.get(immobile.getFiles().get(0));
+            if (immobile.isActive()) {
+                Path pathFirstImmobileImage = Paths.get(immobile.getFiles().get(0));
+                String imageImmobile = baseUrl + baseUrlImmobileFilesApi + pathFirstImmobileImage;
 
-            String imageImmobile = baseUrl + baseUrlImmobileFilesApi + pathFirstImmobileImage;
+                ImmobileByProfileDTO profileDTO = new ImmobileByProfileDTO(
+                        immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
+                        imageImmobile, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
+                );
 
-            ImmobileByProfileDTO profileDTO = new ImmobileByProfileDTO(
-                    immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
-                    imageImmobile, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
-            );
-
-            immobiles.add(profileDTO);
+                immobiles.add(profileDTO);
+            }
         }
 
         String imageProfile = baseUrl + baseUrlProfileFilesApi + user.getImageProfile();

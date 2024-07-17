@@ -2,11 +2,12 @@
 
 <section class="main-section">
      <h1>Vamos publicar o seu imóvel de forma simples</h1>
-     <p class="subtitle">Use a sessão a baixo para enviar as imagens do seu imóvel!</p>
+     <p class="subtitle-1">Use a sessão a baixo para enviar as imagens do seu imóvel!</p>
+     <p class="subtitle">As imagens devem conter até 10MB</p>
      <form id="form" [formGroup]="form">
           <section class="upload-images">
                <div class="upload-button upload-button-bg">
-                    <input formControlName="imagens" type="file" placeholder="Envie sua imagem" (change)="onFileChange($event)" multiple>
+                    <input formControlName="files" type="file" placeholder="Envie sua imagem" (change)="onFileChange($event)" multiple accept="image/*">
                </div>
                <div class="view-upload" #imageContainer>
                     <app-carrosel [images]="images"></app-carrosel>
@@ -18,15 +19,19 @@
      
                <section class="basic-informations">
                     <label class="title-label">Título do imóvel:</label>
+<<<<<<< HEAD
                     <input formControlName="titulo_do_imóvel" class="title-input" type="text" placeholder="Ex: Kitnet para alugar no centro" maxlength="100">
+=======
+                    <input formControlName="immobileTitle" class="title-input" type="text" placeholder="Ex: Kitnet para alugar no centro" maxlength="100">
+>>>>>>> c7446a510e3683dfd47a1b5ace3928a22b127b44
                     
                     <label class="address-label">Endereço:</label>
-                    <input formControlName="endereço" type="text" name="address" placeholder="Endereço">
+                    <input formControlName="address" type="text" name="address" placeholder="Endereço" maxlength="50">
           
                     <div class="state-city-neighborhood-address">
                          <div class="state">
                               <label>Estado:</label>
-                              <select id="estado-select" formControlName="estado" (change)="findCitiesByState($event)">
+                              <select id="estado-select" formControlName="state" (change)="findCitiesByState($event)">
                                    <option value="" disabled selected>Selecione</option>
                                    <option value="AC">Acre</option>
                                    <option value="AL">Alagoas</option>
@@ -59,24 +64,24 @@
                          </div>
                          <div class="city">
                               <label>Cidade:</label>
-                              <select formControlName="cidade" (click)="searchCity($event)">
+                              <select formControlName="city" (click)="searchCity($event)">
                                    <option value="" disabled selected>Selecione</option>
                                    <option *ngFor="let city of cities" [value]="city">{{ city }}</option> 
                               </select>
                          </div>
                          <div class="neighborhood">
                               <label>Bairro:</label>
-                              <input formControlName="bairro" type="text" name="neighborhood" placeholder="Nome do bairro...">
+                              <input formControlName="neighborhood" type="text" name="neighborhood" placeholder="Nome do bairro..." maxlength="50">
                          </div>
                     </div>
                     <div class="type-price-sellertype">
                          <div class="price">
                               <label>Preço:</label>
-                              <input formControlName="preço" type="text" name="price" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="R$ 150.000">
+                              <input formControlName="price" type="text" name="price" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="R$ 150.000">
                          </div>
                          <div class="type">
                               <label>O que você quer fazer?</label>
-                              <select formControlName="o_que_você_quer_fazer">
+                              <select formControlName="category">
                                    <option value="" disabled selected>Selecione</option>
                                    <option value="SELL">Vender</option>
                                    <option value="RENT">Alugar</option>
@@ -87,7 +92,7 @@
                          </div>
                          <div class="seller-type">
                               <label>Que tipo de vendedor você é?</label>
-                              <select formControlName="que_tipo_de_vendedor_você_é">
+                              <select formControlName="sellerType">
                                    <option value="" disabled selected>Selecione</option>
                                    <option value="OWNER">Vendedor próprio</option>
                                    <option value="BROKER">Corretor</option>
@@ -97,7 +102,7 @@
                     </div>
           
                     <label class="description-label">Descrição:</label>
-                    <textarea formControlName="descrição" class="description-textarea" placeholder=" Digite aqui a descrição do seu imóvel..."></textarea>
+                    <textarea formControlName="description" class="description-textarea" placeholder=" Digite aqui a descrição do seu imóvel..." maxlength="500"></textarea>
                </section>
           </div>
 
@@ -108,7 +113,7 @@
                     <div class="garage-quantityRooms-quantityBathrooms">
                          <div class="garage">
                               <label>Seu imóvel possui garagem?</label>
-                              <select formControlName="seu_imóvel_possui_garagem">
+                              <select formControlName="garage">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="true">Sim</option>
                                    <option value="false">Não</option>
@@ -116,7 +121,7 @@
                          </div>
                          <div class="quantityRooms">
                               <label>Quantidade de comodos:</label>
-                              <select formControlName="quantidade_de_comodos">
+                              <select formControlName="quantityRooms">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="1">1</option>
                                    <option value="2">2</option>
@@ -132,7 +137,7 @@
                          </div>
                          <div class="quantityBathrooms">
                               <label>Quantidade de banheiros:</label>
-                              <select formControlName="quantidade_de_banheiros">
+                              <select formControlName="quantityBathrooms">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="1">1</option>
                                    <option value="2">2</option>
@@ -144,7 +149,7 @@
                          </div>
                          <div class="integrity">
                               <label>Integridade do imóvel</label>
-                              <select formControlName="integridade_do_imóvel"><option value="" disabled selected>Selecione uma opção</option>
+                              <select formControlName="integrity"><option value="" disabled selected>Selecione uma opção</option>
                                    <option value="USED">Usado (Já ouveram moradores)</option>
                                    <option value="NEW">Planta (Nunca ouveram moradores)</option>
                               </select>
@@ -153,7 +158,7 @@
                     <div class="quantityBedrooms-iptu-suite-age">
                          <div class="quantityBedrooms">
                               <label>Quantidade de quartos do imóvel:</label>
-                              <select formControlName="quantidade_de_quartos_do_imóvel">
+                              <select formControlName="quantityBedrooms">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="1">1</option>
                                    <option value="2">2</option>
@@ -169,11 +174,11 @@
                          </div>
                          <div class="iptu">
                               <label>Valor do IPTU</label>
-                              <input formControlName="valor_do_IPTU" type="text" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="Digite aqui o valor do IPTU">
+                              <input formControlName="IPTU" type="text" prefix="R$ " mask="separator.2" thousandSeparator="." decimalMarker="," placeholder="Digite aqui o valor do IPTU">
                          </div>
                          <div class="suite">
                               <label>Seu imóvel possui suite?</label>
-                              <select formControlName="seu_imóvel_possui_suite">
+                              <select formControlName="suite">
                                    <option value="" dissabled selected>Selecione uma opção</option>
                                    <option value="true">Sim</option>
                                    <option value="false">Não</option>
@@ -181,7 +186,7 @@
                          </div>
                          <div class="age">
                               <label>Qual a idade do seu imóvel?</label>
-                              <select formControlName="qual_a_idade_do_seu_imóvel">
+                              <select formControlName="age">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="IN_THE_PLANT">Ainda na planta</option>
                                    <option value="BUILDING">Em construção</option>
@@ -199,7 +204,7 @@
                     <div class="type-totalarea-usefularea">
                          <div class="type">
                               <label>Tipo do imóvel:</label>
-                              <select formControlName="tipo_do_imóvel" name="property-type" id="property-type">
+                              <select formControlName="type" name="property-type" id="property-type">
                                    <option value="" disabled selected>Selecione uma opção</option>
                                    <option value="HOUSE">Casa</option>
                                    <option value="ROOM">Quarto</option>
@@ -224,11 +229,11 @@
                          </div>
                          <div class="totalarea">
                               <label>Qual a area total em m² (metros quadrados)?</label>
-                              <input formControlName="qual_a_area_total" type="number" placeholder="ex: 56">
+                              <input formControlName="totalArea" type="number" placeholder="ex: 56">
                          </div>
                          <div class="garden">
                               <label>Possui jardim?</label>
-                              <select formControlName="possui_jardim">
+                              <select formControlName="garden">
                                    <option value="" dissabled selected>Selecione uma opção</option>
                                    <option value="true">Sim</option>
                                    <option value="false">Não</option>

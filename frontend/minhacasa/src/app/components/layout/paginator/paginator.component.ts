@@ -10,35 +10,26 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class PaginatorComponent {
   @Input() length: number = 0;
   @Input() pageSize: number = 10;
-  @Input() pageIndex: number = 0;
+  pageIndex: number = 1;
 
-  @Output() page: EventEmitter<number> = new EventEmitter<number>();
+  @Output() previousPage = new EventEmitter<number>();
+  @Output() nextPage = new EventEmitter<number>();
 
   get totalPages(): number {
     return Math.ceil(this.length / this.pageSize);
   }
 
-  goToFirstPage() {
-    this.pageIndex = 0;
-    this.page.emit(this.pageIndex);
-  }
-
   goToPreviousPage() {
     if (this.pageIndex > 0) {
       this.pageIndex--;
-      this.page.emit(this.pageIndex);
+      this.previousPage.emit(this.pageIndex);
     }
   }
 
   goToNextPage() {
-    if (this.pageIndex < this.totalPages - 1) {
+    if (this.pageIndex) {
       this.pageIndex++;
-      this.page.emit(this.pageIndex);
+      this.nextPage.emit(this.pageIndex);
     }
-  }
-
-  goToLastPage() {
-    this.pageIndex = this.totalPages - 1;
-    this.page.emit(this.pageIndex);
   }
 }

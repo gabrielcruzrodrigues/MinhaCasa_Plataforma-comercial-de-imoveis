@@ -11,25 +11,25 @@
         <form id="form" [formGroup]="form">
             <section class="section1">
                 <div class="image-profile-div">
-                    <input formControlName="imagem_de_perfil" class="image-profile-input" type="file" id="imageProfileInput" name="image-profile" (change)="onFileSelect($event)">
+                    <input formControlName="image" class="image-profile-input" type="file" id="imageProfileInput" name="image-profile" (change)="onFileSelect($event)">
                 </div>
                 <div class="data1">
                     <label>Nome:</label>
-                    <input formControlName="nome" type="text" name="name" placeholder="Digite aqui o seu nome!">
+                    <input formControlName="name" type="text" name="name" placeholder="Digite aqui o seu nome!">
                     <label>Email:</label>
                     <input formControlName="email" type="email" name="email" placeholder="Digite aqui o seu email!">
                     <label>Data de nascimento:</label>
-                    <input formControlName="data_de_nascimento" type="date" name="dateOfBirth">
+                    <input formControlName="dateOfBirth" type="date" name="dateOfBirth">
                 </div>
             </section>
             <section class="section2">
                 <div class="data2">
                     <label>Telefone:</label>
-                    <input formControlName="telefone" type="tel" name="phone" placeholder="Ex: 55900000000">
+                    <input formControlName="phone" type="tel" name="phone" placeholder="Ex: 55900000000">
                     <label>Whatsapp:</label>
                     <input formControlName="whatsapp" type="tel" name="whatsapp" placeholder="Ex: 55900000000">
                     <label>Estado:</label>
-                    <select id="estado-select" formControlName="estado" (change)="findCitiesByState($event)">
+                    <select id="estado-select" formControlName="state" (change)="findCitiesByState($event)">
                         <option value="" disabled selected>Selecione um estado</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -60,22 +60,22 @@
                         <option value="TO">Tocantins</option>
                     </select>
                     <label>Cidade:</label>
-                    <select formControlName="cidade" (click)="searchCity($event)">
+                    <select formControlName="city" (click)="searchCity($event)">
                         <option value="" disabled selected>Selecione uma cidade</option>
                         <option *ngFor="let city of cities" [value]="city">{{ city }}</option> 
                     </select>
                 </div>
                 <div class="data3">
                     <label for="genderSelect">Gênero:</label>
-                    <select formControlName="gênero" name="genderInput" id="genderSelect">
+                    <select formControlName="gender" name="genderInput" id="genderSelect">
                         <option value="" disabled selected>Selecione o gênero</option>
                         <option value="MALE">Masculino</option>
                         <option value="FEMALE">Feminina</option>
                     </select>
                     <label>Senha:</label>
-                    <input formControlName="senha" type="password" name="password" placeholder="Digite uma senha de no mínimo 10 caracteres">
+                    <input formControlName="password" type="password" name="password" placeholder="Digite uma senha de no mínimo 10 caracteres">
                     <label>Verificar senha:</label>
-                    <input formControlName="verificação_de_senha" type="password" name="verify-password" placeholder="Digite a mesma senha do campo anterior!" (input)="verifyIfPasswordNotNull()">
+                    <input formControlName="passwordVerify" type="password" name="verify-password" placeholder="Digite a mesma senha do campo anterior!" (input)="verifyIfPasswordNotNull()">
                     <button (click)="verifyFields()">Finalizar cadastro</button>
                 </div>
             </section>

@@ -1,61 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { ArrowCarroselComponent } from '../layout/arrow-carrosel/arrow-carrosel.component';
 import { ImmobileService } from '../../services/immobile.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { LoadingComponent } from '../layout/loading/loading.component';
 import { FooterComponent } from '../layout/footer/footer.component';
-
-interface Body {
-  gatedCommunity: boolean;
-  videos: boolean;
-  beach: boolean;
-  disabledAccess: boolean;
-  playground: boolean;
-  grill: boolean;
-  energyGenerator: boolean;
-  closeToTheCenter: boolean;
-  elevator: boolean;
-  pool: boolean;
-  frontDesk: boolean;
-  multiSportsCourt: boolean;
-  gym: boolean;
-  steamRoom: boolean;
-  cableTV: boolean;
-  heating: boolean;
-  cabinetsInTheKitchen: boolean;
-  bathroomInTheRoom: boolean;
-  internet: boolean;
-  partyRoom: boolean;
-  airConditioning: boolean;
-  americanKitchen: boolean;
-  hydromassage: boolean;
-  fireplace: boolean;
-  privatePool: boolean;
-  electronicGate: boolean;
-  serviceArea: boolean;
-  pub: boolean;
-  closet: boolean;
-  office: boolean;
-  yard: boolean;
-  alarmSystem: boolean;
-  balcony: boolean;
-  concierge24Hour: boolean;
-  walledArea: boolean;
-  dogAllowed: boolean;
-  catAllowed: boolean;
-  cameras: boolean;
-  furnished: boolean;
-  seaView: boolean;
-}
+import { ConverterAgeToPortuguese } from '../../utils/ConverterAgeToPortuguese';
+import { ConverterCategoryToPortuguese } from '../../utils/ConverterCategoryToPortuguese';
+import { ConverterTypeForPortuguese } from '../../utils/ConverterTypeToPortuguese';
+import { ConverterSellerTypeToPortuguese } from '../../utils/ConverterSellerTypeToPortuguese';
+import { GetTrueBooleanFields } from '../../utils/GetTrueBooleanFields';
+import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 
 @Component({
   selector: 'app-immobile-details',
   standalone: true,
-  imports: [NavbarComponent, ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent],
+  imports: [NavbarComponent, ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent, ModalTextComponent],
   templateUrl: './immobile-details.component.html',
   styleUrl: './immobile-details.component.scss'
 })
@@ -63,8 +26,14 @@ export class ImmobileDetailsComponent implements OnInit{
   imagesUrl: string[] = [];
   immobileId: string | null = null;
   sellerId: string | null = null;
+  userId: string | null | undefined = null;
   isLoading: boolean = false;
+  showModalText: boolean = false;
+  message: string = '';
+  @ViewChild(ModalTextComponent) modalComponent!: ModalTextComponent;
+  isSeller: boolean = false;
 
+  id: string = '';
   name: string = '';
   address: string = '';
   state: string = '';
@@ -85,6 +54,7 @@ export class ImmobileDetailsComponent implements OnInit{
   usefulArea: string = '';
   IPTU: string = '';
   garden: string = '';
+  immobileSellerId: string = '';
 
   //seller
   sellerImage: string = '';
@@ -94,107 +64,13 @@ export class ImmobileDetailsComponent implements OnInit{
 
   trueBooleanFields: string[] = [];
 
-  booleanFields: (keyof Body)[] = [
-    'gatedCommunity', 'videos', 'beach', 'disabledAccess', 'playground', 'grill',
-    'energyGenerator', 'closeToTheCenter', 'elevator', 'pool', 'frontDesk',
-    'multiSportsCourt', 'gym', 'steamRoom', 'cableTV', 'heating', 'cabinetsInTheKitchen',
-    'bathroomInTheRoom', 'internet', 'partyRoom', 'airConditioning', 'americanKitchen',
-    'hydromassage', 'fireplace', 'privatePool', 'electronicGate', 'serviceArea', 'pub',
-    'closet', 'office', 'yard', 'alarmSystem', 'balcony', 'concierge24Hour', 'walledArea',
-    'dogAllowed', 'catAllowed', 'cameras', 'furnished', 'seaView'
-  ];
-
-  translations: { [key in keyof Body]: string } = {
-    gatedCommunity: 'Condomínio Fechado',
-    videos: 'Vídeos',
-    beach: 'Praia',
-    disabledAccess: 'Acesso para Deficientes',
-    playground: 'Playground',
-    grill: 'Churrasqueira',
-    energyGenerator: 'Gerador de Energia',
-    closeToTheCenter: 'Perto do Centro',
-    elevator: 'Elevador',
-    pool: 'Piscina',
-    frontDesk: 'Recepção',
-    multiSportsCourt: 'Quadra Poliesportiva',
-    gym: 'Academia',
-    steamRoom: 'Sauna',
-    cableTV: 'TV a Cabo',
-    heating: 'Aquecimento',
-    cabinetsInTheKitchen: 'Armários na Cozinha',
-    bathroomInTheRoom: 'Banheiro na Suíte',
-    internet: 'Internet',
-    partyRoom: 'Salão de Festas',
-    airConditioning: 'Ar-Condicionado',
-    americanKitchen: 'Cozinha Americana',
-    hydromassage: 'Hidromassagem',
-    fireplace: 'Lareira',
-    privatePool: 'Piscina Privada',
-    electronicGate: 'Portão Eletrônico',
-    serviceArea: 'Área de Serviço',
-    pub: 'Pub',
-    closet: 'Closet',
-    office: 'Escritório',
-    yard: 'Quintal',
-    alarmSystem: 'Sistema de Alarme',
-    balcony: 'Varanda',
-    concierge24Hour: 'Portaria 24h',
-    walledArea: 'Área Murada',
-    dogAllowed: 'Permite Cachorro',
-    catAllowed: 'Permite Gato',
-    cameras: 'Câmeras de Segurança',
-    furnished: 'Mobiliado',
-    seaView: 'Vista para o Mar'
-  };
-
-  body: Body = {
-    gatedCommunity: true,
-    videos: false,
-    beach: true,
-    disabledAccess: false,
-    playground: true,
-    grill: false,
-    energyGenerator: true,
-    closeToTheCenter: false,
-    elevator: true,
-    pool: true,
-    frontDesk: false,
-    multiSportsCourt: true,
-    gym: false,
-    steamRoom: true,
-    cableTV: true,
-    heating: false,
-    cabinetsInTheKitchen: true,
-    bathroomInTheRoom: false,
-    internet: true,
-    partyRoom: false,
-    airConditioning: true,
-    americanKitchen: false,
-    hydromassage: true,
-    fireplace: false,
-    privatePool: true,
-    electronicGate: false,
-    serviceArea: true,
-    pub: false,
-    closet: true,
-    office: false,
-    yard: true,
-    alarmSystem: false,
-    balcony: true,
-    concierge24Hour: false,
-    walledArea: true,
-    dogAllowed: true,
-    catAllowed: false,
-    cameras: true,
-    furnished: false,
-    seaView: true
-  };
-
   constructor(  
     private immobileService: ImmobileService, 
     private route: ActivatedRoute,
     private currencyPipe: CurrencyPipe,
-    private userService: UserService
+    private userService: UserService,
+    private cdr: ChangeDetectorRef,
+    private router: Router,
   ){}
 
   ngOnInit(): void {
@@ -202,9 +78,12 @@ export class ImmobileDetailsComponent implements OnInit{
     this.immobileId = this.route.snapshot.paramMap.get('id');
     this.sellerId = this.route.snapshot.paramMap.get('seller-id');
 
+    this.userId = this.userService.getIdOfTheUserLogged();
+
     this.immobileService.getImmobileWithCompleteImagesPath(this.immobileId).subscribe({
       next: (response: HttpResponse<any>) => {
-        this.populateFields(response.body);
+        this.immobileSellerId = response.body.sellerId;
+        this.populateFields(response.body.immobile);
 
         this.userService.findByIdForProfile(this.sellerId).subscribe({
           next: (response: HttpResponse<any>) => {
@@ -213,6 +92,10 @@ export class ImmobileDetailsComponent implements OnInit{
             this.sellerWhatsapp = response.body.whatsapp;
             this.sellerWhatsappLink = `https://wa.me/55${this.sellerWhatsapp}?text=Olá! Estou interessado(a) pela publicação "${this.name}", vim pelo minhacasa.com`;
             this.isLoading = false;
+
+            if (this.immobileSellerId == this.userId) {
+              this.isSeller = true;
+            }
           }
         })
       },
@@ -223,6 +106,8 @@ export class ImmobileDetailsComponent implements OnInit{
   }
   
   populateFields(body: any): void {
+    console.log(body);
+    this.id = body.id;
     this.imagesUrl = body.files;
     this.name = body.name;
     this.address = body.address;
@@ -257,138 +142,11 @@ export class ImmobileDetailsComponent implements OnInit{
       this.IPTU = `R$ ${body.iptu}`;
     }
     
-
-    let category = body.category;
-
-    switch (category) {
-      case 'SELL':
-        this.category = 'vender';
-        break;
-      case "RENT":
-        this.category = 'alugar';
-        break;
-      case "TEMPORARY_RENTAL":
-        this.category = "alugar por temporada";
-        break;
-      case "FINANCING":
-        this.category = "financiamento";
-        break;
-    }
-
-    let age = body.age;
-
-    switch(age) {
-      case 'IN_THE_PLANT':
-        this.age = 'na planta';
-        break;
-      case 'BUILDING':
-        this.age = 'construindo';
-        break;
-      case 'UP_TO_1_YEARS':
-        this.age = 'mais ou menos 1 ano';
-        break;
-      case 'UP_TO_2_YEARS':
-        this.age = 'mais de 2 anos';
-        break;
-      case 'UP_TO_5_YEARS':
-        this.age = 'mais de 5 anos';
-        break;
-      case 'UP_TO_10_YEARS':
-        this.age = 'mais de 10 anos';
-        break;
-      case 'UP_TO_20_YEARS':
-        this.age = 'mais de 20 anos';
-        break;
-      case 'UP_TO_30_YEARS':
-        this.age = 'mais de 30 anos';
-        break;
-      case 'UP_TO_40_YEARS':
-        this.age = 'mais de 40 anos';
-        break;
-      case 'OVER_50_YEARS':
-        this.age = 'mais de 50 anos';
-        break;
-      default:
-        this.age = 'idade não definida';
-    }
-
-    switch (body.type) {
-      case "HOUSE":
-        this.type = "Casa";
-        break;
-      case "ROOM":
-          this.type = "Quarto";
-          break;
-      case "ROOF":
-          this.type = "Cobertura";
-          break;
-      case "FLAT":
-          this.type = "Apartamento";
-          break;
-      case "KITNET":
-          this.type = "Kitnet";
-          break;
-      case "LOFT":
-          this.type = "Loft";
-          break;
-      case "STUDIO":
-          this.type = "Estúdio";
-          break;
-      case "DUPLEX":
-          this.type = "Duplex";
-          break;
-      case "TRIPLEX":
-          this.type = "Triplex";
-          break;
-      case "CONDOMINIUM":
-          this.type = "Condomínio";
-          break;
-      case "BUILDING":
-          this.type = "Prédio";
-          break;
-      case "SHEDS":
-          this.type = "Galpões";
-          break;
-      case "DEPOSITS":
-          this.type = "Depósito";
-          break;
-      case "OFFICES":
-          this.type = "Escritório";
-          break;
-      case "PARKING":
-          this.type = "Estacionamento";
-          break;
-      case "STORE":
-          this.type = "Loja";
-          break;
-      case "SUBDIVISION":
-          this.type = "Loteamento";
-          break;
-      case "GATED_COMMUNITY":
-          this.type = "Condomínio Fechado";
-          break;
-      case "FARM":
-          this.type = "Fazenda";
-          break;
-      default:
-          this.type = "Tipo não especificado";
-    }
-
-    switch (body.sellerType) {
-      case 'OWNER':
-        this.sellerType = 'proprietário';
-        break;
-      case 'BROKER':
-        this.sellerType = 'corretora';
-        break;
-      case 'REAL_ESTATE':
-        this.sellerType = 'imobiliária';
-        break;
-      default:
-        this.sellerType = 'vendedor não definido';
-    }
-
-    this.trueBooleanFields = this.getTrueBooleanFields(body);
+    this.category = ConverterCategoryToPortuguese.converter(body.category);
+    this.age = ConverterAgeToPortuguese.converter(body.age);
+    this.type = ConverterTypeForPortuguese.converter(body.type);
+    this.sellerType = ConverterSellerTypeToPortuguese.converter(body.sellerType);
+    this.trueBooleanFields = GetTrueBooleanFields.get(body);
   }
 
   verifyBoolean(variable : any): string {
@@ -400,8 +158,38 @@ export class ImmobileDetailsComponent implements OnInit{
     return this.currencyPipe.transform(numericPrice, 'BRL', 'symbol', '1.0-0') ?? '';
   }
 
-  getTrueBooleanFields(body: any): string[] {
-    const trueFields = this.booleanFields.filter(field => body[field] === true);
-    return trueFields.map(field => this.translations[field]);
+  activeModalText(text: string):void {
+    this.showModalText = false; //reset
+    setTimeout(() => {
+      this.message = text;
+      this.showModalText = true;
+      this.cdr.detectChanges();
+    });
+  }
+
+  waitForModalClose(): Promise<void> {
+    return new Promise(resolve => {
+      this.modalComponent.onClose.subscribe(() => resolve());
+    })
+  }
+
+  soldImmobile(): void {
+    this.immobileService.soldImmobile(this.id).subscribe({
+      next: (response: HttpResponse<any>) => {
+        console.log('oi');
+        if (response.status === 200) {
+          this.activeModalText('Imóvel marcado como vendido!');
+          this.waitForModalClose().then(() => {
+            this.router.navigate(["/profile"]);
+          });
+        } else {
+          this.activeModalText("Aconteceu um pequeno imprevisto, por favor tente mais tarde!");
+        }
+      },
+      error: (error) => {
+        this.activeModalText("Aconteceu um pequeno imprevisto, por favor tente mais tarde!");
+        console.log(`Erro ao tentar marcar o imóvel como vendido: ${error.message}`);
+      }
+    })
   }
 }

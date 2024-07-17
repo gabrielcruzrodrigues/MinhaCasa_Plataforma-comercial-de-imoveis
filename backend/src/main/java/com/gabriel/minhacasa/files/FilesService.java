@@ -3,6 +3,7 @@ package com.gabriel.minhacasa.files;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.FileNullContentException;
+import com.gabriel.minhacasa.exceptions.customizeExceptions.SaveFileErrorException;
 import com.gabriel.minhacasa.utils.GenerateNewName;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,26 +37,26 @@ public class FilesService {
 
              return filename;
          } catch (IOException ex) {
-            throw new RuntimeException("File Upload Failed.");
+            throw new SaveFileErrorException("File Upload Failed.");
          }
     }
 
     public List<String> uploadImmobileFile(List<MultipartFile> files, Immobile immobile) {
-        List<String> filesUser = new ArrayList<>();
+        List<String> referencesOfImmobileFiles = new ArrayList<>();
         if (!files.isEmpty()) {
             for (MultipartFile file : files) {
                 String filename = generateNewName.generateFileName(file, immobile.getName());
                 try {
                     Path targetLocation = fileStorageImmobileLocation.resolve(filename);
                     file.transferTo(targetLocation);
-                    filesUser.add(filename);
+                    referencesOfImmobileFiles.add(filename);
                 } catch (IOException ex) {
-                    throw new RuntimeException("File Upload Failed.");
+                    throw new SaveFileErrorException("File Upload Failed.");
                 }
             }
-            return filesUser;
+            return referencesOfImmobileFiles;
         } else {
-            throw new FileNullContentException("The file is nullable.");
+            throw new FileNullContentException("uploadImmobileFile: FilesService");
         }
     }
 }

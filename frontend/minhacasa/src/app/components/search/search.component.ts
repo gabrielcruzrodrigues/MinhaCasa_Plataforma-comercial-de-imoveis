@@ -129,7 +129,6 @@ export class SearchComponent implements OnInit {
     this.immobileService.search(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.cards = response.body;
-        console.log(this.cards);
         this.isLoading = false;
       },
       error: (error) => {
@@ -139,7 +138,6 @@ export class SearchComponent implements OnInit {
   }
 
   submitSearch(): void {
-    console.log(this.form.value);
     this.isLoading = true;
     this.cards = [];
     this.populateFormData();
@@ -209,6 +207,22 @@ export class SearchComponent implements OnInit {
 
   clearForm():void {
     this.setInitialFormValues();
+    this.submitSearch();
+  }
+
+  onPreviousPage(pageIndex: number) {
+    const newPageIndex = this.form.get('pageNumber')?.value - 1;
+    this.form.patchValue({
+      pageNumber: newPageIndex
+    });
+    this.submitSearch();
+  }
+
+  onNextPage(pageIndex: number) {
+    const newPageIndex = this.form.get('pageNumber')?.value + 1;
+    this.form.patchValue({
+      pageNumber: newPageIndex
+    });
     this.submitSearch();
   }
 

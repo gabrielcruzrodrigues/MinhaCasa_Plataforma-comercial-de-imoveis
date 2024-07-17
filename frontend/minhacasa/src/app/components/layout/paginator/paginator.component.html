@@ -1,9 +1,9 @@
 <div class="paginator-container">
-     <button class="paginator-button" (click)="goToPreviousPage()" [disabled]="pageIndex === 0" aria-label="Previous page">
+     <button class="paginator-button" (click)="goToPreviousPage()" [disabled]="pageIndex === 1" aria-label="Previous page">
          &#9664;
      </button>
-     <span class="page-info">Page {{pageIndex + 1}} of {{totalPages}}</span>
-     <button class="paginator-button" (click)="goToNextPage()" [disabled]="pageIndex >= totalPages - 1" aria-label="Next page">
+     <span class="page-info">Página {{pageIndex}}</span>
+     <button class="paginator-button" (click)="goToNextPage()" aria-label="Next page">
          &#9654;
      </button>
  </div>
