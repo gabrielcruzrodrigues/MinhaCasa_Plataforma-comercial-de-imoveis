@@ -58,29 +58,6 @@ export class CreateImmobileComponent implements OnInit{
   ) 
   {
     this.form = this.fb.group({
-<<<<<<< HEAD
-      imagens: [null, Validators.required],
-      titulo_do_imóvel: ['', Validators.required, Validators.maxLength(100)],
-      endereço: ['', Validators.required, Validators.maxLength(50)],
-      estado: ['', Validators.required],
-      cidade: ['', Validators.required,],
-      bairro: ['', Validators.required],
-      preço: ['', Validators.required],
-      o_que_você_quer_fazer: ['', Validators.required],
-      que_tipo_de_vendedor_você_é: ['', Validators.required],
-      descrição: ['', Validators.required, Validators.maxLength(500)],
-      seu_imóvel_possui_garagem: ['', Validators.required],
-      quantidade_de_comodos: ['', Validators.required],
-      quantidade_de_banheiros: ['', Validators.required],
-      integridade_do_imóvel: ['', Validators.required],
-      quantidade_de_quartos_do_imóvel: ['', Validators.required],
-      valor_do_IPTU: [''],
-      seu_imóvel_possui_suite: ['', Validators.required],
-      qual_a_idade_do_seu_imóvel: ['', Validators.required],
-      tipo_do_imóvel: ['', Validators.required],
-      qual_a_area_total: [''],
-      possui_jardim: ['', Validators.required],
-=======
       files: [null, Validators.required],
       immobileTitle: ['', Validators.required],
       address: ['', Validators.required],
@@ -102,7 +79,6 @@ export class CreateImmobileComponent implements OnInit{
       type: ['', Validators.required],
       totalArea: [''],
       garden: ['', Validators.required],
->>>>>>> c7446a510e3683dfd47a1b5ace3928a22b127b44
       gatedCommunity: [false],
       videos: [false],
       beach: [false],

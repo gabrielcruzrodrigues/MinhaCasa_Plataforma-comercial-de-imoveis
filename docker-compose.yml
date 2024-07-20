@@ -7,7 +7,7 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_DB=minhacasa
-      - POSTGRES_USER=user
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
   
   spring-app:
@@ -21,10 +21,10 @@ services:
   
   angular-app:
     build:
-      context: ./frontend
+      context: ./frontend/minhacasa
       dockerfile: Dockerfile
     ports:
-      - "9090"
+      - "9090:9090"
     depends_on:
       - spring-app
 
