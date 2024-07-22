@@ -13,6 +13,7 @@ import com.gabriel.minhacasa.repository.ImmobileRepositoryImpl;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ImmobileService {
@@ -252,6 +254,7 @@ public class ImmobileService {
     }
 
     public List<ImmobileByProfileDTO> findImmobileByParamsWithCompleteImagePath(SearchParamsDTO params) {
+        log.info("get data in findImmobileByParamsWithCompleteImagePath: " + params);
         List<Immobile> immobiles = this.immobileRepositorySearch.searchByParams(params);
         List<ImmobileByProfileDTO> immobilesWithCompletePath = new ArrayList<>();
 
@@ -268,6 +271,7 @@ public class ImmobileService {
 
             immobilesWithCompletePath.add(immobileByProfileDTO);
         }
+
 
         return immobilesWithCompletePath;
     }

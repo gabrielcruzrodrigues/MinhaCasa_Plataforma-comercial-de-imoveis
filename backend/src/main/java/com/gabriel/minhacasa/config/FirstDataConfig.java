@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -23,6 +24,7 @@ import java.util.Set;
 public class FirstDataConfig implements ApplicationRunner {
     private final UserRepository userRepository;
     private final ImmobileRepository immobileRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -36,7 +38,7 @@ public class FirstDataConfig implements ApplicationRunner {
             .phone("00000000000")
             .whatsapp("00000000000")
             .email("adm@gmail.com")
-            .password("12345678a!")
+            .password(this.passwordEncoder.encode("12345678a!"))
             .dateOfBirth(LocalDate.of(1990, 1, 1))
             .state("São Paulo")
             .gender(GenderEnum.MALE)
