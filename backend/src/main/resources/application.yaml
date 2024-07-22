@@ -1,22 +1,7 @@
 spring:
+  application:
+    name: minhacasa
   servlet:
     multipart:
       max-file-size: 200MB
       max-request-size: 200MB
-  datasource:
-    username: postgres
-    url: jdbc:postgresql://postgres-db:5432/minhacasa
-    password: 1234
-  jpa:
-    hibernate:
-      ddl-auto: update
-      show-sql: true
-
-#path for save files
-file.upload-image-profile-dir: "C:/minhacasa/images-profile"
-file.upload-image-immobile-dir: "C:/minhacasa/files-immobile"
-
-#path for mount files
-base-url: "http://localhost:8080"
-base-url-user-files-api: "/api/files/download/profile/"
-base-url-immobile-files-api: "/api/files/download/immobile/"

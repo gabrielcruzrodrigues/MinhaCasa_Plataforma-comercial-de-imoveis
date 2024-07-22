@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +21,9 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
+@Profile("dev")
 @Slf4j
-public class FirstDataConfig implements ApplicationRunner {
+public class Dev_FirstDataConfig implements ApplicationRunner {
     private final UserRepository userRepository;
     private final ImmobileRepository immobileRepository;
     private final PasswordEncoder passwordEncoder;
