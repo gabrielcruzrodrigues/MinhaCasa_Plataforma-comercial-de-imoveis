@@ -11,8 +11,8 @@ spring:
 info: ===== production =====
 
 #path for save files
-file.upload-image-profile-dir: "C:/minhacasa/images-profile"
-file.upload-image-immobile-dir: "C:/minhacasa/files-immobile"
+file.upload-image-profile-dir: "/app/images-profile"
+file.upload-image-immobile-dir: "/app/files-immobile"
 
 #path for mount files
 base-url: "http://localhost:8080"
