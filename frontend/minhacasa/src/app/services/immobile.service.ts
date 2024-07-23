@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { enviroment } from '../../environment';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImmobileService {
-  readonly url = enviroment.url + '/immobile'
+  readonly url = environment.url + '/immobile'
 
   constructor(private http: HttpClient) { }
 
