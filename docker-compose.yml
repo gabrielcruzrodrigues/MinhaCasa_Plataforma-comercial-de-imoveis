@@ -25,7 +25,7 @@ services:
   
   angular-app:
     build:
-      context: ./frontend/minhacasa
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "9090:9090"
