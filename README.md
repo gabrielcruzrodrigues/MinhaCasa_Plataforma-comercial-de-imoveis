@@ -6,7 +6,7 @@ Recursos Principais:
 #### Cadastro e Gestão de Imóveis: 
 Os usuários podem cadastrar facilmente seus imóveis para venda ou locação, gerenciando todas as informações relevantes de forma eficiente.
 #### Super Filtro Avançado: 
-Utilizando tecnologias de filtragem avançada, como integração com Angular e TypeScript, o MinhaCasa permite que os usuários encontrem o imóvel ideal de acordo com suas preferências específicas.
+Utilizando tecnologias de filtragem avançada, o MinhaCasa permite que os usuários encontrem o imóvel ideal de acordo com suas preferências específicas.
 #### Segurança e Privacidade: 
 Implementação de Spring Security garante a segurança dos dados dos usuários e protege as transações realizadas na plataforma.
 #### Testes Unitários: 
