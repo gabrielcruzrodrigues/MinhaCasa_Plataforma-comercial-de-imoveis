@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  # postgres-db:
-  #   image: postgres:15
-  #   ports:
-  #     - "5432:5432"
-  #   environment:
-  #     - POSTGRES_DB=minhacasa
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=1234
+  postgres-db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=minhacasa
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
   
   spring-app:
     build:
@@ -16,12 +16,12 @@ services:
       dockerfile: Dockerfile
     ports:
      - "8080:8080"
-    # depends_on:
-    #   - postgres-db
+    depends_on:
+      - postgres-db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://minhacasa-db.c7qsqqusu74x.us-east-2.rds.amazonaws.com
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/minhacasa
       - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=Asdfg;lkjh1472583690!
+      - SPRING_DATASOURCE_PASSWORD=1234
   
   angular-app:
     build:
