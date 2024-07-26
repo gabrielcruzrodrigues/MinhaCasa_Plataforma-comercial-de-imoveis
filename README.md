@@ -28,4 +28,5 @@ Com uma interface moderna e responsiva, o MinhaCasa proporciona uma experiência
 * Backend Java 17/Spring
 
 ## 🔹Documentação
-Documentação em breve...
+A documentação do backend do projeto foi feita usando o Swagger, para acessar a documentação, acesse o link abaixo no navegador:<br>
+`http://localhost:8080/swagger-ui/index.html#/`

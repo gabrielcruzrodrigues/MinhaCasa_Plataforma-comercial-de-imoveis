@@ -4,6 +4,10 @@ package com.gabriel.minhacasa.controller;
 import com.gabriel.minhacasa.domain.DTO.*;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.service.ImmobileService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,40 +22,70 @@ public class ImmobileController {
 
     private final ImmobileService immobileService;
 
+    @Operation(description = "Criar novo imóvel.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Imóvel criado com sucesso."),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor."),
+        @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
+        @ApiResponse(responseCode = "400", description = "Lista de imagens vazia.")
+    })
     @PostMapping
-    public ResponseEntity<Object> create(@ModelAttribute CreateImmobileDTO request) { //change to modelAttribute
+    public ResponseEntity<Object> create(@ModelAttribute CreateImmobileDTO request) {
         this.immobileService.createImmobile(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @Operation(description = "Buscar imóvel pelo id.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Imóvel encontrado com sucesso."),
+        @ApiResponse(responseCode = "400", description = "Imóvel não encontrado.")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Immobile> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(this.immobileService.findById(id));
     }
 
+    @Operation(description = "Retorna uma lista com os imóveis e seus caminhos de imagens completos para download.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso."),
+        @ApiResponse(responseCode = "404", description = "Imóvel não encontrado.")
+    })
     @GetMapping("/details/{id}")
     public ResponseEntity<ImmobileWithSellerIdDTO> getImmobileWithFullImagePaths(@PathVariable Long id) {
         return ResponseEntity.ok().body(this.immobileService.getImmobileWithCompleteImagesPath(id));
     }
 
+    //add documentation after
     @PutMapping("/update")
     public ResponseEntity<Object> updateImmobile(@RequestBody UpdateImmobileDTO request) {
         this.immobileService.updateImmobile(request);
         return ResponseEntity.noContent().build();
     }
 
+    //add documentation after
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteImmobile(@PathVariable Long id) {
         this.immobileService.disableImmobile(id);
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(description = "Vender o imóvel e deletar suas imagens, exceto a primeira.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Processo de conclusão de venda feita com sucesso."),
+        @ApiResponse(responseCode = "404", description = "Imóvel não encontrado."),
+        @ApiResponse(responseCode = "500", description = "Erro ao tentar deletar as imagens.")
+    })
     @PutMapping("/sold/{id}")
     public ResponseEntity<Object> soldImmobile(@PathVariable Long id) {
         this.immobileService.soldImmobile(id);
         return ResponseEntity.ok().body("Immobile sold successfully");
     }
 
+    @Operation(description = "Fazer pesquisa de imóveis com base em paratros.")
+    @ApiResponses(value = { 
+        @ApiResponse(responseCode = "200", description = "Pesquisa feita com sucesso."),
+        
+    })
     @PostMapping("/search")
     public ResponseEntity<List<ImmobileByProfileDTO>> search(@ModelAttribute SearchParamsDTO params) {
         return ResponseEntity.ok().body(this.immobileService.findImmobileByParamsWithCompleteImagePath(params));
