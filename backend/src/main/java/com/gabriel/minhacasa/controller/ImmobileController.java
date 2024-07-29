@@ -3,6 +3,9 @@ package com.gabriel.minhacasa.controller;
 
 import com.gabriel.minhacasa.domain.DTO.*;
 import com.gabriel.minhacasa.domain.Immobile;
+import com.gabriel.minhacasa.security.accessInterfaces.AdminAccess;
+import com.gabriel.minhacasa.security.accessInterfaces.OwnerAccess;
+import com.gabriel.minhacasa.security.accessInterfaces.UserAccess;
 import com.gabriel.minhacasa.service.ImmobileService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +32,7 @@ public class ImmobileController {
         @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
         @ApiResponse(responseCode = "400", description = "Lista de imagens vazia.")
     })
+    @UserAccess
     @PostMapping
     public ResponseEntity<Object> create(@ModelAttribute CreateImmobileDTO request) {
         this.immobileService.createImmobile(request);
@@ -40,6 +44,7 @@ public class ImmobileController {
         @ApiResponse(responseCode = "200", description = "Imóvel encontrado com sucesso."),
         @ApiResponse(responseCode = "400", description = "Imóvel não encontrado.")
     })
+    @AdminAccess
     @GetMapping("/{id}")
     public ResponseEntity<Immobile> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(this.immobileService.findById(id));
@@ -55,15 +60,17 @@ public class ImmobileController {
         return ResponseEntity.ok().body(this.immobileService.getImmobileWithCompleteImagesPath(id));
     }
 
-    //add documentation after
+    //add documentation after because these endpoint is not active
+    @OwnerAccess
     @PutMapping("/update")
     public ResponseEntity<Object> updateImmobile(@RequestBody UpdateImmobileDTO request) {
         this.immobileService.updateImmobile(request);
         return ResponseEntity.noContent().build();
     }
 
-    //add documentation after
+    //add documentation after because these endpoint is not active
     @DeleteMapping("/{id}")
+    @AdminAccess
     public ResponseEntity<Object> deleteImmobile(@PathVariable Long id) {
         this.immobileService.disableImmobile(id);
         return ResponseEntity.noContent().build();
@@ -75,6 +82,7 @@ public class ImmobileController {
         @ApiResponse(responseCode = "404", description = "Imóvel não encontrado."),
         @ApiResponse(responseCode = "500", description = "Erro ao tentar deletar as imagens.")
     })
+    @OwnerAccess
     @PutMapping("/sold/{id}")
     public ResponseEntity<Object> soldImmobile(@PathVariable Long id) {
         this.immobileService.soldImmobile(id);

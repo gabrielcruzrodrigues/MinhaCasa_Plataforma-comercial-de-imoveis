@@ -45,7 +45,7 @@ public class Dev_FirstDataConfig implements ApplicationRunner {
             .state("São Paulo")
             .gender(GenderEnum.MALE)
             .city("São Paulo")
-            .role(Set.of("ROLE_USER", "ROLE_ADMIN"))
+            .role(Set.of("ADMIN"))
             .createdAt(LocalDateTime.now())
             .contractQuantities(5L)
             .imageProfile("Gabriel Cruz Rodrigues_c23bb95b-e.jpg")
