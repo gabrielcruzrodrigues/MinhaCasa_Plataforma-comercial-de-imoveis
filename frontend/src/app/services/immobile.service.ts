@@ -2,17 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImmobileService {
-  readonly url = environment.url + '/immobile'
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  constructor(private http: HttpClient) { }
-
+  readonly url = environment.url + '/immobile';
+  
   create(data: any): Observable<any> {
-    return this.http.post(this.url, data, {observe: 'response'});
+    const headers = this.authService.getHeaders();
+    return this.http.post(this.url, data, {headers, observe: 'response'});
   }
 
   getImmobileWithCompleteImagesPath(id: any): Observable<any> {
