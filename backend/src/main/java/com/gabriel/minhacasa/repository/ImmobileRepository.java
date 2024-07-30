@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ImmobileRepository extends JpaRepository<Immobile, Long> {
 
-     @Query(value = "SELECT * FROM Immobile ORDER BY DESC LIMIT 4", nativeQuery = true)
+     @Query(value = "SELECT * FROM Immobile ORDER BY RANDOM() LIMIT 4", nativeQuery = true)
      List<Immobile> find4RandomProducts();
 }

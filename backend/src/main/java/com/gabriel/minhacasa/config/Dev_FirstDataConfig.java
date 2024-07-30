@@ -30,10 +30,6 @@ public class Dev_FirstDataConfig implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        log.info("=======================================================");
-        log.info("Nenhum usuário encontrado, cadastrando usuários padrão.");
-        log.info("=======================================================");
-
         User user = User.builder()
             .id(1L)
             .name("admin")
@@ -57,11 +53,18 @@ public class Dev_FirstDataConfig implements ApplicationRunner {
             .build();
 
         if (userRepository.count() == 0) {
+            log.info("=======================================================");
+            log.info("Nenhum usuário encontrado, cadastrando usuários padrão.");
+            log.info("=======================================================");
             userRepository.save(user);
         }
 
         if (userRepository.findById(1L).isPresent()) {
             for (int i = 0; i <= 20; i++) {
+                log.info("=======================================================");
+                log.info("Nenhum usuário encontrado, cadastrando imóveis padrão.");
+                log.info("=======================================================");
+
                 immobileRepository.save(
                     Immobile.builder()
                         .name("Casa de Praia")
