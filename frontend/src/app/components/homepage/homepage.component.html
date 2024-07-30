@@ -10,10 +10,18 @@
         <h3>Opções rápidas para você</h3>
         <p>Destaques da semana que você pode se interessar.</p>
         <div class="highlights-main">
-            <app-card></app-card>
-            <app-card></app-card>
-            <app-card></app-card>
-            <app-card></app-card>
+            <ng-container class="ngcontainer" *ngFor="let immobile of immobiles">
+                <app-card
+                    [id]="immobile.id"
+                    [quantityRooms]="immobile.quantityRooms"
+                    [quantityBedrooms]="immobile.quantityBedrooms"
+                    [quantityBathrooms]="immobile.quantityBathrooms"
+                    [imageUrl]="immobile.imageUrl"
+                    [price]="immobile.price"
+                    [name]="immobile.name"
+                    [sellerId]="immobile.sellerId">
+                </app-card>
+           </ng-container>
         </div>
     </section>
     <section class="filter">

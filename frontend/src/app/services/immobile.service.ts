@@ -29,4 +29,9 @@ export class ImmobileService {
     let urlForRequest = this.url + `/sold/${id}`;
     return this.http.put(urlForRequest, {}, {observe: 'response', responseType: 'text'});
   }
+
+  find4immobilesForHome(): Observable<any> {
+    let urlForRequest = this.url + '/cards';
+    return this.http.get(urlForRequest, {observe: 'response'});
+  }
 }
