@@ -253,10 +253,10 @@ public class ImmobileService {
         }
     }
 
-    public List<ImmobileByProfileDTO> findImmobileByParamsWithCompleteImagePath(SearchParamsDTO params) {
+    public List<ImmobileByCardsDTO> findImmobileByParamsWithCompleteImagePath(SearchParamsDTO params) {
         log.info("get data in findImmobileByParamsWithCompleteImagePath: " + params);
         List<Immobile> immobiles = this.immobileRepositorySearch.searchByParams(params);
-        List<ImmobileByProfileDTO> immobilesWithCompletePath = new ArrayList<>();
+        List<ImmobileByCardsDTO> immobilesWithCompletePath = new ArrayList<>();
 
         for (Immobile immobile : immobiles) {
             String fullImagePath;
@@ -264,15 +264,35 @@ public class ImmobileService {
             String path = immobile.getFiles().get(0);
             fullImagePath = this.baseUrl + this.baseUrlImmobileFilesApi + path;
 
-            ImmobileByProfileDTO immobileByProfileDTO = new ImmobileByProfileDTO(
+            ImmobileByCardsDTO immobileByCardsDTO = new ImmobileByCardsDTO(
                     immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
                     fullImagePath, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
             );
 
-            immobilesWithCompletePath.add(immobileByProfileDTO);
+            immobilesWithCompletePath.add(immobileByCardsDTO);
         }
 
 
         return immobilesWithCompletePath;
+    }
+
+    public List<ImmobileByCardsDTO> find4RandomImmobilesForHome() {
+        List<ImmobileByCardsDTO> immobilesWithFullPathImages = new ArrayList<>();
+        List<Immobile> immobiles = this.immobileRepository.find4RandomProducts();
+        for (Immobile immobile : immobiles) {
+            String fullImagePath;
+
+            String path = immobile.getFiles().get(0);
+            fullImagePath = this.baseUrl + this.baseUrlImmobileFilesApi + path;
+
+            ImmobileByCardsDTO immobileByCardsDTO = new ImmobileByCardsDTO(
+                immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
+                fullImagePath, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
+            );
+
+            immobilesWithFullPathImages.add(immobileByCardsDTO);
+        }
+
+        return immobilesWithFullPathImages;
     }
 }

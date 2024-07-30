@@ -95,7 +95,12 @@ public class ImmobileController {
         
     })
     @PostMapping("/search")
-    public ResponseEntity<List<ImmobileByProfileDTO>> search(@ModelAttribute SearchParamsDTO params) {
+    public ResponseEntity<List<ImmobileByCardsDTO>> search(@ModelAttribute SearchParamsDTO params) {
         return ResponseEntity.ok().body(this.immobileService.findImmobileByParamsWithCompleteImagePath(params));
+    }
+
+    @GetMapping("/cards")
+    public ResponseEntity<List<ImmobileByCardsDTO>> findImmobilesByCards() {
+        return ResponseEntity.ok().body(this.immobileService.find4RandomImmobilesForHome());
     }
 }

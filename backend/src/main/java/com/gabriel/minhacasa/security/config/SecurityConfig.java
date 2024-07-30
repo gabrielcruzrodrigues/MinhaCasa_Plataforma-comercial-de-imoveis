@@ -55,6 +55,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/user/profile/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/immobile/search").permitAll()
                         .requestMatchers(HttpMethod.GET, "/immobile/details/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/immobile/cards").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/files/download/profile/{filename:.+}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/files/download/immobile/{filename:.+}").permitAll()
 

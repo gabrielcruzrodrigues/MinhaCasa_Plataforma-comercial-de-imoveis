@@ -1,7 +1,7 @@
 package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.DTO.CreateUserDTO;
-import com.gabriel.minhacasa.domain.DTO.ImmobileByProfileDTO;
+import com.gabriel.minhacasa.domain.DTO.ImmobileByCardsDTO;
 import com.gabriel.minhacasa.domain.DTO.ProfileUserResponseDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateUserDTO;
 import com.gabriel.minhacasa.domain.Immobile;
@@ -77,7 +77,7 @@ public class UserService {
 
     public ProfileUserResponseDTO findByIdForProfile(Long id) throws IOException {
         User user = this.findById(id);
-        List<ImmobileByProfileDTO> immobiles = new ArrayList<>();
+        List<ImmobileByCardsDTO> immobiles = new ArrayList<>();
         List<Immobile> properties = user.getProperties();
 
         for (Immobile immobile : properties) {
@@ -85,7 +85,7 @@ public class UserService {
                 Path pathFirstImmobileImage = Paths.get(immobile.getFiles().get(0));
                 String imageImmobile = baseUrl + baseUrlImmobileFilesApi + pathFirstImmobileImage;
 
-                ImmobileByProfileDTO profileDTO = new ImmobileByProfileDTO(
+                ImmobileByCardsDTO profileDTO = new ImmobileByCardsDTO(
                         immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
                         imageImmobile, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
                 );

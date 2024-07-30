@@ -1,7 +1,7 @@
 package com.gabriel.minhacasa.service;
 
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
-import com.gabriel.minhacasa.domain.DTO.ImmobileByProfileDTO;
+import com.gabriel.minhacasa.domain.DTO.ImmobileByCardsDTO;
 import com.gabriel.minhacasa.domain.DTO.ImmobileWithSellerIdDTO;
 import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
 import com.gabriel.minhacasa.domain.Immobile;
@@ -223,7 +223,7 @@ class ImmobileServiceTest {
         when(this.immobileRepositorySearch.searchByParams(any(SearchParamsDTO.class))).thenReturn(List.of(this.immobile));
         String path = this.baseUrl + this.baseUrlImmobileFilesApi;
 
-        List<ImmobileByProfileDTO> response = this.immobileService.findImmobileByParamsWithCompleteImagePath(new SearchParamsDTO());
+        List<ImmobileByCardsDTO> response = this.immobileService.findImmobileByParamsWithCompleteImagePath(new SearchParamsDTO());
 
         assertNotNull(response);
         assertEquals(1, response.size());

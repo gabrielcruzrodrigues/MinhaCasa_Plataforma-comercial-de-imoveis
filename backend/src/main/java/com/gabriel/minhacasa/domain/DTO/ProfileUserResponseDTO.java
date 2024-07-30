@@ -11,7 +11,7 @@ public record ProfileUserResponseDTO(
     String email,
     String state,
     String city,
-    List<ImmobileByProfileDTO> immobiles,
+    List<ImmobileByCardsDTO> immobiles,
     String imageProfileUrl
 ) {
 }
