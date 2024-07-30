@@ -297,4 +297,28 @@ public class MainExceptionHandler {
                 .build();
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ErrorToSaveMessageException.class)
+    public ResponseEntity<StandardError> ErrorToSaveMessageException(ErrorToSaveMessageException ex, HttpServletRequest request) {
+        StandardError error = StandardError.builder()
+                .timeStamp(LocalDateTime.now())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .error(ex.getMessage())
+                .path(request.getRequestURI())
+                .fieldError("ErrorToSaveMessageException")
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(MessageNotFoundException.class)
+    public ResponseEntity<StandardError> MessageNotFoundException(MessageNotFoundException ex, HttpServletRequest request) {
+        StandardError error = StandardError.builder()
+                .timeStamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .error(ex.getMessage())
+                .path(request.getRequestURI())
+                .fieldError("MessageNotFoundException")
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
 }
