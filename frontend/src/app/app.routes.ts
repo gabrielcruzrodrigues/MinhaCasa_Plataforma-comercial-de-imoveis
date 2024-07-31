@@ -7,6 +7,7 @@ import { CreateImmobileComponent } from './components/create-immobile/create-imm
 import { ProfileComponent } from './components/profile/profile.component';
 import { ImmobileDetailsComponent } from './components/immobile-details/immobile-details.component';
 import { SearchComponent } from './components/search/search.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 export const routes: Routes = [
     {
@@ -32,5 +33,8 @@ export const routes: Routes = [
     },
     {
         path: 'search', component: SearchComponent
+    },
+    {
+        path: 'contact', component: ContactComponent
     }
 ]
