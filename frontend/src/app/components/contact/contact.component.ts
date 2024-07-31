@@ -9,5 +9,11 @@ import { NavbarComponent } from '../layout/navbar/navbar.component';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
+  constructor() {}
 
+  selectedOption: string = '';
+
+  selectOption(option: string) {
+    this.selectedOption = option;
+  }
 }

@@ -13,13 +13,19 @@
           <section class="submit">
                <h2>O que você quer reportar?</h2>
                <div class="options">
-                    <div class="radio">
-                         <label><input type="radio" name="type" value="ISSUE"> Reportar um problema.</label>
+                    <div class="radio" [class.selected]="selectedOption === 'ISSUE'" (click)="selectOption('ISSUE')">
+                        <label>
+                            <input type="radio" name="type" value="ISSUE">
+                            <span>Reportar um problema ⛔</span>
+                        </label>
                     </div>
-                    <div class="radio">
-                         <label><input type="radio" name="type" value="IDEA"> Sugerir uma ideia.</label>
+                    <div class="radio" [class.selected]="selectedOption === 'IDEA'" (click)="selectOption('IDEA')">
+                        <label>
+                            <input type="radio" name="type" value="IDEA">
+                            <span>Sugerir uma ideia 💡</span>
+                        </label>
                     </div>
-               </div>
+                </div>
                <button class="button">Enviar</button>
           </section>
      </section>
