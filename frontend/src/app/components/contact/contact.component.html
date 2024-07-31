@@ -4,11 +4,11 @@
      <h1>Entre em contato direto conosco!</h1>
      <p>Nos ajude a deixar a plataforma ainda melhor para todos!</p>
 </section>
-<form>
+<form id="form" [formGroup]="form">
      <section class="main-section">
      
           <section class="textarea-section">
-               <textarea name="text" class="textarea" placeholder="Digite o conteúdo aqui dentro!"></textarea>
+               <textarea name="text" formControlName="text" class="textarea" placeholder="Digite o conteúdo aqui dentro!"></textarea>
           </section>
           <section class="submit">
                <h2>O que você quer reportar?</h2>
@@ -26,7 +26,9 @@
                         </label>
                     </div>
                 </div>
-               <button class="button">Enviar</button>
+               <button class="button" (click)="submit()">Enviar</button>
           </section>
      </section>
 </form>
+<app-modal-text [showModal]="showModalText" [message]="message"></app-modal-text>
+<app-footer></app-footer>

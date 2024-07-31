@@ -1,13 +1,16 @@
 package com.gabriel.minhacasa.domain.DTO;
 
 import com.gabriel.minhacasa.domain.Message;
+import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.MessageTypeEnum;
+import com.gabriel.minhacasa.service.UserService;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
@@ -17,8 +20,6 @@ import java.time.LocalDateTime;
 @Setter
 public class MessageDTO {
 
-    @NotBlank @NotNull
-    String senderName;
     @NotNull
     Long senderId;
     @NotBlank
@@ -26,10 +27,11 @@ public class MessageDTO {
     @NotNull
     MessageTypeEnum type;
 
-    public Message createObjectMessage() {
+    public Message createObjectMessage(UserService userService) {
+        User user = userService.findById(this.senderId);
         return Message.builder()
                 .senderId(this.senderId)
-                .senderName(this.senderName)
+                .senderName(user.getName())
                 .text(this.text)
                 .type(type)
                 .createdAt(LocalDateTime.now())

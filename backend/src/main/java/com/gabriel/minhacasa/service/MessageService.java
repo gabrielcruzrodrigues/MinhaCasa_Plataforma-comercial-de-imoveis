@@ -17,10 +17,12 @@ public class MessageService {
 
     @Autowired
     private MessageRepository messageRepository;
+    @Autowired
+    private UserService userService;
 
     @Transactional
     public void create(MessageDTO messageDTO) {
-        Message message = messageDTO.createObjectMessage();
+        Message message = messageDTO.createObjectMessage(userService);
         try {
             this.messageRepository.save(message);
         } catch (Exception ex) {

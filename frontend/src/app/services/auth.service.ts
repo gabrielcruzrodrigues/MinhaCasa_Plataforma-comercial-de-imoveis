@@ -19,11 +19,10 @@ export class AuthService {
   }
 
   getUserId() {
-    const id = localStorage.getItem('userId');
-    if (id) {
-      return id;
+    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+      return localStorage.getItem('userId');
     } else {
-      return 'usuário não authenticado!';
+      return;
     }
   }
 
