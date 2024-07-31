@@ -18,6 +18,15 @@ export class AuthService {
     }
   }
 
+  getUserId() {
+    const id = localStorage.getItem('userId');
+    if (id) {
+      return id;
+    } else {
+      return 'usuário não authenticado!';
+    }
+  }
+
   verifyIfAreLoggedIn() {
     if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
       const token = localStorage.getItem('token');
