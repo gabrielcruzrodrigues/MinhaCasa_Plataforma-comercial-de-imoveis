@@ -36,11 +36,7 @@ public class MessageService {
     }
 
     public List<Message> findByType(String type) {
-        if (type != null) {
-            return this.messageRepository.findMessagesByType(type);
-        } else {
-            return List.of();
-        }
+        return this.messageRepository.findMessagesByType(type);
     }
 
     public List<Message> findBySenderName(String senderName) {
