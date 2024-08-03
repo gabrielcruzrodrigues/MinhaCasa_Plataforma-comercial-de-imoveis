@@ -1,0 +1,25 @@
+@import '../../scss/color-variables.scss';
+
+.title {
+     text-align: center;
+     padding: 3% 5% 0 5%;
+}
+
+.title h1 {
+     color: $primary-color;
+     font-size: 2.5rem;
+     margin-bottom: 0.9375rem;
+}
+
+.plans {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     width: 80%;
+     padding: 5% 10%;
+}
+
+.card {
+     border: 1px solid black;
+     width: 30%;
+}
