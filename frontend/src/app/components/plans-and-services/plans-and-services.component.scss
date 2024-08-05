@@ -1,4 +1,7 @@
 @import '../../scss/color-variables.scss';
+p {
+     margin: 0;
+}
 
 .title {
      text-align: center;
@@ -16,10 +19,102 @@
      flex-direction: row;
      justify-content: space-between;
      width: 80%;
-     padding: 5% 10%;
+     padding: 3% 10%;
 }
 
 .card {
-     border: 1px solid black;
+     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.2);
+     border: 1px solid #ccc;
+     border-radius: 15px;
      width: 30%;
+     height: 1000px;
+     cursor: pointer;
+}
+
+.card:hover {
+     box-shadow: 0px 2px 5px 5px ($primary-color);
+}
+
+.icon {
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     align-items: center;
+     padding: 25px 10px 10px 10px;
+}
+
+.icon img {
+     max-width: 40px;
+     max-height: 40px;
+     padding: 0 15px;
+}
+
+.icon h2 {
+     font-size: 25px;
+     margin: 0;
+}
+
+.description {
+     width: 80%;
+     height: 80px;
+     padding: 10%;
+     text-align: center;
+}
+
+.houses {
+     width: 100%;
+}
+
+.houses h3 {
+     text-align: center;
+     font-weight: 700;
+     margin-top: 10px;
+}
+
+.blocks {
+     border: 1px solid #aaaaaa;
+     border-radius: 15px;
+     width: 60%;
+     height: 50px;
+     margin: auto;
+     display: flex;
+     justify-content: space-between;
+}
+
+.block {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     border-radius: 15px;
+     width: 70px;
+     height: 100%;
+     font-size: 16px;
+}
+
+.block p {
+     background-attachment: red;
+     margin: 0;
+}
+
+.select {
+     background-color: $primary-color;
+     border-radius: 14px;
+     border: none;
+}
+
+.price {
+     height: 100px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-top: 20px;
+}
+
+.price-itens{
+     font-size: 20px;
+     padding: 0 6px;
+}
+
+.value {
+     font-size: 90px;
 }
