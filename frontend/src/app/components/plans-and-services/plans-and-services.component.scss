@@ -12,6 +12,13 @@ p {
      color: $primary-color;
      font-size: 2.5rem;
      margin-bottom: 0.9375rem;
+     font-weight: 500;
+     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.title p {
+     color: #858585;
+     font-size: 16px;
 }
 
 .plans {
@@ -19,16 +26,15 @@ p {
      flex-direction: row;
      justify-content: space-between;
      width: 80%;
-     padding: 3% 10%;
+     padding: 3% 10% 10% 10%;
 }
 
 .card {
-     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.2);
-     border: 1px solid #ccc;
+     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.1);
+     border: 2px solid #ccc;
      border-radius: 15px;
      width: 30%;
-     height: 1000px;
-     cursor: pointer;
+     height: 630px;
 }
 
 .card:hover {
@@ -72,7 +78,8 @@ p {
 }
 
 .blocks {
-     border: 1px solid #aaaaaa;
+     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.1);
+     border: 2px solid #aaaaaa;
      border-radius: 15px;
      width: 60%;
      height: 50px;
@@ -88,7 +95,7 @@ p {
      border-radius: 15px;
      width: 70px;
      height: 100%;
-     font-size: 16px;
+     font-size: 18px;
 }
 
 .block p {
@@ -98,6 +105,7 @@ p {
 
 .select {
      background-color: $primary-color;
+     color: white;
      border-radius: 14px;
      border: none;
 }
@@ -107,7 +115,7 @@ p {
      display: flex;
      justify-content: center;
      align-items: center;
-     margin-top: 20px;
+     margin-top: 15px;
 }
 
 .price-itens{
@@ -116,5 +124,57 @@ p {
 }
 
 .value {
-     font-size: 90px;
+     padding: 0 6px;
+     font-size: 70px;
+     font-weight: 700;
+}
+
+button {
+     cursor: pointer;
+}
+
+button:hover {
+     background-color: #3c5fd3dc;
+}
+
+.button {
+     display: flex;
+     justify-content: center;
+     text-decoration: none;
+}
+
+.toSign {
+     width: 80%;
+     padding: 14px;
+     border-radius: 20px;
+     border: none;
+     background-color: $primary-color;
+     font-size: 16px;
+     display: flex;
+     justify-content: center;
+     font-weight: 600;
+     color: white;
+}
+
+.icon-button {
+     max-width: 20px;
+     padding-left: 10px;
+}
+
+h4 {
+     text-align: center;
+     padding-top: 30px;
+     font-weight: 500;
+     font-size: 16px;
+     color: #2b2b2b;
+}
+
+.list {
+     width: 80%;
+     padding: 0 20px;
+}
+
+.list ul {
+     margin: 0;
+     font-size: 15px;
 }
