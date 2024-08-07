@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginpageComponent } from './components/loginpage/loginpage.component';
-import { RegisterpageComponent } from './components/registerpage/registerpage.component';
 import { LogoutComponent } from './components/layout/logout/logout.component';
 import { CreateImmobileComponent } from './components/create-immobile/create-immobile.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -9,6 +8,7 @@ import { ImmobileDetailsComponent } from './components/immobile-details/immobile
 import { SearchComponent } from './components/search/search.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { PlansAndServicesComponent } from './components/plans-and-services/plans-and-services.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
     {
@@ -18,10 +18,10 @@ export const routes: Routes = [
         path: 'login', component: LoginpageComponent
     },
     {
-        path: 'register', component: RegisterpageComponent
+        path: 'logout', component: LogoutComponent
     },
     {
-        path: 'logout', component: LogoutComponent
+        path: 'register', component: RegisterComponent
     },
     {
         path: 'create-immobile', component: CreateImmobileComponent
