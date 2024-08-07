@@ -50,9 +50,6 @@ public class UserService {
         user.setEmail(userData.email());
         user.setPassword(passwordEncoder.encode(userData.password()));
         user.setDateOfBirth(userData.dateOfBirth());
-        user.setState(userData.state());
-        user.setGender(userData.gender());
-        user.setCity(userData.city());
         user.setRole(Set.of(RoleEnum.USER.toString()));
         user.setCreatedAt(LocalDateTime.now());
         user.setContractQuantities(0L);
@@ -98,7 +95,7 @@ public class UserService {
 
         return new ProfileUserResponseDTO(
                 user.getId(), user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
-                user.getEmail(), user.getState(), user.getCity(), immobiles, imageProfile
+                user.getEmail(), immobiles, imageProfile
         );
     }
 
@@ -111,9 +108,6 @@ public class UserService {
         user.setWhatsapp(userDTO.whatsapp());
         user.setEmail(userDTO.email());
         user.setDateOfBirth(userDTO.dateOfBirth());
-        user.setState(userDTO.state());
-        user.setGender(userDTO.gender());
-        user.setCity(userDTO.city());
 
         userRepository.save(user);
     }

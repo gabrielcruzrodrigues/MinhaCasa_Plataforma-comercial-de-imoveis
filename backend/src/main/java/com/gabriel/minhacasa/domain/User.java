@@ -1,7 +1,6 @@
 package com.gabriel.minhacasa.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gabriel.minhacasa.domain.enums.GenderEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -53,18 +52,6 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private LocalDate dateOfBirth;
-
-    @Column(nullable = false)
-    @NotBlank
-    private String state;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private GenderEnum gender;
-
-    @Column(nullable = false)
-    @NotBlank
-    private String city;
 
     @Column(nullable = false)
     private Set<String> role;

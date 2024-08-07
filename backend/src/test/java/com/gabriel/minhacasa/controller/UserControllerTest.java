@@ -42,14 +42,11 @@ class UserControllerTest {
     public static final String PHONE = "00000000000";
     public static final String WHATSAPP = "00000000000";
     public static final String EMAIL = "email@email.com";
-    public static final String STATE = "BA";
-    public static final String CITY = "cidade";
     public static final String IMAGE_PROFILE = "teste.png";
     public static final boolean ACTIVE = true;
     public static final LocalDateTime CREATED_AT = null;
     public static final Set<String> ROLE = Set.of(RoleEnum.USER.toString());
     public static final String PASSWORD = "12345678a!";
-    public static final GenderEnum GENDER = GenderEnum.MALE;
 
     //immobile attributes
     public static final String IMMOBILE_NAME = "Casa para alugar";
@@ -190,8 +187,6 @@ class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.phone").value(this.user.getPhone()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.whatsapp").value(this.user.getWhatsapp()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(this.user.getEmail()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.state").value(this.user.getState()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.city").value(this.user.getCity()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.imageProfileUrl").value("imageprofile.png"));
     }
 
@@ -219,10 +214,7 @@ class UserControllerTest {
                 EMAIL,
                 PASSWORD,
                 this.imageFile,
-                DATE_OF_BIRTH,
-                STATE,
-                GENDER,
-                CITY
+                DATE_OF_BIRTH
         );
 
         this.immobile = new Immobile(
@@ -247,8 +239,6 @@ class UserControllerTest {
                 .phone(PHONE)
                 .whatsapp(WHATSAPP)
                 .email(EMAIL)
-                .state(STATE)
-                .city(CITY)
                 .imageProfile(IMAGE_PROFILE)
                 .active(ACTIVE)
                 .createdAt(CREATED_AT)
@@ -263,8 +253,6 @@ class UserControllerTest {
                 PHONE,
                 WHATSAPP,
                 EMAIL,
-                STATE,
-                CITY,
                 List.of(),
                 "imageprofile.png"
         );

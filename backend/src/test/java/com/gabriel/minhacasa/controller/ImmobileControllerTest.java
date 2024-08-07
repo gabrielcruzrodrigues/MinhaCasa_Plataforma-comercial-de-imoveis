@@ -48,8 +48,6 @@ class ImmobileControllerTest {
     public static final LocalDateTime CREATED_AT = null;
     public static final Set<String> ROLE = Set.of(RoleEnum.USER.toString());
     public static final String PASSWORD = "12345678a!";
-    public static final GenderEnum GENDER = GenderEnum.MALE;
-
     public static final String IMMOBILE_NAME = "Casa para alugar";
     public static final String IMMOBILE_DESCRIPTION = "description";
     public static final String IMMOBILE_ADDRESS = "Rua 7";
@@ -325,8 +323,6 @@ class ImmobileControllerTest {
                 .phone(PHONE)
                 .whatsapp(WHATSAPP)
                 .email(EMAIL)
-                .state(STATE)
-                .city(CITY)
                 .imageProfile(IMAGE_PROFILE)
                 .active(ACTIVE)
                 .createdAt(CREATED_AT)

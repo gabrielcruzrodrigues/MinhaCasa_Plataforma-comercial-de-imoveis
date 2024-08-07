@@ -75,7 +75,7 @@ class UserServiceTest {
 
         CreateUserDTO createUserDTOWithoutImageProfile = new CreateUserDTO(
                 "Gabriel", "00000000000", "00000000000", "gabriel@gmail.com", "12345678a!",
-                null, LocalDate.of(2000, 8, 13), "BA", GenderEnum.MALE, "Salvador"
+                null, LocalDate.of(2000, 8, 13)
         );
 
         ImageProfileNotFoundException response = assertThrows(ImageProfileNotFoundException.class, () -> {
@@ -142,8 +142,6 @@ class UserServiceTest {
                 .phone("00000000000")
                 .whatsapp("00000000000")
                 .email("email@email.com")
-                .state("BA")
-                .city("cidade")
                 .properties(null)
                 .imageProfile(imageFile.getOriginalFilename())
                 .active(true)
@@ -195,8 +193,6 @@ class UserServiceTest {
                 .phone("00000000000")
                 .whatsapp("00000000000")
                 .email("email@email.com")
-                .state("BA")
-                .city("cidade")
                 .properties(null)
                 .imageProfile(imageFile.getOriginalFilename())
                 .active(true)
@@ -212,7 +208,7 @@ class UserServiceTest {
 
         this.createUserDTO = new CreateUserDTO(
                 "Gabriel", "00000000000", "00000000000", "gabriel@gmail.com", "12345678a!",
-                imageFile, LocalDate.of(2000, 8, 13), "BA", GenderEnum.MALE, "Salvador"
+                imageFile, LocalDate.of(2000, 8, 13)
         );
     }
 }

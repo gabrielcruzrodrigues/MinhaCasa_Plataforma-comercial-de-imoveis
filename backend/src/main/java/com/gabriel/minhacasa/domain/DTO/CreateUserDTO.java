@@ -1,6 +1,5 @@
 package com.gabriel.minhacasa.domain.DTO;
 
-import com.gabriel.minhacasa.domain.enums.GenderEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,12 +20,6 @@ public record CreateUserDTO(
         @NotNull
         MultipartFile imageProfile,
         @NotNull
-        LocalDate dateOfBirth,
-        @NotBlank
-        String state,
-        @NotNull
-        GenderEnum gender,
-        @NotBlank
-        String city
+        LocalDate dateOfBirth
 ) {
 }

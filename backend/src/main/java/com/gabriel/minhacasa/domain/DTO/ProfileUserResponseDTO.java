@@ -9,8 +9,6 @@ public record ProfileUserResponseDTO(
     String phone,
     String whatsapp,
     String email,
-    String state,
-    String city,
     List<ImmobileByCardsDTO> immobiles,
     String imageProfileUrl
 ) {
