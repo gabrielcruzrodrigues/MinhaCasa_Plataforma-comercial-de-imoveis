@@ -42,7 +42,7 @@ export class ContactComponent implements OnInit{
 
   ngOnInit(): void {
     if (!this.authService.verifyIfAreLoggedIn()) {
-      this.router.navigate(['/register']);
+      this.router.navigate(['/login']);
     } else {
       const id = this.authService.getUserId();
       this.form.patchValue({

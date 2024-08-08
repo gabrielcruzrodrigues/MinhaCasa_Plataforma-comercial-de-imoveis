@@ -14,6 +14,7 @@ import { CarroselComponent } from '../layout/carrosel/carrosel.component';
 import { LoadingComponent } from '../layout/loading/loading.component';
 import { NgxMaskDirective } from 'ngx-mask';
 import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
+import { AuthService } from '../../services/auth.service';
 
 interface cepInterface {
   nome: string
@@ -54,7 +55,8 @@ export class CreateImmobileComponent implements OnInit{
     private cepService: CepService,
     private cdr: ChangeDetectorRef,
     private immobileService: ImmobileService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) 
   {
     this.form = this.fb.group({
@@ -123,14 +125,19 @@ export class CreateImmobileComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    if (!this.authService.verifyIfAreLoggedIn()) {
+      this.router.navigate(['/login']);
+    } else {
+      const id = this.authService.getUserId();
+      this.form.patchValue({
+        senderId: id
+      })
+    }
+
     const id = this.userService.getIdOfTheUserLogged();
     if (id) {
       this.userId = id;
     }
-
-    // this.form.get('titulo_do_imóvel')?.valueChanges.subscribe(value => {
-    //   this.verifyLength(value.length, 'nome do imóvel', 100);
-    // })
   }
 
   submit():void {

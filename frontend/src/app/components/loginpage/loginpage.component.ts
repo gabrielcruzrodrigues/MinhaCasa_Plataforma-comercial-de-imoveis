@@ -53,7 +53,6 @@ export class LoginpageComponent {
 
       this.loginService.login(formData).subscribe({
         next: (response: HttpResponse<ResponseInterface>) => {
-          console.log(response);
           if (response.status == 200) {
             this.authService.configureLocalStorage(response.body);
             this.isLoading = false;
