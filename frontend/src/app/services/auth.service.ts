@@ -44,11 +44,15 @@ export class AuthService {
   }
 
   getHeaders() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      } else {
+        return new HttpHeaders();
+      }
     } else {
-      return new HttpHeaders();
+      return;
     }
   }
 }

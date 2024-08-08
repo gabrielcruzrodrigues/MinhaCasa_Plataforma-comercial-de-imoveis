@@ -48,4 +48,11 @@ export class ImmobileService {
     const urlForRequest = this.url + `/favorites/${userId}`;
     return this.http.get(urlForRequest, {headers: headers, observe: 'response'});
   }
+
+  searchIdsOfImmobilesFavorited() {
+    const userId = this.userService.getIdOfTheUserLogged();
+    const headers = this.authService.getHeaders();
+    const urlForRequest = this.url + `/favorites/user/${userId}`;
+    return this.http.get(urlForRequest, {headers: headers, observe: 'response'});
+  }
 }

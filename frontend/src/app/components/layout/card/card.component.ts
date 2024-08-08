@@ -1,20 +1,22 @@
 import { CommonModule, CurrencyPipe  } from '@angular/common';
-import {Component, Input } from '@angular/core';
+import {Component, Input, OnInit } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
+import { ImmobileService } from '../../../services/immobile.service';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, LoadingComponent],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent {
+export class CardComponent implements OnInit{
   isLoading: boolean = true;
   @Input() id: string = '';
   @Input() quantityRooms: string = '';
@@ -29,10 +31,38 @@ export class CardComponent {
     private currencyPipe: CurrencyPipe, 
     private router: Router,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private immobileService: ImmobileService
   ) {}
 
   isFavorited: boolean = false;
+  idsFavorited: number[] = [];
+
+  ngOnInit(): void {
+    if (this.authService.verifyIfAreLoggedIn()) {
+      this.immobileService.searchIdsOfImmobilesFavorited().subscribe({
+        next: (response: HttpResponse<any>) => {
+          if (response.status === 200) {
+            this.idsFavorited = response.body;
+            this.verifyIds();
+          } 
+        },
+        error: (error) => {
+          console.log(error)
+          console.log("Ocorreu um erro ao verificar se o card esta favoritado.");
+        }
+      })
+    } else {
+      this.isLoading = false;
+    }
+  }
+
+  verifyIds(): void {
+    if (this.idsFavorited.includes(Number(this.id))) {
+      this.isFavorited = true;
+    }
+    this.isLoading = false;
+  }
 
   toggleFavorite() {
     if (!this.authService.verifyIfAreLoggedIn()) {

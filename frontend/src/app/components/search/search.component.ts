@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { ImmobileService } from '../../services/immobile.service';
 import { HttpResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { LoadingComponent } from '../layout/loading/loading.component';
 import { CepService } from '../../services/cep.service';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { PaginatorComponent } from '../layout/paginator/paginator.component';
@@ -31,7 +30,7 @@ interface city {
   selector: 'app-search',
   standalone: true,
   imports: [
-    NavbarComponent, CardComponent, FormsModule, ReactiveFormsModule, CommonModule, LoadingComponent,
+    NavbarComponent, CardComponent, FormsModule, ReactiveFormsModule, CommonModule,
     ModalTextComponent, PaginatorComponent, NgxMaskDirective
   ],
   templateUrl: './search.component.html',
@@ -43,7 +42,6 @@ export class SearchComponent implements OnInit {
   pageNumber: number = 1;
   pageSize: number = 10;
   cards: cardInterface[] =[];
-  isLoading: boolean = true;
 
   cities: string[] = [];
   showModalText: boolean = false;
@@ -129,7 +127,6 @@ export class SearchComponent implements OnInit {
     this.immobileService.search(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.cards = response.body;
-        this.isLoading = false;
       },
       error: (error) => {
         console.log(error);
@@ -138,14 +135,12 @@ export class SearchComponent implements OnInit {
   }
 
   submitSearch(): void {
-    this.isLoading = true;
     this.cards = [];
     this.populateFormData();
     this.immobileService.search(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.cards = response.body;
         console.log(this.cards);
-        this.isLoading = false;
       },
       error: (error) => {
         console.log(error);
