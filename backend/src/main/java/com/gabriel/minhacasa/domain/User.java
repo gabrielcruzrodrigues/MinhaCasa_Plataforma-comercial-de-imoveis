@@ -62,7 +62,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Long contractQuantities;
 
-    @Column(nullable = false)
+    @Column
     private String imageProfile;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

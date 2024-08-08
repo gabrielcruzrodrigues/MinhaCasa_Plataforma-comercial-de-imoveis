@@ -18,8 +18,6 @@ public record CreateUserDTO(
         @NotBlank
         String password,
         @NotNull
-        MultipartFile imageProfile,
-        @NotNull
         LocalDate dateOfBirth
 ) {
 }

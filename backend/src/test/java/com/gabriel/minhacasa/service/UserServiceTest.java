@@ -55,37 +55,14 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("must create a new user with image profile with success")
-    void createUser_whenImageProfileExists_mustSavedUser() {
+    @DisplayName("must create a new user with success")
+    void createUser_mustSavedUser_success() {
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
-        when(filesService.uploadProfileFile(this.createUserDTO.imageProfile(), this.user)).thenReturn("path/to/uploaded/image");
         when(userRepository.save(any(User.class))).thenReturn(new User());
 
         this.userService.createUser(createUserDTO);
 
         verify(this.userRepository, times(1)).save(any(User.class));
-        verify(this.filesService, times(1)).uploadProfileFile(any(), any());
-    }
-
-    @Test
-    @DisplayName("must return a exception when have no image profile")
-    void createUser_whenImageProfileNotExists_mustReturnImageProfileNotFoundException() {
-        when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
-        when(userRepository.save(any(User.class))).thenReturn(new User());
-
-        CreateUserDTO createUserDTOWithoutImageProfile = new CreateUserDTO(
-                "Gabriel", "00000000000", "00000000000", "gabriel@gmail.com", "12345678a!",
-                null, LocalDate.of(2000, 8, 13)
-        );
-
-        ImageProfileNotFoundException response = assertThrows(ImageProfileNotFoundException.class, () -> {
-            this.userService.createUser(createUserDTOWithoutImageProfile);
-        });
-
-        assertNotNull(response);
-        assertEquals(ImageProfileNotFoundException.class, response.getClass());
-        verify(this.filesService, times(0)).uploadProfileFile(any(), any());
-        verify(this.userRepository, times(0)).save(any(User.class));
     }
 
     @Test
@@ -208,7 +185,7 @@ class UserServiceTest {
 
         this.createUserDTO = new CreateUserDTO(
                 "Gabriel", "00000000000", "00000000000", "gabriel@gmail.com", "12345678a!",
-                imageFile, LocalDate.of(2000, 8, 13)
+                LocalDate.of(2000, 8, 13)
         );
     }
 }

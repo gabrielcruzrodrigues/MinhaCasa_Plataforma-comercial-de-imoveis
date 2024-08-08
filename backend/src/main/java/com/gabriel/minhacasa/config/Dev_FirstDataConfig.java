@@ -41,7 +41,6 @@ public class Dev_FirstDataConfig implements ApplicationRunner {
             .role(Set.of("ADMIN"))
             .createdAt(LocalDateTime.now())
             .contractQuantities(5L)
-            .imageProfile("Gabriel Cruz Rodrigues_c23bb95b-e.jpg")
             .favorites(List.of())
             .properties(List.of())
             .facebook("admin")

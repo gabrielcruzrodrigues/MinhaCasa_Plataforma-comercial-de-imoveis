@@ -35,7 +35,7 @@ public class UserController {
         @ApiResponse(responseCode = "400", description = "Erro ao passar parâmetros incorretos na criação.")
     })
     @PostMapping
-    public ResponseEntity<Object> createUser(@ModelAttribute CreateUserDTO request) {
+    public ResponseEntity<Object> createUser(@RequestBody CreateUserDTO request) {
         this.userService.createUser(request);
         AuthenticatedResponseDTO authenticatedResponseDTO = this.authenticationService.loginUser(request.email(), request.password());
         return new ResponseEntity<>(authenticatedResponseDTO, HttpStatus.CREATED);

@@ -39,7 +39,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ImmobileService immobileService;
-    private final FilesService filesService;
 
     @Transactional
     public void createUser(CreateUserDTO userData) {
@@ -58,11 +57,6 @@ public class UserService {
         user.setFacebook(null);
         user.setInstagram(null);
         user.setActive(true);
-
-        if (userData.imageProfile() == null) {
-            throw new ImageProfileNotFoundException();
-        }
-        user.setImageProfile(this.filesService.uploadProfileFile(userData.imageProfile(), user));
 
         this.userRepository.save(user);
     }
@@ -90,13 +84,20 @@ public class UserService {
                 immobiles.add(profileDTO);
             }
         }
+        String imageProfile;
+        if (user.getImageProfile() != null) {
+            imageProfile = baseUrl + baseUrlProfileFilesApi + user.getImageProfile();
 
-        String imageProfile = baseUrl + baseUrlProfileFilesApi + user.getImageProfile();
-
-        return new ProfileUserResponseDTO(
-                user.getId(), user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
-                user.getEmail(), immobiles, imageProfile
-        );
+            return new ProfileUserResponseDTO(
+                    user.getId(), user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
+                    user.getEmail(), immobiles, imageProfile
+            );
+        } else {
+            return new ProfileUserResponseDTO(
+                    user.getId(), user.getName(), user.getDateOfBirth().toString(), user.getPhone(), user.getWhatsapp(),
+                    user.getEmail(), immobiles, null
+            );
+        }
     }
 
     @Transactional

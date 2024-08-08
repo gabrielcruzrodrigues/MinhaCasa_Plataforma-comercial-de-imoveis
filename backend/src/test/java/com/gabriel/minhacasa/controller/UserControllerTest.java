@@ -147,9 +147,8 @@ class UserControllerTest {
         when(this.authenticationService.loginUser(request.email(), request.password())).thenReturn(authenticatedDTO);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/user")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("email", request.email())
-                .param("password", request.password()))
+                .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\": \"" + request.email() + "\", \"password\": \"" + request.password() + "\"}"))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().json("{\"id\": 1, \"token\": \"token\", \"role\": \"USER\"}"));
     }
@@ -213,7 +212,6 @@ class UserControllerTest {
                 WHATSAPP,
                 EMAIL,
                 PASSWORD,
-                this.imageFile,
                 DATE_OF_BIRTH
         );
 
