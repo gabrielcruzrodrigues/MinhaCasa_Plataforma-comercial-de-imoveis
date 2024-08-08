@@ -1,16 +1,17 @@
 export class ConverterFieldName {
      static fields: string[] = [
-          'image', 'name', 'dateOfBirth', 'phone','city', 'gender', 'password', 'passwordVerify', 'files','immobileTitle', 'address', 'state', 'city', 'neighborhood', 'price', 
-          'category', 'sellerType', 'description', 'garage', 'numberOfRooms', 
-          'numberOfBathrooms', 'propertyCondition', 'numberOfBedrooms', 'iptuValue', 
-          'hasSuite', 'propertyAge', 'propertyType', 'totalArea', 'hasGarden'
+          'image', 'name', 'dateOfBirth', 'phone','city', 'gender', 'password', 'passwordVerify', 'files','immobileTitle', 'address', 'state',
+          'city', 'neighborhood', 'price', 'category', 'sellerType', 'description', 'garage', 'numberOfRooms', 'numberOfBathrooms', 'propertyCondition', 
+          'numberOfBedrooms', 'iptuValue', 'hasSuite', 'propertyAge', 'propertyType', 'totalArea', 'hasGarden', 'email', 'whatsapp'
      ];
 
      static fieldMap: { [key: string]: string } = {
           'image': 'imagem de perfil',
           'name': 'nome',
-          'dateOfBirth': 'Data de aniversário',
-          'phone': 'telefone',
+          'email': 'email',
+          'dateOfBirth': 'data de aniversário',
+          'phone': 'telefone/whatsapp',
+          'whatsapp': 'whatsapp',
           'city': 'cidade',
           'gender': 'gênero',
           'password': 'senha',

@@ -1,10 +1,10 @@
 <section class="body">
      <section class="main-section">
-          <form>
+          <form id="form" [formGroup]="form">
                <section class="login">
                     <h2>Bem vindo!</h2>
                     <p>Se você ja tem uma conta, clique abaixo para fazer login</p>
-                    <button>Fazer login</button>
+                    <a href="/login">Fazer login</a>
                </section>
                <section class="register">
                     <div class="content">
@@ -12,21 +12,24 @@
                          <p>Crie uma conta para ter acesso a todas as funcionalidades</p>
                          <div class="inputs">
                               <div class="input">
-                                   <input type="text" placeholder="Nome">
-                                   <input type="email" placeholder="email">
-                                   <input type="date" placeholder="Data de aniversário">
+                                   <input formControlName="name" type="text" placeholder="Nome">
+                                   <input formControlName="email" type="email" placeholder="email">
+                                   <input formControlName="dateOfBirth" type="date" placeholder="Data de aniversário">
                               </div>
                               <div class="input">
-                                   <input type="number" placeholder="Telefone/whatsapp">
-                                   <input type="password" placeholder="Escolha uma senha">
-                                   <input type="password" placeholder="Repita a senha">
+                                   <input formControlName="phone" type="number" placeholder="Telefone/whatsapp">
+                                   <input formControlName="password" type="password" placeholder="Escolha uma senha">
+                                   <input formControlName="passwordVerify" type="password" placeholder="Repita a senha" (click)="verifyIfPasswordNotNull()">
                               </div>
                          </div>
                          <div class="button">
-                              <button class="submit">Finalizar cadastro</button>
+                              <button class="submit" (click)="verifyFields()">Finalizar cadastro</button>
                          </div>
                     </div>
                </section>
           </form>
      </section>
+     <app-modal-alert [showModal]="showModal" [field]="field"></app-modal-alert>
+     <app-modal-text [showModal]="showModalText" [message]="message"></app-modal-text>
+     <app-loading [isLoading]="isLoading"></app-loading>
 </section>
