@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+
+<section class="main-section">
+     <div class="cards">
+          <div class="card-div">
+               <ng-container class="ngcontainer" *ngFor="let immobile of cards">
+                    <app-card class="card"
+                         [id]="immobile.id"
+                         [quantityRooms]="immobile.quantityRooms"
+                         [quantityBedrooms]="immobile.quantityBedrooms"
+                         [quantityBathrooms]="immobile.quantityBathrooms"
+                         [imageUrl]="immobile.imageUrl"
+                         [price]="immobile.price"
+                         [name]="immobile.name"
+                         [sellerId]="immobile.sellerId">
+                    </app-card>
+               </ng-container>
+          </div>
+     </div>
+</section>

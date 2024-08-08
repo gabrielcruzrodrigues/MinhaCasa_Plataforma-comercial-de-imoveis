@@ -9,6 +9,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { PlansAndServicesComponent } from './components/plans-and-services/plans-and-services.component';
 import { RegisterComponent } from './components/register/register.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 export const routes: Routes = [
     {
@@ -40,5 +41,8 @@ export const routes: Routes = [
     },
     {
         path: 'plans-and-services', component: PlansAndServicesComponent
+    }, 
+    {
+        path: 'favorites', component: FavoritesComponent
     }
 ]

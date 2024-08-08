@@ -295,4 +295,39 @@ public class ImmobileService {
 
         return immobilesWithFullPathImages;
     }
+
+    private List<ImmobileByCardsDTO> createImmobileByCard(List<Immobile> immobiles) {
+        List<ImmobileByCardsDTO> immobilesWithFullPathImages = new ArrayList<>();
+
+        for (Immobile immobile : immobiles) {
+            String fullImagePath;
+
+            String path = immobile.getFiles().get(0);
+            fullImagePath = this.baseUrl + this.baseUrlImmobileFilesApi + path;
+
+            ImmobileByCardsDTO immobileByCardsDTO = new ImmobileByCardsDTO(
+                    immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
+                    fullImagePath, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
+            );
+
+            immobilesWithFullPathImages.add(immobileByCardsDTO);
+        }
+        return immobilesWithFullPathImages;
+    }
+
+    public List<Long> searchForUserFavoritesImmobilesId(Long id) {
+        return this.immobileRepository.findFavoritedImmobilesIdOfUser(id);
+    }
+
+    public List<ImmobileByCardsDTO> searchForUserFavoritesImmobiles(Long id) {
+        List<Long> favoritesImmobilesId = this.searchForUserFavoritesImmobilesId(id);
+        System.out.println(favoritesImmobilesId);
+        List<Immobile> immobiles = new ArrayList<>();
+
+        for (Long immobileId : favoritesImmobilesId) {
+            immobiles.add(this.findById(immobileId));
+        }
+
+        return this.createImmobileByCard(immobiles);
+    }
 }

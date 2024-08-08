@@ -56,7 +56,7 @@ public class Dev_FirstDataConfig implements ApplicationRunner {
         }
 
         if (userRepository.findById(1L).isPresent()) {
-            for (int i = 0; i <= 20; i++) {
+            for (int i = 0; i <= 2; i++) {
                 log.info("=======================================================");
                 log.info("Nenhum usuário encontrado, cadastrando imóveis padrão.");
                 log.info("=======================================================");

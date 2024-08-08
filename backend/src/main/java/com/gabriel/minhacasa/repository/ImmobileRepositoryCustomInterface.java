@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ImmobileRepositoryCustomInterface {
     List<Immobile> searchByParams(SearchParamsDTO params);
+
 }

@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.controller;
 
 import com.gabriel.minhacasa.domain.DTO.CreateUserDTO;
+import com.gabriel.minhacasa.domain.DTO.ImmobileByCardsDTO;
 import com.gabriel.minhacasa.domain.DTO.ProfileUserResponseDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateUserDTO;
 import com.gabriel.minhacasa.domain.User;

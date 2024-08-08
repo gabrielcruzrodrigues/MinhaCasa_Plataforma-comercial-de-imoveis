@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gabriel.minhacasa.domain.DTO.CardDTO;
 import com.gabriel.minhacasa.domain.enums.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

@@ -103,4 +103,9 @@ public class ImmobileController {
     public ResponseEntity<List<ImmobileByCardsDTO>> findImmobilesByCards() {
         return ResponseEntity.ok().body(this.immobileService.find4RandomImmobilesForHome());
     }
+
+    @GetMapping("/favorites/{userId}")
+    public ResponseEntity<List<ImmobileByCardsDTO>> findAllFavorites(@PathVariable Long userId) {
+        return ResponseEntity.ok().body(this.immobileService.searchForUserFavoritesImmobiles(userId));
+    }
 }
