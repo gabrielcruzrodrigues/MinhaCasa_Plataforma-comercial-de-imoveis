@@ -3,12 +3,17 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImmobileService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient, 
+    private authService: AuthService,
+    private userService: UserService  
+  ) {}
 
   readonly url = environment.url + '/immobile';
   
@@ -35,5 +40,12 @@ export class ImmobileService {
   find4immobilesForHome(): Observable<any> {
     let urlForRequest = this.url + '/cards';
     return this.http.get(urlForRequest, {observe: 'response'});
+  }
+
+  searchForUserFavoriteImmobiles(): Observable<any> {
+    const userId = this.userService.getIdOfTheUserLogged();
+    const headers = this.authService.getHeaders();
+    const urlForRequest = this.url + `/favorites/${userId}`;
+    return this.http.get(urlForRequest, {headers: headers, observe: 'response'});
   }
 }

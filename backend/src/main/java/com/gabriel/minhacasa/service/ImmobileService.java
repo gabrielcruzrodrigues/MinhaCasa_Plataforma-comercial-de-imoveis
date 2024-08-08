@@ -256,44 +256,24 @@ public class ImmobileService {
     public List<ImmobileByCardsDTO> findImmobileByParamsWithCompleteImagePath(SearchParamsDTO params) {
         log.info("get data in findImmobileByParamsWithCompleteImagePath: " + params);
         List<Immobile> immobiles = this.immobileRepositorySearch.searchByParams(params);
-        List<ImmobileByCardsDTO> immobilesWithCompletePath = new ArrayList<>();
-
-        for (Immobile immobile : immobiles) {
-            String fullImagePath;
-
-            String path = immobile.getFiles().get(0);
-            fullImagePath = this.baseUrl + this.baseUrlImmobileFilesApi + path;
-
-            ImmobileByCardsDTO immobileByCardsDTO = new ImmobileByCardsDTO(
-                    immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
-                    fullImagePath, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
-            );
-
-            immobilesWithCompletePath.add(immobileByCardsDTO);
-        }
-
-
-        return immobilesWithCompletePath;
+        return this.createImmobileByCard(immobiles);
     }
 
     public List<ImmobileByCardsDTO> find4RandomImmobilesForHome() {
-        List<ImmobileByCardsDTO> immobilesWithFullPathImages = new ArrayList<>();
         List<Immobile> immobiles = this.immobileRepository.find4RandomProducts();
-        for (Immobile immobile : immobiles) {
-            String fullImagePath;
+        return this.createImmobileByCard(immobiles);
+    }
 
-            String path = immobile.getFiles().get(0);
-            fullImagePath = this.baseUrl + this.baseUrlImmobileFilesApi + path;
+    public List<ImmobileByCardsDTO> searchForUserFavoritesImmobiles(Long id) {
+        List<Long> favoritesImmobilesId = this.searchForUserFavoritesImmobilesId(id);
+        System.out.println(favoritesImmobilesId);
+        List<Immobile> immobiles = new ArrayList<>();
 
-            ImmobileByCardsDTO immobileByCardsDTO = new ImmobileByCardsDTO(
-                immobile.getId(), immobile.getQuantityRooms(), immobile.getQuantityBedrooms(), immobile.getQuantityBathrooms(),
-                fullImagePath, immobile.getPrice(), immobile.getName(), immobile.getDescription(), immobile.getUser().getId()
-            );
-
-            immobilesWithFullPathImages.add(immobileByCardsDTO);
+        for (Long immobileId : favoritesImmobilesId) {
+            immobiles.add(this.findById(immobileId));
         }
 
-        return immobilesWithFullPathImages;
+        return this.createImmobileByCard(immobiles);
     }
 
     private List<ImmobileByCardsDTO> createImmobileByCard(List<Immobile> immobiles) {
@@ -317,17 +297,5 @@ public class ImmobileService {
 
     public List<Long> searchForUserFavoritesImmobilesId(Long id) {
         return this.immobileRepository.findFavoritedImmobilesIdOfUser(id);
-    }
-
-    public List<ImmobileByCardsDTO> searchForUserFavoritesImmobiles(Long id) {
-        List<Long> favoritesImmobilesId = this.searchForUserFavoritesImmobilesId(id);
-        System.out.println(favoritesImmobilesId);
-        List<Immobile> immobiles = new ArrayList<>();
-
-        for (Long immobileId : favoritesImmobilesId) {
-            immobiles.add(this.findById(immobileId));
-        }
-
-        return this.createImmobileByCard(immobiles);
     }
 }

@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { CardComponent } from '../layout/card/card.component';
 import { CommonModule } from '@angular/common';
+import { ImmobileService } from '../../services/immobile.service';
+import { response } from 'express';
+import { HttpResponse } from '@angular/common/http';
 
 interface cardInterface {
   id: string,
@@ -24,7 +27,27 @@ interface cardInterface {
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss'
 })
-export class FavoritesComponent {
+export class FavoritesComponent implements OnInit{
   cards: cardInterface[] =[];
   isLoading: boolean = true;
+
+  constructor(
+    private immobileService: ImmobileService
+  ) {}
+
+  ngOnInit(): void {
+    this.immobileService.searchForUserFavoriteImmobiles().subscribe({
+      next: (response: HttpResponse<any>) => {
+        if (response.status === 200) {
+          this.cards = response.body;
+          this.isLoading = false;
+        } else {
+          console.log("Um status code diferente do esperado foi retornado ao tentar buscar cards favoritos.");
+        }
+      },
+      error: () => {
+        console.log("Aconteceu um erro ao tentar buscar os imóveis favoritos do usuário.");
+      }
+    })
+  }
 }
