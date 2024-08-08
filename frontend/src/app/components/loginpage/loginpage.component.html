@@ -1,27 +1,33 @@
-<section class="main-section">
-    <section class="content">
-        <img src="/assets/background-login.jpg">
+<section class="body">
+    <section class="main-section">
+         <form id="form" [formGroup]="form">
+              <section class="register">
+                   <h2>Não tem uma conta?</h2>
+                   <p>Se você não tem uma conta, clique abaixo e faca o cadastro para ter acesso a todas as funcionalidades!</p>
+                   <a href="/register">Criar conta</a>
+              </section>
+              <section class="login">
+                   <div class="content">
+                        <h1>Fazer Login</h1>
+                        <p>Use os campos abaixo para acessar a sua conta!</p>
+                        <div class="inputs">
+                            <div class="input">
+                                <input formControlName="email" type="email" placeholder="Email">
+                                <input formControlName="password" type="password" placeholder="Senha">
+                            </div>
+                        </div>
+                        <div class="button">
+                             <button class="submit" (click)="verifyFields()">Entrar na minha conta</button>
+                        </div>
+                   </div>
+              </section>
+         </form>
     </section>
-    <section class="login">
-        <a href="/" class="back">
-            <img src="/assets/arrow-icon.png">
-            <span>voltar para o menu</span>
-        </a>
-
-        <img class="login-logo" src="/assets/logo-escura.png">
-        <h2>Acesse sua conta</h2>
-
-        <form [formGroup]="form">
-            <label>Email:</label>
-            <input type="email" formControlName="email" name="email" placeholder="Digite aqui o seu email" required>
-            <label>Senha:</label>
-            <input type="password" formControlName="password" name="password" placeholder="Digite aqui a sua senha" required>
-            <button (click)="submit()">Entrar</button>
-            <a class="login-recover" href="#">Esqueci a minha senha</a>
-            <a class="login-register" href="/register">Não tem uma conta? Registre-se clicando aqui</a>
-        </form>
-    </section>
-
     <app-loading [isLoading]="isLoading"></app-loading>
     <app-modal-text [showModal]="showModalText" [message]="message"></app-modal-text>
+    <app-modal-alert [showModal]="showModal" [field]="field"></app-modal-alert>
 </section>
+
+
+    
+

@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { LoadingComponent } from '../layout/loading/loading.component';
+import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component';
+import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
 
 interface ResponseInterface {
   id: number,
@@ -16,7 +18,9 @@ interface ResponseInterface {
 @Component({
   selector: 'app-loginpage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, ModalTextComponent, LoadingComponent],
+  imports: [
+    ReactiveFormsModule, FormsModule, ModalTextComponent, LoadingComponent, ModalAlertComponent
+  ],
   templateUrl: './loginpage.component.html',
   styleUrl: './loginpage.component.scss'
 })
@@ -27,6 +31,9 @@ export class LoginpageComponent {
   @ViewChild(ModalTextComponent) modalComponent!: ModalTextComponent;
   isLoading: boolean = false;
 
+  showModal: boolean = false;
+  field: string = '';
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -35,15 +42,15 @@ export class LoginpageComponent {
     private cdr: ChangeDetectorRef,
   ) {
       this.form = this.fb.group({
-        email: [''],
-        password: ['']
+        email: ['', Validators.required],
+        password: ['', Validators.required]
       });
     }
 
     submit() {
       this.isLoading = true;
       const formData = this.form.value;
-      console.log(formData);
+
       this.loginService.login(formData).subscribe({
         next: (response: HttpResponse<ResponseInterface>) => {
           console.log(response);
@@ -62,12 +69,37 @@ export class LoginpageComponent {
             this.activeModalText("Credenciais incorretas, tente novamente!");
           } else {
             this.activeModalText("Ocorreu um erro, tente novamente mais tarde!");
-            this.waitForModalClose().then(() => {
-              this.router.navigate(["/"]);
-            })
           }
         }
       })
+    }
+
+    verifyFields() {
+      const invalidFields = this.getInvalidFields();
+     
+      if (invalidFields[0]) {
+        this.showModal = false;
+        setTimeout(() => {
+          this.field = ConverterFieldName.verify(invalidFields[0]);
+          this.showModal = true;
+          this.cdr.detectChanges();
+        });
+      } else {
+        this.submit();
+      }
+    }
+  
+    getInvalidFields(): string[] {
+      const invalidFields: string[] = [];
+  
+      Object.keys(this.form.controls).forEach(key => {
+        const control = this.form.get(key);
+        if (control && control.invalid) {
+          invalidFields.push(key);
+        }
+      });
+  
+      return invalidFields;
     }
 
     activeModalText(text: string):void {

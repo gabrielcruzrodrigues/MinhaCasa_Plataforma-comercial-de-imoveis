@@ -3,7 +3,7 @@
           <form id="form" [formGroup]="form">
                <section class="login">
                     <h2>Bem vindo!</h2>
-                    <p>Se você ja tem uma conta, clique abaixo para fazer login</p>
+                    <p>Se você já tem uma conta, clique abaixo para fazer login</p>
                     <a href="/login">Fazer login</a>
                </section>
                <section class="register">
@@ -13,13 +13,13 @@
                          <div class="inputs">
                               <div class="input">
                                    <input formControlName="name" type="text" placeholder="Nome">
-                                   <input formControlName="email" type="email" placeholder="email">
+                                   <input formControlName="email" type="email" placeholder="Email">
                                    <input formControlName="dateOfBirth" type="date" placeholder="Data de aniversário">
                               </div>
                               <div class="input">
                                    <input formControlName="phone" type="number" placeholder="Telefone/whatsapp">
                                    <input formControlName="password" type="password" placeholder="Escolha uma senha">
-                                   <input formControlName="passwordVerify" type="password" placeholder="Repita a senha" (click)="verifyIfPasswordNotNull()">
+                                   <input formControlName="passwordVerify" type="password" placeholder="Digite a senha novamente" (click)="verifyIfPasswordNotNull()">
                               </div>
                          </div>
                          <div class="button">

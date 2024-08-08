@@ -65,9 +65,6 @@ export class RegisterComponent {
       error: () => {
         this.isLoading = false;
         this.activeModalText('Ocorreu um erro interno, por favor tente mais tarde!');
-        // this.waitForModalClose().then(() => {
-        //   this.router.navigate(["/"]);
-        // })
       }
     })
   }
