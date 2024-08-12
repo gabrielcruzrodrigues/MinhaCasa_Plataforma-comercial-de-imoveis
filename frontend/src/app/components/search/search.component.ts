@@ -56,26 +56,26 @@ export class SearchComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
-      pageNumber: [1], //
-      pageSize: [12], //
-      name: [''], //
-      city: [''], //
-      neighborhood: [''], //
-      state: [''], //
+      pageNumber: [1],
+      pageSize: [12],
+      name: [''],
+      city: [''],
+      neighborhood: [''],
+      state: [''],
       garage: [false],
-      quantityBedrooms: [''], //
-      quantityRooms: [''], //
-      iptu: [''], //
-      minPrice: [''], //
-      maxPrice: [''], //
+      quantityBedrooms: [''],
+      quantityRooms: [''],
+      iptu: [''],
+      minPrice: [''], 
+      maxPrice: [''], 
       suite: [false],
-      totalArea: [''], //
-      quantityBathrooms: [''], //
+      totalArea: [''],
+      quantityBathrooms: [''],
       integrity: [''],
-      sellerType: [''], //
-      age: [''],  //
+      sellerType: [''],
+      age: [''], 
       category: [''],
-      type: [''], //
+      type: [''],
       garden: [false],
       virtualTour: [false],
       videos: [false],
@@ -129,7 +129,7 @@ export class SearchComponent implements OnInit {
         this.cards = response.body;
       },
       error: (error) => {
-        console.log(error);
+        console.log("Ocorreu um erro ao tentar fazer a busca inicial de imóveis.");
       }
     })
   }
@@ -143,7 +143,7 @@ export class SearchComponent implements OnInit {
         console.log(this.cards);
       },
       error: (error) => {
-        console.log(error);
+        console.log("Ocorreu um erro ao tentar enviar o formulário de pesquisa.");
       }
     })
   }

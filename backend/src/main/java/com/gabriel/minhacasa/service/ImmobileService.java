@@ -149,6 +149,7 @@ public class ImmobileService {
         return immobile.orElseThrow(ImmobileNotFoundException::new);
     }
 
+    //missing testes
     public void updateImmobile(UpdateImmobileDTO immobileData) {
         Immobile immobile = Immobile.builder()
                 .name(immobileData.immobileTitle())
@@ -266,7 +267,6 @@ public class ImmobileService {
 
     public List<ImmobileByCardsDTO> searchForUserFavoritesImmobiles(Long id) {
         List<Long> favoritesImmobilesId = this.searchForUserFavoritesImmobilesId(id);
-        System.out.println(favoritesImmobilesId);
         List<Immobile> immobiles = new ArrayList<>();
 
         for (Long immobileId : favoritesImmobilesId) {

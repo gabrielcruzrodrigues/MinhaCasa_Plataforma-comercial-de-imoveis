@@ -46,9 +46,21 @@
                          </select>
                     </div>
                </div>
-               <div class="neighborhood">
-                    <label>Bairro:</label>
-                    <input type="text" formControlName="neighborhood">
+               <div class="neighborhood-category">
+                    <div class="neighborhood">
+                         <label>Bairro:</label>
+                         <input type="text" formControlName="neighborhood">
+                    </div>
+                    <div class="category">
+                         <label>Tipo de contrato:</label>
+                         <select formControlName="category">
+                              <option value="" disabled selected>Alugar/Vender</option>
+                              <option value="SELL" selected>Vender</option>
+                              <option value="RENT" selected>Alugar</option>
+                              <option value="TEMPORARY_RENTAL" selected>Alugar temporariamente</option>
+                              <option value="FINANCING" selected>Financiamento</option>
+                         </select>
+                    </div>
                </div>
                <div class="type-quantityRooms">
                     <div class="type">

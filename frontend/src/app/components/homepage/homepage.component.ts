@@ -37,7 +37,7 @@ export class HomepageComponent implements OnInit{
         this.immobiles = response.body;
       },
       error: (error) => {
-        console.log(error);
+        console.log("Ocorreu um erro ao tentar buscar os cards");
       }
     })
   }

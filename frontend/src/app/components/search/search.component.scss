@@ -45,7 +45,7 @@ select, input {
 }
 
 .state-city, .price, .iptu-totalArea, .type-quantityRooms,
-.quantityBedrooms-quantityBathrooms, .sellerType-age {
+.quantityBedrooms-quantityBathrooms, .sellerType-age, .neighborhood-category {
      width: 100%;
      display: flex;
      justify-content: space-between;
@@ -71,7 +71,7 @@ select, input {
 .iptu, .totalArea,
 .type, .quantityRooms,
 .quantityBedrooms, .quantityBathrooms,
-.sellerType, .age {
+.sellerType, .age, .neighborhood, .category {
      display: flex;
      flex-direction: column;
      width: 46%;

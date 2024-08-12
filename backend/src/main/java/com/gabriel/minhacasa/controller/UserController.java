@@ -1,17 +1,14 @@
 package com.gabriel.minhacasa.controller;
 
 import com.gabriel.minhacasa.domain.DTO.CreateUserDTO;
-import com.gabriel.minhacasa.domain.DTO.ImmobileByCardsDTO;
 import com.gabriel.minhacasa.domain.DTO.ProfileUserResponseDTO;
 import com.gabriel.minhacasa.domain.DTO.UpdateUserDTO;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.security.DTO.AuthenticatedResponseDTO;
 import com.gabriel.minhacasa.security.accessInterfaces.AdminAccess;
-import com.gabriel.minhacasa.security.accessInterfaces.OwnerAccess;
 import com.gabriel.minhacasa.security.accessInterfaces.UserAccess;
 import com.gabriel.minhacasa.security.service.AuthenticationService;
 import com.gabriel.minhacasa.service.UserService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

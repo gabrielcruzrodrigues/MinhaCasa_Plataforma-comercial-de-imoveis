@@ -1,6 +1,7 @@
 package com.gabriel.minhacasa.controller;
 
 import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
+import com.gabriel.minhacasa.domain.DTO.ImmobileByCardsDTO;
 import com.gabriel.minhacasa.domain.DTO.ImmobileWithSellerIdDTO;
 import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
 import com.gabriel.minhacasa.domain.Immobile;
@@ -24,6 +25,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.print.attribute.standard.Media;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -126,6 +128,7 @@ class ImmobileControllerTest {
 
     private Immobile immobile;
     private CreateImmobileDTO createImmobileDTO;
+    private ImmobileByCardsDTO immobileByCardsDTO;
     private User user;
     private final List<MultipartFile> imageFile = List.of(new MockMultipartFile("imageProfile", "teste.png", "image/jpeg", "dummy image content".getBytes()));
 
@@ -291,6 +294,64 @@ class ImmobileControllerTest {
                 .andExpect(MockMvcResultMatchers.content().json("[]"));
     }
 
+    @Test
+    @DisplayName("must return a list with immobileByCardsDto with success")
+    void findImmobilesByCards_mustReturnAListWithImmobileByCardsDto() throws Exception {
+        when(this.immobileService.find4RandomImmobilesForHome()).thenReturn(List.of(this.immobileByCardsDTO));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/immobile/cards")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[\n" +
+                        "    {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"quantityRooms\": 3,\n" +
+                        "        \"quantityBedrooms\": 3,\n" +
+                        "        \"quantityBathrooms\": 3,\n" +
+                        "        \"imageUrl\": \"teste.png\",\n" +
+                        "        \"price\": 150000,\n" +
+                        "        \"name\": \"Gabriel\",\n" +
+                        "        \"description\": \"description\",\n" +
+                        "        \"sellerId\": 1\n" +
+                        "    }]"));
+    }
+
+    @Test
+    @DisplayName("must return a list of ImmobileByCardsDto with all user favorite immobile")
+    void findAllFavorites_mustReturnAListOfImmobileByCardsDto_withAllUserFavoriteImmobile() throws Exception {
+        when(this.immobileService.searchForUserFavoritesImmobiles(anyLong())).thenReturn(List.of(this.immobileByCardsDTO));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/immobile/favorites/{userId}", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("userId", String.valueOf(1L)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[\n" +
+                        "    {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"quantityRooms\": 3,\n" +
+                        "        \"quantityBedrooms\": 3,\n" +
+                        "        \"quantityBathrooms\": 3,\n" +
+                        "        \"imageUrl\": \"teste.png\",\n" +
+                        "        \"price\": 150000,\n" +
+                        "        \"name\": \"Gabriel\",\n" +
+                        "        \"description\": \"description\",\n" +
+                        "        \"sellerId\": 1\n" +
+                        "    }]"));
+    }
+
+    @Test
+    @DisplayName("must return a list of Long with ids of immobiles favorited")
+    void findIdsOfImmobilesFavorited_mustReturnAListOfLongWithIdsOfImmobilesFavorited() throws Exception {
+        when(this.immobileService.searchForUserFavoritesImmobilesId(anyLong())).thenReturn(List.of(1L, 2L, 3L));
+        when(this.immobileRepository.findFavoritedImmobilesIdOfUser(anyLong())).thenReturn(List.of(1L, 2L, 3L));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/immobile/favorites/user/{userId}", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                    .param("userId", String.valueOf(1L)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[1, 2, 3]"));
+    }
+
     void startElements() {
         this.immobile = new Immobile(
                 ID, IMMOBILE_NAME, IMMOBILE_DESCRIPTION, IMMOBILE_ADDRESS, IMMOBILE_CITY, IMMOBILE_NEIGHBORHOOD, IMMOBILE_STATE,
@@ -329,6 +390,11 @@ class ImmobileControllerTest {
                 .properties(List.of(this.immobile))
                 .role(ROLE)
                 .build();
+
+        this.immobileByCardsDTO = new ImmobileByCardsDTO(
+                ID, QUANTITY_ROOMS, QUANTITY_BEDROOMS, QUANTITY_BATHROOMS, IMAGE_PROFILE,
+                PRICE, NAME, IMMOBILE_DESCRIPTION, ID
+        );
     }
 
 }

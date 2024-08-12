@@ -230,6 +230,43 @@ class ImmobileServiceTest {
         assertEquals(path + this.immobile.getFiles().get(0), response.get(0).imageUrl());
     }
 
+    @Test
+    @DisplayName("must return a list with 4 ImmobileByCardsDto")
+    void find4RandomImmobilesForHome_mustReturnAListWith4ImmobileByCardsDto() {
+        when(this.immobileRepository.find4RandomProducts()).thenReturn(List.of(this.immobile, this.immobile, this.immobile, this.immobile));
+
+        List<ImmobileByCardsDTO> response = this.immobileService.find4RandomImmobilesForHome();
+
+        assertNotNull(response);
+        assertEquals(ImmobileByCardsDTO.class, response.get(0).getClass());
+        assertEquals(4, response.size());
+    }
+
+    @Test
+    @DisplayName("must return a list of ImmobileByCardsDto with immobiles favorites by user")
+    void searchForUserFavoritesImmobiles_returnAListOfImmobileByCardsDto_withImmobilesFavoritesByUser() {
+        when(this.immobileRepository.findFavoritedImmobilesIdOfUser(anyLong())).thenReturn(List.of(1L, 2L, 3L, 4L));
+        when(this.immobileRepository.findById(anyLong())).thenReturn(Optional.of(this.immobile));
+
+        List<ImmobileByCardsDTO> response = this.immobileService.searchForUserFavoritesImmobiles(1L);
+
+        assertNotNull(response);
+        assertEquals(ImmobileByCardsDTO.class, response.get(0).getClass());
+        assertEquals(4, response.size());
+    }
+
+    @Test
+    @DisplayName("must return a list of Long with favorites immobiles id by user")
+    void searchForUserFavoritesImmobilesId_mustReturnAListOfLong_withFavoritesImmobilesIdByUser() {
+        when(this.immobileRepository.findFavoritedImmobilesIdOfUser(anyLong())).thenReturn(List.of(1L, 2L, 3L));
+
+        List<Long> response = this.immobileService.searchForUserFavoritesImmobilesId(1L);
+
+        assertNotNull(response);
+        assertEquals(3, response.size());
+        assertEquals(Long.class, response.get(0).getClass());
+    }
+
     void startImmobiles() {
         this.user = User.builder()
                 .id(1L)
