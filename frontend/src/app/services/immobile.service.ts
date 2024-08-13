@@ -55,4 +55,10 @@ export class ImmobileService {
     const urlForRequest = this.url + `/favorites/user/${userId}`;
     return this.http.get(urlForRequest, {headers: headers, observe: 'response'});
   }
+
+  findById(immobileId: any): Observable<any> {
+    const headers = this.authService.getHeaders();
+    const urlForRequest = this.url + `/${immobileId}`;
+    return this.http.get(urlForRequest, {headers: headers, observe: 'response'});
+  }
 }

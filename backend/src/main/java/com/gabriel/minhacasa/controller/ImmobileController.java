@@ -44,7 +44,7 @@ public class ImmobileController {
         @ApiResponse(responseCode = "200", description = "Imóvel encontrado com sucesso."),
         @ApiResponse(responseCode = "400", description = "Imóvel não encontrado.")
     })
-    @AdminAccess
+    @OwnerAccess
     @GetMapping("/{id}")
     public ResponseEntity<Immobile> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(this.immobileService.findById(id));
