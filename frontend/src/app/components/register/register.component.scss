@@ -15,6 +15,15 @@ form {
      display: flex;
 }
 
+@keyframes fadeIn {
+     from {
+       opacity: 0;
+     }
+     to {
+       opacity: 1;
+     }
+}
+
 .main-section {
      width: 90%;
      height: 600px;
@@ -24,7 +33,12 @@ form {
      display: flex;
      flex-direction: row;
      box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.1);
+     animation: fadeIn 0.5s ease-in forwards;
 }
+
+.main-section.loaded {
+     animation-delay: 0.5s;
+ }
 
 .login {
      width: 25%;
