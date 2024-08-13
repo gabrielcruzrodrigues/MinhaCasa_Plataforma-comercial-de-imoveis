@@ -31,8 +31,6 @@ export class ProfileComponent implements OnInit{
   phone: string  = '';
   whatsapp: string = '';
   email: string = '';
-  state: string = '';
-  city: string = '';
   imageProfileUrl: string = '';
 
   completedEmail: string = '';
@@ -79,8 +77,6 @@ export class ProfileComponent implements OnInit{
     this.name = body.name;
     this.phone = body.phone;
     this.whatsapp = body.whatsapp;
-    this.state = body.state;
-    this.city = body.city;
     this.id = body.id;
     this.age = this.getYear(body.dateOfBirth);
 

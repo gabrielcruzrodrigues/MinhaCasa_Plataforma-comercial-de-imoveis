@@ -191,7 +191,7 @@ export class CreateImmobileComponent implements OnInit{
 
   onFileChange(event: any):void {
     const files = event.target.files as FileList;
-    const maxSize = 10 * 1024 * 1024;
+    const maxSize = 5 * 1024 * 1024;
     const validFiles: File[] = [];
 
     if (files) {
@@ -200,7 +200,7 @@ export class CreateImmobileComponent implements OnInit{
         if (file.size <= maxSize) {
           validFiles.push(file);
         } else {
-          this.activeModalText(`O arquivo ${file.name} é maior que 10MB e não será adicionado.`);
+          this.activeModalText(`O arquivo ${file.name} é maior que 5MB e não será adicionado.`);
         }
       }
 

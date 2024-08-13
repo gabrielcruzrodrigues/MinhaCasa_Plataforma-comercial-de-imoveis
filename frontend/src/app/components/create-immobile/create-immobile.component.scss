@@ -5,12 +5,23 @@
      height: 100vh;
 }
 
-h1 {
+.title {
      text-align: center;
+     padding: 3% 5% 0 5%;
+ }
+ 
+ .title h1 {
      color: $primary-color;
-     font-size: 30px;
-     margin-top: 50px;
-}
+     font-size: 2.5rem;
+     margin-bottom: 1.5rem;
+     font-weight: 500;
+ }
+ 
+ .title p {
+     color: #858585;
+     font-size: 1.25rem;
+     margin-bottom: 10px;
+ }
 
 .subtitle {
      text-align: center;
