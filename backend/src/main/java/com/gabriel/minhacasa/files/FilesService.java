@@ -30,7 +30,7 @@ public class FilesService {
     }
 
     public String uploadProfileFile(MultipartFile file, User user) {
-        String filename = generateNewName.generateFileName(file, user.getName());
+        String filename = generateNewName.generateFileName(file);
          try {
              Path targetLocation = fileStorageProfileLocation.resolve(filename);
              file.transferTo(targetLocation);
@@ -45,7 +45,7 @@ public class FilesService {
         List<String> referencesOfImmobileFiles = new ArrayList<>();
         if (!files.isEmpty()) {
             for (MultipartFile file : files) {
-                String filename = generateNewName.generateFileName(file, immobile.getName());
+                String filename = generateNewName.generateFileName(file);
                 try {
                     Path targetLocation = fileStorageImmobileLocation.resolve(filename);
                     file.transferTo(targetLocation);

@@ -25,7 +25,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.print.attribute.standard.Media;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -143,7 +142,7 @@ class ImmobileControllerTest {
     @Test
     @DisplayName("must create a new immobile with success")
     void create_whenToCall_withSuccess() throws Exception {
-        when(this.immobileService.findById(anyLong())).thenReturn(this.immobile);
+        when(this.immobileService.findByIdWithCompletePath(anyLong())).thenReturn(this.immobile);
 
         MockMultipartFile file = new MockMultipartFile(
                 "files",
@@ -238,7 +237,7 @@ class ImmobileControllerTest {
     @Test
     @DisplayName("must find and return a Immobile with success")
     void findById_whenImmobileExists_mustReturnAImmobileWithSuccess() throws Exception {
-        when(this.immobileService.findById(anyLong())).thenReturn(this.immobile);
+        when(this.immobileService.findByIdWithCompletePath(anyLong())).thenReturn(this.immobile);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/immobile/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -252,7 +251,7 @@ class ImmobileControllerTest {
     @DisplayName("must return a immobile with sellerId and full images path")
     void getImmobileWithFullImagePaths_mustReturnAImmobileWithSellerIdAndFullImagesPath() throws Exception {
         ImmobileWithSellerIdDTO immobile = new ImmobileWithSellerIdDTO(this.immobile, 1L);
-        when(this.immobileService.getImmobileWithCompleteImagesPath(anyLong())).thenReturn(immobile);
+        when(this.immobileService.getImmobileWithSellerId(anyLong())).thenReturn(immobile);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/immobile/details/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)

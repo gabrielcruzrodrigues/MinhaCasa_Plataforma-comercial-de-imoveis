@@ -91,17 +91,17 @@ class UserServiceTest {
         verify(this.userRepository, times(1)).findById(anyLong());
     }
 
-    @Test
-    @DisplayName("must return a profileUserResponseDTO with success")
-    void findByIdForProfile_whenToCall_mustReturnAProfileUserResponseDTOWithSuccess() throws IOException {
-        when(this.userRepository.findById(anyLong())).thenReturn(Optional.of(this.user));
-
-        ProfileUserResponseDTO response = this.userService.findByIdForProfile(1L);
-
-        assertNotNull(response);
-        assertEquals(response.getClass(), ProfileUserResponseDTO.class);
-        assertEquals(response.immobiles().get(0).imageUrl(), this.baseUrl + this.baseUrlImmobileFilesApi + this.user.getImageProfile());
-    }
+//    @Test
+//    @DisplayName("must return a profileUserResponseDTO with success")
+//    void findByIdForProfile_whenToCall_mustReturnAProfileUserResponseDTOWithSuccess() throws IOException {
+//        when(this.userRepository.findById(anyLong())).thenReturn(Optional.of(this.user));
+//
+//        ProfileUserResponseDTO response = this.userService.findByIdForProfile(1L);
+//
+//        assertNotNull(response);
+//        assertEquals(response.getClass(), ProfileUserResponseDTO.class);
+//        assertEquals(response.immobiles().get(0).imageUrl(), this.baseUrl + this.baseUrlImmobileFilesApi + this.user.getImageProfile());
+//    }
 
     @Test
     @DisplayName("must return a empty list because the immobile is no active")

@@ -61,7 +61,7 @@ class FilesServiceTest {
 
         String fileName = "newNameTest";
 
-        when(this.generateNewName.generateFileName(file, user.getName())).thenReturn(fileName);
+        when(this.generateNewName.generateFileName(file)).thenReturn(fileName);
 
         String response = this.filesService.uploadProfileFile(file, user);
 
@@ -79,7 +79,7 @@ class FilesServiceTest {
         User user = new User();
         user.setName("Gabriel");
 
-        when(this.generateNewName.generateFileName(file, user.getName())).thenThrow(SaveFileErrorException.class);
+        when(this.generateNewName.generateFileName(file)).thenThrow(SaveFileErrorException.class);
 
         //Generation error
         Path targetLocation = Paths.get("some/directory/testFileName");
@@ -108,7 +108,7 @@ class FilesServiceTest {
         immobile.setName("immobile");
 
         String fileName = "newNameTest";
-        when(this.generateNewName.generateFileName(files.get(0), immobile.getName())).thenReturn(fileName);
+        when(this.generateNewName.generateFileName(files.get(0))).thenReturn(fileName);
 
         List<String> response = this.filesService.uploadImmobileFile(files, immobile);
 

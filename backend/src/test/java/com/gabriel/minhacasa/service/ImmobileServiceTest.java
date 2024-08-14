@@ -1,9 +1,6 @@
 package com.gabriel.minhacasa.service;
 
-import com.gabriel.minhacasa.domain.DTO.CreateImmobileDTO;
-import com.gabriel.minhacasa.domain.DTO.ImmobileByCardsDTO;
-import com.gabriel.minhacasa.domain.DTO.ImmobileWithSellerIdDTO;
-import com.gabriel.minhacasa.domain.DTO.SearchParamsDTO;
+import com.gabriel.minhacasa.domain.DTO.*;
 import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.*;
@@ -14,6 +11,7 @@ import com.gabriel.minhacasa.repository.ImmobileRepository;
 import com.gabriel.minhacasa.repository.ImmobileRepositoryImpl;
 import com.gabriel.minhacasa.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.constraints.time.DurationMax;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +22,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -118,6 +120,7 @@ class ImmobileServiceTest {
     private Immobile immobile;
     private User user;
     private CreateImmobileDTO createImmobileDTO;
+    private UpdateImmobileDTO updateImmobileDTO;
     MockMultipartFile imageFile = new MockMultipartFile("imageProfile", "teste.png", "image/jpeg", "dummy image content".getBytes());
 
     @BeforeEach
@@ -159,7 +162,7 @@ class ImmobileServiceTest {
     void getImmobileWithCompleteImagesPath_whenToCall_mustReturnAImmobileWithCompleteImagePath() {
         when(immobileRepository.findById(anyLong())).thenReturn(Optional.of(this.immobile));
 
-        ImmobileWithSellerIdDTO response = this.immobileService.getImmobileWithCompleteImagesPath(1L);
+        ImmobileWithSellerIdDTO response = this.immobileService.getImmobileWithSellerId(1L);
 
         assertNotNull(response);
         assertEquals(this.immobile.getFiles().get(0), response.immobile().getFiles().get(0));
@@ -168,10 +171,10 @@ class ImmobileServiceTest {
 
     @Test
     @DisplayName("must return a immobile with success")
-    void findById_whenToCall_mustReturnAImmobileWithSuccess() {
+    void findById_WithCompletePath_whenToCall_mustReturnAImmobileWithSuccess() {
         when(this.immobileRepository.findById(anyLong())).thenReturn(Optional.of(this.immobile));
 
-        Immobile response = this.immobileService.findById(1L);
+        Immobile response = this.immobileService.findByIdWithCompletePath(1L);
 
         assertNotNull(response);
         assertEquals(response.getClass(), Immobile.class);
@@ -180,11 +183,11 @@ class ImmobileServiceTest {
 
     @Test
     @DisplayName("must return a immobileNotFoundException when immobile to be empty")
-    void findById_whenImmobileToBeEmpty_mustReturnAImmobileNotFoundException() {
+    void findByIdWithCompletePath_whenImmobileToBeEmpty_mustReturnAImmobileNotFoundException() {
         when(this.immobileRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         ImmobileNotFoundException response = assertThrows(ImmobileNotFoundException.class, () -> {
-           this.immobileService.findById(1L);
+           this.immobileService.findByIdWithCompletePath(1L);
         });
 
         assertNotNull(response);
@@ -192,7 +195,47 @@ class ImmobileServiceTest {
     }
 
     @Test
-    void updateImmobile() {
+    @DisplayName("must return a Immobile with success")
+    void findById_success() {
+        when(this.immobileRepository.findById(anyLong())).thenReturn(Optional.of(this.immobile));
+        
+        Immobile response = this.immobileService.findById(1L);
+
+        assertNotNull(response);
+        assertEquals(Immobile.class, response.getClass());
+        verify(immobileRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    @DisplayName("must return a ImmobileNotFoundException when user not found")
+    void findById_mustReturnAImmobileNotFoundException_whenUserNotFound() {
+        when(this.immobileRepository.findById(anyLong())).thenThrow(new ImmobileNotFoundException());
+        
+        ImmobileNotFoundException response = assertThrows(ImmobileNotFoundException.class, () -> {
+           this.immobileService.findById(1L);
+        });
+
+        assertNotNull(response);
+        assertEquals(ImmobileNotFoundException.class, response.getClass());
+        verify(immobileRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void updateImmobile_mustUploadedTheImmobile_success() throws IOException {
+        //mocks for File and Paths static class
+        Path path = mock(Path.class);
+        mockStatic(Paths.class);
+        when(Paths.get(anyString())).thenReturn(path);
+        mockStatic(Files.class);
+
+        when(this.immobileRepository.findById(anyLong())).thenReturn(Optional.of(this.immobile));
+        when(this.filesService.uploadImmobileFile(any(), any())).thenReturn(List.of("arquivo1.jpg", "arquivo2.jpg"));
+
+        this.immobileService.updateImmobile(this.updateImmobileDTO);
+
+        verify(this.immobileRepository, times(1)).save(any(Immobile.class));
+        verify(this.immobileRepository, times(1)).findById(anyLong());
+        verify(this.filesService, times(1)).uploadImmobileFile(any(), any());
     }
 
     @Test
@@ -405,6 +448,70 @@ class ImmobileServiceTest {
                 SEA_VIEW,
                 GATED_COMMUNITY,
                 FILES
+        );
+
+        this.updateImmobileDTO = new UpdateImmobileDTO(
+                IMMOBILE_ID,
+                FILES,
+                IMMOBILE_NAME,
+                IMMOBILE_DESCRIPTION,
+                IMMOBILE_ADDRESS,
+                IMMOBILE_CITY,
+                IMMOBILE_NEIGHBORHOOD,
+                IMMOBILE_STATE,
+                GARAGE,
+                QUANTITY_BEDROOMS,
+                QUANTITY_ROOMS,
+                IPTU,
+                PRICE,
+                SUITE,
+                TOTAL_AREA,
+                QUANTITY_BATHROOMS,
+                INTEGRITY_ENUM,
+                SELLER_TYPE_ENUM,
+                AGE_ENUM,
+                CATEGORY_ENUM,
+                TYPE_ENUM,
+                GARDEN,
+                BEACH,
+                DISABLED_ACCESS,
+                PLAYGROUND,
+                GRILL,
+                ENERGY_GENERATOR,
+                CLOSE_TO_THE_CENTER,
+                ELEVATOR,
+                POOL,
+                FRONT_DESK,
+                MULTI_SPORTS_COURT,
+                GYM,
+                STEAM_ROOM,
+                CABLE_TV,
+                HEATING,
+                CABINETS_IN_THE_KITCHEN,
+                BATHROOM_IN_THE_ROOM,
+                INTERNET,
+                PARTY_ROOM,
+                AIR_CONDITIONING,
+                AMERICAN_KITCHEN,
+                HYDROMASSAGE,
+                FIREPLACE,
+                PRIVATE_POOL,
+                ELECTRONIC_GATE,
+                SERVICE_AREA,
+                PUB,
+                CLOSET,
+                OFFICE,
+                YARD,
+                ALARM_SYSTEM,
+                BALCONY,
+                CONCIERGE_24_HOUR,
+                WALLED_AREA,
+                DOG_ALLOWED,
+                CAT_ALLOWED,
+                CAMERAS,
+                FURNISHED,
+                SEA_VIEW,
+                GATED_COMMUNITY
         );
     }
 }

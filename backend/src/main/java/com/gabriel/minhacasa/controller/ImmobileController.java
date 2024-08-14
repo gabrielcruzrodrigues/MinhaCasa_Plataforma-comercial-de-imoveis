@@ -47,7 +47,7 @@ public class ImmobileController {
     @OwnerAccess
     @GetMapping("/{id}")
     public ResponseEntity<Immobile> findById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(this.immobileService.findById(id));
+        return ResponseEntity.ok().body(this.immobileService.findByIdWithCompletePath(id));
     }
 
     @Operation(description = "Retorna uma lista com os imóveis e seus caminhos de imagens completos para download.")
@@ -57,13 +57,13 @@ public class ImmobileController {
     })
     @GetMapping("/details/{id}")
     public ResponseEntity<ImmobileWithSellerIdDTO> getImmobileWithFullImagePaths(@PathVariable Long id) {
-        return ResponseEntity.ok().body(this.immobileService.getImmobileWithCompleteImagesPath(id));
+        return ResponseEntity.ok().body(this.immobileService.getImmobileWithSellerId(id));
     }
 
     //add documentation after because these endpoint is not active
     @OwnerAccess
     @PutMapping("/update")
-    public ResponseEntity<Object> updateImmobile(@RequestBody UpdateImmobileDTO request) {
+    public ResponseEntity<Object> updateImmobile(@ModelAttribute UpdateImmobileDTO request) {
         this.immobileService.updateImmobile(request);
         return ResponseEntity.noContent().build();
     }

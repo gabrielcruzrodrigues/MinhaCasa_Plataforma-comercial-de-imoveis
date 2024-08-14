@@ -8,10 +8,8 @@ import com.gabriel.minhacasa.domain.Immobile;
 import com.gabriel.minhacasa.domain.User;
 import com.gabriel.minhacasa.domain.enums.RoleEnum;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.FavoriteAlreadyExistsException;
-import com.gabriel.minhacasa.exceptions.customizeExceptions.ImageProfileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.ImmobileNotFoundException;
 import com.gabriel.minhacasa.exceptions.customizeExceptions.UserNotFoundException;
-import com.gabriel.minhacasa.files.FilesService;
 import com.gabriel.minhacasa.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -121,7 +119,7 @@ public class UserService {
     }
 
     public void addNewFavorite(Long studentId, Long immobileId) {
-        Immobile immobile = this.immobileService.findById(immobileId);
+        Immobile immobile = this.immobileService.findByIdWithCompletePath(immobileId);
         User user = this.findById(studentId);
 
         if (!user.getFavorites().contains(immobile)) {
@@ -133,7 +131,7 @@ public class UserService {
     }
 
     public void removeFavorite(Long studentId, Long immobileId) {
-        Immobile immobile = this.immobileService.findById(immobileId);
+        Immobile immobile = this.immobileService.findByIdWithCompletePath(immobileId);
         User user = this.findById(studentId);
 
         if (user.getFavorites().contains(immobile)) {

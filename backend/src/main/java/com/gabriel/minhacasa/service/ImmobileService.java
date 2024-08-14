@@ -37,8 +37,8 @@ public class ImmobileService {
     private String baseUrl;
     @Value("${base-url-immobile-files-api}")
     private String baseUrlImmobileFilesApi;
-    @Value("{file.upload-image-profile-dir}")
-    private String rootPath;
+    @Value("${file.upload-image-immobile-dir}")
+    private String immobileDirBasePath;
 
     private final ImmobileRepository immobileRepository;
     private final UserRepository userRepository;
@@ -127,15 +127,8 @@ public class ImmobileService {
         }
     }
 
-    public ImmobileWithSellerIdDTO getImmobileWithCompleteImagesPath(Long id) {
-        Immobile immobile = this.findById(id);
-        List<String> fullImagePaths = new ArrayList<>();
-
-        for (String path : immobile.getFiles()) {
-            fullImagePaths.add(this.baseUrl + this.baseUrlImmobileFilesApi + path);
-        }
-
-        immobile.setFiles(fullImagePaths);
+    public ImmobileWithSellerIdDTO getImmobileWithSellerId(Long id) {
+        Immobile immobile = this.findByIdWithCompletePath(id);
         return new ImmobileWithSellerIdDTO(immobile, immobile.getUser().getId());
     }
 
@@ -144,90 +137,99 @@ public class ImmobileService {
         this.userRepository.save(user);
     }
 
-    public Immobile findById(Long id) {
-        Optional<Immobile> immobile = this.immobileRepository.findById(id);
-        List<String> imagesReference = immobile.get().getFiles();
+    public Immobile findByIdWithCompletePath(Long id) {
+        Immobile immobile = this.findById(id);
+        List<String> imagesReference = immobile.getFiles();
         List<String> fullPaths = new ArrayList<>();
 
         for (String imageReference : imagesReference) {
             fullPaths.add(this.baseUrl + this.baseUrlImmobileFilesApi + imageReference);
         }
 
-        immobile.get().setFiles(fullPaths);
+        immobile.setFiles(fullPaths);
 
+        return immobile;
+    }
+
+    public Immobile findById(Long id) {
+        Optional<Immobile> immobile = this.immobileRepository.findById(id);
         return immobile.orElseThrow(ImmobileNotFoundException::new);
     }
 
     //missing testes
     public void updateImmobile(UpdateImmobileDTO immobileData) {
-        Immobile immobile = Immobile.builder()
-                .name(immobileData.getImmobileTitle())
-                .description(immobileData.getDescription())
-                .address(immobileData.getAddress())
-                .city(immobileData.getCity())
-                .neighborhood(immobileData.getNeighborhood())
-                .state(immobileData.getState())
-                .garage(immobileData.isGarage())
-                .quantityBedrooms(immobileData.getQuantityBedrooms())
-                .quantityRooms(immobileData.getQuantityRooms())
-                .IPTU(immobileData.getIPTU())
-                .price(immobileData.getPrice())
-                .suite(immobileData.isSuite())
-                .totalArea(immobileData.getTotalArea())
-                .quantityBathrooms(immobileData.getQuantityBathrooms())
-                .integrity(immobileData.getIntegrity())
-                .sellerType(immobileData.getSellerType())
-                .age(immobileData.getAge())
-                .category(immobileData.getCategory())
-                .type(immobileData.getType())
-                .garden(immobileData.isGarden())
-                .beach(immobileData.isBeach())
-                .disabledAccess(immobileData.isDisabledAccess())
-                .playground(immobileData.isPlayground())
-                .grill(immobileData.isGrill())
-                .energyGenerator(immobileData.isEnergyGenerator())
-                .closeToTheCenter(immobileData.isCloseToTheCenter())
-                .elevator(immobileData.isElevator())
-                .pool(immobileData.isPool())
-                .frontDesk(immobileData.isFrontDesk())
-                .multiSportsCourt(immobileData.isMultiSportsCourt())
-                .gym(immobileData.isGym())
-                .steamRoom(immobileData.isSteamRoom())
-                .cableTV(immobileData.isCableTV())
-                .heating(immobileData.isHeating())
-                .cabinetsInTheKitchen(immobileData.isCabinetsInTheKitchen())
-                .bathroomInTheRoom(immobileData.isBathroomInTheRoom())
-                .internet(immobileData.isInternet())
-                .partyRoom(immobileData.isPartyRoom())
-                .airConditioning(immobileData.isAirConditioning())
-                .americanKitchen(immobileData.isAmericanKitchen())
-                .hydromassage(immobileData.isHydromassage())
-                .fireplace(immobileData.isFireplace())
-                .privatePool(immobileData.isPrivatePool())
-                .electronicGate(immobileData.isElectronicGate())
-                .serviceArea(immobileData.isServiceArea())
-                .pub(immobileData.isPub())
-                .closet(immobileData.isCloset())
-                .office(immobileData.isOffice())
-                .yard(immobileData.isYard())
-                .alarmSystem(immobileData.isAlarmSystem())
-                .balcony(immobileData.isBalcony())
-                .concierge24Hour(immobileData.isConcierge24Hour())
-                .walledArea(immobileData.isWalledArea())
-                .dogAllowed(immobileData.isDogAllowed())
-                .catAllowed(immobileData.isCatAllowed())
-                .cameras(immobileData.isCameras())
-                .furnished(immobileData.isFurnished())
-                .seaView(immobileData.isSeaView())
-                .gatedCommunity(immobileData.isGatedCommunity())
-                .build();
+        Immobile immobile = this.findById(immobileData.getImmobileId());
+
+        immobile.setName(immobileData.getImmobileTitle());
+        immobile.setDescription(immobileData.getDescription());
+        immobile.setAddress(immobileData.getAddress());
+        immobile.setCity(immobileData.getCity());
+        immobile.setNeighborhood(immobileData.getNeighborhood());
+        immobile.setState(immobileData.getState());
+        immobile.setGarage(immobileData.isGarage());
+        immobile.setQuantityBedrooms(immobileData.getQuantityBedrooms());
+        immobile.setQuantityRooms(immobileData.getQuantityRooms());
+        immobile.setIPTU(immobileData.getIPTU());
+        immobile.setPrice(immobileData.getPrice());
+        immobile.setSuite(immobileData.isSuite());
+        immobile.setTotalArea(immobileData.getTotalArea());
+        immobile.setQuantityBathrooms(immobileData.getQuantityBathrooms());
+        immobile.setIntegrity(immobileData.getIntegrity());
+        immobile.setSellerType(immobileData.getSellerType());
+        immobile.setAge(immobileData.getAge());
+        immobile.setCategory(immobileData.getCategory());
+        immobile.setType(immobileData.getType());
+        immobile.setGarden(immobileData.isGarden());
+        immobile.setBeach(immobileData.isBeach());
+        immobile.setDisabledAccess(immobileData.isDisabledAccess());
+        immobile.setPlayground(immobileData.isPlayground());
+        immobile.setGrill(immobileData.isGrill());
+        immobile.setEnergyGenerator(immobileData.isEnergyGenerator());
+        immobile.setCloseToTheCenter(immobileData.isCloseToTheCenter());
+        immobile.setElevator(immobileData.isElevator());
+        immobile.setPool(immobileData.isPool());
+        immobile.setFrontDesk(immobileData.isFrontDesk());
+        immobile.setMultiSportsCourt(immobileData.isMultiSportsCourt());
+        immobile.setGym(immobileData.isGym());
+        immobile.setSteamRoom(immobileData.isSteamRoom());
+        immobile.setCableTV(immobileData.isCableTV());
+        immobile.setHeating(immobileData.isHeating());
+        immobile.setCabinetsInTheKitchen(immobileData.isCabinetsInTheKitchen());
+        immobile.setBathroomInTheRoom(immobileData.isBathroomInTheRoom());
+        immobile.setInternet(immobileData.isInternet());
+        immobile.setPartyRoom(immobileData.isPartyRoom());
+        immobile.setAirConditioning(immobileData.isAirConditioning());
+        immobile.setAmericanKitchen(immobileData.isAmericanKitchen());
+        immobile.setHydromassage(immobileData.isHydromassage());
+        immobile.setFireplace(immobileData.isFireplace());
+        immobile.setPrivatePool(immobileData.isPrivatePool());
+        immobile.setElectronicGate(immobileData.isElectronicGate());
+        immobile.setServiceArea(immobileData.isServiceArea());
+        immobile.setPub(immobileData.isPub());
+        immobile.setCloset(immobileData.isCloset());
+        immobile.setOffice(immobileData.isOffice());
+        immobile.setYard(immobileData.isYard());
+        immobile.setAlarmSystem(immobileData.isAlarmSystem());
+        immobile.setBalcony(immobileData.isBalcony());
+        immobile.setConcierge24Hour(immobileData.isConcierge24Hour());
+        immobile.setWalledArea(immobileData.isWalledArea());
+        immobile.setDogAllowed(immobileData.isDogAllowed());
+        immobile.setCatAllowed(immobileData.isCatAllowed());
+        immobile.setCameras(immobileData.isCameras());
+        immobile.setFurnished(immobileData.isFurnished());
+        immobile.setSeaView(immobileData.isSeaView());
+        immobile.setGatedCommunity(immobileData.isGatedCommunity());
+
+        this.deleteImages(immobile.getFiles());
+        List<String> filesReference = this.filesService.uploadImmobileFile(immobileData.getFiles(), immobile);
+        immobile.setFiles(filesReference);
 
         this.immobileRepository.save(immobile);
     }
 
     @Transactional
     public void disableImmobile(Long id) {
-        Immobile immobile = this.findById(id);
+        Immobile immobile = this.findByIdWithCompletePath(id);
         immobile.setActive(false);
         this.immobileRepository.save(immobile);
     }
@@ -253,12 +255,11 @@ public class ImmobileService {
 
     private void deleteImages(List<String> images) {
         for (String image : images) {
-            Path path = Paths.get(this.rootPath + image);
-
+            Path path = Paths.get(this.immobileDirBasePath + image);
             try {
                 Files.delete(path);
-            } catch (IOException ex) {
-                throw new ErrorForDeleteFileException("Error for delete ImmobileFile");
+            } catch (Exception ex) {
+                throw new ErrorForDeleteFileException(ex.getMessage());
             }
         }
     }
@@ -279,7 +280,7 @@ public class ImmobileService {
         List<Immobile> immobiles = new ArrayList<>();
 
         for (Long immobileId : favoritesImmobilesId) {
-            immobiles.add(this.findById(immobileId));
+            immobiles.add(this.findByIdWithCompletePath(immobileId));
         }
 
         return this.createImmobileByCard(immobiles);

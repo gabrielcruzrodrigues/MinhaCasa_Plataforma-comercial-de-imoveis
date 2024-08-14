@@ -17,6 +17,9 @@ import java.util.List;
 @Getter
 @Setter
 public class UpdateImmobileDTO {
+        @NotNull(message = "immobileId is required")
+        private Long immobileId;
+
         @NotNull(message = "files is required")
         private List<MultipartFile> files;
 

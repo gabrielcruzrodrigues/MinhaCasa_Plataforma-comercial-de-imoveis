@@ -61,4 +61,10 @@ export class ImmobileService {
     const urlForRequest = this.url + `/${immobileId}`;
     return this.http.get(urlForRequest, {headers: headers, observe: 'response'});
   }
+
+  update(immobileForm: any): Observable<any> {
+    const headers = this.authService.getHeaders();
+    const urlForRequest = this.url + `/update`;
+    return this.http.put(urlForRequest, immobileForm, {headers: headers, observe: 'response'});
+  }
 }

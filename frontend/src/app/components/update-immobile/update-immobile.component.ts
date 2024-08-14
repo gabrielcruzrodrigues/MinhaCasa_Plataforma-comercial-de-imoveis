@@ -63,7 +63,8 @@ export class UpdateImmobileComponent {
     private http: HttpClient
   ) {
     this.form = this.fb.group({
-      files: [null, Validators.required],
+      immobileId: [''],
+      files: [null],
       immobileTitle: ['', Validators.required],
       description: ['', Validators.required],
       address: ['', Validators.required],
@@ -176,6 +177,7 @@ export class UpdateImmobileComponent {
     this.cities.push(body.city);
 
     this.form.patchValue({
+      immobileId: body.id,
       // files: body.files,
       immobileTitle: body.name,
       description: body.description,
@@ -258,10 +260,10 @@ export class UpdateImmobileComponent {
   submit():void {
     this.isLoading = true;
     this.populateFormData();
-    this.immobileService.create(this.formData).subscribe({
+    this.immobileService.update(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.isLoading = false;
-        this.activeModalText('Imóvel cadastrado com sucesso!');
+        this.activeModalText('Imóvel atualizado com sucesso!');
         this.waitForModalClose().then(() => {
           this.router.navigate(["/"]);
         })
@@ -384,7 +386,7 @@ export class UpdateImmobileComponent {
       this.formData.set(field, this.form.get(field)?.value ? 'true' : 'false');
    });
 
-    this.formData.set('studentId', this.userId);
+    this.formData.set('immobileId', this.form.get('immobileId')?.value);
     this.formData.set('immobileTitle', this.form.get('immobileTitle')?.value);
     this.formData.set('address', this.form.get('address')?.value);
     this.formData.set('state', this.form.get('state')?.value);
