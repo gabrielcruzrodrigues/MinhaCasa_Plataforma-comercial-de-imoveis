@@ -42,17 +42,24 @@ export class CardComponent implements OnInit{
     if (this.authService.verifyIfAreLoggedIn()) {
       this.immobileService.searchIdsOfImmobilesFavorited().subscribe({
         next: (response: HttpResponse<any>) => {
+          console.log('passou aqui!');
           if (response.status === 200) {
             this.idsFavorited = response.body;
             this.verifyIds();
           } 
+          if (response.status === 401) {
+            this.authService.clearLocalStorage();
+            this.isLoading = false;
+          }
         },
         error: (error) => {
-          console.log(error)
+          this.authService.clearLocalStorage();
+          this.isLoading = false;
           console.log("Ocorreu um erro ao verificar se o card esta favoritado.");
         }
       })
     } else {
+      this.authService.clearLocalStorage();
       this.isLoading = false;
     }
   }

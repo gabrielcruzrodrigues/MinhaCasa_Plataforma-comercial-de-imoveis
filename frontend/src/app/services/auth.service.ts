@@ -1,12 +1,22 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  url: string = environment.url;
+
+  isLogged():Observable<any> {
+    const headers = this.getHeaders();
+    const urlForRequest = this.url + "/user/isLogged";
+    return this.http.get(urlForRequest, {headers: headers, observe: 'response'});
+  }
 
   configureLocalStorage(body: any): void {
     if (body) {
@@ -17,6 +27,14 @@ export class AuthService {
       console.log("Erro ao configurar o localStorage.");
     }
   }
+
+  clearLocalStorage(): void {
+    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+      localStorage.clear();
+    } else {
+      return;
+    }
+  } 
 
   getUserId() {
     if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {

@@ -27,6 +27,11 @@ public class UserController {
     private final UserService userService;
     private final AuthenticationService authenticationService;
 
+    @GetMapping("/isLogged")
+    public ResponseEntity<Object> isLogged() {
+        return ResponseEntity.noContent().build();
+    }
+
     @Operation(description = "Criar um novo usuário.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso."),

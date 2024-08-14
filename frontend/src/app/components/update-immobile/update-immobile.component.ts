@@ -273,6 +273,7 @@ export class UpdateImmobileComponent {
         this.activeModalText('Ocorreu um erro interno, por favor tente mais tarde!');
         this.waitForModalClose().then(() => {
           // this.router.navigate(["/"]);
+          console.log(error)
         })
       }
     })
