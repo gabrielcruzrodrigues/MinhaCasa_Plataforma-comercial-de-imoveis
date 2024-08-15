@@ -107,7 +107,9 @@ public class ImmobileController {
     @UserAccess
     @GetMapping("/favorites/{userId}")
     public ResponseEntity<List<ImmobileByCardsDTO>> findAllFavorites(@PathVariable Long userId) {
-        return ResponseEntity.ok().body(this.immobileService.searchForUserFavoritesImmobiles(userId));
+        List<ImmobileByCardsDTO> immobile = this.immobileService.searchForUserFavoritesImmobiles(userId);
+        System.out.println(immobile);
+        return ResponseEntity.ok().body(immobile);
     }
 
     @UserAccess

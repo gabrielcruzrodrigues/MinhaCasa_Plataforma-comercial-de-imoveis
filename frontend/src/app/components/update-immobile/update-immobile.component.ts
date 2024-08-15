@@ -13,6 +13,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
 import { CepService } from '../../services/cep.service';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../layout/navbar/navbar.component';
 
 interface cepInterface {
   nome: string
@@ -23,7 +24,7 @@ interface cepInterface {
   standalone: true,
   imports: [
     FooterComponent, CarroselComponent, ReactiveFormsModule, ModalAlertComponent, ModalTextComponent, LoadingComponent,
-    CommonModule
+    CommonModule, NavbarComponent
   ],
   templateUrl: './update-immobile.component.html',
   styleUrl: './update-immobile.component.scss'

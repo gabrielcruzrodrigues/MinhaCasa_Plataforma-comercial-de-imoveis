@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ImmobileService } from '../../services/immobile.service';
+import { HttpResponse } from '@angular/common/http';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { CardComponent } from '../layout/card/card.component';
 import { CommonModule } from '@angular/common';
-import { ImmobileService } from '../../services/immobile.service';
-import { HttpResponse } from '@angular/common/http';
-import { NavbarComponent } from '../layout/navbar/navbar.component';
+import { NavbarComponent } from "../layout/navbar/navbar.component";
 
 interface cardInterface {
   id: string,
@@ -18,15 +18,16 @@ interface cardInterface {
 }
 
 @Component({
-  selector: 'app-favorites',
+  selector: 'app-list-update',
   standalone: true,
   imports: [
-    FooterComponent, CardComponent, CommonModule, NavbarComponent
-  ],
-  templateUrl: './favorites.component.html',
-  styleUrl: './favorites.component.scss'
+    FooterComponent, CardComponent, CommonModule,
+    NavbarComponent
+],
+  templateUrl: './list-update.component.html',
+  styleUrl: './list-update.component.scss'
 })
-export class FavoritesComponent implements OnInit{
+export class ListUpdateComponent {
   cards: cardInterface[] =[];
   isLoading: boolean = true;
 
@@ -40,7 +41,6 @@ export class FavoritesComponent implements OnInit{
         if (response.status === 200) {
           this.cards = response.body;
           this.isLoading = false;
-          console.log(response.body)
         } else {
           console.log("Um status code diferente do esperado foi retornado ao tentar buscar cards favoritos.");
         }

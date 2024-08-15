@@ -11,6 +11,7 @@ import { PlansAndServicesComponent } from './components/plans-and-services/plans
 import { RegisterComponent } from './components/register/register.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { UpdateImmobileComponent } from './components/update-immobile/update-immobile.component';
+import { ListUpdateComponent } from './components/list-update/list-update.component';
 
 export const routes: Routes = [
     {
@@ -48,5 +49,8 @@ export const routes: Routes = [
     },
     {
         path: 'update-immobile/:id', component: UpdateImmobileComponent
+    }, 
+    {
+        path: 'update-list', component: ListUpdateComponent
     }
 ]

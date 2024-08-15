@@ -31,7 +31,7 @@ interface city {
   standalone: true,
   imports: [
     CardComponent, FormsModule, ReactiveFormsModule, CommonModule,
-    ModalTextComponent, PaginatorComponent, NgxMaskDirective
+    ModalTextComponent, PaginatorComponent, NgxMaskDirective, NavbarComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'

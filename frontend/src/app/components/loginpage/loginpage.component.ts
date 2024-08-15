@@ -8,6 +8,7 @@ import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { LoadingComponent } from '../layout/loading/loading.component';
 import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component';
 import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
+import { NavbarComponent } from '../layout/navbar/navbar.component';
 
 interface ResponseInterface {
   id: number,
@@ -19,7 +20,7 @@ interface ResponseInterface {
   selector: 'app-loginpage',
   standalone: true,
   imports: [
-    ReactiveFormsModule, FormsModule, ModalTextComponent, LoadingComponent, ModalAlertComponent
+    NavbarComponent, ReactiveFormsModule, FormsModule, ModalTextComponent, LoadingComponent, ModalAlertComponent
   ],
   templateUrl: './loginpage.component.html',
   styleUrl: './loginpage.component.scss'
@@ -58,9 +59,7 @@ export class LoginpageComponent {
             this.isLoading = false;
             this.activeModalText("Login efetuado com sucesso!");
             this.waitForModalClose().then(() => {
-              this.router.navigate(["/"]).then(() => {
-                window.location.reload();
-              });
+              this.router.navigate(["/"]);
             })
           }
         },

@@ -14,6 +14,7 @@ import { LoadingComponent } from '../layout/loading/loading.component';
 import { NgxMaskDirective } from 'ngx-mask';
 import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
 import { AuthService } from '../../services/auth.service';
+import { NavbarComponent } from "../layout/navbar/navbar.component";
 
 interface cepInterface {
   nome: string
@@ -24,8 +25,9 @@ interface cepInterface {
   standalone: true,
   imports: [
     FooterComponent, ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule,
-    ModalTextComponent, CarroselComponent, LoadingComponent, NgxMaskDirective
-  ],
+    ModalTextComponent, CarroselComponent, LoadingComponent, NgxMaskDirective,
+    NavbarComponent
+],
   templateUrl: './create-immobile.component.html',
   styleUrl: './create-immobile.component.scss'
 })

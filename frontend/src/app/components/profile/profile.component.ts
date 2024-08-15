@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from '../layout/card/card.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { LoadingComponent } from '../layout/loading/loading.component';
+import { NavbarComponent } from '../layout/navbar/navbar.component';
 
 interface propertiesInterface {
   id: string,
@@ -20,7 +21,7 @@ interface propertiesInterface {
   selector: 'app-profile',
   standalone: true,
   imports: [
-    CommonModule, CardComponent, FooterComponent, LoadingComponent
+    CommonModule, CardComponent, FooterComponent, LoadingComponent, NavbarComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'

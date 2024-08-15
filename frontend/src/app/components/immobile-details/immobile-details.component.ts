@@ -13,11 +13,12 @@ import { ConverterTypeForPortuguese } from '../../utils/ConverterTypeToPortugues
 import { ConverterSellerTypeToPortuguese } from '../../utils/ConverterSellerTypeToPortuguese';
 import { GetTrueBooleanFields } from '../../utils/GetTrueBooleanFields';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
+import { NavbarComponent } from '../layout/navbar/navbar.component';
 
 @Component({
   selector: 'app-immobile-details',
   standalone: true,
-  imports: [ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent, ModalTextComponent],
+  imports: [ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent, ModalTextComponent, NavbarComponent],
   templateUrl: './immobile-details.component.html',
   styleUrl: './immobile-details.component.scss'
 })

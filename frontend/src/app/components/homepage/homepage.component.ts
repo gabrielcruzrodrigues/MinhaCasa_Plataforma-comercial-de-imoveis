@@ -44,7 +44,6 @@ export class HomepageComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.authService.verifyIfAreLoggedIn()) {
-      console.log('passou')
       this.authService.isLogged().subscribe({
         next: (response: HttpResponse<any>) => {
           if (response.status === 204) {

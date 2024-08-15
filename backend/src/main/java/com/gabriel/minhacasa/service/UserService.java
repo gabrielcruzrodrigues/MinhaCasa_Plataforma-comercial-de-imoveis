@@ -119,7 +119,7 @@ public class UserService {
     }
 
     public void addNewFavorite(Long studentId, Long immobileId) {
-        Immobile immobile = this.immobileService.findByIdWithCompletePath(immobileId);
+        Immobile immobile = this.immobileService.findById(immobileId);
         User user = this.findById(studentId);
 
         if (!user.getFavorites().contains(immobile)) {
@@ -131,7 +131,7 @@ public class UserService {
     }
 
     public void removeFavorite(Long studentId, Long immobileId) {
-        Immobile immobile = this.immobileService.findByIdWithCompletePath(immobileId);
+        Immobile immobile = this.immobileService.findById(immobileId);
         User user = this.findById(studentId);
 
         if (user.getFavorites().contains(immobile)) {

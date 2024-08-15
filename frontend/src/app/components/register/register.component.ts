@@ -8,12 +8,13 @@ import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { LoadingComponent } from '../layout/loading/loading.component';
+import { NavbarComponent } from '../layout/navbar/navbar.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
-    ReactiveFormsModule, ModalTextComponent, ModalAlertComponent, LoadingComponent
+    ReactiveFormsModule, ModalTextComponent, ModalAlertComponent, LoadingComponent, NavbarComponent
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'

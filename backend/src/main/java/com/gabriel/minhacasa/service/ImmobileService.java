@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -147,7 +146,6 @@ public class ImmobileService {
         }
 
         immobile.setFiles(fullPaths);
-
         return immobile;
     }
 
@@ -267,12 +265,12 @@ public class ImmobileService {
     public List<ImmobileByCardsDTO> findImmobileByParamsWithCompleteImagePath(SearchParamsDTO params) {
         log.info("get data in findImmobileByParamsWithCompleteImagePath: " + params);
         List<Immobile> immobiles = this.immobileRepositorySearch.searchByParams(params);
-        return this.createImmobileByCard(immobiles);
+        return this.mountCardWithImmobile(immobiles);
     }
 
     public List<ImmobileByCardsDTO> find4RandomImmobilesForHome() {
         List<Immobile> immobiles = this.immobileRepository.find4RandomProducts();
-        return this.createImmobileByCard(immobiles);
+        return this.mountCardWithImmobile(immobiles);
     }
 
     public List<ImmobileByCardsDTO> searchForUserFavoritesImmobiles(Long id) {
@@ -280,13 +278,13 @@ public class ImmobileService {
         List<Immobile> immobiles = new ArrayList<>();
 
         for (Long immobileId : favoritesImmobilesId) {
-            immobiles.add(this.findByIdWithCompletePath(immobileId));
+            immobiles.add(this.findById(immobileId));
         }
 
-        return this.createImmobileByCard(immobiles);
+        return this.mountCardWithImmobile(immobiles);
     }
 
-    private List<ImmobileByCardsDTO> createImmobileByCard(List<Immobile> immobiles) {
+    private List<ImmobileByCardsDTO> mountCardWithImmobile(List<Immobile> immobiles) {
         List<ImmobileByCardsDTO> immobilesWithFullPathImages = new ArrayList<>();
 
         for (Immobile immobile : immobiles) {

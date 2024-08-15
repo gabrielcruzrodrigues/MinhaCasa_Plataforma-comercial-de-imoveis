@@ -6,13 +6,15 @@ import { MessageService } from '../../services/message.service';
 import { HttpResponse } from '@angular/common/http';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { FooterComponent } from "../layout/footer/footer.component";
+import { NavbarComponent } from "../layout/navbar/navbar.component";
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [
-    FormsModule, FormsModule, ReactiveFormsModule, ModalTextComponent, FooterComponent, FooterComponent
-  ],
+    NavbarComponent, FormsModule, FormsModule, ReactiveFormsModule, ModalTextComponent, FooterComponent, FooterComponent,
+    NavbarComponent
+],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
