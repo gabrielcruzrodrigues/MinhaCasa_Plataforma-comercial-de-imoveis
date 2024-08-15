@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit{
   whatsapp: string = '';
   email: string = '';
   imageProfileUrl: string = '';
+  typeCard: string = 'owner';
 
   completedEmail: string = '';
   showCompletedEmail: boolean = false;

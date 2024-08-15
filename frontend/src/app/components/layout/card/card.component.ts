@@ -17,6 +17,7 @@ import { ImmobileDetailsComponent } from "../../immobile-details/immobile-detail
 })
 export class CardComponent implements OnInit{
   isLoading: boolean = true;
+  @Input() type: string = '';
   @Input() id: string = '';
   @Input() quantityRooms: string = '';
   @Input() quantityBedrooms: string = '';
@@ -25,6 +26,7 @@ export class CardComponent implements OnInit{
   @Input() price: string = '';
   @Input() name: string = '';
   @Input() sellerId: string = '';
+  ownerAccess: boolean = false;
 
   constructor(
     private currencyPipe: CurrencyPipe, 
@@ -38,6 +40,10 @@ export class CardComponent implements OnInit{
   idsFavorited: number[] = [];
 
   ngOnInit(): void {
+    if (this.type === "owner") {
+      this.ownerAccess = true;
+    }
+
     if (this.authService.verifyIfAreLoggedIn()) {
       this.immobileService.searchIdsOfImmobilesFavorited().subscribe({
         next: (response: HttpResponse<any>) => {
@@ -112,5 +118,13 @@ export class CardComponent implements OnInit{
 
   redirectForImmobileDetails():void {
     this.router.navigate(["/immobile/" + this.id + "/" + this.name + "/" + this.sellerId]);
+  }
+
+  redirectForUpdatePage(): void {
+    this.router.navigate(["/update-immobile/" + this.id]);
+  }
+
+  soldImmobile(): void {
+
   }
 }

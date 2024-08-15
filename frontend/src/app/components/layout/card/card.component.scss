@@ -23,7 +23,6 @@
 .button {
   display: block;
   padding: 0.625rem;
-  background-color: $primary-color;
   border-radius: 0.625rem;
   align-self: flex-end;
   width: 90%;
@@ -32,6 +31,18 @@
   font-size: 1.1rem;
   cursor: pointer;
   margin: 20px auto;
+}
+
+.button-details {
+  background-color: blue;
+}
+
+.button-update {
+  background-color: $primary-color;
+}
+
+.button-sold {
+  background-color: #d33c8f ;
 }
 
 .title h3 {

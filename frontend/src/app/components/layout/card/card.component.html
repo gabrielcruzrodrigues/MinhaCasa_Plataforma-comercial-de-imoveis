@@ -27,7 +27,9 @@
       <p>{{quantityBathrooms}}</p>
     </div>
   </div>
-  <button class="button" (click)="redirectForImmobileDetails()">Ver mais detalhes</button>
+  <button class="button button-details" (click)="redirectForImmobileDetails()">Ver mais detalhes</button>
+  <button class="button button-update" *ngIf="ownerAccess" (click)="redirectForUpdatePage()">Atualizar imóvel</button>
+  <button class="button button-sold" *ngIf="ownerAccess" (click)="soldImmobile()">Marcar como vendido</button>
 </div>
 <app-loading [isLoading]="isLoading"></app-loading>
 

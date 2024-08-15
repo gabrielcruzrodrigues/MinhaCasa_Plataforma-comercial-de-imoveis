@@ -40,7 +40,6 @@ export class FavoritesComponent implements OnInit{
         if (response.status === 200) {
           this.cards = response.body;
           this.isLoading = false;
-          console.log(response.body)
         } else {
           console.log("Um status code diferente do esperado foi retornado ao tentar buscar cards favoritos.");
         }
