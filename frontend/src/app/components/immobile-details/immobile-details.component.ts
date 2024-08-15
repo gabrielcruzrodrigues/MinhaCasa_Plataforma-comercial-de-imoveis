@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { ArrowCarroselComponent } from '../layout/arrow-carrosel/arrow-carrosel.component';
 import { ImmobileService } from '../../services/immobile.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +17,7 @@ import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 @Component({
   selector: 'app-immobile-details',
   standalone: true,
-  imports: [NavbarComponent, ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent, ModalTextComponent],
+  imports: [ArrowCarroselComponent, CommonModule, LoadingComponent, FooterComponent, ModalTextComponent],
   templateUrl: './immobile-details.component.html',
   styleUrl: './immobile-details.component.scss'
 })

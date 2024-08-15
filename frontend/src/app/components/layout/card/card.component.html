@@ -1,16 +1,18 @@
-<mat-card class="example-card">
+<div class="card">
   <div class="favorite-container">
     <button class="favorite-button" [class.favorited]="isFavorited" (click)="toggleFavorite()">
       <img [src]="isFavorited ? '/assets/like-active-icon.png' : '/assets/like-noactive-icon.png'" loading="lazy" alt="Like Icon">
     </button>
   </div>
-  <img mat-card-image class="image" *ngIf="imageUrl" [src]="imageUrl" alt="Profile Image" loading="lazy">
-  <mat-card-content class="title">
+  <div class="image-div">
+    <img class="image" *ngIf="imageUrl" [src]="imageUrl" alt="Profile Image" loading="lazy">
+  </div>
+  <div class="title">
     <h3>{{ formatPrice(price) }}</h3>
     <div class="name">
       <h4>{{name}}</h4>
     </div>
-  </mat-card-content>
+  </div>
   <div class="info">
     <div class="quantityRooms">
       <img class="info-icon" src="/assets/room-icon.png">
@@ -25,9 +27,7 @@
       <p>{{quantityBathrooms}}</p>
     </div>
   </div>
-  <mat-card-actions>
-    <button class="button" (click)="redirectForImmobileDetails()">Ver mais detalhes</button>
-  </mat-card-actions>
-</mat-card>
+  <button class="button" (click)="redirectForImmobileDetails()">Ver mais detalhes</button>
+</div>
 <app-loading [isLoading]="isLoading"></app-loading>
 

@@ -1,6 +1,7 @@
 @import '../../../scss/color-variables.scss';
 
-.example-card {
+.card {
+  width: 100%;
   width: 20rem;
   border: 0.063rem solid #e7e6e6;
   border-radius: 0.625rem;
@@ -8,13 +9,19 @@
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.image-div {
+  width: 100%;
+}
+
 .image {
   height: 200px;
   width: 100%;
   border-radius: 10px 10px 0 0;
+  object-fit: cover;
 }
 
 .button {
+  display: block;
   padding: 0.625rem;
   background-color: $primary-color;
   border-radius: 0.625rem;
@@ -22,9 +29,9 @@
   width: 90%;
   color: white;
   border: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  margin: 10px auto;
+  margin: 20px auto;
 }
 
 .title h3 {
@@ -49,7 +56,8 @@
 }
 
 .info {
-  padding: 10px 20px 5px 20px;
+  width: 70%;
+  margin: auto;
   display: flex;
   justify-content: space-between;
 }

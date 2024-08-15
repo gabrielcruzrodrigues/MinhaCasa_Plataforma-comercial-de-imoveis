@@ -1,18 +1,17 @@
 import { CommonModule, CurrencyPipe  } from '@angular/common';
 import {Component, Input, OnInit } from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { ImmobileService } from '../../../services/immobile.service';
 import { LoadingComponent } from '../loading/loading.component';
+import { ImmobileDetailsComponent } from "../../immobile-details/immobile-details.component";
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, LoadingComponent],
+  imports: [CommonModule, LoadingComponent, ImmobileDetailsComponent],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { UserService } from '../../services/user.service';
 import { HttpResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -20,7 +19,9 @@ interface propertiesInterface {
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, CardComponent, FooterComponent, LoadingComponent],
+  imports: [
+    CommonModule, CardComponent, FooterComponent, LoadingComponent
+  ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })

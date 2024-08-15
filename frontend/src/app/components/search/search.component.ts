@@ -30,7 +30,7 @@ interface city {
   selector: 'app-search',
   standalone: true,
   imports: [
-    NavbarComponent, CardComponent, FormsModule, ReactiveFormsModule, CommonModule,
+    CardComponent, FormsModule, ReactiveFormsModule, CommonModule,
     ModalTextComponent, PaginatorComponent, NgxMaskDirective
   ],
   templateUrl: './search.component.html',

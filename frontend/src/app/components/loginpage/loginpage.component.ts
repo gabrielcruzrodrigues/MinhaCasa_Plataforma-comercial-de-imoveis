@@ -58,7 +58,9 @@ export class LoginpageComponent {
             this.isLoading = false;
             this.activeModalText("Login efetuado com sucesso!");
             this.waitForModalClose().then(() => {
-              this.router.navigate(["/"]);
+              this.router.navigate(["/"]).then(() => {
+                window.location.reload();
+              });
             })
           }
         },

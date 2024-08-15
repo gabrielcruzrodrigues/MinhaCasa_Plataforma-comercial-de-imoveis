@@ -30,6 +30,7 @@
 }
 
 .card {
+     flex: 1 1 calc(25% - 3.5%); // Distribui os cards igualmente, considerando o gap.
      margin-bottom: 3.5%;
 }
 

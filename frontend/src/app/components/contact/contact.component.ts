@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterConfigOptions } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MessageService } from '../../services/message.service';
 import { HttpResponse } from '@angular/common/http';
@@ -12,7 +11,7 @@ import { FooterComponent } from "../layout/footer/footer.component";
   selector: 'app-contact',
   standalone: true,
   imports: [
-    NavbarComponent, FormsModule, FormsModule, ReactiveFormsModule, ModalTextComponent, FooterComponent, FooterComponent
+    FormsModule, FormsModule, ReactiveFormsModule, ModalTextComponent, FooterComponent, FooterComponent
   ],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'

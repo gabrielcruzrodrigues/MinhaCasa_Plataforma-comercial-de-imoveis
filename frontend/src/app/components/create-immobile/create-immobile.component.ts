@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalAlertComponent } from '../layout/modal-alert/modal-alert.component';
@@ -24,7 +23,7 @@ interface cepInterface {
   selector: 'app-create-immobile',
   standalone: true,
   imports: [
-    NavbarComponent, FooterComponent, ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule,
+    FooterComponent, ReactiveFormsModule, FormsModule, ModalAlertComponent, CommonModule,
     ModalTextComponent, CarroselComponent, LoadingComponent, NgxMaskDirective
   ],
   templateUrl: './create-immobile.component.html',

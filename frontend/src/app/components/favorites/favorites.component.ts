@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { CardComponent } from '../layout/card/card.component';
 import { CommonModule } from '@angular/common';
 import { ImmobileService } from '../../services/immobile.service';
-import { response } from 'express';
 import { HttpResponse } from '@angular/common/http';
 
 interface cardInterface {
@@ -22,7 +20,7 @@ interface cardInterface {
   selector: 'app-favorites',
   standalone: true,
   imports: [
-    NavbarComponent, FooterComponent, CardComponent, CommonModule
+    FooterComponent, CardComponent, CommonModule
   ],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss'

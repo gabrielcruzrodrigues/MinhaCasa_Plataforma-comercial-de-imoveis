@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
-import { NavbarComponent } from '../layout/navbar/navbar.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CarroselComponent } from '../layout/carrosel/carrosel.component';
@@ -14,7 +13,6 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ConverterFieldName } from '../../utils/ConverterFieldNameToPortuguese';
 import { CepService } from '../../services/cep.service';
 import { CommonModule } from '@angular/common';
-import { url } from 'inspector';
 
 interface cepInterface {
   nome: string
@@ -24,7 +22,7 @@ interface cepInterface {
   selector: 'app-update-immobile',
   standalone: true,
   imports: [
-    NavbarComponent, FooterComponent, CarroselComponent, ReactiveFormsModule, ModalAlertComponent, ModalTextComponent, LoadingComponent,
+    FooterComponent, CarroselComponent, ReactiveFormsModule, ModalAlertComponent, ModalTextComponent, LoadingComponent,
     CommonModule
   ],
   templateUrl: './update-immobile.component.html',
