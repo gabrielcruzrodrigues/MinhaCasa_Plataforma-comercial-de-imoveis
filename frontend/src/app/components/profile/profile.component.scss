@@ -124,11 +124,12 @@
      width: 100%;
      flex-wrap: wrap;
      align-content: flex-start;
-     gap: 1.5%
+     gap: 3%
 }
 
 .card {
-     margin-bottom: 2%;
+     flex: 1 1 calc(25% - 3.5%); // Distribui os cards igualmente, considerando o gap.
+     margin-bottom: 3%;
 }
 
 .card:last-child {

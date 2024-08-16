@@ -117,3 +117,30 @@ select, input {
 .clear-form:active {
      background-color: $third-color;
 }
+
+@media screen and (max-width: 1444px){
+     .cards {
+          margin-left: 3%;
+          padding: 0;
+     }
+     .card-div {
+          gap: 2.2%;
+     }
+}
+
+@media screen and (min-width: 1880px){
+     .search {
+          width: 18%;
+          padding: 2%;
+     }
+     .cards {
+          width: 80%;
+          height: 600px;
+          margin-left: 3%;
+          padding: 0;
+     }
+     .card-div {
+          gap: 2.2%;
+     }
+}
+
