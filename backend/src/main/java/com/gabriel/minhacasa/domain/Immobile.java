@@ -31,14 +31,14 @@ public class Immobile {
     @Column(length = 500)
     private String description; //
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     @NotBlank
     private String address; //
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     private String city; //
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     @NotBlank
     private String neighborhood; //
 
