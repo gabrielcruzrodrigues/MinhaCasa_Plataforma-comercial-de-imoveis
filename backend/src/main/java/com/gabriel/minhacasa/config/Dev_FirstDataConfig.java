@@ -35,7 +35,7 @@ public class Dev_FirstDataConfig implements ApplicationRunner {
             .name("admin")
             .phone("00000000000")
             .whatsapp("00000000000")
-            .email("adm@gmail.com")
+            .email("admin@gmail.com")
             .password(this.passwordEncoder.encode("12345678a!"))
             .dateOfBirth(LocalDate.of(1990, 1, 1))
             .role(Set.of("ADMIN"))

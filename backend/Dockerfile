@@ -6,7 +6,11 @@ RUN apt-get update && \
 
 WORKDIR /app
 RUN mkdir -p /app/images-profile /app/files-immobile
+
 COPY . .
+COPY houses-images/. /app/files-immobile
+COPY users-images/. /app/images-profile
+
 RUN mvn -N io.takari:maven:wrapper
 RUN chmod +x ./mvnw && ./mvnw clean install -DskipTests
 ENTRYPOINT [ "java", "-jar", "-Dspring.profiles.active=prod", "target/minhacasa-0.0.1-SNAPSHOT.jar" ]
