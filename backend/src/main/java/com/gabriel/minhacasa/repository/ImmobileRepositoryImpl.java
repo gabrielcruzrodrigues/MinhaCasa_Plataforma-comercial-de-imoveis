@@ -276,7 +276,7 @@ public class ImmobileRepositoryImpl implements ImmobileRepositoryCustomInterface
         int offset = (params.getPageNumber() - 1) * params.getPageSize();
 
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
-        criteriaQuery.orderBy(criteriaBuilder.asc(criteriaBuilder.function("RANDOM", Double.class)));
+//        criteriaQuery.orderBy(criteriaBuilder.asc(criteriaBuilder.function("RANDOM", Double.class)));
 
         TypedQuery<Immobile> query = entityManager.createQuery(criteriaQuery);
 
