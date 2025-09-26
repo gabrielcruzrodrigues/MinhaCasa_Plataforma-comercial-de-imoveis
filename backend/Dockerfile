@@ -8,8 +8,8 @@ WORKDIR /app
 RUN mkdir -p /app/images-profile /app/files-immobile
 
 COPY . .
-COPY houses-images/. /app/files-immobile
-COPY users-images/. /app/images-profile
+COPY mock-houses-images/. /app/files-immobile
+COPY mock-users-images/. /app/images-profile
 
 RUN mvn -N io.takari:maven:wrapper
 RUN chmod +x ./mvnw && ./mvnw clean install -DskipTests

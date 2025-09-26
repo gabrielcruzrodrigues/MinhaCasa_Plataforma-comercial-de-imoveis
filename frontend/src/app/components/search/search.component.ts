@@ -127,9 +127,11 @@ export class SearchComponent implements OnInit {
     this.immobileService.search(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.cards = response.body;
+        console.log(response)
       },
       error: (error) => {
         console.log("Ocorreu um erro ao tentar fazer a busca inicial de imóveis.");
+        console.log(error)
       }
     })
   }
