@@ -10,6 +10,7 @@ import { CepService } from '../../services/cep.service';
 import { ModalTextComponent } from '../layout/modal-text/modal-text.component';
 import { PaginatorComponent } from '../layout/paginator/paginator.component';
 import { NgxMaskDirective } from 'ngx-mask';
+import { take } from 'rxjs';
 
 interface cardInterface {
   id: string,
@@ -122,16 +123,15 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.populateFormData();
-    this.immobileService.search(this.formData).subscribe({
+    this.immobileService.search(this.formData)
+    .pipe(take(1))
+    .subscribe({
       next: (response: HttpResponse<any>) => {
         this.cards = response.body;
-        console.log(response)
       },
       error: (error) => {
         console.log("Ocorreu um erro ao tentar fazer a busca inicial de imóveis.");
-        console.log(error)
       }
     })
   }
@@ -142,10 +142,11 @@ export class SearchComponent implements OnInit {
     this.immobileService.search(this.formData).subscribe({
       next: (response: HttpResponse<any>) => {
         this.cards = response.body;
-        console.log(this.cards);
+        console.log(response)
       },
       error: (error) => {
         console.log("Ocorreu um erro ao tentar enviar o formulário de pesquisa.");
+        console.log(error)
       }
     })
   }

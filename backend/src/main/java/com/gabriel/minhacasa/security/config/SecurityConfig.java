@@ -58,6 +58,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/immobile/cards").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/files/download/profile/{filename:.+}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/files/download/immobile/{filename:.+}").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
 
                         .anyRequest().authenticated())
                 .oauth2ResourceServer((config) -> config.jwt(

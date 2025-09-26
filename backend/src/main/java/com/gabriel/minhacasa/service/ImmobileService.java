@@ -265,6 +265,9 @@ public class ImmobileService {
     public List<ImmobileByCardsDTO> findImmobileByParamsWithCompleteImagePath(SearchParamsDTO params) {
         log.info("get data in findImmobileByParamsWithCompleteImagePath: " + params);
         List<Immobile> immobiles = this.immobileRepositorySearch.searchByParams(params);
+//        System.out.println("==================");
+//        System.out.println(immobiles.get(0));
+//        System.out.println("==================");
         return this.mountCardWithImmobile(immobiles);
     }
 
@@ -300,6 +303,7 @@ public class ImmobileService {
 
             immobilesWithFullPathImages.add(immobileByCardsDTO);
         }
+
         return immobilesWithFullPathImages;
     }
 
