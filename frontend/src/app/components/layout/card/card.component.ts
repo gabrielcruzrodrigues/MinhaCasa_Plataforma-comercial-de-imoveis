@@ -113,7 +113,8 @@ export class CardComponent implements OnInit{
 
   formatPrice(price: string): string {
     const numericPrice = parseFloat(price);
-    return this.currencyPipe.transform(numericPrice, 'BRL', 'symbol', '1.0-0') ?? '';
+    let formatted = this.currencyPipe.transform(numericPrice, 'BRL', 'symbol', '1.0-0') ?? '';
+    return formatted.replace('R$', 'R$ ');
   }
 
   redirectForImmobileDetails():void {

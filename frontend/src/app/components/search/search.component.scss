@@ -1,5 +1,9 @@
 @import '../../scss/color-variables.scss';
 
+.custom {
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 .main-section {
      display: flex;
      width: 94%;
@@ -8,10 +12,10 @@
 
 .search {
      width: 20%;
-     padding: 2%;
+     padding: 1.5%;
      height: 1800px;
      border: 2px solid #ccc;
-     border-radius: 10px;
+     border-radius: 15px;
      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -107,11 +111,12 @@ select, input {
      margin-bottom: 20px;
      border-radius: 10px;
      border: 1px solid #ccc;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
      font-size: 16px;
 }
 
 .clear-form:hover {
-     background-color: $secundary-color;
+     background-color: $text-primary-color;
 }
 
 .clear-form:active {
