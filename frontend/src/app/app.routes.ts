@@ -15,7 +15,7 @@ import { ListUpdateComponent } from './components/list-update/list-update.compon
 
 export const routes: Routes = [
     {
-        path: '', component: HomepageComponent
+        path: '', component: SearchComponent
     },
     {
         path: 'login', component: LoginpageComponent
