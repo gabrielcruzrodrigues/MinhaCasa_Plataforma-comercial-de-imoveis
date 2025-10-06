@@ -44,7 +44,7 @@
 
 <br>
 
-# 🔹Descrição do projeto
+## Descrição do projeto
 O projeto MinhaCasa é uma plataforma robusta e intuitiva voltada para facilitar a experiência de compra, venda e aluguel de imóveis. Desenvolvido com as mais recentes tecnologias Java, Spring Boot, Spring Security, PostgreSQL, JPA, Hibernate, Docker, Angular e TypeScript, o MinhaCasa oferece uma solução completa para usuários interessados no mercado imobiliário.
 
 Recursos Principais:
@@ -59,7 +59,7 @@ Implementação de Spring Security garante a segurança dos dados dos usuários 
 Utilização de Junit5 e Mockito para garantir a qualidade do código e a robustez das funcionalidades implementadas.<br><br>
 Com uma interface moderna e responsiva, o MinhaCasa proporciona uma experiência fluida tanto para usuários que desejam comercializar quanto para aqueles que estão em busca de seu próximo lar. Este projeto visa não apenas simplificar, mas também aprimorar a forma como negócios imobiliários são conduzidos, oferecendo uma solução completa e confiável para todas as necessidades relacionadas ao mercado de imóveis.
 
-# 🔹Rodando o projeto com Docker
+# Rodando o projeto com Docker
 0. Tenha o git juntamente com o git bash instalado na sua máquina.
 1. Tenha o docker instalado na sua máquina;
 2. Garanta que o docker foi iniciado e está rodando;
@@ -78,12 +78,12 @@ Com isso, todos os container serão criados e configurados, incluindo:
 9. Utilize o `email:admin@gmail.com` e a `senha: 12345678a!` para fazer login como administrador. 
 
 
-# 🔹Documentação para usuários
+## Documentação para usuários
 * Para ter acesso a todas as funcionalidades do sistema, crie uma conta ou utilize as credenciais fornecidas na sessão `Rodando o projeto com Docker`.
 * A documentação dos endpoints da api do projeto foi feita usando o Swagger, para acessar a documentação, acesse o link abaixo no navegador:<br>
 ``` `http://localhost:8080/swagger-ui/index.html#/` ```
 
-# 🔹Documentação para desenvolvimento(localmente)
+## Documentação para desenvolvimento(localmente)
 1. O projeto necessita de duas pastas para armazenar imagens, elas devem ser criadas no exato caminho:
 ```
 C:
